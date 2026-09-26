@@ -1,0 +1,7 @@
+node_modules/
+_site/
+work/
+.impeccable/
+src/assets/fonts/*.woff2
+src/assets/css/fonts.css
+.DS_Store

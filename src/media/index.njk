@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+title: "Медиа"
+description: "Пишем о том, что помогает бизнесу принимать решения: рынок IT-аутсорсинга, тренды AI, реальные кейсы автоматизации. Рубрики: Новости W2W, IT-аутсорсинг, Тренды и AI, Кейсы."
+permalink: /media/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Медиа</p>
+      <h1 class="h1">Разбираемся в IT-аутсорсинге и AI</h1>
+      <p class="lead">Пишем о том, что помогает бизнесу принимать решения: рынок IT-аутсорсинга, тренды AI, реальные кейсы автоматизации.</p>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>4 рубрики</b>Новости W2W, IT-аутсорсинг, Тренды и AI, Кейсы</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="opts">
+      {% for c in ["Все", "Новости W2W", "IT-аутсорсинг", "Тренды и AI", "Кейсы"] %}<span class="chip{% if loop.first %} is-on{% endif %}">{{ c }}</span>{% endfor %}
+    </div>
+    <div class="index mt-32">
+      {% for a in extra.articles %}
+      {% if a.ready %}
+      <a class="index-row" href="{{ ('/media/' + a.slug + '/') | url }}" data-cols="2-7">
+        <span class="tag" style="justify-self:start">{{ a.tag }}</span>
+        <h3>{{ a.title }}</h3>
+        <span class="link-arrow">Читать <svg class="i"><use href="#i-arrow"/></svg></span>
+      </a>
+      {% else %}
+      <div class="index-row" data-cols="2-7" style="color:var(--ink-3)">
+        <span class="tag" style="justify-self:start">{{ a.tag }}</span>
+        <h3 style="color:var(--ink-3)">{{ a.title }}</h3>
+        <span class="small">статья готовится</span>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <p class="muted small mt-24">Первые статьи выходят к запуску сайта; раздел работает на привлечение клиентов из поиска.</p>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

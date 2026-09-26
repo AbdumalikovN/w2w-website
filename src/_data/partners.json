@@ -1,0 +1,345 @@
+[
+ {
+  "file": "p01.webp",
+  "name": "VoltAuto",
+  "kind": "transparent",
+  "w": 240,
+  "h": 64
+ },
+ {
+  "file": "p02.webp",
+  "name": "Sugar Free",
+  "kind": "transparent",
+  "w": 217,
+  "h": 80
+ },
+ {
+  "file": "p03.webp",
+  "name": "SEM Travel",
+  "kind": "transparent",
+  "w": 240,
+  "h": 62
+ },
+ {
+  "file": "p05.webp",
+  "name": "Sales Doctor Academy",
+  "kind": "transparent",
+  "w": 240,
+  "h": 71
+ },
+ {
+  "file": "p06.webp",
+  "name": "Unique Line",
+  "kind": "transparent",
+  "w": 168,
+  "h": 80
+ },
+ {
+  "file": "p07.webp",
+  "name": "No Nikotin",
+  "kind": "transparent",
+  "w": 240,
+  "h": 76
+ },
+ {
+  "file": "p08.webp",
+  "name": "Ansor Med",
+  "kind": "transparent",
+  "w": 240,
+  "h": 24
+ },
+ {
+  "file": "p09.webp",
+  "name": "Sales Doctor",
+  "kind": "transparent",
+  "w": 240,
+  "h": 59
+ },
+ {
+  "file": "p11.webp",
+  "name": "Salohiyat",
+  "kind": "transparent",
+  "w": 240,
+  "h": 58
+ },
+ {
+  "file": "p12.webp",
+  "name": "R.O.P",
+  "kind": "transparent",
+  "w": 214,
+  "h": 80
+ },
+ {
+  "file": "p13.webp",
+  "name": "Andeli",
+  "kind": "transparent",
+  "w": 240,
+  "h": 42
+ },
+ {
+  "file": "p14.webp",
+  "name": "Onlayn Hamshira",
+  "kind": "transparent",
+  "w": 218,
+  "h": 80
+ },
+ {
+  "file": "p15.webp",
+  "name": "Profex Accounting Advisors",
+  "kind": "transparent",
+  "w": 201,
+  "h": 80
+ },
+ {
+  "file": "p16.webp",
+  "name": "EastEra Group",
+  "kind": "transparent",
+  "w": 74,
+  "h": 80
+ },
+ {
+  "file": "p17.webp",
+  "name": "Amin Exco",
+  "kind": "transparent",
+  "w": 240,
+  "h": 57
+ },
+ {
+  "file": "p18.webp",
+  "name": "ADM Jizzakh",
+  "kind": "transparent",
+  "w": 240,
+  "h": 68
+ },
+ {
+  "file": "p19.webp",
+  "name": "MIT Academy",
+  "kind": "transparent",
+  "w": 240,
+  "h": 60
+ },
+ {
+  "file": "p20.webp",
+  "name": "Topskill",
+  "kind": "transparent",
+  "w": 240,
+  "h": 37
+ },
+ {
+  "file": "p21.webp",
+  "name": "Imperium",
+  "kind": "transparent",
+  "w": 92,
+  "h": 80
+ },
+ {
+  "file": "p22.webp",
+  "name": "Oopdate",
+  "kind": "transparent",
+  "w": 240,
+  "h": 63
+ },
+ {
+  "file": "p23.webp",
+  "name": "Noor Express Logistics",
+  "kind": "transparent",
+  "w": 240,
+  "h": 48
+ },
+ {
+  "file": "p24.webp",
+  "name": "EduMaster",
+  "kind": "transparent",
+  "w": 240,
+  "h": 63
+ },
+ {
+  "file": "p25.webp",
+  "name": "Inzo CRM",
+  "kind": "transparent",
+  "w": 167,
+  "h": 80
+ },
+ {
+  "file": "p26.webp",
+  "name": "Andersen",
+  "kind": "transparent",
+  "w": 240,
+  "h": 58
+ },
+ {
+  "file": "p27.webp",
+  "name": "Investing Tours",
+  "kind": "transparent",
+  "w": 240,
+  "h": 39
+ },
+ {
+  "file": "p28.webp",
+  "name": "UJ Links",
+  "kind": "transparent",
+  "w": 128,
+  "h": 80
+ },
+ {
+  "file": "p29.webp",
+  "name": "Muslim.uz",
+  "kind": "transparent",
+  "w": 91,
+  "h": 80
+ },
+ {
+  "file": "p30.webp",
+  "name": "Sogdiana Avia Tour",
+  "kind": "transparent",
+  "w": 240,
+  "h": 53
+ },
+ {
+  "file": "p31.webp",
+  "name": "Венеция",
+  "kind": "tile",
+  "w": 152,
+  "h": 80
+ },
+ {
+  "file": "p32.webp",
+  "name": "Long Haul",
+  "kind": "transparent",
+  "w": 240,
+  "h": 47
+ },
+ {
+  "file": "p33.webp",
+  "name": "Andersen Global",
+  "kind": "transparent",
+  "w": 240,
+  "h": 57
+ },
+ {
+  "file": "p34.webp",
+  "name": "ADM Global",
+  "kind": "transparent",
+  "w": 240,
+  "h": 71
+ },
+ {
+  "file": "p35.webp",
+  "name": "Premium Logistics",
+  "kind": "transparent",
+  "w": 240,
+  "h": 58
+ },
+ {
+  "file": "p36.webp",
+  "name": "Insard Projects",
+  "kind": "transparent",
+  "w": 240,
+  "h": 71
+ },
+ {
+  "file": "p37.webp",
+  "name": "Makani",
+  "kind": "transparent",
+  "w": 151,
+  "h": 80
+ },
+ {
+  "file": "p38.webp",
+  "name": "Fusion Art Textile",
+  "kind": "transparent",
+  "w": 240,
+  "h": 60
+ },
+ {
+  "file": "p39.webp",
+  "name": "U-Enter",
+  "kind": "transparent",
+  "w": 240,
+  "h": 60
+ },
+ {
+  "file": "p40.webp",
+  "name": "UIC Group",
+  "kind": "transparent",
+  "w": 111,
+  "h": 80
+ },
+ {
+  "file": "p41.webp",
+  "name": "udevs",
+  "kind": "transparent",
+  "w": 240,
+  "h": 76
+ },
+ {
+  "file": "p42.webp",
+  "name": "IT Park Uzbekistan",
+  "kind": "transparent",
+  "w": 74,
+  "h": 80
+ },
+ {
+  "file": "p43.webp",
+  "name": "Jobster",
+  "kind": "transparent",
+  "w": 213,
+  "h": 80
+ },
+ {
+  "file": "p44.webp",
+  "name": "Carro",
+  "kind": "transparent",
+  "w": 151,
+  "h": 80
+ },
+ {
+  "file": "p45.webp",
+  "name": "Urgut Free Economic Zone",
+  "kind": "transparent",
+  "w": 240,
+  "h": 67
+ },
+ {
+  "file": "p46.webp",
+  "name": "Profitex",
+  "kind": "transparent",
+  "w": 240,
+  "h": 45
+ },
+ {
+  "file": "p47.webp",
+  "name": "Akbar Build Group",
+  "kind": "transparent",
+  "w": 136,
+  "h": 80
+ },
+ {
+  "file": "p48.webp",
+  "name": "ObedTime",
+  "kind": "tile",
+  "w": 152,
+  "h": 80
+ },
+ {
+  "file": "p49.webp",
+  "name": "Hemp Farm",
+  "kind": "transparent",
+  "w": 130,
+  "h": 80
+ },
+ {
+  "file": "p50.webp",
+  "name": "UzbekStone",
+  "kind": "transparent",
+  "w": 240,
+  "h": 46
+ },
+ {
+  "file": "p51.webp",
+  "name": "Pudrat.uz",
+  "kind": "transparent",
+  "w": 240,
+  "h": 42
+ }
+]

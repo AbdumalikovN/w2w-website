@@ -1,0 +1,95 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: team
+  size: 1
+  addAllPagesToCollections: true
+  alias: p
+permalink: "/team/{{ p.slug }}/"
+eleventyComputed:
+  title: "{{ p.role }} Win to Win"
+  description: "{{ p.lead }}"
+---
+<section class="hero-page">
+  <div class="wrap">
+    <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span><a href="{{ '/team/' | url }}">Команда</a><span>/</span>{{ p.role }}</p>
+    <div class="split" style="align-items:start">
+      <div>
+        <div class="portrait portrait-lg" data-code="{{ p.code }}"></div>
+        <p class="todo mt-16">Фото после фотосессии. Формат: вертикальный портрет 3:4, фирменный фон по брендбуку.</p>
+      </div>
+      <div>
+        <p class="person-role">{{ p.role }}</p>
+        <h1 class="h1 mt-8">{{ p.name }}</h1>
+        <p class="todo mt-16">ФИО и должность в официальной формулировке — на утверждении.</p>
+        <p class="lead" style="margin-top:20px">{{ p.lead }}</p>
+        <div class="hero-cta"><button class="btn" type="button" data-modal="call">Записаться на созвон</button><a class="btn btn-outline" href="{{ '/team/' | url }}">Вся команда</a></div>
+        <p class="muted small mt-16">Персональные контакты (Telegram, почта, LinkedIn) — на утверждении: решаем, публикуем прямые контакты или все заявки идут через общую форму.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">Об этом человеке</h2>
+      </div>
+      <div>
+        <div class="prose">
+          <p class="todo">Текст биографии — на утверждении. Ниже структура и объём, под которые свёрстана страница: 3 абзаца по 400–600 знаков.</p>
+          <p class="mt-16" style="color:var(--ink-3)"><b style="color:var(--ink-2)">Абзац 1, путь.</b> Образование, ключевые компании и роли до Win to Win, сколько лет в отрасли, на чём специализировался. 2–3 факта, которые объясняют, почему этому человеку можно доверить эту зону.</p>
+          <p style="color:var(--ink-3)"><b style="color:var(--ink-2)">Абзац 2, что сделал в Win to Win.</b> Конкретные результаты с цифрами: какие направления запустил, какие проекты вёл, что изменилось в компании благодаря ему.</p>
+          <p style="color:var(--ink-3)"><b style="color:var(--ink-2)">Абзац 3, подход.</b> Как принимает решения, что считает недопустимым, чего ждёт от клиента и от команды. Здесь голос человека, а не резюме.</p>
+        </div>
+        <div class="facts mt-32">
+          <div class="facts-row"><span>Роль</span><b>{{ p.role }}</b></div>
+          <div class="facts-row"><span>В компании с</span><b class="pending">год — на утверждении</b></div>
+          <div class="facts-row"><span>Опыт в отрасли</span><b class="pending">лет — на утверждении</b></div>
+          <div class="facts-row"><span>Языки</span><b class="pending">узбекский, русский, английский — уточнить уровень</b></div>
+          <div class="facts-row"><span>Образование</span><b class="pending">на утверждении</b></div>
+          <div class="facts-row"><span>Локация</span><b>Ташкент, Узбекистан</b></div>
+        </div>
+        <p class="muted small mt-16">Пустые строки при публикации скрываются, а не показываются пустыми.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <h2 class="h2">За что отвечает {{ p.role | lower }}</h2>
+    <p class="lead mt-16">Формулировки согласованы со структурой компании: за каждый пункт есть один ответственный, а не «команда вообще».</p>
+    <div class="own mt-32">
+      {% for o in p.own %}<div><b>{{ o[0] }}</b><p>{{ o[1] }}</p></div>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split split-eq">
+      <div>
+        <h2 class="h2">С какими вопросами идти напрямую</h2>
+        <ul class="check-list mt-24">{% for w in p.when %}<li><svg class="i"><use href="#i-check"/></svg><span>{{ w }}</span></li>{% endfor %}</ul>
+        <div class="hero-cta"><button class="btn" type="button" data-modal="call">Записаться на созвон</button></div>
+      </div>
+      <div>
+        <div class="quote"><span style="opacity:.5">«Цитата-манифест руководителя: 1–2 предложения о принципе, по которому он работает. На утверждении.»</span><span class="who">{{ p.name }}, {{ p.role | lower }}</span></div>
+        <p class="muted small mt-16">Цитата пишется вместе с руководителем. Если решим не публиковать, блок убирается без последствий для вёрстки.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="h2">Остальные руководители</h2><a class="link-arrow" href="{{ '/team/' | url }}">Вся команда <svg class="i"><use href="#i-arrow"/></svg></a></div>
+    <div class="team-grid">
+      {% set me = p %}{% for p in team | wherenot('slug', me.slug) %}{% include "partials/person.njk" %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

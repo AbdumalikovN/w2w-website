@@ -1,0 +1,62 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: services.detail
+  size: 1
+  addAllPagesToCollections: true
+  alias: key
+permalink: "/services/{{ key }}/"
+eleventyComputed:
+  title: "{{ services.detail[key].h1 }}"
+  description: "{{ services.detail[key].lead }}"
+---
+{% set d = services.detail[key] %}
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span><a href="{{ '/services/' | url }}">Услуги</a><span>/</span>{{ d.crumb }}</p>
+      <h1 class="h1">{{ d.h1 }}</h1>
+      <p class="lead">{{ d.lead }}</p>
+      <div class="hero-cta"><button class="btn" type="button" data-modal="request">Обсудить задачу</button><a class="btn btn-outline" href="{{ '/projects/' | url }}">Смотреть кейсы</a></div>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>от 1 дня</b>до старта работ после подписания договора</p>
+      <p><b>Код ваш</b>исходники, архитектура и документация передаются клиенту</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="h2">Что входит</h2>
+    <div class="industries mt-32">
+      {% for x in d.includes %}<div><b>{{ x[0] }}</b><p>{{ x[1] }}</p></div>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="ledger">
+      <div class="ledger-head"><div>Узнаёте свою ситуацию?</div><div>Что получаете</div></div>
+      {% for i in range(0, d.pains.length) %}
+      <div class="ledger-row"><div data-col="Ситуация"><p style="color:var(--ink)">{{ d.pains[i] }}</p></div><div data-col="Результат"><p style="color:var(--ink)">{{ d.gains[i] }}</p></div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2">Уже сделали</h2>
+      <a class="link-arrow" href="{{ '/projects/' | url }}">Все проекты <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="pgrid">
+      {% for slug in d.cases %}{% set p = projects | find('slug', slug) %}{% include "partials/pcard.njk" %}{% endfor %}
+    </div>
+    <p class="muted small mt-24">{{ d.techNote }}</p>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

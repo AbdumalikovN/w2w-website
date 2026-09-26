@@ -1,0 +1,33 @@
+<footer class="site-footer is-dark">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        {% include "partials/logo.njk" %}
+        <p class="footer-desc">AI-агенты и IT-аутсорсинг полного цикла из Ташкента. Резидент IT Park Uzbekistan. Мы выигрываем только тогда, когда выигрываете вы.</p>
+        <div class="clocks" data-clocks>
+          {% for c in site.clocks %}<span class="clock"><span class="clock-city">{{ c.city }}</span> <time class="clock-time" data-tz="{{ c.tz }}">—:—</time></span>{% endfor %}
+        </div>
+        <p class="footer-online"><span class="dot-live" aria-hidden="true"></span>Отвечаем в рабочее время в течение часа</p>
+      </div>
+      {% for col in nav.footer %}
+      <div class="footer-col">
+        <h2 class="footer-h">{{ col.title }}</h2>
+        {% for l in col.links %}<a href="{{ l.url | url }}">{{ l.label }}</a>{% endfor %}
+      </div>
+      {% endfor %}
+      <div class="footer-col">
+        <h2 class="footer-h">Контакты</h2>
+        <a href="{{ site.phoneHref }}">{{ site.phone }}</a>
+        <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+        <p class="footer-addr">{{ site.address }}</p>
+        <div class="soc">
+          {% for s in site.socials %}<a href="{{ s.href }}" >{{ s.name }}</a>{% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© {{ '' | year }} {{ site.legal }}. Все права защищены. ИНН {{ site.inn }}</p>
+      <p><a href="{{ '/documents/' | url }}">Документы и сертификаты</a> <a href="{{ '/documents/' | url }}">Политика конфиденциальности</a></p>
+    </div>
+  </div>
+</footer>

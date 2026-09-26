@@ -1,0 +1,84 @@
+---
+layout: layouts/base.njk
+title: "О компании"
+description: "Win to Win — IT-аутсорсинговая компания из Ташкента, резидент IT Park Uzbekistan. Команда 20–50 специалистов, 50+ проектов, активные рынки: Узбекистан, Казахстан, США, Европа."
+permalink: /about/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>О компании</p>
+      <h1 class="h1">Мы выигрываем только тогда, когда выигрываете вы</h1>
+      <p class="lead">Win to Win — IT-аутсорсинговая компания из Ташкента, резидент IT Park Uzbekistan. Строим AI-агентов, ERP, CRM, мобильные приложения и веб-платформы для клиентов в Узбекистане, Казахстане, США и Европе.</p>
+      <div class="hero-cta"><button class="btn" type="button" data-modal="call">Записаться на созвон</button><a class="btn btn-outline" href="{{ '/career/' | url }}">Присоединиться к команде</a></div>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>№4689</b>сертификат резидента IT Park Uzbekistan, в реестре с 29.08.2025</p>
+      <p><b>20–50</b>специалистов, каждый закрывает 2–3 роли</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">Кто мы</h2>
+      </div>
+      <div class="prose">
+        <p>Win to Win (W2W) — команда из 20–50 специалистов, где каждый закрывает 2–3 роли. Это делает нас быстрее и доступнее классических студий: старт проекта занимает от 1 дня до 2 недель, а ставка $10–30 в час в 2–3 раза ниже, чем у международных конкурентов, при сопоставимом качестве.</p>
+        <p>Мы работаем в двух направлениях: международный аутсорсинг для компаний из США, Европы и Ближнего Востока и автоматизация крупных локальных компаний Узбекистана и Казахстана на ERP/CRM-системах с интеграциями 1С, AmoCRM, платёжных систем и IoT.</p>
+        <p>Формат сотрудничества выбираете вы: fixed price, time &amp; materials, выделенная команда или партнёрская модель с разделением дохода и долевым участием.</p>
+        <div class="figures is-2 mt-32">
+          <div><div class="num">50+</div><p>проектов и партнёров</p></div>
+          <div><div class="num">4 рынка</div><p>Узбекистан, Казахстан, США, Европа и ОАЭ</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="ledger">
+      <div class="ledger-head is-3"><div>Миссия</div><div>Видение</div><div>Ценности</div></div>
+      <div class="ledger-row is-3">
+        <div data-col="Миссия"><p style="color:var(--ink);font-size:17px">Помогать бизнесу выигрывать за счёт технологий: убирать хаос и рутину, строить цифровые системы, которые растут вместе с компанией.</p></div>
+        <div data-col="Видение"><p style="color:var(--ink);font-size:17px">Стать технологическим партнёром №1 для компаний Центральной Азии и надёжной командой разработки для бизнеса по всему миру.</p></div>
+        <div data-col="Ценности"><p style="color:var(--ink);font-size:17px">Win-win в каждой сделке, прозрачность, качество и надёжность, скорость и гибкость, командный дух, долгосрочные отношения.</p></div>
+      </div>
+    </div>
+    <p class="todo mt-16">Формулировки миссии и видения — драфт на утверждение владельцем.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 class="h2">Резидент IT Park Uzbekistan</h2>
+        <p class="lead" style="margin-top:18px">ООО «WIN TO WIN» внесено в Единый реестр резидентов Технопарка 29 августа 2025 года. Guvohnoma №4689 можно проверить по QR-коду на сертификате.</p>
+        <div class="mt-24"><a class="btn btn-ghost" href="{{ '/documents/' | url }}">Все документы и сертификаты</a></div>
+      </div>
+      <div class="cover cover-brand" style="aspect-ratio:16/9"><span class="cover-meta">IT Park Uzbekistan</span><span class="cover-name">Сертификат №4689</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h2">Люди, которые делают проекты</h2>
+        <p class="lead">Четыре руководителя, между которыми распределена ответственность за ваш проект: стратегия, коммерция, технология и доставка.</p>
+      </div>
+      <a class="link-arrow" href="{{ '/team/' | url }}">Вся команда <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="team-grid">
+      {% for p in team %}{% include "partials/person.njk" %}{% endfor %}
+    </div>
+    <p class="todo mt-24">Фото и состав обновим после фотосессии. Имена и роли — на подтверждении.</p>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

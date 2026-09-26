@@ -1,0 +1,18 @@
+{
+  "name": "w2w-website",
+  "version": "1.0.0",
+  "description": "Win to Win (w2w.uz) — сайт компании на Eleventy",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "fonts": "node scripts/fetch-fonts.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6"
+  }
+}

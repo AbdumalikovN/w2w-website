@@ -1,0 +1,67 @@
+{# Full calculator widget. JS (main.js) recomputes on interaction; initial values match calc.defaults. #}
+<div class="calc" data-calc="full">
+  <div class="calc-form">
+    <fieldset class="fld">
+      <legend>1. Тип агента</legend>
+      <div class="opts" data-group="type" role="radiogroup">
+        {% for t in calc.types %}<button type="button" class="chip{% if t.id == calc.defaults.type %} is-on{% endif %}" role="radio" aria-checked="{{ 'true' if t.id == calc.defaults.type else 'false' }}" data-value="{{ t.id }}">{{ t.label }}</button>{% endfor %}
+      </div>
+    </fieldset>
+    <fieldset class="fld">
+      <legend>2. Каналы, где он работает</legend>
+      <div class="opts" data-group="channels" data-multi>
+        {% for c in calc.channels %}<button type="button" class="chip{% if c.id in calc.defaults.channels %} is-on{% endif %}" aria-pressed="{{ 'true' if c.id in calc.defaults.channels else 'false' }}" data-value="{{ c.id }}">{{ c.label }}</button>{% endfor %}
+      </div>
+    </fieldset>
+    <div class="fld">
+      <label for="calc-integrations">3. Сколько систем подключаем: 1С, CRM, база, API</label>
+      <div class="rng"><input id="calc-integrations" type="range" min="0" max="8" step="1" value="{{ calc.defaults.integrations }}" data-group="integrations"><output data-out="integrations">{{ calc.defaults.integrations }} системы</output></div>
+    </div>
+    <fieldset class="fld">
+      <legend>4. Объём базы знаний</legend>
+      <div class="opts" data-group="knowledge" role="radiogroup">
+        {% for k in calc.knowledge %}<button type="button" class="chip{% if k.id == calc.defaults.knowledge %} is-on{% endif %}" role="radio" aria-checked="{{ 'true' if k.id == calc.defaults.knowledge else 'false' }}" data-value="{{ k.id }}">{{ k.label }}</button>{% endfor %}
+      </div>
+      <label class="fld-sub" for="calc-languages">Языки общения агента</label>
+      <div class="rng"><input id="calc-languages" type="range" min="1" max="4" step="1" value="{{ calc.defaults.languages }}" data-group="languages"><output data-out="languages">{{ calc.defaults.languages }} языка</output></div>
+    </fieldset>
+    <fieldset class="fld">
+      <legend>5. Где разворачиваем и как срочно</legend>
+      <div class="opts" data-group="deploy" role="radiogroup">
+        {% for d in calc.deploy %}<button type="button" class="chip{% if d.id == calc.defaults.deploy %} is-on{% endif %}" role="radio" aria-checked="{{ 'true' if d.id == calc.defaults.deploy else 'false' }}" data-value="{{ d.id }}">{{ d.label }}</button>{% endfor %}
+      </div>
+      <p class="fld-sub">Сроки запуска</p>
+      <div class="opts" data-group="urgency" role="radiogroup">
+        {% for u in calc.urgency %}<button type="button" class="chip{% if u.id == calc.defaults.urgency %} is-on{% endif %}" role="radio" aria-checked="{{ 'true' if u.id == calc.defaults.urgency else 'false' }}" data-value="{{ u.id }}">{{ u.label }}</button>{% endfor %}
+      </div>
+    </fieldset>
+    <fieldset class="fld">
+      <legend>6. Дополнительные требования</legend>
+      <div class="opts" data-group="extras" data-multi>
+        {% for e in calc.extras %}<button type="button" class="chip{% if e.id in calc.defaults.extras %} is-on{% endif %}" aria-pressed="{{ 'true' if e.id in calc.defaults.extras else 'false' }}" data-value="{{ e.id }}">{{ e.label }}</button>{% endfor %}
+      </div>
+    </fieldset>
+  </div>
+  <div class="calc-side">
+  <div class="calc-out">
+    <p class="calc-out-title">Предварительная оценка</p>
+    <p class="price"><span data-out="setup">$9 500 – $15 500</span><small>внедрение под ключ, единоразово</small></p>
+    <div class="obar" aria-hidden="true"><i data-out="bar" style="--pct:.26"></i></div>
+    <dl class="orows">
+      <div><dt>Эксплуатация и поддержка</dt><dd data-out="monthly">$500 – $1 500 в месяц</dd></div>
+      <div><dt>Срок до промышленного запуска</dt><dd data-out="weeks">6–10 недель</dd></div>
+      <div><dt>Пилот с метрикой качества</dt><dd>2–4 недели</dd></div>
+      <div><dt>Команда на проекте</dt><dd data-out="team">2–3 специалиста и PM</dd></div>
+    </dl>
+    <div class="calc-parts">
+      <p class="calc-parts-title">Структура оценки</p>
+      <ol data-out="parts"></ol>
+      <p class="calc-k" data-out="mult" hidden></p>
+    </div>
+    <p class="sr-only" aria-live="polite" data-out="summary"></p>
+    <p class="calc-includes">Что входит: Discovery, подключение данных и систем, сам агент, интерфейсы, приёмка по метрике качества, передача кода и документации.</p>
+    <button class="btn btn-on-brand" type="button" data-modal="request">Получить точный расчёт в КП</button>
+    <p class="calc-disclaimer">Диапазон носит справочный характер и не является офертой. Точная стоимость фиксируется в коммерческом предложении после брифинга. Минимальный бюджет проекта — $5 000.</p>
+  </div>
+  </div>
+</div>

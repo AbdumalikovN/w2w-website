@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+title: "Backend-разработчик"
+description: "Разработка серверной части ERP/CRM-систем и интеграций для клиентов в Узбекистане, Казахстане и США. Ташкент, гибрид."
+permalink: /career/vacancy/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span><a href="{{ '/career/' | url }}">Карьера</a><span>/</span>Вакансия</p>
+      <h1 class="h1">Backend-разработчик</h1>
+      <p class="lead">Разработка серверной части ERP/CRM-систем и интеграций (1С, AmoCRM, платёжные системы) для клиентов в Узбекистане, Казахстане и США.</p>
+      <div class="tags mt-24"><span class="tag">Ташкент, гибрид</span><span class="tag">Полная занятость</span><span class="tag tag-dashed">Зарплата: по итогам интервью</span></div>
+    </div>
+    <div class="hero-page-aside"><p class="todo" style="border-color:var(--ink-4)">Шаблон страницы вакансии: структура и порядок блоков. Содержимое — пример.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="prose">
+        <h2 class="h3">Что делать</h2>
+        <ul><li>Проектировать и разрабатывать API</li><li>Строить интеграции с внешними сервисами</li><li>Участвовать в архитектурных решениях</li><li>Писать поддерживаемый, документированный код</li></ul>
+        <h2 class="h3">Что ждём</h2>
+        <ul><li>Опыт коммерческой разработки от 2 лет</li><li>Уверенная работа с базами данных</li><li>Понимание REST API и интеграционных паттернов</li><li>Ответственность и самостоятельность</li></ul>
+        <h2 class="h3">Что предлагаем</h2>
+        <ul><li>Международные проекты и современный стек</li><li>Рост на 2–3 ролях</li><li>Команда без бюрократии</li><li>Офис в Ташкенте, гибридный формат</li></ul>
+      </div>
+      <div class="panel sticky-card">
+        <h3 class="h3">Откликнуться на вакансию</h3>
+        <form class="form mt-16" data-form="vacancy" novalidate>
+          <label class="field"><span>Имя</span><input name="name" required autocomplete="name"></label>
+          <label class="field"><span>Телефон или Telegram</span><input name="contact" required autocomplete="tel"></label>
+          <label class="field"><span>Ссылка на резюме или LinkedIn</span><input name="cv"></label>
+          <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p class="form-error" data-error hidden>Заполните имя и контакт, чтобы мы могли ответить.</p>
+          <button class="btn btn-primary" type="submit">Отправить отклик</button>
+          <p class="form-note">Отклик попадает в Telegram HR-команды W2W.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

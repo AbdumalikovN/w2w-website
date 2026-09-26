@@ -1,0 +1,33 @@
+<header class="site-header" id="top">
+  <div class="wrap site-header-in">
+    {% include "partials/logo.njk" %}
+    <nav class="site-nav" aria-label="Основная навигация">
+      {% for item in nav.main %}
+      <a href="{{ item.url | url }}"{% if page.url == item.url or (item.match and page.url.startsWith(item.match) and item.match != '/') %} aria-current="page"{% endif %}>{{ item.label }}</a>
+      {% endfor %}
+    </nav>
+    <div class="site-tools">
+      <div class="lang" aria-label="Язык сайта">
+        <span class="lang-on" aria-current="true">RU</span>
+        <span class="lang-soon" aria-disabled="true" title="Узбекская версия — скоро">UZ</span>
+        <span class="lang-soon" aria-disabled="true" title="Английская версия — скоро">EN</span>
+      </div>
+      <button class="tool-btn" type="button" data-modal="search" aria-label="Поиск по сайту"><svg class="i"><use href="#i-search"/></svg><span class="tool-btn-text">Поиск</span><kbd>⌘K</kbd></button>
+      <button class="btn btn-primary btn-sm site-cta" type="button" data-modal="call">Записаться на созвон</button>
+      <button class="tool-btn burger" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Открыть меню"><svg class="i i-open"><use href="#i-menu"/></svg><svg class="i i-close"><use href="#i-close"/></svg></button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <div class="wrap">
+      <nav aria-label="Мобильная навигация">
+        {% for item in nav.main %}<a href="{{ item.url | url }}">{{ item.label }}</a>{% endfor %}
+        {% for item in nav.more %}<a class="mobile-nav-more" href="{{ item.url | url }}">{{ item.label }}</a>{% endfor %}
+      </nav>
+      <div class="mobile-nav-actions">
+        <button class="btn btn-primary" type="button" data-modal="call">Записаться на созвон</button>
+        <button class="btn btn-outline" type="button" data-modal="search">Поиск по сайту</button>
+      </div>
+      <p class="mobile-nav-contact"><a href="{{ site.phoneHref }}">{{ site.phone }}</a><br><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+    </div>
+  </div>
+</header>

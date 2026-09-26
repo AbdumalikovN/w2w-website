@@ -1,0 +1,67 @@
+---
+layout: layouts/base.njk
+title: "Карьера в Win to Win"
+description: "Команда 20–50 человек, где каждый растёт на 2–3 ролях и видит результат своей работы в живых продуктах в Узбекистане, США и Европе. Открытые позиции и как проходит найм."
+permalink: /career/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Карьера</p>
+      <h1 class="h1">Команда — главный актив Win to Win</h1>
+      <p class="lead">Мы команда 20–50 человек, где каждый растёт на 2–3 ролях и видит результат своей работы в живых продуктах в Узбекистане, США и Европе. Присоединяйтесь.</p>
+      <div class="hero-cta"><a class="btn" href="#vacancies">Смотреть вакансии</a><button class="btn btn-outline" type="button" data-modal="request">Отправить резюме</button></div>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>2–3 роли</b>на специалиста: растёте быстрее, чем в узкой должности</p>
+      <p><b>Ташкент</b>офис и гибридный формат, часть позиций удалённо</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="h2">Почему у нас</h2>
+    <div class="industries mt-32">
+      <div><b>Реальный рост</b><p>2–3 роли на специалиста: растёте быстрее, чем в узкой должности.</p></div>
+      <div><b>Международные проекты</b><p>США, Европа, Ближний Восток: опыт мирового уровня из Ташкента.</p></div>
+      <div><b>Современный стек</b><p>AI, ERP/CRM, мобайл, IoT, без legacy-болота.</p></div>
+      <div><b>Команда, а не отделы</b><p>Взаимоподдержка и минимум бюрократии: ценность №1 компании.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper" id="vacancies">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2">Открытые позиции</h2>
+      <label class="sr-only" for="vac-search">Поиск по вакансиям</label>
+      <input id="vac-search" class="vac-search" type="search" placeholder="Поиск по вакансиям" data-vacancy-search>
+    </div>
+    <p class="todo" style="margin-bottom:24px">Карточки-примеры для структуры: заменим реальными вакансиями перед запуском.</p>
+    <div class="index">
+      {% for v in extra.vacancies %}
+      <a class="index-row" href="{{ '/career/vacancy/' | url }}" data-vacancy data-cols="4-7">
+        <h3>{{ v[0] }}</h3>
+        <p>{{ v[1] }}</p>
+        <span class="tag">{{ v[2] }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="h2">Как проходит найм</h2>
+    <div class="flow mt-32">
+      <div><h3><span class="step-n">1</span>Отклик</h3><p>Резюме уходит в Telegram HR-команды.</p></div>
+      <div><h3><span class="step-n">2</span>Знакомство</h3><p>Короткий созвон о вас и о нас.</p></div>
+      <div><h3><span class="step-n">3</span>Техническая часть</h3><p>Интервью или тестовое, по роли.</p></div>
+      <div><h3><span class="step-n">4</span>Оффер</h3><p>Условия, старт, онбординг с наставником.</p></div>
+    </div>
+    <p class="muted small mt-16">Этапы найма — на подтверждение HR-команды.</p>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+title: "Проекты"
+description: "50+ реализованных проектов: ELD-платформы в США, B2B-маркетплейсы, медицинские сервисы, ERP и CRM для недвижимости и логистики. Избранные кейсы Win to Win."
+permalink: /projects/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Проекты</p>
+      <h1 class="h1">Проекты, которые уже работают</h1>
+      <p class="lead">50+ реализованных проектов: от ELD-платформ в США до маркетплейсов и медицинских сервисов в Узбекистане. Ниже — избранные кейсы; детальные описания добавляем волнами.</p>
+      <div class="hero-cta"><button class="btn" type="button" data-modal="call">Хочу похожий проект</button></div>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>3 страны</b>активных проектов: Узбекистан, Казахстан, США</p>
+      <p><b>{{ (projects | where('detail', true)).length }} кейсов</b>с подробным описанием, остальные во второй волне</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div data-project-filters style="display:grid;gap:12px">
+      <div class="opts" data-filter="dir" aria-label="Направление">
+        <span class="small muted" style="align-self:center;margin-right:4px">Направление</span>
+        <button class="chip is-on" type="button" aria-pressed="true" data-value="all">Все</button>
+        <button class="chip" type="button" aria-pressed="false" data-value="erp">ERP и CRM</button>
+        <button class="chip" type="button" aria-pressed="false" data-value="mobile">Мобайл</button>
+        <button class="chip" type="button" aria-pressed="false" data-value="web">Веб</button>
+      </div>
+      <div class="opts" data-filter="ind" aria-label="Отрасль">
+        <span class="small muted" style="align-self:center;margin-right:4px">Отрасль</span>
+        <button class="chip is-on" type="button" aria-pressed="true" data-value="all">Все</button>
+        {% for ind in ["Логистика", "Недвижимость", "Образование", "Медицина", "Ритейл и текстиль", "Юруслуги", "Сервисы", "Транспорт", "Сообщества"] %}
+        <button class="chip" type="button" aria-pressed="false" data-value="{{ ind }}">{{ ind }}</button>
+        {% endfor %}
+      </div>
+    </div>
+    <h2 class="sr-only">Все проекты</h2>
+    <div class="pgrid mt-48">
+      {% for p in projects %}{% include "partials/pcard.njk" %}{% endfor %}
+    </div>
+    <p class="empty" data-projects-empty hidden>По этим фильтрам проектов пока нет — сбросьте фильтр.</p>
+    <p class="muted small mt-32">Показаны проекты первой волны. Ещё в работе над кейсами: Topskill, ADM Global, MIT Academy и другие.</p>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

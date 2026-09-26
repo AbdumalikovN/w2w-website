@@ -1,0 +1,19 @@
+{# Hero estimate: only the agent type is chosen here; everything else uses calc.defaults. #}
+<div class="estimate is-brand" data-calc="mini">
+  <div class="estimate-head">
+    <p class="estimate-title">Оценка за 40 секунд</p>
+    <p class="estimate-sub">Выберите тип агента — покажем диапазон бюджета</p>
+  </div>
+  <div class="opts" data-group="type" role="radiogroup" aria-label="Тип агента">
+    {% for t in calc.types %}<button type="button" class="chip{% if t.id == calc.defaults.type %} is-on{% endif %}" role="radio" aria-checked="{{ 'true' if t.id == calc.defaults.type else 'false' }}" data-value="{{ t.id }}">{{ t.label }}</button>{% endfor %}
+  </div>
+  <div class="estimate-result" aria-live="polite">
+    <p class="price"><span data-out="setup">$9 500 – $15 500</span><small>внедрение под ключ</small></p>
+    <div class="obar" aria-hidden="true"><i data-out="bar" style="--pct:.26"></i></div>
+    <p class="estimate-line"><span data-out="monthly">$500 – $1 500 в месяц</span> эксплуатация, запуск за <span data-out="weeks">6–10 недель</span></p>
+  </div>
+  <div class="estimate-actions">
+    <a class="btn btn-on-brand" href="#calculator" data-calc-handoff>Уточнить в калькуляторе</a>
+    <p class="estimate-note">Внедрение от $5 000. Не является офертой.</p>
+  </div>
+</div>

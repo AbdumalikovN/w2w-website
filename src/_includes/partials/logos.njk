@@ -1,0 +1,14 @@
+<section class="logos" aria-label="Клиенты и партнёры">
+  <div class="wrap logos-head">
+    <p class="logos-title">{{ logosTitle or 'Нам доверяют' }}</p>
+    <p class="logos-count">{{ partners.length }} компаний в Узбекистане, Казахстане и США</p>
+  </div>
+  <div class="marquee" data-marquee>
+    <div class="marquee-track">
+      {% for p in partners %}<span class="marquee-item{% if p.kind == 'tile' %} is-tile{% endif %}"><img src="{{ ('/assets/img/partners/' + p.file) | url }}" alt="{{ p.name }}" width="{{ p.w }}" height="{{ p.h }}" loading="lazy" decoding="async"></span>{% endfor %}
+    </div>
+    <div class="marquee-track" aria-hidden="true">
+      {% for p in partners %}<span class="marquee-item{% if p.kind == 'tile' %} is-tile{% endif %}"><img src="{{ ('/assets/img/partners/' + p.file) | url }}" alt="" width="{{ p.w }}" height="{{ p.h }}" loading="lazy" decoding="async"></span>{% endfor %}
+    </div>
+  </div>
+</section>

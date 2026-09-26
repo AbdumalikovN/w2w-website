@@ -1,0 +1,90 @@
+---
+layout: layouts/base.njk
+title: "Услуги: AI-агенты, ERP и CRM, мобильная и веб-разработка"
+description: "Полный цикл разработки цифровых продуктов: AI-агенты под ключ, ERP и CRM, мобильные приложения, веб-платформы и маркетплейсы. Дизайн, QA, DevOps, безопасность, консалтинг."
+permalink: /services/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Услуги</p>
+      <h1 class="h1">Полный цикл разработки цифровых продуктов</h1>
+      <p class="lead">Основной фокус — AI-агенты под ключ. Вокруг них полный цикл: ERP и CRM, мобильные приложения, веб-платформы, а также дизайн, QA, DevOps, безопасность и консалтинг.</p>
+      <div class="hero-cta"><button class="btn" type="button" data-modal="request">Отправить заявку</button><a class="btn btn-outline" href="{{ '/process/' | url }}">Как мы работаем</a></div>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>$10–30 в час</b>ставка команды: в 2–3 раза ниже международных студий при сопоставимом качестве</p>
+      <p><b>от 1 дня</b>до старта работ: созвон, КП, договор, старт</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="h2">Основные направления</h2>
+    <div class="index mt-32">
+      {% for s in services.main %}
+      <a class="index-row" href="{{ ('/services/' + s.slug + '/') | url }}" data-cols="4-7">
+        <h3>{{ s.title }}</h3>
+        <p>{{ s.text }}</p>
+        <span class="link-arrow">Подробнее <svg class="i"><use href="#i-arrow"/></svg></span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">Всё, что нужно вокруг разработки</h2>
+        <p class="lead" style="margin-top:18px">Дополнительные услуги той же командой: от дизайна до инфраструктуры и обучения. Также поставка оборудования: серверы, сети, IT-инфраструктура под ключ.</p>
+      </div>
+      <div class="industries">
+        {% for x in services.extra %}<div><b>{{ x[0] }}</b><p>{{ x[1] }}</p></div>{% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="h2">Отрасли, которые знаем изнутри</h2>
+    <div class="industries mt-32">
+      {% for x in services.industries %}<a class="industries-link" href="{{ x[2] | url }}"><b>{{ x[0] }}</b><p>{{ x[1] }}</p></a>{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">С кем мы не работаем</h2>
+        <p class="lead" style="margin-top:18px">Мы дорожим репутацией и командой, поэтому не берём проекты, которые противоречат закону, этике или здравому смыслу.</p>
+      </div>
+      <ul class="list">
+        {% for x in services.notWorking %}<li class="list-row"><span>{{ x }}</span></li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">Вопросы про услуги и работу</h2>
+        <p class="lead" style="margin-top:18px">Про стоимость агентов — отдельный блок в <a href="{{ '/calculator/' | url }}">калькуляторе</a>.</p>
+        <div class="mt-24"><button class="btn" type="button" data-modal="call">Задать вопрос</button></div>
+      </div>
+      <div>
+        {% set items = faq.services %}{% include "partials/faq.njk" %}
+        <div class="mt-32">{% set items = faq.main %}{% include "partials/faq.njk" %}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

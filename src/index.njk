@@ -1,0 +1,273 @@
+---
+layout: layouts/base.njk
+title: "AI-агенты и IT-аутсорсинг полного цикла"
+description: "Win to Win проектирует, обучает и внедряет AI-агентов под процессы компании: поддержка клиентов, продажи, документы, звонки, отчётность. Внедрение от $5 000, старт от 1 дня. Ташкент, Узбекистан."
+permalink: /
+bodyClass: page-home
+---
+<section class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <h1 class="display">AI-агенты, которые работают вместо рутины</h1>
+      <p class="lead">Win to Win проектирует, обучает и внедряет AI-агентов под процессы вашей компании: поддержка клиентов, продажи, документы, звонки, отчётность. Агент подключается к вашим системам, отвечает со ссылкой на источник и передаёт сложное человеку.</p>
+      <p class="lead hero-lead-2">Аутсорсинг полного цикла: от пилота за 2–4 недели до промышленной эксплуатации и поддержки по SLA. Мы выигрываем только тогда, когда выигрываете вы.</p>
+      <div class="hero-cta">
+        <a class="btn btn-lg" href="#calculator">Рассчитать стоимость агента</a>
+        <button class="btn btn-outline btn-lg" type="button" data-modal="call">Записаться на созвон</button>
+      </div>
+      <p class="hero-facts"><span><b>от $5 000</b> внедрение</span><span><b>от 1 дня</b> до старта работ</span><span><b>50+</b> проектов и партнёров</span><span><b>Резидент</b> IT Park Uzbekistan</span></p>
+    </div>
+    {% include "partials/estimate-mini.njk" %}
+  </div>
+</section>
+
+{% set logosTitle = "Нам доверяют клиенты и партнёры" %}
+{% include "partials/logos.njk" %}
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">Люди в вашей компании делают то, что должна делать машина</h2>
+        <p class="lead" style="margin-top:18px">AI-агент — это не чат-бот со сценарием. Это сотрудник-программа: у него есть доступ к вашим данным, набор инструментов (CRM, 1С, база, почта), правила и границы. Он выполняет задачу целиком и отчитывается о результате.</p>
+      </div>
+      <div class="figures is-1">
+        <div><div class="num">около 20%</div><p>рабочего времени уходит на поиск информации внутри компании, по данным McKinsey Global Institute.</p></div>
+        <div><div class="num">24/7</div><p>клиенты пишут круглосуточно, а отдел поддержки работает 8 часов пять дней в неделю. Лиды остывают в очереди.</p></div>
+        <div><div class="num">Excel</div><p>данные живут в почте, чатах, 1С и головах сотрудников. Каждый перенос вручную — это время и ошибка.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h2">Каких агентов мы строим</h2>
+        <p class="lead">Восемь отработанных типов. Под задачу собираем одного агента или связку из нескольких, которые передают работу друг другу.</p>
+      </div>
+      <a class="link-arrow" href="{{ '/services/agents/' | url }}">Подробнее об услуге <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="index">
+      {% for a in agents %}
+      <div class="index-row">
+        <h3>{{ a.name }}</h3>
+        <p>{{ a.text }}</p>
+        <div class="index-kpi"><b>{{ a.kpi }}</b> <span>{{ a.kpiSub }}</span></div>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="muted small mt-24">Нужен агент под нестандартный процесс? Опишите задачу на созвоне: соберём схему и оценку за 3 рабочих дня.</p>
+  </div>
+</section>
+
+<section class="section" id="calculator">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h2">Сколько будет стоить ваш агент</h2>
+        <p class="lead">Ответьте на шесть вопросов и получите реалистичный диапазон бюджета внедрения и ежемесячной эксплуатации. Точную цифру фиксируем в коммерческом предложении после брифинга.</p>
+      </div>
+    </div>
+    {% include "partials/calculator.njk" %}
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h2">От идеи до работающего агента — четыре этапа</h2>
+        <p class="lead">Каждый этап заканчивается тем, что вы можете потрогать: схемой, прототипом на ваших данных, метрикой качества, работающим агентом.</p>
+      </div>
+      <a class="link-arrow" href="{{ '/process/' | url }}">Весь процесс из 8 шагов <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="flow">
+      <div><h3><span class="step-n">1</span>Discovery</h3><p>Разбираем процесс, считаем текущую стоимость рутины, выбираем сценарий с максимальной отдачей. 3–5 рабочих дней.</p></div>
+      <div><h3><span class="step-n">2</span>Прототип</h3><p>Подключаем данные и системы, собираем агента на реальных документах. Через 2 недели вы разговариваете с ним, а не смотрите презентацию.</p></div>
+      <div><h3><span class="step-n">3</span>Пилот с метрикой</h3><p>50 реальных вопросов вашего бизнеса. Порог приёмки — 85% приемлемых ответов. Не проходим порог — дорабатываем за свой счёт.</p></div>
+      <div><h3><span class="step-n">4</span>Эксплуатация</h3><p>Промышленный запуск, обучение команды, мониторинг качества, дообучение на новых данных и поддержка по SLA.</p></div>
+    </div>
+    <div class="two-lists mt-48">
+      <div>
+        <h3 class="h3">Что вы получаете на выходе</h3>
+        <p class="muted">Работающий агент в вашем контуре, исходный код и документация, панель аналитики по обращениям и качеству ответов, обученная команда и регламент эксплуатации. Код и данные принадлежат вам.</p>
+      </div>
+      <div>
+        <h3 class="h3">Где живёт агент</h3>
+        <p class="muted">Облако W2W для быстрого старта или полностью приватный контур на ваших серверах: для банков, госсектора и компаний с требованиями к резидентности данных.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">Почему агент не выдумывает ответы</h2>
+        <p class="lead" style="margin-top:18px">Ответ всегда со ссылкой на источник. Права доступа применяются до генерации, а не после. Каждый запрос логируется.</p>
+      </div>
+      <div>
+        <div class="prose">
+          <p><b>Ответ со ссылкой на источник.</b> Агент отвечает только на основе ваших документов и данных. Под каждым ответом нумерованные ссылки на документ, пункт и дату. Не нашёл подтверждения — говорит «не знаю» и передаёт человеку, а не сочиняет.</p>
+          <p><b>Права до генерации.</b> Агент физически не видит документы, к которым у сотрудника нет доступа. Роль определяет, что попадёт в контекст ответа.</p>
+          <p><b>Гибридный поиск и порог уверенности.</b> Семантический поиск плюс поиск по ключевым словам, оценка уверенности перед ответом: если она ниже порога, агент не отвечает.</p>
+          <p><b>Полный аудит.</b> Каждый запрос, источник и ответ логируются. Всегда можно разобрать, почему агент ответил именно так.</p>
+        </div>
+        <div class="stack mt-32">
+          <div><b>Хранилище</b><span>Postgres и pgvector, объектное хранилище, Redis-очередь</span></div>
+          <div><b>Поиск</b><span>Гибридный: семантика и ключевые слова, порог уверенности</span></div>
+          <div><b>Доступ</b><span>RBAC до генерации, аудит-логи, изоляция данных</span></div>
+          <div><b>Каналы</b><span>Telegram, веб-виджет, WhatsApp, телефон, почта, портал</span></div>
+          <div><b>Интеграции</b><span>1С, AmoCRM, Bitrix24, Google Drive, Gmail, Slack, API</span></div>
+          <div><b>Развёртывание</b><span>Облако W2W или приватный контур клиента</span></div>
+        </div>
+        <p class="muted small mt-16">Финальный стек фиксируется на этапе Discovery под инфраструктуру клиента: часть компонентов может быть заменена.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-dark">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 class="h2">TwinWin — мозг вашей компании</h2>
+        <p class="lead" style="margin-top:18px">Ответ за 10 секунд, с источником в приложении. Готовая платформа корпоративных знаний: подключает документы, регламенты, встречи и переписку и отвечает сотрудникам со ссылками. Внедряется быстрее, чем агент с нуля.</p>
+        <div class="hero-cta"><a class="btn btn-on-dark" href="{{ '/twinwin/' | url }}">Смотреть TwinWin</a><button class="btn btn-outline" type="button" data-modal="call">Запросить демо</button></div>
+      </div>
+      <div class="figures is-2">
+        <div><div class="num">10 сек</div><p>среднее время до ответа с цитатой источника</p></div>
+        <div><div class="num">3 языка</div><p>русский, узбекский и английский как первый класс, а не машинный перевод</p></div>
+        <div><div class="num">от $5 000</div><p>внедрение облачной версии для компаний 20–200 человек</p></div>
+        <div><div class="num">85%</div><p>порог приёмки на пилоте: 50 реальных вопросов бизнеса</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h2">Где агенты дают отдачу быстрее всего</h2>
+      </div>
+    </div>
+    <div class="industries">
+      {% for ind in services.agentIndustries %}
+      <div><b>{{ ind[0] }}</b><p>{{ ind[1] }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h2">Мы строим не только агентов</h2>
+        <p class="lead">За плечами 50+ проектов: платформы, ERP, маркетплейсы и мобильные приложения в Узбекистане, Казахстане и США. Тот же инженерный уровень, теперь с агентами внутри.</p>
+      </div>
+      <a class="link-arrow" href="{{ '/projects/' | url }}">Все проекты <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="pgrid">
+      {% for slug in ['logx-eld', 'profitex', 'onlayn-hamshira', 'uybaza'] %}{% set p = projects | find('slug', slug) %}
+      {% include "partials/pcard.njk" %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <h2 class="h2">Кто отвечает за ваш проект</h2>
+        <p class="lead">У каждого направления есть конкретный человек с именем и зоной ответственности. Вы знаете, кому писать, и можете записаться на созвон напрямую.</p>
+      </div>
+      <a class="link-arrow" href="{{ '/team/' | url }}">Вся команда <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="team-grid">
+      {% for p in team %}{% include "partials/person.njk" %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <h2 class="h2">Что вы получаете, выбирая нас</h2>
+    <div class="industries mt-32">
+      <div><b>Агенты как инженерная задача</b><p>Не демо на промптах: архитектура, тесты качества, метрики приёмки, мониторинг и дообучение. Агент живёт в проде годами.</p></div>
+      <div><b>Цена и скорость</b><p>$10–30 в час против $30–80 у крупных студий. Внедрение от $5 000. Быстрее за счёт мультифункциональной команды 20–50 человек.</p></div>
+      <div><b>Старт от 1 дня</b><p>Адаптируем процессы под клиента за 1–2 дня. У крупных конкурентов старт занимает 1–3 месяца.</p></div>
+      <div><b>Полный стек под ключ</b><p>Агент редко живёт один: нужны интеграции, ERP, CRM, мобильное приложение. Делаем всё внутри одной команды.</p></div>
+      <div><b>Прозрачность</b><p>Открытые сроки, бюджет и статус задач. Доступ к трекерам: вы всегда видите, на что идут деньги.</p></div>
+      <div><b>Партнёрский формат</b><p>Не только «заказчик и исполнитель»: revenue sharing, совместные продукты, долевое участие.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-brand">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <h2 class="h2">Приводите клиентов — зарабатывайте 10–25% с каждого проекта</h2>
+        <p class="lead" style="margin-top:18px">Модель Revenue Sharing для маркетинговых агентств, консалтинга и интеграторов. Все риски реализации берём на себя: оплата с первого платежа клиента, выплаты не возвращаются.</p>
+        <div class="hero-cta">
+          <a class="btn btn-on-brand" href="{{ '/partners/' | url }}">Узнать о партнёрстве</a>
+          <a class="btn btn-outline" href="{{ '/documents/' | url }}">Партнёрская модель (PDF)</a>
+        </div>
+      </div>
+      <div class="ledger">
+        <div class="ledger-head"><div>Партнёр</div><div>Win to Win</div></div>
+        <div class="ledger-row"><div data-col="Партнёр"><b>Передаёт лид</b><p>Компания, контакт ЛПР и потребность. Лид закрепляется за вами.</p></div><div data-col="Win to Win"><b>Продаёт и реализует</b><p>Презентация, КП, договор, разработка и запуск. Риски реализации на нас.</p></div></div>
+        <div class="ledger-row"><div data-col="Партнёр"><b>Получает 10–25%</b><p>С каждого платежа клиента, начиная с первого.</p></div><div data-col="Win to Win"><b>Не забирает выплаты</b><p>No Clawback: полученное остаётся у партнёра, даже если проект остановится.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">Что о нас говорят клиенты</h2>
+        <p class="lead" style="margin-top:18px">Записываем видео- и текстовые отзывы клиентов: имя, компания, результат в цифрах.</p>
+      </div>
+      <div>
+        <p class="todo">Блок появится по мере записи отзывов. Формат: фото или видео, имя, компания, результат в цифрах.</p>
+        <div class="sec-head mt-48" style="margin-bottom:20px">
+          <h3 class="h3">Разбираемся в AI и аутсорсинге вместе</h3>
+          <a class="link-arrow" href="{{ '/media/' | url }}">Все статьи <svg class="i"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="list">
+          {% for a in extra.articles | limit(3) %}
+          <div class="list-row">
+            <div>
+              {% if a.ready %}<a href="{{ ('/media/' + a.slug + '/') | url }}" style="display:block;font-weight:600;text-decoration:none">{{ a.title }}</a>{% else %}<b style="font-weight:600;color:var(--ink-3)">{{ a.title }}</b>{% endif %}
+              <div class="tags mt-8"><span class="tag">{{ a.tag }}</span>{% if not a.ready %}<span class="tag tag-dashed">готовится</span>{% endif %}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">Частые вопросы</h2>
+        <p class="lead" style="margin-top:18px">Не нашли ответ — спросите на созвоне или напишите в Telegram.</p>
+        <div class="mt-24"><button class="btn" type="button" data-modal="call">Задать вопрос</button></div>
+      </div>
+      {% set items = faq.agents %}{% include "partials/faq.njk" %}
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

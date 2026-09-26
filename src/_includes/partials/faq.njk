@@ -1,0 +1,8 @@
+<div class="faq">
+  {% for item in items %}
+  <details class="faq-item"{% if loop.first and open %} open{% endif %}>
+    <summary>{{ item[0] }}<span class="faq-plus" aria-hidden="true"></span></summary>
+    <div class="faq-a"><p>{{ item[1] }}</p></div>
+  </details>
+  {% endfor %}
+</div>

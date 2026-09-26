@@ -1,0 +1,55 @@
+---
+layout: layouts/base.njk
+title: "Калькулятор стоимости AI-агента"
+description: "Шесть вопросов о вашем процессе — и реалистичный диапазон бюджета внедрения, ежемесячной эксплуатации и сроков. Без регистрации и без звонка. Внедрение от $5 000."
+permalink: /calculator/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Калькулятор</p>
+      <h1 class="h1">Калькулятор стоимости AI-агента</h1>
+      <p class="lead">Шесть вопросов о вашем процессе — и вы видите реалистичный диапазон бюджета внедрения, ежемесячной эксплуатации и сроков. Без регистрации и без звонка.</p>
+      <div class="hero-cta"><a class="btn btn-outline" href="{{ '/services/agents/' | url }}">Как мы строим агентов</a><button class="btn btn-outline" type="button" data-modal="call">Обсудить задачу</button></div>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>от $5 000</b>минимальный бюджет внедрения</p>
+      <p><b>Диапазон</b>всегда, точную цену фиксируем в КП после брифинга</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    {% include "partials/calculator.njk" %}
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <h2 class="h2">Из чего складывается бюджет</h2>
+    <div class="industries mt-32">
+      <div><b>Discovery и проектирование</b><p>Разбор процесса, выбор сценария, схема данных и интеграций, метрики приёмки. 10–15% бюджета.</p></div>
+      <div><b>Данные и интеграции</b><p>Подключение источников, очистка и индексация, права доступа, связки с 1С, CRM и внутренними системами. Обычно самая большая часть.</p></div>
+      <div><b>Сам агент</b><p>Логика, инструменты, сценарии эскалации, тон общения, тестовый набор вопросов и настройка качества ответов.</p></div>
+      <div><b>Интерфейсы</b><p>Виджет, бот, панель оператора и аналитика по обращениям. Кастомный интерфейс считается отдельно.</p></div>
+      <div><b>Развёртывание</b><p>Облако W2W или приватный контур на ваших серверах. Приватный контур дороже за счёт инфраструктуры и безопасности.</p></div>
+      <div><b>Эксплуатация</b><p>Мониторинг качества, дообучение на новых данных, поддержка по SLA, стоимость моделей и инфраструктуры, ежемесячно.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">Частые вопросы о стоимости</h2>
+        <p class="lead" style="margin-top:18px">Считаем честно: если задача не окупается, мы скажем об этом на первом созвоне.</p>
+        <div class="mt-24"><button class="btn" type="button" data-modal="call">Задать вопрос</button></div>
+      </div>
+      {% set items = faq.calc %}{% include "partials/faq.njk" %}
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

@@ -1,0 +1,64 @@
+---
+layout: layouts/base.njk
+title: "Команда"
+description: "Четыре руководителя Win to Win, между которыми распределена ответственность за ваш проект: стратегия, коммерция, технология и доставка. Кто какой вопрос решает и как быстро."
+permalink: /team/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Команда</p>
+      <h1 class="h1">Команда, которая отвечает за результат</h1>
+      <p class="lead">Четыре руководителя, между которыми распределена вся ответственность за ваш проект: стратегия, коммерция, технология и доставка. У каждого своя страница и свой круг задач, чтобы вы понимали, с кем говорить.</p>
+      <div class="hero-cta"><button class="btn" type="button" data-modal="call">Записаться на созвон</button><a class="btn btn-outline" href="{{ '/about/' | url }}">О компании</a></div>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>20–50</b>специалистов в команде, каждый закрывает 2–3 роли</p>
+      <p><b>1 ответственный</b>за каждый вопрос: не «команда вообще», а конкретный человек</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="h2">Топ-команда Win to Win</h2>
+    <p class="todo mt-16" style="max-width:70ch">ФИО, фотографии, биографии и контакты руководителей — на утверждении у владельца. Фотосессия запланирована; структура страниц готова и заполняется без изменений вёрстки.</p>
+    <div class="team-grid mt-48">
+      {% for p in team %}{% include "partials/person.njk" %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <h2 class="h2">Кто за что отвечает на вашем проекте</h2>
+    <div class="tbl-wrap mt-32" tabindex="0" role="region" aria-label="Кто за что отвечает">
+      <table class="tbl">
+        <thead><tr><th>Вопрос клиента</th><th>Кто решает</th><th>Срок реакции</th></tr></thead>
+        <tbody>
+          {% for p in team | wherenot('slug', 'ceo') %}<tr><td>{{ p.solves }}</td><td><a href="{{ ('/team/' + p.slug + '/') | url }}"><b>{{ p.role }}</b></a></td><td>{{ p.reaction }}</td></tr>{% endfor %}
+          {% set ceo = team | find('slug', 'ceo') %}<tr><td>{{ ceo.solves }}</td><td><a href="{{ '/team/ceo/' | url }}"><b>{{ ceo.role }}</b></a></td><td>{{ ceo.reaction }}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="todo mt-16">Сроки реакции — предложение на утверждение владельцем. Будут вынесены в договор и SLA.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2">Кто работает над агентом каждый день</h2>
+      <a class="btn btn-ghost" href="{{ '/career/' | url }}">Мы нанимаем</a>
+    </div>
+    <div class="industries">
+      <div><b>Project Manager</b><p>Единая точка входа: планы, статусы, демо, эскалации. Ведёт коммуникацию и трекер, доступный вам.</p></div>
+      <div><b>AI-инженер</b><p>Пайплайн данных, индексация, промпт- и контекст-инжиниринг, инструменты агента, оценка качества ответов.</p></div>
+      <div><b>Backend и интеграции</b><p>Подключение 1С, AmoCRM, Bitrix24, баз и внешних API, права доступа, аудит-логи, производительность.</p></div>
+      <div><b>QA и DevOps</b><p>Регрессионные тесты качества, нагрузочное тестирование, CI/CD, развёртывание в облаке или приватном контуре.</p></div>
+    </div>
+    <p class="muted small mt-24">Команда 20–50 специалистов, каждый закрывает 2–3 роли: за счёт этого мы держим ставку $10–30 в час и стартуем от 1 дня.</p>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

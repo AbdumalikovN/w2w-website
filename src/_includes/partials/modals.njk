@@ -1,0 +1,51 @@
+<div class="modal-bg" id="m-call" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-call-title">
+    <button class="modal-x" type="button" data-close aria-label="Закрыть"><svg class="i"><use href="#i-close"/></svg></button>
+    <h2 class="modal-title" id="m-call-title">Записаться на созвон</h2>
+    <p class="modal-lead">30 минут, без обязательств: обсудим задачу, предложим решение и оценку.</p>
+    <form class="form" data-form="call" novalidate>
+      <label class="field"><span>Имя</span><input name="name" required autocomplete="name"></label>
+      <label class="field"><span>Компания</span><input name="company" autocomplete="organization"></label>
+      <label class="field"><span>Телефон или Telegram</span><input name="contact" required autocomplete="tel"></label>
+      <label class="field"><span>Тема</span>
+        <select name="topic">
+          <option>AI-агент под ключ</option><option>ERP / CRM</option><option>Разработка под ключ</option><option>Партнёрство</option><option>Другое</option>
+        </select>
+      </label>
+      <label class="field"><span>Удобные дата и время</span><input name="when" placeholder="например, вторник после 15:00"></label>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="form-error" data-error hidden>Заполните имя и контакт, чтобы мы могли ответить.</p>
+      <button class="btn btn-primary" type="submit">Отправить заявку</button>
+      <p class="form-note">Заявка попадает в Telegram команды W2W. Отвечаем в рабочее время в течение часа.</p>
+    </form>
+  </div>
+</div>
+
+<div class="modal-bg" id="m-request" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-request-title">
+    <button class="modal-x" type="button" data-close aria-label="Закрыть"><svg class="i"><use href="#i-close"/></svg></button>
+    <h2 class="modal-title" id="m-request-title">Заявка на проект</h2>
+    <p class="modal-lead">Опишите задачу в двух словах. Вернёмся с решением и оценкой.</p>
+    <form class="form" data-form="request" novalidate>
+      <label class="field"><span>Имя</span><input name="name" required autocomplete="name"></label>
+      <label class="field"><span>Компания</span><input name="company" autocomplete="organization"></label>
+      <label class="field"><span>Телефон или Telegram</span><input name="contact" required autocomplete="tel"></label>
+      <label class="field"><span>Коротко о задаче</span><textarea name="task" rows="4" placeholder="что нужно сделать, сроки, ориентир бюджета"></textarea></label>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="form-error" data-error hidden>Заполните имя и контакт, чтобы мы могли ответить.</p>
+      <button class="btn btn-primary" type="submit">Отправить заявку</button>
+      <p class="form-note">Заявка попадает в Telegram команды W2W.</p>
+    </form>
+  </div>
+</div>
+
+<div class="modal-bg" id="m-search" hidden>
+  <div class="modal modal-search" role="dialog" aria-modal="true" aria-labelledby="m-search-title">
+    <button class="modal-x" type="button" data-close aria-label="Закрыть"><svg class="i"><use href="#i-close"/></svg></button>
+    <h2 class="modal-title" id="m-search-title">Поиск по сайту</h2>
+    <form class="form" onsubmit="return false">
+      <label class="field field-search"><span class="sr-only">Запрос</span><input id="search-input" type="search" placeholder="Например: CRM, партнёрство, вакансии" autocomplete="off" data-search-input></label>
+    </form>
+    <div class="search-out" data-search-out aria-live="polite"><p class="muted">Начните вводить запрос: покажем страницы, где встречается это слово.</p></div>
+  </div>
+</div>

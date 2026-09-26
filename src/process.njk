@@ -1,0 +1,66 @@
+---
+layout: layouts/base.njk
+title: "Процесс работы: 8 шагов и гарантии"
+description: "Прозрачный процесс из 8 шагов от первого созвона до поддержки после запуска. Что делаете вы и что делаем мы на каждом шаге. Гарантии: сроки, NDA, SLA, код и документация принадлежат вам."
+permalink: /process/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Процесс работы</p>
+      <h1 class="h1">Прозрачный процесс из 8 шагов</h1>
+      <p class="lead">От первого созвона до поддержки после запуска. Вы всегда видите статус, сроки и бюджет: доступ к трекерам открыт с первого дня.</p>
+      <div class="hero-cta"><button class="btn" type="button" data-modal="call">Забронировать звонок</button></div>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>от 1 дня</b>до старта: созвон, КП, договор, старт</p>
+      <p><b>Каждый спринт</b>заканчивается демо, которое вы можете потрогать</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="ledger">
+      <div class="ledger-cols"><div>Шаг</div><div>Что делаете вы</div><div>Что делаем мы</div></div>
+      {% for s in process.steps %}
+      <div class="ledger-step">
+        <div class="step-n">{{ loop.index }}</div>
+        <h2 class="ledger-step-title">{{ s.title }}</h2>
+        <div data-col="Вы"><p>{{ s.you }}</p></div>
+        <div data-col="Мы"><p>{{ s.we }}</p></div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="split split-eq">
+      <div>
+        <h2 class="h2">Что мы фиксируем в договоре</h2>
+        <div class="list mt-32">
+          {% for g in process.guarantees %}<div class="list-row"><div><b>{{ g[0] }}</b><span class="small">{{ g[1] }}</span></div><svg class="i" style="color:var(--green-deep)"><use href="#i-check"/></svg></div>{% endfor %}
+        </div>
+      </div>
+      <div>
+        <h2 class="h2">Всё под контролем</h2>
+        <p class="lead mt-16">Задачи, код, макеты и коммуникация в прозрачных инструментах, к которым вы получаете доступ.</p>
+        <div class="tiles mt-24">{% for t in process.tools %}<div>{{ t }}</div>{% endfor %}</div>
+        <p class="muted small mt-16">Конкретный набор инструментов согласуем под ваш проект.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky"><h2 class="h2">Вопросы о процессе</h2></div>
+      {% set items = faq.process %}{% include "partials/faq.njk" %}
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

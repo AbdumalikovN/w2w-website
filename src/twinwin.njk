@@ -1,0 +1,85 @@
+---
+layout: layouts/base.njk
+title: "TwinWin — платформа корпоративных знаний"
+description: "TwinWin подключает документы, регламенты, встречи, почту и CRM и отвечает сотрудникам за 10 секунд со ссылкой на первоисточник. Права доступа до генерации, аудит, три языка. Внедрение от $5 000."
+permalink: /twinwin/
+---
+<section class="hero-page is-dark">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>TwinWin</p>
+      <h1 class="h1">TwinWin — мозг вашей компании</h1>
+      <p class="lead">Ответ за 10 секунд, с источником в приложении. Платформа корпоративных знаний: подключает документы, регламенты, встречи, почту и CRM и отвечает сотрудникам со ссылками на первоисточник. Наш собственный продукт: внедряется быстрее, чем агент с нуля.</p>
+      <div class="hero-cta"><button class="btn btn-on-dark" type="button" data-modal="call">Запросить демо</button><a class="btn btn-outline" href="{{ '/calculator/' | url }}">Рассчитать стоимость</a></div>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>10 секунд</b>целевое время до ответа с источником</p>
+      <p><b>RU, UZ, EN</b>три языка как первый класс, а не машинный перевод</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="h2">Три потери, которые TwinWin закрывает</h2>
+    <div class="figures mt-48">
+      <div><div class="num">около 20%</div><p>рабочего времени уходит на поиск информации (McKinsey Global Institute). В компании на 100 человек это 20 оплаченных ставок, занятых поиском.</p></div>
+      <div><div class="num">Уход</div><p>сотрудник уходит — знания уходят с ним. Регламенты, договорённости и контекст остаются в его голове и переписке.</p></div>
+      <div><div class="num">Встречи</div><p>решения теряются между встречами: через месяц никто не помнит, о чём договорились и кто отвечает.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <h2 class="h2">Как работает: четыре шага</h2>
+    <div class="flow mt-32">
+      <div><h3><span class="step-n">1</span>Capture</h3><p>Документы, чаты, транскрипты встреч и данные CRM собираются в одном контуре.</p></div>
+      <div><h3><span class="step-n">2</span>Structure</h3><p>Содержимое разбирается и индексируется вместе с правами доступа.</p></div>
+      <div><h3><span class="step-n">3</span>Recall</h3><p>Сотрудник получает ответ с нумерованными ссылками на источники.</p></div>
+      <div><h3><span class="step-n">4</span>Act</h3><p>Из знаний собираются отчёты, черновики документов и задачи.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="two-lists">
+      <div>
+        <h2 class="h2" style="margin-bottom:24px">Что внутри</h2>
+        <ul class="check-list">
+          {% for f in ["Ответы с цитатами и ссылками на первоисточник", "Русский, узбекский и английский как первый класс", "Права доступа применяются до генерации ответа", "Полный аудит запросов и источников", "Telegram-бот и веб-интерфейс", "Автотранскрипция встреч", "Коннекторы: Telegram, Google Drive, Gmail, Bitrix24, AmoCRM, 1С, Slack", "Аналитика использования: что спрашивают, где пробелы в базе знаний"] %}
+          <li><svg class="i"><use href="#i-check"/></svg><span>{{ f }}</span></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div>
+        <h2 class="h2" style="margin-bottom:24px">Два формата</h2>
+        <div class="list">
+          <div class="list-row" style="display:block"><span class="tag">Business, облако</span><b class="h3" style="display:block;margin-top:10px">$500–1 500 в месяц</b><p class="muted small mt-8">Внедрение от $5 000. Для компаний 20–200 человек. Быстрый старт в облаке W2W.</p></div>
+          <div class="list-row" style="display:block"><span class="tag">Enterprise, приватный контур</span><b class="h3" style="display:block;margin-top:10px">$1 500–5 000 в месяц</b><p class="muted small mt-8">Внедрение от $15 000. Для компаний от 200 человек и регулируемых данных. Полностью закрытая инсталляция.</p></div>
+        </div>
+        <p class="todo mt-16">Цены продукта TwinWin публикуем открыто, в отличие от проектной разработки. Финальные формулировки тарифов — на утверждении.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="split">
+      <div class="split-sticky">
+        <h2 class="h2">Как понять, что продукт работает</h2>
+        <p class="lead" style="margin-top:18px">Пилот идёт на ваших реальных данных. Берём 50 настоящих вопросов сотрудников и замеряем долю приемлемых ответов. Порог — 85%. Ниже порога дорабатываем за свой счёт, а не спорим о формулировках.</p>
+      </div>
+      <div class="figures is-2">
+        <div><div class="num">50</div><p>реальных вопросов бизнеса в тестовом наборе</p></div>
+        <div><div class="num">85%</div><p>порог приемлемых ответов для приёмки пилота</p></div>
+        <div><div class="num">2–4 нед</div><p>длительность пилота</p></div>
+        <div><div class="num">10 сек</div><p>целевое время до ответа с источником</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

@@ -1,0 +1,69 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: projectsDetail
+  size: 1
+  addAllPagesToCollections: true
+  alias: p
+permalink: "/projects/{{ p.slug }}/"
+eleventyComputed:
+  title: "Кейс: {{ p.name }}"
+  description: "{{ p.short }}"
+---
+<section class="hero-page">
+  <div class="wrap">
+    <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span><a href="{{ '/projects/' | url }}">Проекты</a><span>/</span>{{ p.name }}</p>
+    <div class="hero-page-in">
+      <div>
+        <h1 class="h1">{{ p.name }}</h1>
+        <p class="lead">{{ p.short }}</p>
+        <div class="hero-cta"><button class="btn" type="button" data-modal="call">Хочу похожий проект</button>{% if p.live %}<span class="btn btn-ghost" style="cursor:default">Продукт: {{ p.live }}</span>{% endif %}</div>
+      </div>
+      <div class="tags" style="align-self:end"><span class="tag">{{ p.dir }}</span><span class="tag">{{ p.ind }}</span><span class="tag tag-dashed">Год: уточним</span><span class="tag tag-dashed">Стек: уточним</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap">
+    <div class="cover cover-{{ p.tone }} cover-lg">
+      <span class="cover-meta">{{ p.ind }}{% if p.live %}, {{ p.live }}{% endif %}</span>
+      <span class="cover-name">{{ p.name }}</span>
+      <svg class="cover-w" viewBox="335 262 445 555" aria-hidden="true"><path fill="currentColor" d="M475.92,558.01l18.53-17.94s18.25,106.28,62.54,123.07c44.29,16.79,54.72-110.94,54.72-110.94l7.23-136.7,141.05-141.05s-28.68,508.29-151.48,530.89c0,0-64.87,12.17-106.6-148.28l-26.08-99.05h.08Z"/><path fill="currentColor" d="M344.75,612.26l14.46-14.03s14.26,83.01,48.83,96.13c34.61,13.12,42.75-86.6,42.75-86.6l5.65-106.75,110.15-110.15s-22.4,396.91-118.29,414.53c0,0-50.65,9.48-83.21-115.8l-20.35-77.36v.04Z"/></svg>
+    </div>
+    <p class="todo mt-16">Скриншоты продукта появятся здесь после согласования с клиентом.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split split-eq">
+      <div>
+        <h2 class="h3">О продукте</h2>
+        <div class="prose mt-16"><p>{{ p.overview }}</p></div>
+        <h2 class="h3 mt-32">Задача</h2>
+        <div class="prose mt-16"><p>{{ p.task }}</p></div>
+      </div>
+      <div>
+        <h2 class="h3">Что сделали</h2>
+        <ul class="check-list mt-16">{% for x in p.did %}<li><svg class="i"><use href="#i-check"/></svg><span>{{ x }}</span></li>{% endfor %}</ul>
+        <h2 class="h3 mt-32">Результаты</h2>
+        <p class="todo mt-16">Цифры результата (метрики до и после, сроки, эффект для бизнеса) соберём с командой проекта и добавим сюда.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-paper">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="h2">Смотрите также</h2><a class="link-arrow" href="{{ '/projects/' | url }}">Все проекты <svg class="i"><use href="#i-arrow"/></svg></a></div>
+    {% set related = [] %}
+    {% for x in projects %}{% if x.detail and x.slug != p.slug and (x.ind == p.ind or x.dirKey == p.dirKey) and related.length < 2 %}{% set related = (related.push(x), related) %}{% endif %}{% endfor %}
+    {% if related.length < 2 %}{% for x in projects %}{% if x.detail and x.slug != p.slug and related.length < 2 and x not in related %}{% set related = (related.push(x), related) %}{% endif %}{% endfor %}{% endif %}
+    <div class="pgrid">
+      {% for rp in related %}{% set p2 = p %}{% set p = rp %}{% include "partials/pcard.njk" %}{% set p = p2 %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title %}{{ title }} — {% endif %}Win to Win</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <link rel="canonical" href="{{ site.domain }}{{ page.url }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Win to Win">
+  <meta property="og:title" content="{{ title or 'Win to Win' }}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="theme-color" content="#F3F3F3">
+  <link rel="icon" href="{{ '/assets/img/favicon.svg' | url }}" type="image/svg+xml">
+  <link rel="preload" href="{{ '/assets/fonts/onest-800-cyrillic.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ '/assets/fonts/onest-400-cyrillic.woff2' | url }}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/fonts.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | url }}">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Win to Win","url":"{{ site.domain }}","email":"{{ site.email }}","telephone":"{{ site.phone }}","address":{"@type":"PostalAddress","addressLocality":"Ташкент","addressCountry":"UZ","streetAddress":"ул. Kozitarnov, 76"}}</script>
+</head>
+<body class="{{ bodyClass }}">
+  <a class="skip" href="#main">К содержанию</a>
+  {% include "partials/icons.njk" %}
+  {% include "partials/header.njk" %}
+  <main id="main" tabindex="-1">
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+  {% include "partials/modals.njk" %}
+  <script>
+    window.W2W = {
+      base: "{{ '/' | url }}",
+      formEndpoint: {{ site.formEndpoint | jsonstr | safe }},
+      thanks: "{{ '/thanks/' | url }}",
+      calc: {{ calc | dump | safe }},
+      clocks: {{ site.clocks | dump | safe }}
+    };
+  </script>
+  <script src="{{ '/assets/js/main.js' | url }}" defer></script>
+</body>
+</html>

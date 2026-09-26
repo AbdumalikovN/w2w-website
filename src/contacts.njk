@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+title: "Контакты"
+description: "Свяжитесь с Win to Win: телефон +998 95 535 35 55, info@w2w.uz, офис в Ташкенте. Заявки с сайта мгновенно попадают в Telegram команды."
+permalink: /contacts/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Контакты</p>
+      <h1 class="h1">Свяжитесь с нами любым удобным способом</h1>
+      <p class="lead">Отвечаем быстро: заявки с сайта мгновенно попадают в Telegram команды. Или приходите в офис в Ташкенте: угостим кофе и покажем проекты вживую.</p>
+    </div>
+    <div class="hero-page-aside">
+      <div class="clocks" style="margin-top:0;color:var(--ink)" data-clocks>
+        {% for c in site.clocks %}<span class="clock"><span class="clock-city" style="color:var(--ink-3)">{{ c.city }}</span> <time class="clock-time" data-tz="{{ c.tz }}">—:—</time></span>{% endfor %}
+      </div>
+      <p class="mt-16">Ташкент (UTC+5) перекрывает рабочий день Европы и утро США: вопросы, заданные вечером в Нью-Йорке, решены к началу следующего рабочего дня.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="split split-eq">
+      <div>
+        <div class="contact-row"><div><p class="label">Телефон</p><a class="value" href="{{ site.phoneHref }}">{{ site.phone }}</a></div><button class="btn btn-ghost btn-sm" type="button" data-modal="call">Заказать звонок</button></div>
+        <div class="contact-row"><div><p class="label">Почта</p><a class="value" href="mailto:{{ site.email }}">{{ site.email }}</a></div></div>
+        <div class="contact-row"><div><p class="label">Адрес</p><p class="value" style="font-size:19px">{{ site.address }}</p><p class="small muted mt-8">{{ site.addressNote }}</p></div></div>
+        <div class="contact-row"><div><p class="label">Мессенджеры и соцсети</p><div class="tags mt-8">{% for s in site.socials %}<a class="tag" href="{{ s.href }}">{{ s.name }}</a>{% endfor %}</div></div></div>
+        <div class="mt-32">
+          <p class="label small muted" style="font-weight:600">Реквизиты</p>
+          <p class="mt-8">{{ site.legal }}, {{ site.director }}<br>ИНН {{ site.inn }}, ОКЭД {{ site.oked }}<br>{{ site.certificate }}</p>
+        </div>
+      </div>
+      <div class="map-ph">Карта появится при публикации (Google или Яндекс)</div>
+    </div>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}

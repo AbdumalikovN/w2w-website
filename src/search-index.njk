@@ -1,0 +1,7 @@
+---
+permalink: /search-index.json
+eleventyExcludeFromCollections: true
+---
+{%- set pages = [] -%}
+{%- for p in collections.all -%}{%- if p.data.title and not p.data.noindex -%}{%- set pages = (pages.push(p), pages) -%}{%- endif -%}{%- endfor -%}
+[{% for p in pages %}{"url":{{ (p.url | url) | jsonstr | safe }},"title":{{ p.data.title | jsonstr | safe }},"text":{{ (p.templateContent | striptags | truncate(6000)) | jsonstr | safe }}}{% if not loop.last %},{% endif %}{% endfor %}]

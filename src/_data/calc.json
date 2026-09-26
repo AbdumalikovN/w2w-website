@@ -1,0 +1,50 @@
+{
+  "types": [
+    { "id": "support", "label": "Поддержка клиентов", "k": 1.0 },
+    { "id": "sales", "label": "Продажи и лиды", "k": 1.1 },
+    { "id": "voice", "label": "Голосовой агент", "k": 1.6 },
+    { "id": "docs", "label": "Документы и бэк-офис", "k": 1.5 },
+    { "id": "knowledge", "label": "База знаний компании", "k": 1.3 },
+    { "id": "ops", "label": "Операционные процессы", "k": 1.4 },
+    { "id": "analytics", "label": "Аналитика и отчёты", "k": 1.3 },
+    { "id": "hr", "label": "HR-агент", "k": 1.0 }
+  ],
+  "channels": [
+    { "id": "telegram", "label": "Telegram" },
+    { "id": "web", "label": "Виджет на сайте" },
+    { "id": "whatsapp", "label": "WhatsApp" },
+    { "id": "phone", "label": "Телефония" },
+    { "id": "email", "label": "Почта" },
+    { "id": "portal", "label": "Внутренний портал" }
+  ],
+  "knowledge": [
+    { "id": "s", "label": "до 500 документов", "add": 0 },
+    { "id": "m", "label": "500–5 000 документов", "add": 1500 },
+    { "id": "l", "label": "более 5 000 документов", "add": 4000 }
+  ],
+  "deploy": [
+    { "id": "cloud", "label": "Облако W2W", "k": 1.0 },
+    { "id": "private", "label": "Приватный контур клиента", "k": 1.5 }
+  ],
+  "extras": [
+    { "id": "audit", "label": "Аудит-логи и SLA", "add": 1500 },
+    { "id": "hitl", "label": "Контроль человеком", "add": 1000 },
+    { "id": "ui", "label": "Кастомный интерфейс", "add": 2500 },
+    { "id": "training", "label": "Обучение команды заказчика", "add": 800 }
+  ],
+  "urgency": [
+    { "id": "normal", "label": "Обычный график", "k": 1.0 },
+    { "id": "fast", "label": "Срочно, сжатые сроки", "k": 1.25 }
+  ],
+  "defaults": {
+    "type": "support",
+    "channels": ["telegram"],
+    "integrations": 2,
+    "knowledge": "m",
+    "languages": 2,
+    "deploy": "cloud",
+    "extras": ["audit"],
+    "urgency": "normal"
+  },
+  "minSetup": 5000
+}

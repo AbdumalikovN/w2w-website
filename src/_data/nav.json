@@ -1,0 +1,53 @@
+{
+  "main": [
+    { "label": "AI-агенты", "url": "/services/agents/", "match": "/services/agents/" },
+    { "label": "TwinWin", "url": "/twinwin/", "match": "/twinwin/" },
+    { "label": "Калькулятор", "url": "/calculator/", "match": "/calculator/" },
+    { "label": "Проекты", "url": "/projects/", "match": "/projects/" },
+    { "label": "Команда", "url": "/team/", "match": "/team/" },
+    { "label": "Партнёрство", "url": "/partners/", "match": "/partners/" },
+    { "label": "О нас", "url": "/about/", "match": "/about/" },
+    { "label": "Контакты", "url": "/contacts/", "match": "/contacts/" }
+  ],
+  "more": [
+    { "label": "Все услуги", "url": "/services/" },
+    { "label": "Процесс работы", "url": "/process/" },
+    { "label": "Карьера", "url": "/career/" },
+    { "label": "Медиа", "url": "/media/" },
+    { "label": "Документы", "url": "/documents/" }
+  ],
+  "footer": [
+    {
+      "title": "AI-агенты",
+      "links": [
+        { "label": "Агенты под ключ", "url": "/services/agents/" },
+        { "label": "TwinWin", "url": "/twinwin/" },
+        { "label": "Калькулятор стоимости", "url": "/calculator/" },
+        { "label": "Процесс работы", "url": "/process/" }
+      ]
+    },
+    {
+      "title": "Услуги",
+      "links": [
+        { "label": "ERP, CRM, HRM", "url": "/services/erp-crm/" },
+        { "label": "Мобильная разработка", "url": "/services/mobile/" },
+        { "label": "Веб и маркетплейсы", "url": "/services/web/" },
+        { "label": "AI-автоматизация", "url": "/services/ai/" },
+        { "label": "Все услуги", "url": "/services/" }
+      ]
+    },
+    {
+      "title": "Компания",
+      "links": [
+        { "label": "Команда", "url": "/team/" },
+        { "label": "О нас", "url": "/about/" },
+        { "label": "Партнёрство", "url": "/partners/" },
+        { "label": "Проекты", "url": "/projects/" },
+        { "label": "Карьера", "url": "/career/" },
+        { "label": "Медиа", "url": "/media/" },
+        { "label": "Документы и сертификаты", "url": "/documents/" },
+        { "label": "Контакты", "url": "/contacts/" }
+      ]
+    }
+  ]
+}

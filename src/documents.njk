@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+title: "Документы и сертификаты"
+description: "Официальные документы Win to Win: сертификат резидента IT Park Uzbekistan, партнёрская модель и соглашение, политика конфиденциальности, публичная оферта и условия использования."
+permalink: /documents/
+---
+<section class="hero-page">
+  <div class="wrap hero-page-in">
+    <div>
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Документы</p>
+      <h1 class="h1">Документы и сертификаты</h1>
+      <p class="lead">Официальные документы компании: статус резидента, партнёрские условия и политики. Всё можно скачать и проверить.</p>
+    </div>
+    <div class="hero-page-aside">
+      <p><b>№4689</b>сертификат резидента IT Park Uzbekistan, проверяется по QR-коду</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="list doc-list">
+      {% for d in extra.documents %}
+      <div class="list-row">
+        <div style="display:flex;gap:14px;align-items:flex-start"><svg class="i" style="margin-top:4px;color:var(--ink-3)"><use href="#i-file"/></svg><div><b>{{ d.title }}</b><span class="small">{{ d.sub }}</span></div></div>
+        <span class="status{% if not d.ready %} is-pending{% endif %}">{{ d.status }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="muted small mt-24">Файлы для скачивания подключим при публикации сайта.</p>
+  </div>
+</section>
+
+{% include "partials/cta.njk" %}
