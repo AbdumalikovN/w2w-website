@@ -15,7 +15,7 @@ export default function (eleventyConfig) {
     .replace(/\s+/g, " ").trim());
   eleventyConfig.addFilter("jsonstr", (s) => JSON.stringify(String(s || "")));
 
-  // Russian typesetting on the final HTML (text nodes only; tags, scripts, styles untouched):
+  // Russian typesetting on the final HTML (text nodes only; <title>, tags, scripts, styles untouched):
   // short prepositions/conjunctions stick to the next word, a dash sticks to the word before it,
   // numeric ranges (10–25%) and short hyphenated words (чат-бот, AI-агент) never break.
   const SHORT = "в|во|на|не|ни|и|а|к|ко|с|со|о|об|обо|от|до|по|за|из|у|для|без|при|или|но|же|как|под|над|про|это|мы|вы|вас|нам|вам";
@@ -27,7 +27,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addTransform("typeset", function (content) {
     if (!(this.page.outputPath || "").endsWith(".html")) return content;
     return content
-      .split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<textarea[\s\S]*?<\/textarea>|<pre[\s\S]*?<\/pre>|<[^>]+>)/i)
+      .split(/(<title>[\s\S]*?<\/title>|<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<textarea[\s\S]*?<\/textarea>|<pre[\s\S]*?<\/pre>|<[^>]+>)/i)
       .map((seg, i) => (i % 2 ? seg : typeset(seg)))
       .join("");
   });
