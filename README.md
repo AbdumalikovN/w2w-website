@@ -1,6 +1,6 @@
 # Win to Win — сайт w2w.uz (Website 2.0)
 
-Сайт компании **Win to Win (W2W)**: AI-агенты и IT-аутсорсинг полного цикла. Статический сайт на [Eleventy](https://www.11ty.dev/), 34 страницы, дизайн по брендбуку W2W (см. `DESIGN.md`).
+Сайт компании **Win to Win (W2W)**: AI-агенты и IT-аутсорсинг полного цикла. Статический сайт на [Eleventy](https://www.11ty.dev/), 34 страницы, дизайн в стиле iOS по брендбуку W2W (см. `DESIGN.md`). Анимации — [GSAP](https://gsap.com) + ScrollTrigger (npm-пакет `gsap`, при сборке копируется в `assets/vendor/`).
 
 Опубликовано через GitHub Pages: https://abdumalikovn.github.io/w2w-website/
 
@@ -9,9 +9,10 @@
 ```
 src/
   _data/        контент в JSON: site (контакты, реквизиты), nav, agents, calc, projects, team,
-                services, faq, process, extra (вакансии, статьи, документы), partners (лого)
+                services, faq, process, extra (вакансии, статьи, документы), partners (лого),
+                ui (иконки, этапы, уведомления на телефоне в первом экране)
   _includes/    layouts/base.njk + partials (шапка, футер, модалки, калькулятор, лента лого, FAQ…)
-  assets/       css/main.css (дизайн-система), js/main.js (интерактив), img/ (лого, фавикон), fonts/
+  assets/       css/main.css (дизайн-система), js/main.js (интерактив и анимации), img/ (лого, фавикон), fonts/
   *.njk         страницы; projects/detail.njk, team/detail.njk, services/detail.njk — шаблоны с пагинацией
   search-index.njk  → /search-index.json для поиска ⌘K
   static/       robots.txt (копируется в корень)

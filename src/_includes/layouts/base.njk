@@ -12,6 +12,7 @@
   <meta property="og:description" content="{{ description or site.description }}">
   <meta property="og:locale" content="ru_RU">
   <meta name="theme-color" content="#F3F3F3">
+  <script>(function(d){var h=d.documentElement;h.classList.add("js");if(!window.matchMedia||!matchMedia("(prefers-reduced-motion: reduce)").matches){h.classList.add("motion");setTimeout(function(){if(!h.classList.contains("anim-ready"))h.classList.remove("motion")},2600)}})(document);</script>
   <link rel="icon" href="{{ '/assets/img/favicon.svg' | url }}" type="image/svg+xml">
   <link rel="preload" href="{{ '/assets/fonts/onest-800-cyrillic.woff2' | url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/onest-400-cyrillic.woff2' | url }}" as="font" type="font/woff2" crossorigin>
@@ -34,9 +35,12 @@
       formEndpoint: {{ site.formEndpoint | jsonstr | safe }},
       thanks: "{{ '/thanks/' | url }}",
       calc: {{ calc | dump | safe }},
-      clocks: {{ site.clocks | dump | safe }}
+      clocks: {{ site.clocks | dump | safe }},
+      notifs: {{ ui.notifs | dump | safe }}
     };
   </script>
+  <script src="{{ '/assets/vendor/gsap.min.js' | url }}" defer></script>
+  <script src="{{ '/assets/vendor/ScrollTrigger.min.js' | url }}" defer></script>
   <script src="{{ '/assets/js/main.js' | url }}" defer></script>
 </body>
 </html>

@@ -25,7 +25,7 @@ permalink: /services/
     <div class="index mt-32">
       {% for s in services.main %}
       <a class="index-row" href="{{ ('/services/' + s.slug + '/') | url }}" data-cols="4-7">
-        <h3>{{ s.title }}</h3>
+        <h3>{% set si = ui.serviceIcons[s.slug] %}{% if si %}<span class="app-icon md ic-{{ si[1] }}"><svg><use href="#{{ si[0] }}"/></svg></span>{% endif %}{{ s.title }}</h3>
         <p>{{ s.text }}</p>
         <span class="link-arrow">Подробнее <svg class="i"><use href="#i-arrow"/></svg></span>
       </a>

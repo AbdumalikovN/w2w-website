@@ -1,11 +1,11 @@
-<footer class="site-footer is-dark">
+<footer class="site-footer">
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
         {% include "partials/logo.njk" %}
         <p class="footer-desc">AI-агенты и IT-аутсорсинг полного цикла из Ташкента. Резидент IT Park Uzbekistan. Мы выигрываем только тогда, когда выигрываете вы.</p>
         <div class="clocks" data-clocks>
-          {% for c in site.clocks %}<span class="clock"><span class="clock-city">{{ c.city }}</span> <time class="clock-time" data-tz="{{ c.tz }}">—:—</time></span>{% endfor %}
+          {% for c in site.clocks %}<span class="clock"><span class="clock-city">{{ c.city }}</span><time class="clock-time" data-tz="{{ c.tz }}">—:—</time></span>{% endfor %}
         </div>
         <p class="footer-online"><span class="dot-live" aria-hidden="true"></span>Отвечаем в рабочее время в течение часа</p>
       </div>
@@ -21,8 +21,9 @@
         <a href="mailto:{{ site.email }}">{{ site.email }}</a>
         <p class="footer-addr">{{ site.address }}</p>
         <div class="soc">
-          {% for s in site.socials %}<a href="{{ s.href }}" >{{ s.name }}</a>{% endfor %}
+          {% for s in site.socials %}<a href="{{ s.href }}">{{ s.name }}</a>{% endfor %}
         </div>
+        <p class="footer-lang"><span class="sr-only">Язык сайта: </span><span class="is-on">RU</span><span>UZ</span><span>EN</span><span class="sr-only"> — узбекская и английская версии готовятся</span></p>
       </div>
     </div>
     <div class="footer-bottom">

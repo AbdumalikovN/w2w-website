@@ -22,6 +22,7 @@ permalink: /media/
     <div class="opts">
       {% for c in ["Все", "Новости W2W", "IT-аутсорсинг", "Тренды и AI", "Кейсы"] %}<span class="chip{% if loop.first %} is-on{% endif %}">{{ c }}</span>{% endfor %}
     </div>
+    <h2 class="sr-only">Все статьи</h2>
     <div class="index mt-32">
       {% for a in extra.articles %}
       {% if a.ready %}

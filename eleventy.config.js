@@ -1,6 +1,7 @@
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
   eleventyConfig.addPassthroughCopy({ "src/static": "/" });
+  eleventyConfig.addPassthroughCopy({ "node_modules/gsap/dist/gsap.min.js": "assets/vendor/gsap.min.js", "node_modules/gsap/dist/ScrollTrigger.min.js": "assets/vendor/ScrollTrigger.min.js" });
 
   eleventyConfig.addFilter("usd", (n) => "$" + Number(n).toLocaleString("ru-RU").replace(/ /g, " "));
   eleventyConfig.addFilter("year", () => new Date().getFullYear());
@@ -22,8 +23,10 @@ export default function (eleventyConfig) {
   const reShort = new RegExp(`(?<=^|[\\s(«"„\\u00A0])(${SHORT})\\s+(?=[^\\s<])`, "giu");
   const reDash = /(\S) ([—–]) /g;
   const reRange = /(\d)([–-])(?=\$?\d)/g;
-  const reHyph = /(?<=^|[\s>(« ])([A-Za-zА-Яа-яЁё]{1,5})-(?=[A-Za-zА-Яа-яЁё])/gu;
-  const typeset = (t) => t.replace(reShort, "$1 ").replace(reDash, "$1 $2 ").replace(reRange, "$1$2⁠").replace(reHyph, "$1-⁠");
+  const reHyph = /(?<=^|[\s>(«\u00A0])([A-Za-zА-Яа-яЁё]{1,5})-(?=[A-Za-zА-Яа-яЁё])/gu;
+  const reNum = /(\d) (?=[А-Яа-яЁё%])/g;
+  const reThousands = /(\d) (?=\d{3}(?!\d))/g;
+  const typeset = (t) => t.replace(reShort, "$1\u00A0").replace(reDash, "$1\u00A0$2 ").replace(reRange, "$1$2\u2060").replace(reHyph, "$1-\u2060").replace(reNum, "$1\u00A0").replace(reThousands, "$1\u00A0");
   eleventyConfig.addTransform("typeset", function (content) {
     if (!(this.page.outputPath || "").endsWith(".html")) return content;
     return content

@@ -24,16 +24,18 @@ permalink: /contacts/
   <div class="wrap">
     <div class="split split-eq">
       <div>
+        <div class="contact-group">
         <div class="contact-row"><div><p class="label">Телефон</p><a class="value" href="{{ site.phoneHref }}">{{ site.phone }}</a></div><button class="btn btn-ghost btn-sm" type="button" data-modal="call">Заказать звонок</button></div>
         <div class="contact-row"><div><p class="label">Почта</p><a class="value" href="mailto:{{ site.email }}">{{ site.email }}</a></div></div>
-        <div class="contact-row"><div><p class="label">Адрес</p><p class="value" style="font-size:19px">{{ site.address }}</p><p class="small muted mt-8">{{ site.addressNote }}</p></div></div>
+        <div class="contact-row"><div><p class="label">Адрес</p><p class="value" style="font-size:19px">{{ site.address }}</p></div></div>
         <div class="contact-row"><div><p class="label">Мессенджеры и соцсети</p><div class="tags mt-8">{% for s in site.socials %}<a class="tag" href="{{ s.href }}">{{ s.name }}</a>{% endfor %}</div></div></div>
+        </div>
         <div class="mt-32">
           <p class="label small muted" style="font-weight:600">Реквизиты</p>
           <p class="mt-8">{{ site.legal }}, {{ site.director }}<br>ИНН {{ site.inn }}, ОКЭД {{ site.oked }}<br>{{ site.certificate }}</p>
         </div>
       </div>
-      <div class="map-ph">Карта появится при публикации (Google или Яндекс)</div>
+      <div class="map-ph"><span class="map-pin" aria-hidden="true"></span><b style="color:var(--ink)">Ташкент, Мирзо Улугбек</b><span>Интерактивная карта появится при публикации</span></div>
     </div>
   </div>
 </section>

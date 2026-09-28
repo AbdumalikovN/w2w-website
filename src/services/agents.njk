@@ -22,13 +22,15 @@ permalink: /services/agents/
 <section class="section">
   <div class="wrap">
     <h2 class="h2">Типы агентов</h2>
-    <div class="index mt-32">
+    <div class="agent-grid mt-32">
       {% for a in agents %}
-      <div class="index-row">
+      <article class="agent-card{% if loop.index == 3 or loop.index == 6 %} is-dark{% endif %}">
+        <span class="app-icon lg ic-{{ loop.index }}"><svg><use href="#{{ ui.agentIcons[a.slug] }}"/></svg></span>
         <h3>{{ a.name }}</h3>
         <p>{{ a.text }}</p>
-        <div class="index-kpi"><b>{{ a.kpi }}</b> <span>{{ a.kpiSub }}</span></div>
-      </div>
+        <div class="agent-kpi"><b>{{ a.kpi }}</b><span>{{ a.kpiSub }}</span></div>
+        <span class="agent-glow ic-{{ loop.index }}" aria-hidden="true"></span>
+      </article>
       {% endfor %}
     </div>
   </div>
