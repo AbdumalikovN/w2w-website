@@ -2,13 +2,13 @@
   "name": "Win to Win",
   "short": "W2W",
   "domain": "https://w2w.uz",
-  "tagline": "AI-агенты и IT-аутсорсинг полного цикла из Ташкента",
-  "description": "Win to Win проектирует, обучает и внедряет AI-агентов и строит ERP, CRM, мобильные и веб-платформы для компаний в Узбекистане, Казахстане, США и Европе. Мы выигрываем только тогда, когда выигрываете вы.",
+  "origin": "https://abdumalikovn.github.io",
+  "tagline": "Company Brain и IT-аутсорсинг полного цикла из Ташкента",
+  "description": "Win to Win внедряет Company Brain — второй мозг компании, который знает всё о ваших процессах, отвечает сотрудникам со ссылками на источники и сам выполняет рутину, — и разрабатывает ERP, CRM, мобильные и веб-платформы для компаний в Узбекистане, Казахстане, США и Европе.",
   "phone": "+998 95 535 35 55",
   "phoneHref": "tel:+998955353555",
   "email": "info@w2w.uz",
-  "address": "Ташкент, МФЙ Мирзо Улугбек, ул. Kozitarnov, 76",
-  "addressNote": "написание улицы сверим перед публикацией",
+  "address": "Ташкент, ул. Шахрисабз, 25, U-Enter",
   "legal": "ООО «WIN TO WIN»",
   "director": "директор Комилжонов Ж.З.",
   "inn": "311939969",
@@ -16,17 +16,78 @@
   "certificate": "Резидент IT Park Uzbekistan, сертификат №4689",
   "certificateDate": "внесён в Единый реестр 29.08.2025",
   "socials": [
-    { "name": "Telegram", "short": "TG", "href": "#" },
-    { "name": "Instagram", "short": "IG", "href": "#" },
-    { "name": "LinkedIn", "short": "IN", "href": "#" },
-    { "name": "Facebook", "short": "FB", "href": "#" },
-    { "name": "X", "short": "X", "href": "#" }
+    {
+      "id": "telegram",
+      "name": "Telegram",
+      "href": ""
+    },
+    {
+      "id": "instagram",
+      "name": "Instagram",
+      "href": ""
+    },
+    {
+      "id": "linkedin",
+      "name": "LinkedIn",
+      "href": ""
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "href": ""
+    },
+    {
+      "id": "facebook",
+      "name": "Facebook",
+      "href": ""
+    },
+    {
+      "id": "x",
+      "name": "X",
+      "href": ""
+    },
+    {
+      "id": "whatsapp",
+      "name": "WhatsApp",
+      "href": "https://wa.me/998955353555",
+      "label": "WhatsApp"
+    },
+    {
+      "id": "phone",
+      "name": "Телефон",
+      "href": "tel:+998955353555",
+      "label": "+998 95 535 35 55"
+    },
+    {
+      "id": "mail",
+      "name": "Почта",
+      "href": "mailto:info@w2w.uz",
+      "label": "info@w2w.uz"
+    }
   ],
   "formEndpoint": "",
-  "music": false,
+  "music": true,
   "clocks": [
-    { "city": "Ташкент", "tz": "Asia/Tashkent" },
-    { "city": "Берлин", "tz": "Europe/Berlin" },
-    { "city": "Нью-Йорк", "tz": "America/New_York" }
-  ]
+    {
+      "city": "Ташкент",
+      "tz": "Asia/Tashkent"
+    },
+    {
+      "city": "Берлин",
+      "tz": "Europe/Berlin"
+    },
+    {
+      "city": "Нью-Йорк",
+      "tz": "America/New_York"
+    }
+  ],
+  "payouts": {
+    "lastMonth": null,
+    "note": "Реальные цифры выплат партнёрам появятся после подтверждения бухгалтерией"
+  },
+  "game": {
+    "record": 18470,
+    "holder": "Nuriddin Abdumalikov",
+    "role": "COO"
+  }
 }

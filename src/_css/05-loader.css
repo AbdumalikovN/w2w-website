@@ -1,0 +1,67 @@
+/* =====================================================================
+   Boot loader — shown once per session while html.boot is set
+   ===================================================================== */
+body .boot { display: none; } /* not "html.boot": the <html> flag class shares the name */
+html.boot { overflow: hidden; }
+html.boot body { overflow: hidden; }
+html.boot .boot {
+  display: block; position: fixed; inset: 0; z-index: 1000; color: #fff; background: #030405; overflow: hidden;
+  font-family: "Onest", system-ui, sans-serif; animation: boot-failsafe 0s linear 10s forwards;
+}
+html.boot:not(.boot-exit) .hd, html.boot:not(.boot-exit) main, html.boot:not(.boot-exit) .site-footer { visibility: hidden; }
+@keyframes boot-failsafe { to { visibility: hidden; opacity: 0; pointer-events: none; } }
+
+.boot-bg, .boot-bg i { position: absolute; inset: 0; pointer-events: none; }
+.boot-glow { background: radial-gradient(60% 50% at 50% 46%, rgba(10, 188, 243, 0.16), rgba(10, 188, 243, 0) 70%), radial-gradient(40% 40% at 80% 90%, rgba(7, 231, 183, 0.1), rgba(7, 231, 183, 0) 70%), radial-gradient(40% 40% at 10% 10%, rgba(60, 90, 255, 0.1), rgba(60, 90, 255, 0) 70%); }
+.boot-floor {
+  top: 55% !important; left: -50% !important; right: -50% !important; bottom: -40% !important;
+  background-image: linear-gradient(rgba(10, 188, 243, 0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(10, 188, 243, 0.22) 1px, transparent 1px);
+  background-size: 56px 56px; transform: perspective(520px) rotateX(64deg); transform-origin: 50% 0;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 35%, #000 60%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 35%, #000 60%, transparent 100%);
+  animation: boot-floor 1.6s linear infinite; opacity: 0.55;
+}
+@keyframes boot-floor { to { background-position: 0 56px; } }
+.boot-scan { background: linear-gradient(180deg, rgba(10, 188, 243, 0) 0%, rgba(10, 188, 243, 0.06) 48%, rgba(120, 230, 255, 0.14) 50%, rgba(10, 188, 243, 0) 52%); background-size: 100% 220%; animation: boot-scan 3.2s linear infinite; mix-blend-mode: screen; }
+@keyframes boot-scan { from { background-position: 0 120%; } to { background-position: 0 -120%; } }
+.boot-cv { position: absolute; inset: 0; transform-origin: 50% 46%; }
+
+.boot-hud { position: absolute; inset: 0; display: grid; grid-template-rows: auto 1fr auto auto; padding: max(20px, env(safe-area-inset-top)) clamp(18px, 4vw, 48px) max(22px, env(safe-area-inset-bottom)); transition: opacity 0.4s ease, transform 0.6s var(--ease-out); }
+.boot.is-exit .boot-hud, .boot.is-fade .boot-hud { opacity: 0; transform: scale(1.04); }
+.boot.is-fade { opacity: 0; transition: opacity 0.35s ease; }
+.boot-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.boot-brand { display: flex; align-items: center; gap: 12px; }
+.boot-w { width: 26px; height: 32px; color: var(--brand); filter: drop-shadow(0 0 10px rgba(10, 188, 243, 0.8)); }
+.boot-brand b { display: block; font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+.boot-brand small { display: block; font: 500 11.5px/1.3 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; color: rgba(235, 235, 245, 0.55); letter-spacing: 0.06em; text-transform: uppercase; }
+.boot-skip {
+  display: inline-flex; align-items: center; gap: 6px; height: 38px; padding: 0 14px 0 16px; border-radius: 999px; color: rgba(255, 255, 255, 0.86); font-size: 14px; font-weight: 600;
+  background: rgba(255, 255, 255, 0.07); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.08); transition: background-color 0.2s ease;
+}
+.boot-skip:hover { background: rgba(255, 255, 255, 0.14); }
+.boot-skip .i { width: 16px; height: 16px; }
+.boot-stats { align-self: center; justify-self: end; display: grid; gap: 14px; text-align: right; font: 500 11.5px/1.3 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(235, 235, 245, 0.5); }
+.boot-stats b { display: block; margin-top: 3px; font: 700 18px/1 "Onest", system-ui, sans-serif; letter-spacing: -0.01em; color: #fff; font-variant-numeric: tabular-nums; }
+.boot-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.boot-log { display: grid; gap: 5px; font: 500 12.5px/1.35 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; color: rgba(235, 235, 245, 0.62); max-width: 62ch; min-height: 88px; align-content: end; }
+.boot-log li { display: flex; gap: 10px; animation: bl-in 0.35s var(--ease-out) both; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.boot-log .bl-t { color: rgba(10, 188, 243, 0.8); flex: none; }
+.boot-log .bl-m { overflow: hidden; text-overflow: ellipsis; }
+.boot-log li:last-child .bl-m { color: #fff; }
+.boot-log li:last-child:not(.is-ok) .bl-m::after { content: "▍"; margin-left: 2px; color: var(--brand); animation: blink 0.8s steps(1) infinite; }
+.boot-log .bl-s { flex: none; color: var(--green); opacity: 0; transition: opacity 0.2s ease; }
+.boot-log .is-ok .bl-s { opacity: 1; }
+@keyframes bl-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes blink { 50% { opacity: 0; } }
+.boot-pct { display: flex; align-items: flex-start; line-height: 0.8; font-variant-numeric: tabular-nums; }
+.boot-pct b { font-size: clamp(72px, 13vw, 176px); font-weight: 800; letter-spacing: -0.06em; background: linear-gradient(180deg, #fff 30%, rgba(255, 255, 255, 0.5)); -webkit-background-clip: text; background-clip: text; color: transparent; min-width: 2.3ch; text-align: right; }
+.boot-pct small { font-size: clamp(22px, 3vw, 40px); font-weight: 700; color: var(--brand); margin: 0.2em 0 0 0.12em; }
+.boot-bar { margin-top: 18px; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
+.boot-bar i { display: block; height: 100%; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, #0abcf3, #07e7b7); box-shadow: 0 0 14px rgba(10, 188, 243, 0.9); }
+@media (max-width: 640px) {
+  .boot-stats { display: none; }
+  .boot-bottom { flex-direction: column-reverse; align-items: stretch; gap: 10px; }
+  .boot-pct { justify-content: flex-end; }
+  .boot-log { font-size: 11px; min-height: 70px; }
+}
+@media (prefers-reduced-motion: reduce) { .boot-floor, .boot-scan { animation: none; } }

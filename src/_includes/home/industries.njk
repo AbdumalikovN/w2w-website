@@ -1,0 +1,47 @@
+<section class="section ind" data-ind aria-labelledby="ind-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Эффект по отраслям</p>
+        <h2 class="h2" id="ind-title" data-no-auto>Что меняется <span class="grad-text">после внедрения</span></h2>
+      </div>
+      <p class="lead">Выберите отрасль — покажем, какие показатели Company Brain сдвигает первыми и насколько.</p>
+    </div>
+    <div class="ind-box">
+      <div class="ind-tabs" role="tablist" aria-label="Отрасль" data-ind-tabs>
+        {% for x in industries %}
+        <button class="ind-tab" type="button" role="tab" id="ind-t-{{ x.id }}" aria-controls="ind-p-{{ x.id }}" aria-selected="{{ 'true' if loop.first else 'false' }}" tabindex="{{ '0' if loop.first else '-1' }}">
+          <svg class="i" aria-hidden="true"><use href="#{{ x.icon }}"/></svg><span>{{ x.name }}</span>
+        </button>
+        {% endfor %}
+      </div>
+      <div class="ind-stage">
+        {% for x in industries %}
+        <div class="ind-panel" role="tabpanel" id="ind-p-{{ x.id }}" aria-labelledby="ind-t-{{ x.id }}"{% if not loop.first %} hidden{% endif %} data-ind-panel>
+          <div class="ind-top">
+            <div class="ind-hero"><b>{{ x.hero[0] }}</b><span>{{ x.hero[1] }}</span></div>
+            <p class="ind-text">{{ x.text }}</p>
+          </div>
+          <div class="ind-kpis">
+            {% for k in x.kpis %}
+            <div class="ind-kpi">
+              <p class="ind-kpi-l">{{ k[0] }}<span class="ind-gain">{{ k[5] }}</span></p>
+              <div class="ind-bars">
+                <div class="ind-bar is-before"><span>До</span><i style="--v: {{ k[3] }}%"></i><b>{{ k[1] }}</b></div>
+                <div class="ind-bar is-after"><span>После</span><i style="--v: {{ k[4] }}%"></i><b>{{ k[2] }}</b></div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="ind-trend" data-trend="{{ x.trend[1] | join(',') }}">
+            <p class="ind-trend-l">{{ x.trend[0] }}<span>6 месяцев после запуска</span></p>
+            <svg class="ind-chart" viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div class="ind-months" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <p class="ind-note">Ожидаемый эффект по данным наших пилотов и отраслевых исследований. Точные цифры для вашей компании считаем на аудите процессов — это первый этап работы.</p>
+  </div>
+</section>

@@ -1,63 +1,95 @@
 ---
 layout: layouts/base.njk
 title: "Команда"
-description: "Четыре руководителя Win to Win, между которыми распределена ответственность за ваш проект: стратегия, коммерция, технология и доставка. Кто какой вопрос решает и как быстро."
+description: "Команда Win to Win: руководители с зонами ответственности, разработчики, дизайнеры, проектные менеджеры и маркетинг. Кто работает над вашим проектом и к кому обращаться."
 permalink: /team/
+scripts: []
 ---
-<section class="hero-page">
+{% set staffCount = 0 %}
+<section class="hero-page tmh">
   <div class="wrap hero-page-in">
     <div>
       <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Команда</p>
       <h1 class="h1">Команда, которая отвечает за результат</h1>
-      <p class="lead">Четыре руководителя, между которыми распределена вся ответственность за ваш проект: стратегия, коммерция, технология и доставка. У каждого своя страница и свой круг задач, чтобы вы понимали, с кем говорить.</p>
-      <div class="hero-cta"><button class="btn" type="button" data-modal="call">Записаться на созвон</button><a class="btn btn-outline" href="{{ '/about/' | url }}">О компании</a></div>
+      <p class="lead">Руководители с именами и зонами ответственности, разработчики, дизайнеры, проектные менеджеры и маркетинг — все, кто может работать над вашим проектом. Вы всегда знаете, кому написать.</p>
+      <div class="hero-cta"><button class="btn btn-brand" type="button" data-modal="request">Обсудить проект</button><a class="btn btn-glass" href="{{ '/career/' | url }}">Вакансии</a></div>
     </div>
-    <div class="hero-page-aside">
-      <p><b>20–50</b>специалистов в команде, каждый закрывает 2–3 роли</p>
-      <p><b>1 ответственный</b>за каждый вопрос: не «команда вообще», а конкретный человек</p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <h2 class="h2">Топ-команда Win to Win</h2>
-    <p class="todo mt-16" style="max-width:70ch">ФИО, фотографии, биографии и контакты руководителей — на утверждении у владельца. Фотосессия запланирована; структура страниц готова и заполняется без изменений вёрстки.</p>
-    <div class="team-grid mt-48">
-      {% for p in team %}{% include "partials/person.njk" %}{% endfor %}
+    <div class="hero-page-side tmh-faces" aria-hidden="true">
+      {% set faces = ["javohir-komiljonov", "nuriddin-abdumalikov", "fazliddin-mirzaqosimov", "mohira-habibullayeva", "samariddin-paritdinov", "akbarxoja-polatxojayev", "ehson-komiljonov", "rokhila-toshpulatova", "habibullo-axrorov", "shokhsanam-ganiyeva", "numonjon-umarov", "ibrohim-mirsadiqov"] %}
+      {% for f in faces %}<span class="tmh-f" style="--i: {{ loop.index0 }}"><img src="{{ ('/assets/img/team/' + f + '-sq.webp') | url }}" alt="" width="160" height="160" loading="lazy"></span>{% endfor %}
+      <div class="tmh-stat"><b>30+</b><span>специалистов в Ташкенте</span></div>
     </div>
   </div>
 </section>
 
-<section class="section is-paper">
+<section class="section tm" aria-labelledby="lead-title">
   <div class="wrap">
-    <h2 class="h2">Кто за что отвечает на вашем проекте</h2>
-    <div class="tbl-wrap mt-32" tabindex="0" role="region" aria-label="Кто за что отвечает">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Руководство</p>
+        <h2 class="h2" id="lead-title">Пять человек, за которыми <span class="grad-text">закреплён ваш проект</span></h2>
+      </div>
+      <p class="lead">У каждого своя страница: зона ответственности, когда писать и как быстро ответят.</p>
+    </div>
+    <div class="tm-grid">
+      {% for m in team %}{% include "partials/person-card.njk" %}{% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="who-title">
+  <div class="wrap">
+    <h2 class="h2" id="who-title">Кто за что отвечает</h2>
+    <div class="tbl-wrap mt-32" tabindex="0" role="region" aria-label="Таблица ответственности руководителей">
       <table class="tbl">
-        <thead><tr><th>Вопрос клиента</th><th>Кто решает</th><th>Срок реакции</th></tr></thead>
+        <thead><tr><th>Вопрос</th><th>Кто решает</th><th>Срок реакции</th></tr></thead>
         <tbody>
-          {% for p in team | wherenot('slug', 'ceo') %}<tr><td>{{ p.solves }}</td><td><a href="{{ ('/team/' + p.slug + '/') | url }}"><b>{{ p.role }}</b></a></td><td>{{ p.reaction }}</td></tr>{% endfor %}
-          {% set ceo = team | find('slug', 'ceo') %}<tr><td>{{ ceo.solves }}</td><td><a href="{{ '/team/ceo/' | url }}"><b>{{ ceo.role }}</b></a></td><td>{{ ceo.reaction }}</td></tr>
+          {% for p in team %}<tr><td>{{ p.solves }}</td><td><a href="{{ ('/team/' + p.slug + '/') | url }}"><b>{{ p.name }}</b></a><br><span class="muted small">{{ p.role }}</span></td><td>{{ p.reaction }}</td></tr>{% endfor %}
         </tbody>
       </table>
     </div>
-    <p class="todo mt-16">Сроки реакции — предложение на утверждение владельцем. Будут вынесены в договор и SLA.</p>
   </div>
 </section>
 
-<section class="section">
+{% for g in staff.groups %}
+<section class="section sf-sec{% if loop.index0 % 2 == 1 %} is-alt{% endif %}" aria-labelledby="g-{{ g.id }}">
+  <div class="wrap">
+    <div class="sf-head">
+      <span class="app-icon lg {{ g.tone }}" aria-hidden="true"><svg><use href="#{{ g.icon }}"/></svg></span>
+      <div>
+        <h2 class="h2 h2-sm" id="g-{{ g.id }}">{{ g.title }} <span class="sf-count">{{ g.people | length }}</span></h2>
+        <p class="lead">{{ g.text }}</p>
+      </div>
+    </div>
+    <div class="sf-grid">
+      {% for p in g.people %}
+      <article class="sf">
+        <span class="sf-ph sf-{{ g.id }}">
+          {% if p.photo %}<img src="{{ ('/assets/img/team/' + p.slug + '.webp') | url }}" alt="" width="800" height="1000" loading="lazy" decoding="async">{% else %}<i aria-hidden="true">{{ p.name | initials }}</i>{% endif %}
+        </span>
+        <h3 class="sf-n">{{ p.name }}</h3>
+        <p class="sf-r">{{ p.role }}</p>
+        {% if p.since %}<p class="sf-s">в команде с {{ p.since }}</p>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<section class="section" aria-labelledby="proj-title">
   <div class="wrap">
     <div class="sec-head">
-      <h2 class="h2">Кто работает над агентом каждый день</h2>
-      <a class="btn btn-ghost" href="{{ '/career/' | url }}">Мы нанимаем</a>
+      <h2 class="h2" id="proj-title">Кто работает над вашим проектом каждый день</h2>
+      <a class="btn btn-glass" href="{{ '/career/' | url }}">Мы нанимаем<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
-    <div class="industries">
-      <div><b>Project Manager</b><p>Единая точка входа: планы, статусы, демо, эскалации. Ведёт коммуникацию и трекер, доступный вам.</p></div>
-      <div><b>AI-инженер</b><p>Пайплайн данных, индексация, промпт- и контекст-инжиниринг, инструменты агента, оценка качества ответов.</p></div>
-      <div><b>Backend и интеграции</b><p>Подключение 1С, AmoCRM, Bitrix24, баз и внешних API, права доступа, аудит-логи, производительность.</p></div>
-      <div><b>QA и DevOps</b><p>Регрессионные тесты качества, нагрузочное тестирование, CI/CD, развёртывание в облаке или приватном контуре.</p></div>
+    <div class="flow">
+      <div><h3><span class="step-n">PM</span>Проектный менеджер</h3><p>Единая точка входа: планы, статусы, демо и эскалации. Ведёт трекер, к которому у вас есть доступ.</p></div>
+      <div><h3><span class="step-n">AI</span>AI-инженер</h3><p>Данные и индексация, контекст и инструменты Company Brain, оценка качества ответов.</p></div>
+      <div><h3><span class="step-n">BE</span>Backend и интеграции</h3><p>1С, amoCRM, Bitrix24, базы и внешние API, права доступа, аудит-логи, производительность.</p></div>
+      <div><h3><span class="step-n">QA</span>QA и DevOps</h3><p>Регрессионные тесты качества, нагрузочное тестирование, CI/CD, развёртывание в облаке или у вас.</p></div>
     </div>
-    <p class="muted small mt-24">Команда 20–50 специалистов, каждый закрывает 2–3 роли: за счёт этого мы держим ставку $10–30 в час и стартуем от 1 дня.</p>
+    <p class="muted small mt-24">Каждый специалист закрывает 2–3 роли — за счёт этого мы держим ставку $10–30 в час и стартуем от 1 дня.</p>
   </div>
 </section>
 

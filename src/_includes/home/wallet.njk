@@ -1,0 +1,31 @@
+{% set passes = [
+  { tone: "p-brand", k: "Ставка", v: "$10–30", u: "в час", t: "В 2–3 раза ниже международных студий при той же экспертизе.", a: ["Ставка", "$10–30 / ч"], b: ["Студии EU/US", "$30–80 / ч"] },
+  { tone: "p-green", k: "Старт", v: "1 день", u: "после договора", t: "Команда выходит на проект сразу, а не через 1–3 месяца, как у крупных подрядчиков.", a: ["Старт", "от 1 дня"], b: ["Прототип", "2 недели"] },
+  { tone: "p-night", k: "Гарантия качества", v: "85%", u: "порог приёмки", t: "Company Brain сдаём по метрике: 50 реальных вопросов. Не прошли — дорабатываем за свой счёт.", a: ["Вопросов", "50"], b: ["Порог", "85%"] },
+  { tone: "p-blue", k: "Код", v: "100%", u: "ваш", t: "Исходники, архитектура и документация передаются клиенту. Никакой зависимости от подрядчика.", a: ["Исходники", "✓"], b: ["Документация", "✓"] },
+  { tone: "p-graphite", k: "Безопасность", v: "NDA", u: "+ SLA", t: "Конфиденциальность с первого созвона, поддержка по SLA и гарантия после сдачи.", a: ["NDA", "с 1-го дня"], b: ["SLA", "в договоре"] },
+  { tone: "p-teal", k: "География", v: "3", u: "страны", t: "Проекты в Узбекистане, Казахстане и США. Подстраиваемся под ваш часовой пояс.", a: ["Офис", "Ташкент"], b: ["Часовой пояс", "ваш"] }
+] %}
+<section class="section wl" data-wl aria-labelledby="wl-title">
+  <div class="wrap wl-in">
+    <div class="wl-copy">
+      <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Что вы получаете</p>
+      <h2 class="h2" id="wl-title" data-no-auto>Шесть гарантий <span class="grad-text">в вашем кошельке</span></h2>
+      <p class="lead">Каждое обещание W2W — как пропуск в Wallet: с конкретной цифрой, которую мы фиксируем в договоре. Нажмите на карточку, чтобы открыть её.</p>
+      <ol class="wl-index" data-wl-index>
+        {% for p in passes %}<li><button type="button" data-wl-go="{{ loop.index0 }}"{% if loop.first %} aria-current="true"{% endif %}><b>{{ p.v }}</b> {{ p.k }}</button></li>{% endfor %}
+      </ol>
+    </div>
+    <div class="wl-stack" data-wl-stack>
+      {% for p in passes %}
+      <button class="wl-pass {{ p.tone }}" type="button" data-wl-pass="{{ loop.index0 }}" style="--i: {{ loop.index0 }}" aria-label="{{ p.k }}: {{ p.v }} {{ p.u }}">
+        <span class="wl-head"><span class="wl-logo"><svg aria-hidden="true"><use href="#i-w"/></svg>Win to Win</span><span class="wl-k">{{ p.k }}</span></span>
+        <span class="wl-main"><b class="wl-v">{{ p.v }}</b><span class="wl-u">{{ p.u }}</span></span>
+        <span class="wl-t">{{ p.t }}</span>
+        <span class="wl-fields"><span><small>{{ p.a[0] }}</small>{{ p.a[1] }}</span><span><small>{{ p.b[0] }}</small>{{ p.b[1] }}</span></span>
+        <span class="wl-code" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </button>
+      {% endfor %}
+    </div>
+  </div>
+</section>

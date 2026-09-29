@@ -1,0 +1,88 @@
+/* =====================================================================
+   Mini-game «Охота на баги» (modal)
+   ===================================================================== */
+.modal-game { max-width: 760px; padding: 22px; color: #fff; background-color: rgba(14, 16, 20, 0.92); background-image: radial-gradient(90% 60% at 100% 0%, rgba(var(--brand-rgb), 0.28), rgba(var(--brand-rgb), 0) 60%), radial-gradient(70% 60% at 0% 100%, rgba(var(--green-rgb), 0.14), rgba(var(--green-rgb), 0) 60%); box-shadow: 0 50px 120px -30px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.06); }
+.modal-game .modal-x { background: rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.8); }
+.modal-game .modal-x:hover { background: rgba(255, 255, 255, 0.18); color: #fff; }
+.modal-game::before { background: rgba(255, 255, 255, 0.25); }
+.bh { position: relative; }
+.bh-screen { display: grid; gap: 16px; }
+.bh-hero { display: flex; align-items: center; gap: 14px; padding-right: 40px; }
+.bh-logo { width: 56px; height: 56px; flex: none; border-radius: 18px; display: grid; place-items: center; color: #ff6b7a; background: linear-gradient(145deg, #2a1319, #150a0d); box-shadow: 0 10px 24px -10px rgba(255, 90, 110, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 0 0 1px rgba(255, 107, 122, 0.3); }
+.bh-logo svg { width: 30px; height: 30px; filter: drop-shadow(0 0 8px rgba(255, 90, 110, 0.8)); animation: bh-wiggle 2.4s ease-in-out infinite; }
+@keyframes bh-wiggle { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(10deg) translateY(-2px); } }
+.bh-kicker { font-size: 12.5px; font-weight: 700; color: #7fe0ff; text-transform: uppercase; letter-spacing: 0.06em; }
+.bh-title { font-size: clamp(28px, 4vw, 38px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin-top: 4px; }
+.bh-intro { color: rgba(235, 235, 245, 0.72); font-size: 15px; line-height: 1.5; }
+.bh-legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; }
+.bh-legend li { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); font-size: 13px; color: rgba(235, 235, 245, 0.8); }
+.bh-legend li span { flex: 1; }
+.bh-legend li b { font-size: 12.5px; color: #fff; }
+.bh-ico { width: 18px; height: 18px; border-radius: 50%; flex: none; }
+.bh-ico-bug { background: #ff5a6e; box-shadow: 0 0 10px #ff5a6e; }
+.bh-ico-fast { background: #ffb020; box-shadow: 0 0 10px #ffb020; }
+.bh-ico-tank { background: #c77dff; box-shadow: 0 0 10px #c77dff; }
+.bh-ico-feat { border-radius: 5px; background: rgba(7, 231, 183, 0.2); box-shadow: inset 0 0 0 1.5px #07e7b7; }
+.bh-ico-orb { background: radial-gradient(circle at 35% 30%, #e6fbff, #4fd8ff 40%, #0797c4); box-shadow: 0 0 12px #0abcf3; }
+.bh-board { border-radius: 18px; padding: 12px 14px; background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08); }
+.bh-board-h { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: rgba(235, 235, 245, 0.7); margin-bottom: 8px; }
+.bh-board-h .i { width: 16px; height: 16px; color: #ffcf6b; }
+.bh-board ol { display: grid; gap: 2px; }
+.bh-board li { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border-radius: 10px; font-size: 14px; }
+.bh-board li b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.bh-board .bh-n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: rgba(235, 235, 245, 0.85); }
+.bh-rank { width: 18px; font-weight: 800; color: rgba(235, 235, 245, 0.45); text-align: center; font-variant-numeric: tabular-nums; }
+.bh-board img, .bh-ava { width: 28px; height: 28px; border-radius: 50%; flex: none; object-fit: cover; background: linear-gradient(145deg, #3a3d44, #1b1c20); }
+.bh-board li.is-coo { background: linear-gradient(90deg, rgba(255, 207, 107, 0.16), rgba(255, 207, 107, 0)); }
+.bh-board li.is-coo .bh-rank { color: #ffcf6b; }
+.bh-board li.is-coo img { box-shadow: 0 0 0 2px #ffcf6b; background: linear-gradient(145deg, #3fd3ff, #0797c4); }
+.bh-board li.is-me { background: rgba(var(--brand-rgb), 0.16); }
+.bh-board li.is-me .bh-n { color: #7fe0ff; font-weight: 700; }
+.bh-offer { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(235, 235, 245, 0.75); }
+.bh-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.bh-keys { font-size: 12.5px; color: rgba(235, 235, 245, 0.5); }
+.modal-game .btn-glass { background: rgba(255, 255, 255, 0.08); color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.08); }
+
+/* in-game */
+.bh-game { gap: 10px; }
+.bh-hud { display: grid; grid-template-columns: 1.3fr 0.9fr 1fr 1.3fr; gap: 8px; padding-right: 44px; }
+.bh-stat { position: relative; padding: 8px 12px; border-radius: 14px; background: rgba(255, 255, 255, 0.06); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08); overflow: hidden; }
+.bh-stat small { display: block; font-size: 11px; font-weight: 700; color: rgba(235, 235, 245, 0.5); text-transform: uppercase; letter-spacing: 0.05em; }
+.bh-stat b { display: block; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.15; }
+.bh-combo.is-hot b { color: #ffb020; text-shadow: 0 0 14px rgba(255, 176, 32, 0.8); }
+.bh-combo.is-pop { animation: bh-pop 0.4s var(--spring); }
+@keyframes bh-pop { 40% { transform: scale(1.12); } }
+.bh-lives span { display: flex; gap: 5px; margin-top: 5px; }
+.bh-lives i { width: 18px; height: 18px; border-radius: 6px; background: linear-gradient(145deg, #3ff2cc, #05b58f); box-shadow: 0 0 10px rgba(var(--green-rgb), 0.6); transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s var(--spring); }
+.bh-lives i.is-off { background: rgba(255, 90, 110, 0.35); box-shadow: none; transform: scale(0.8); }
+.bh-tbar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(255, 255, 255, 0.08); }
+.bh-tbar i { display: block; height: 100%; background: linear-gradient(90deg, var(--brand), var(--green)); transform-origin: 0 50%; }
+.bh-field { position: relative; height: min(62vh, 520px); border-radius: 18px; overflow: hidden; background: #0a0c11; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06); touch-action: none; user-select: none; -webkit-user-select: none; outline: none; }
+.bh-field:focus-visible { box-shadow: inset 0 0 0 2px rgba(var(--brand-rgb), 0.7); }
+.bh-field canvas { display: block; width: 100%; height: 100%; max-width: none; cursor: crosshair; }
+.bh-toast { position: absolute; left: 50%; top: 14px; translate: -50% 0; padding: 7px 14px; border-radius: 999px; font-size: 13.5px; font-weight: 700; white-space: nowrap; background: rgba(20, 22, 28, 0.85); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14); opacity: 0; transform: translateY(-8px); transition: opacity 0.2s ease, transform 0.3s var(--spring); pointer-events: none; }
+.bh-toast.is-on { opacity: 1; transform: none; }
+.bh-toast.is-good { color: #7fe0ff; }
+.bh-toast.is-bad { color: #ff8a95; }
+
+/* game over */
+.bh-over { text-align: center; justify-items: center; }
+.bh-final small { display: block; font-size: 13px; font-weight: 700; color: rgba(235, 235, 245, 0.6); }
+.bh-final b { display: block; font-size: clamp(56px, 10vw, 84px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; background: linear-gradient(120deg, #7fe0ff, var(--brand) 45%, var(--green)); -webkit-background-clip: text; background-clip: text; color: transparent; font-variant-numeric: tabular-nums; }
+.bh-verdict { font-size: 16px; font-weight: 600; color: rgba(235, 235, 245, 0.8); max-width: 36em; }
+.bh-verdict.is-best { color: #7fe0ff; }
+.bh-verdict.is-win { color: #ffcf6b; }
+.bh-sum { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; width: 100%; }
+.bh-sum li { padding: 10px; border-radius: 14px; background: rgba(255, 255, 255, 0.05); }
+.bh-sum small { display: block; font-size: 11.5px; color: rgba(235, 235, 245, 0.55); }
+.bh-sum b { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.bh-over .bh-board { width: 100%; text-align: left; }
+.bh-over .bh-actions { justify-content: center; }
+@media (max-width: 600px) {
+  .modal-game { padding: 20px 14px calc(16px + env(safe-area-inset-bottom)); }
+  .bh-hud { grid-template-columns: 1fr 1fr; padding-right: 0; margin-top: 30px; }
+  .bh-field { height: 58vh; height: 58dvh; }
+  .bh-legend { grid-template-columns: 1fr 1fr; }
+  .bh-legend li { font-size: 12px; padding: 7px 8px; }
+  .bh-keys { display: none; }
+}

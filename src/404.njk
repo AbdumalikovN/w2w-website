@@ -5,10 +5,11 @@ description: "Такой страницы нет."
 permalink: /404.html
 noindex: true
 ---
+<script>(function () { var b = "{{ '/' | url }}", p = location.pathname, l = document.documentElement.lang; ["uz", "en"].forEach(function (x) { if (l !== x && p.indexOf(b + x + "/") === 0) location.replace(b + x + "/404.html"); }); })();</script>
 <section class="center-page">
   <div class="wrap">
     <h1 class="display">404</h1>
     <p class="lead">Такой страницы нет. Зато есть 50+ проектов и команда, которая быстро находит решения.</p>
-    <div class="hero-cta"><a class="btn" href="{{ '/' | url }}">На главную</a><button class="btn btn-outline" type="button" data-modal="call">Записаться на созвон</button></div>
+    <div class="hero-cta"><a class="btn btn-brand" href="{{ '/' | url }}">На главную</a><button class="btn btn-glass" type="button" data-modal="request">Записаться на созвон</button></div>
   </div>
 </section>

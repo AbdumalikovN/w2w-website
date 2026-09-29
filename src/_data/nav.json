@@ -1,29 +1,56 @@
 {
-  "main": [
-    { "label": "AI-агенты", "url": "/services/agents/", "match": "/services/agents/" },
-    { "label": "TwinWin", "url": "/twinwin/", "match": "/twinwin/" },
-    { "label": "Калькулятор", "url": "/calculator/", "match": "/calculator/" },
+  "groups": {
+    "brain": {
+      "label": "Company Brain",
+      "match": ["/brain/", "/calculator/", "/process/"],
+      "items": [
+        { "label": "Что такое Company Brain", "url": "/brain/", "icon": "i-brain", "tone": "ic-5", "desc": "Второй мозг компании: знания, данные и действия в одном окне" },
+        { "label": "Навыки Company Brain", "url": "/brain/skills/", "icon": "i-sparkle", "tone": "ic-1", "desc": "Продажи, поддержка, документы, HR, аналитика" },
+        { "label": "Калькулятор внедрения", "url": "/calculator/", "icon": "i-chart", "tone": "ic-2", "desc": "Бюджет и сроки за минуту" },
+        { "label": "Как проходит внедрение", "url": "/process/", "icon": "i-flow", "tone": "ic-3", "desc": "От аудита до пилота с метрикой 85%" }
+      ],
+      "promo": { "title": "Спросите Company Brain", "text": "Посмотрите, как он отвечает CEO, COO и CTO на реальные вопросы.", "url": "/brain/#demo", "cta": "Открыть демо" }
+    },
+    "services": {
+      "label": "Услуги",
+      "match": ["/services/"],
+      "items": [
+        { "label": "ERP, CRM, HRM", "url": "/services/erp-crm/", "icon": "i-grid", "tone": "ic-1", "desc": "Продажи, склад, финансы и персонал в одной системе" },
+        { "label": "Мобильные приложения", "url": "/services/mobile/", "icon": "i-phone", "tone": "ic-8", "desc": "iOS, Android и кроссплатформа от MVP до масштаба" },
+        { "label": "Веб и маркетплейсы", "url": "/services/web/", "icon": "i-globe", "tone": "ic-4", "desc": "SaaS, e-commerce, B2B-порталы и сайты" },
+        { "label": "AI-автоматизация и ML", "url": "/services/ai/", "icon": "i-bolt", "tone": "ic-2", "desc": "Распознавание, прогнозы, рекомендации" }
+      ],
+      "promo": { "title": "Все услуги", "text": "Аутсорсинг команды, дизайн, QA, DevOps и поддержка — полный цикл.", "url": "/services/", "cta": "Смотреть все" }
+    },
+    "company": {
+      "label": "Компания",
+      "match": ["/about/", "/team/", "/career/", "/media/", "/documents/"],
+      "items": [
+        { "label": "О компании", "url": "/about/", "icon": "i-w", "tone": "ic-w", "desc": "Резидент IT Park, принцип win-win" },
+        { "label": "Команда", "url": "/team/", "icon": "i-people", "tone": "ic-1", "desc": "Руководители и специалисты W2W" },
+        { "label": "Карьера", "url": "/career/", "icon": "i-cap", "tone": "ic-2", "desc": "Вакансии и стажировки" },
+        { "label": "Медиа", "url": "/media/", "icon": "i-book", "tone": "ic-8", "desc": "Статьи и новости" },
+        { "label": "Документы", "url": "/documents/", "icon": "i-shield", "tone": "ic-6", "desc": "Сертификаты и реквизиты" }
+      ],
+      "promo": { "title": "Команда W2W", "text": "Познакомьтесь с людьми, которые будут вести ваш проект.", "url": "/team/", "cta": "Смотреть команду" }
+    }
+  },
+  "top": [
+    { "group": "brain" },
+    { "group": "services" },
     { "label": "Проекты", "url": "/projects/", "match": "/projects/" },
-    { "label": "Команда", "url": "/team/", "match": "/team/" },
-    { "label": "Партнёрство", "url": "/partners/", "match": "/partners/" },
-    { "label": "О нас", "url": "/about/", "match": "/about/" },
+    { "group": "company" },
+    { "label": "Партнёрам", "url": "/partners/", "match": "/partners/" },
     { "label": "Контакты", "url": "/contacts/", "match": "/contacts/" }
-  ],
-  "more": [
-    { "label": "Все услуги", "url": "/services/" },
-    { "label": "Процесс работы", "url": "/process/" },
-    { "label": "Карьера", "url": "/career/" },
-    { "label": "Медиа", "url": "/media/" },
-    { "label": "Документы", "url": "/documents/" }
   ],
   "footer": [
     {
-      "title": "AI-агенты",
+      "title": "Company Brain",
       "links": [
-        { "label": "Агенты под ключ", "url": "/services/agents/" },
-        { "label": "TwinWin", "url": "/twinwin/" },
-        { "label": "Калькулятор стоимости", "url": "/calculator/" },
-        { "label": "Процесс работы", "url": "/process/" }
+        { "label": "Что такое Company Brain", "url": "/brain/" },
+        { "label": "Навыки", "url": "/brain/skills/" },
+        { "label": "Калькулятор внедрения", "url": "/calculator/" },
+        { "label": "Процесс внедрения", "url": "/process/" }
       ]
     },
     {
@@ -39,14 +66,13 @@
     {
       "title": "Компания",
       "links": [
-        { "label": "Команда", "url": "/team/" },
         { "label": "О нас", "url": "/about/" },
-        { "label": "Партнёрство", "url": "/partners/" },
+        { "label": "Команда", "url": "/team/" },
         { "label": "Проекты", "url": "/projects/" },
+        { "label": "Партнёрская программа", "url": "/partners/" },
         { "label": "Карьера", "url": "/career/" },
         { "label": "Медиа", "url": "/media/" },
-        { "label": "Документы и сертификаты", "url": "/documents/" },
-        { "label": "Контакты", "url": "/contacts/" }
+        { "label": "Документы", "url": "/documents/" }
       ]
     }
   ]

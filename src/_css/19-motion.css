@@ -1,0 +1,40 @@
+/* =====================================================================
+   Motion states, theme transition, page transitions, a11y fallbacks
+   ===================================================================== */
+@property --rim-a { syntax: "<angle>"; inherits: true; initial-value: 200deg; }
+.hd-bar, .lg, .lg-rim { transition-property: --rim-a; transition-duration: 0.6s; }
+
+/* elements wait for their intro only while JS animations are active */
+.motion [data-reveal] { opacity: 0; transform: translateY(36px); }
+.motion [data-split-words] .w { opacity: 0; transform: translateY(0.35em); filter: blur(10px); }
+.motion .hero-page .crumbs, .motion .hero-page .lead, .motion .hero-page .hero-cta, .motion .hero-page .hero-page-aside, .motion .hero-page .hero-page-side { opacity: 0; transform: translateY(18px); }
+.motion .hero-page .h1 { opacity: 0; }
+.motion .hero-page .h1.is-split { opacity: 1; }
+.w { display: inline-block; }
+
+/* theme switch: circular reveal from the toggle */
+html.theme-vt:active-view-transition .hd { view-transition-name: none; }
+::view-transition-old(root), ::view-transition-new(root) { mix-blend-mode: normal; }
+html.theme-vt::view-transition-old(root) { animation: none; }
+html.theme-vt::view-transition-new(root) { animation: theme-reveal 0.75s var(--ease-out) both; }
+@keyframes theme-reveal { from { clip-path: circle(0 at var(--vt-x, 50%) var(--vt-y, 0)); } to { clip-path: circle(160vmax at var(--vt-x, 50%) var(--vt-y, 0)); } }
+
+/* cross-document page transitions (Chromium) */
+@view-transition { navigation: auto; }
+html:not(.theme-vt)::view-transition-old(root) { animation: 0.28s var(--ease-out) both vt-out; }
+html:not(.theme-vt)::view-transition-new(root) { animation: 0.45s var(--ease-out) both vt-in; }
+@keyframes vt-out { to { opacity: 0; transform: scale(0.985); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(14px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  .dot-live { animation: none; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .tile, .pcard, .figures > div, .flow > div, .two-lists > div, .panel, .person, .list, .index, .faq, .facts, .own, .industries, .doc-list, .ledger, .stack, .tbl-wrap, .contact-group, .tiles > div,
+  .crumbs, .hero-page-aside, .modal, .toast, .ft-contact, .ft-soc, .ft-rec { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; background-color: var(--bg-elev) !important; }
+  .toast, .ft-rec { background-color: #1a1b20 !important; }
+  .modal-bg::before { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(0, 0, 0, 0.55); }
+}

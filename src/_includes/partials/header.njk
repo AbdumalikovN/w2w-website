@@ -1,26 +1,86 @@
-<header class="site-header" id="top" data-header>
-  <div class="bar glass">
+{% set cur = page.url %}
+<header class="hd" id="top" data-header>
+  <div class="hd-bar" data-refract>
     {% include "partials/logo.njk" %}
-    <nav class="site-nav" aria-label="Основная навигация">
-      {% for item in nav.main %}
-      <a href="{{ item.url | url }}"{% if page.url == item.url or (item.match and page.url.startsWith(item.match) and item.match != '/') %} aria-current="page"{% endif %}>{{ item.label }}</a>
-      {% endfor %}
+    <nav class="hd-nav" aria-label="Основная навигация">
+      <ul class="hd-menu">
+        {% for t in nav.top %}
+        {% if t.group %}{% set g = nav.groups[t.group] %}
+        <li class="hd-item" data-mega>
+          <button class="hd-link" type="button" aria-expanded="false" aria-controls="mega-{{ t.group }}"{% if cur | startsAny(g.match) %} data-current{% endif %}>{{ g.label }}<svg class="i hd-chev" aria-hidden="true"><use href="#i-chevron"/></svg></button>
+          <div class="mega" id="mega-{{ t.group }}">
+            <div class="mega-in">
+              <ul class="mega-list">
+                {% for it in g.items %}
+                <li><a class="mega-link" href="{{ it.url | url }}"{% if cur == it.url %} aria-current="page"{% endif %}><span class="app-icon md {{ it.tone }}" aria-hidden="true"><svg><use href="#{{ it.icon }}"/></svg></span><span class="mega-txt"><b>{{ it.label }}</b><small>{{ it.desc }}</small></span></a></li>
+                {% endfor %}
+              </ul>
+              <a class="mega-promo mp-{{ t.group }}" href="{{ g.promo.url | url }}">
+                <span class="mega-promo-art" aria-hidden="true"><i></i><i></i><i></i><svg><use href="#i-w"/></svg></span>
+                <b>{{ g.promo.title }}</b>
+                <span>{{ g.promo.text }}</span>
+                <span class="link-arrow">{{ g.promo.cta }}<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </li>
+        {% else %}
+        <li class="hd-item"><a class="hd-link" href="{{ t.url | url }}"{% if cur.startsWith(t.match) %} aria-current="page"{% endif %}>{{ t.label }}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
     </nav>
-    <div class="site-tools">
-      <button class="icon-btn" type="button" data-modal="search" aria-label="Поиск по сайту"><svg class="i"><use href="#i-search"/></svg></button>
-      <button class="btn btn-sm btn-primary site-cta" type="button" data-modal="call">Записаться на созвон</button>
-      <button class="icon-btn burger" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Открыть меню"><svg class="i i-open"><use href="#i-menu"/></svg><svg class="i i-close"><use href="#i-close"/></svg></button>
+    <div class="hd-tools">
+      <button class="hd-tool hd-search" type="button" data-modal="search" aria-label="Поиск по сайту" title="Поиск (Ctrl K)"><svg class="i" aria-hidden="true"><use href="#i-search"/></svg></button>
+      <div class="hd-lang" data-lang-menu>
+        <button class="hd-tool hd-lang-btn" type="button" aria-expanded="false" aria-controls="lang-pop" aria-label="Язык сайта"><svg class="i" aria-hidden="true"><use href="#i-globe"/></svg><span data-lang-current>RU</span></button>
+        <div class="lang-pop" id="lang-pop">
+          <div class="lang-pop-in">
+            <a href="{{ cur | url }}" data-lang-link="ru" hreflang="ru" lang="ru" aria-current="true"><span class="lang-code">RU</span>Русский<svg class="i" aria-hidden="true"><use href="#i-check"/></svg></a>
+            <a href="{{ ('/uz' + cur) | url }}" data-lang-link="uz" hreflang="uz" lang="uz"><span class="lang-code">UZ</span>O‘zbekcha<svg class="i" aria-hidden="true"><use href="#i-check"/></svg></a>
+            <a href="{{ ('/en' + cur) | url }}" data-lang-link="en" hreflang="en" lang="en"><span class="lang-code">EN</span>English<svg class="i" aria-hidden="true"><use href="#i-check"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <button class="hd-tool hd-theme" type="button" data-theme-toggle aria-pressed="false" aria-label="Тёмная тема" title="Тёмная / светлая тема">
+        <svg class="i th-ico" viewBox="0 0 24 24" aria-hidden="true"><mask id="th-mask"><rect width="24" height="24" fill="#fff"/><circle class="th-bite" cx="24" cy="4" r="8" fill="#000"/></mask><circle class="th-core" cx="12" cy="12" r="5" fill="currentColor" mask="url(#th-mask)"/><g class="th-rays" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></g></svg>
+      </button>
+      <button class="hd-tool hd-sound" type="button" data-sound-toggle aria-pressed="false" aria-label="Звук и музыка" title="Звук и музыка">
+        <svg class="i snd-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="snd-body" d="M4 9.3h3.2L11.6 5v14l-4.4-4.3H4z" fill="currentColor" fill-opacity=".18"/><path class="snd-w1" d="M15.2 9.3a3.8 3.8 0 0 1 0 5.4"/><path class="snd-w2" d="M18 6.6a7.6 7.6 0 0 1 0 10.8"/><path class="snd-x" d="M15.6 9.6l4.8 4.8M20.4 9.6l-4.8 4.8"/></svg>
+      </button>
+      <button class="btn btn-sm btn-brand hd-cta" type="button" data-modal="request">Обсудить проект</button>
+      <button class="hd-tool hd-burger" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Открыть меню"><span></span><span></span></button>
     </div>
   </div>
-  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
-    <nav aria-label="Мобильная навигация">
-      {% for item in nav.main %}<a href="{{ item.url | url }}" tabindex="-1">{{ item.label }}</a>{% endfor %}
-      {% for item in nav.more %}<a class="mobile-nav-more" href="{{ item.url | url }}" tabindex="-1">{{ item.label }}</a>{% endfor %}
-    </nav>
-    <div class="mobile-nav-actions">
-      <button class="btn btn-primary" type="button" data-modal="call" tabindex="-1">Записаться на созвон</button>
-      <button class="btn btn-outline" type="button" data-modal="search" tabindex="-1">Поиск по сайту</button>
+
+  <div class="mnav" id="mnav" inert>
+    <div class="mnav-scrim" data-mnav-close></div>
+    <div class="mnav-in">
+      <nav class="mnav-nav" aria-label="Мобильная навигация">
+        {% for t in nav.top %}
+        {% if t.group %}{% set g = nav.groups[t.group] %}
+        <details class="mnav-group"{% if cur | startsAny(g.match) %} open{% endif %}>
+          <summary>{{ g.label }}<svg class="i" aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="mnav-sub">
+            {% for it in g.items %}<a href="{{ it.url | url }}"{% if cur == it.url %} aria-current="page"{% endif %}><span class="app-icon sm {{ it.tone }}" aria-hidden="true"><svg><use href="#{{ it.icon }}"/></svg></span>{{ it.label }}</a>{% endfor %}
+          </div>
+        </details>
+        {% else %}
+        <a class="mnav-link" href="{{ t.url | url }}"{% if cur.startsWith(t.match) %} aria-current="page"{% endif %}>{{ t.label }}<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        {% endif %}
+        {% endfor %}
+      </nav>
+      <div class="mnav-prefs">
+        <div class="mnav-lang" role="group" aria-label="Язык сайта">
+          <a href="{{ cur | url }}" data-lang-link="ru" hreflang="ru" aria-current="true">RU</a>
+          <a href="{{ ('/uz' + cur) | url }}" data-lang-link="uz" hreflang="uz">UZ</a>
+          <a href="{{ ('/en' + cur) | url }}" data-lang-link="en" hreflang="en">EN</a>
+        </div>
+        <button class="mnav-pref" type="button" data-theme-toggle aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg><span>Тёмная тема</span><span class="switch" aria-hidden="true"></span></button>
+        <button class="mnav-pref" type="button" data-sound-toggle aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-speaker"/></svg><span>Звук и музыка</span><span class="switch" aria-hidden="true"></span></button>
+      </div>
+      <button class="btn btn-brand btn-block btn-lg" type="button" data-modal="request">Обсудить проект</button>
+      <p class="mnav-contact"><a href="{{ site.phoneHref }}">{{ site.phone }}</a><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
     </div>
-    <p class="mobile-nav-contact"><a href="{{ site.phoneHref }}" tabindex="-1">{{ site.phone }}</a><br><a href="mailto:{{ site.email }}" tabindex="-1">{{ site.email }}</a></p>
   </div>
 </header>

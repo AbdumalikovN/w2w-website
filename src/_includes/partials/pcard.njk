@@ -1,11 +1,12 @@
 {% if p.detail %}<a class="pcard" href="{{ ('/projects/' + p.slug + '/') | url }}" data-project data-dir="{{ p.dirKey }}" data-ind="{{ p.ind }}">{% else %}<div class="pcard is-muted" data-project data-dir="{{ p.dirKey }}" data-ind="{{ p.ind }}">{% endif %}
-  <div class="cover cover-{{ p.tone }}">
+  <div class="cover cover-{{ p.tone }}{% if p.shot %} has-shot{% endif %}">
+    {% if p.shot %}<span class="pc-shot" aria-hidden="true"><span class="sc-browser"><i></i><i></i><i></i><span>{{ p.shotUrl }}</span></span><span class="pc-shot-in"><img src="{{ ('/assets/img/projects/' + p.slug + '-desktop.webp') | url }}" alt="" width="1200" height="3500" loading="lazy" decoding="async"></span></span>{% endif %}
     <span class="cover-meta">{{ p.ind }}</span>
     <h3 class="cover-name">{{ p.name }}</h3>
     <svg class="cover-w" viewBox="335 262 445 555" aria-hidden="true"><path fill="currentColor" d="M475.92,558.01l18.53-17.94s18.25,106.28,62.54,123.07c44.29,16.79,54.72-110.94,54.72-110.94l7.23-136.7,141.05-141.05s-28.68,508.29-151.48,530.89c0,0-64.87,12.17-106.6-148.28l-26.08-99.05h.08Z"/><path fill="currentColor" d="M344.75,612.26l14.46-14.03s14.26,83.01,48.83,96.13c34.61,13.12,42.75-86.6,42.75-86.6l5.65-106.75,110.15-110.15s-22.4,396.91-118.29,414.53c0,0-50.65,9.48-83.21-115.8l-20.35-77.36v.04Z"/></svg>
   </div>
   <div>
     <p>{{ p.short }}</p>
-    <div class="tags mt-8"><span class="tag">{{ p.dir }}</span><span class="tag">{{ p.ind }}</span>{% if p.live %}<span class="tag">{{ p.live }}</span>{% endif %}{% if not p.detail %}<span class="tag tag-dashed">кейс во второй волне</span>{% endif %}</div>
+    <div class="tags mt-8"><span class="tag">{{ p.dir }}</span><span class="tag">{{ p.ind }}</span>{% if p.live %}<span class="tag">{{ p.live }}</span>{% endif %}{% if not p.detail %}<span class="tag tag-dashed">кейс готовится</span>{% endif %}</div>
   </div>
 {% if p.detail %}</a>{% else %}</div>{% endif %}

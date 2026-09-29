@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://w2w.uz/sitemap.xml

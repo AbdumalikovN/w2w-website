@@ -1,326 +1,47 @@
 ---
 layout: layouts/base.njk
-title: "AI-агенты и IT-аутсорсинг полного цикла"
-description: "Win to Win проектирует, обучает и внедряет AI-агентов под процессы компании: поддержка клиентов, продажи, документы, звонки, отчётность. Внедрение от $5 000, старт от 1 дня. Ташкент, Узбекистан."
+title: "Company Brain — второй мозг вашей компании"
+description: "Win to Win внедряет Company Brain: система знает всё о вашей компании, отвечает сотрудникам со ссылками на источники и сама выполняет рутину. Плюс IT-аутсорсинг полного цикла: ERP, CRM, мобильные и веб-платформы."
 permalink: /
-bodyClass: page-home
+bodyClass: "is-home"
+scripts: ["brain-hero", "home", "ask", "calc"]
 ---
-{# ================= HERO ================= #}
-<section class="hero-ios" data-hero>
-  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
-  <div class="wrap hero-ios-in" data-hero-copy>
-    <p class="pill glass live-pill"><span class="dot-live" aria-hidden="true"></span>Агенты на связи 24/7 · Ташкент</p>
-    <h1 class="display" data-split-words>AI-агенты, которые работают вместо рутины</h1>
-    <p class="lead hero-lead">Проектируем, обучаем и внедряем AI-агентов под процессы вашей компании. Агент подключается к вашим системам, отвечает со ссылкой на источник и передаёт сложное человеку.</p>
-    <div class="hero-cta">
-      <a class="btn btn-lg" href="#calculator">Рассчитать стоимость агента</a>
-      <button class="btn btn-outline btn-lg" type="button" data-modal="call">Записаться на созвон</button>
-    </div>
-    <p class="hero-meta"><span><b>от $5 000</b> внедрение</span><span><b>от 1 дня</b> до старта</span><span><b>50+</b> проектов</span><span><b>Резидент</b> IT Park</span></p>
-  </div>
+{% include "home/hero.njk" %}
+{% include "home/logos.njk" %}
+{% include "home/statement.njk" %}
+{% include "home/skills.njk" %}
 
-  <div class="stage" data-stage aria-hidden="true">
-    <div class="float-w fw-1 glass" data-float="0.35">
-      <div class="fw-top">Закрыто без оператора</div>
-      <div class="fw-ring">
-        <svg class="mini-ring" viewBox="0 0 64 64"><circle class="t" cx="32" cy="32" r="25"/><circle class="f" cx="32" cy="32" r="25"/></svg>
-        <div><div class="fw-big">70%</div><p>обращений в поддержку</p></div>
-      </div>
-    </div>
-    <div class="float-w fw-2 glass" data-float="0.55">
-      <div class="fw-top"><span class="fw-check"><svg class="i"><use href="#i-check"/></svg></span>amoCRM · только что</div>
-      <p><b>Лид передан менеджеру</b><br>бюджет подтверждён, созвон в 15:00</p>
-    </div>
-    <div class="float-w fw-3 glass" data-float="0.8">
-      <div class="fw-top"><span class="app-icon sm ic-1"><svg><use href="#i-bolt"/></svg></span>Скорость ответа</div>
-      <div class="fw-big">12 сек</div>
-      <p>вместо 40 минут в очереди</p>
-    </div>
-    <div class="float-w fw-4 glass" data-float="0.65">
-      <div class="fw-top"><span class="app-icon sm ic-3"><svg><use href="#i-moon"/></svg></span>Ночная смена</div>
-      <p><b>Обработано 38 заявок,</b> пока команда спала</p>
-    </div>
-
-    <div class="phone" data-phone>
-      <div class="phone-screen">
-        <div class="phone-island"><span class="dot-live"></span></div>
-        <div class="phone-time"><span data-phone-date>Понедельник, 28 сентября</span><b data-phone-clock>09:41</b></div>
-        <div class="notifs" data-notifs>
-          {% for n in ui.notifs | limit(4) %}
-          <div class="notif"><span class="app-icon ic-{{ n.tone }}"><svg><use href="#{{ n.icon }}"/></svg></span><div><p class="notif-app"><span>{{ n.app }}</span><span class="notif-time">{% if loop.first %}сейчас{% else %}{{ loop.index0 * 3 }} мин{% endif %}</span></p><p class="notif-title">{{ n.title }}</p><p class="notif-text">{{ n.text }}</p></div></div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-    <div class="stage-fade"></div>
-  </div>
-</section>
-
-{% set logosTitle = "Нам доверяют клиенты и партнёры" %}
-{% include "partials/logos.njk" %}
-
-{# ================= STATEMENT ================= #}
-<section class="section">
-  <div class="wrap-narrow">
-    <p class="statement-text" data-scrub-text>Люди в вашей компании тратят часы на то, что должна делать машина: ищут информацию, отвечают на одни и те же вопросы, переносят данные между системами. <span class="accent">AI-агент берёт эту работу на себя</span> — с доступом к вашим данным, правилами и отчётом о результате.</p>
-  </div>
-  <div class="wrap stats-3">
-    <div class="stat-w" data-reveal>
-      <span class="app-icon md ic-1 stat-ic"><svg><use href="#i-search"/></svg></span>
-      <div class="stat-num"><span data-count="20" data-prefix="≈" data-suffix="%">≈20%</span></div>
-      <p>рабочего времени уходит на поиск информации внутри компании, по данным McKinsey Global Institute</p>
-    </div>
-    <div class="stat-w" data-reveal>
-      <span class="app-icon md ic-3 stat-ic"><svg><use href="#i-moon"/></svg></span>
-      <div class="stat-num">24/7</div>
-      <p>клиенты пишут круглосуточно, а отдел поддержки работает 8 часов пять дней в неделю</p>
-    </div>
-    <div class="stat-w" data-reveal>
-      <span class="app-icon md ic-2 stat-ic"><svg><use href="#i-gears"/></svg></span>
-      <div class="stat-num"><span data-count="0" data-from="120">0</span></div>
-      <p>ручных переносов данных между 1С, CRM и почтой, когда процесс ведёт агент</p>
-    </div>
-  </div>
-</section>
-
-{# ================= AGENTS ================= #}
-<section class="agents" data-hscroll>
-  <div class="wrap sec-head">
-    <div>
-      <h2 class="h2" data-reveal>Восемь агентов. Один подход.</h2>
-      <p class="lead" data-reveal>Отработанные типы агентов. Под задачу собираем одного или связку, где агенты передают работу друг другу.</p>
-    </div>
-    <a class="link-arrow" href="{{ '/services/agents/' | url }}" data-reveal>Подробнее об услуге <svg class="i"><use href="#i-arrow"/></svg></a>
-  </div>
-  <div class="hs-viewport" data-hs-viewport>
-    <div class="hs-track" data-hs-track>
-      {% for a in agents %}
-      <article class="agent-card{% if loop.index == 3 or loop.index == 6 %} is-dark{% endif %}">
-        <span class="app-icon lg ic-{{ loop.index }}"><svg><use href="#{{ ui.agentIcons[a.slug] }}"/></svg></span>
-        <h3>{{ a.name }}</h3>
-        <p>{{ a.text }}</p>
-        <div class="agent-kpi"><b>{{ a.kpi }}</b><span>{{ a.kpiSub }}</span></div>
-        <span class="agent-glow ic-{{ loop.index }}" aria-hidden="true"></span>
-      </article>
-      {% endfor %}
-      <a class="agent-card agent-more" href="{{ '/services/agents/' | url }}">
-        <div><h3>Нужен агент под ваш процесс?</h3><p class="mt-16">Опишите задачу на созвоне — соберём схему и оценку за 3 рабочих дня.</p></div>
-        <span class="round-go"><svg class="i"><use href="#i-arrow"/></svg></span>
-      </a>
-    </div>
-  </div>
-</section>
-
-{# ================= CALCULATOR ================= #}
-<section class="section calc-sec" id="calculator">
+<section class="section cx-sec" id="calculator" aria-labelledby="cx-title">
   <div class="wrap">
-    <div class="sec-head center">
-      <h2 class="h2" data-reveal>Сколько стоит ваш агент</h2>
-      <p class="lead" data-reveal>Настройте агента как в телефоне — диапазон бюджета пересчитается сразу. Точную цифру фиксируем в коммерческом предложении после брифинга.</p>
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Калькулятор</p>
+        <h2 class="h2" id="cx-title" data-no-auto>Сколько стоит <span class="grad-text">ваш Company Brain</span></h2>
+      </div>
+      <p class="lead">Соберите конфигурацию как в Apple Store — диапазон бюджета, сроки и команда пересчитаются сразу. Точную цифру фиксируем в КП.</p>
     </div>
     {% include "partials/calculator.njk" %}
   </div>
 </section>
 
-{# ================= PROCESS RINGS ================= #}
-<section class="section rings-sec" data-rings>
-  <div class="wrap rings-in">
-    <div class="rings-copy">
-      <h2 class="h2" data-reveal>От идеи до работающего агента</h2>
-      <p class="lead" data-reveal style="margin-top:18px">Каждый этап заканчивается тем, что можно потрогать: схемой, прототипом на ваших данных, метрикой качества, работающим агентом.</p>
-      <ol class="stages">
-        {% for s in ui.stages %}
-        <li class="st-item{% if loop.first %} is-active{% endif %}" data-stage-i="{{ loop.index0 }}">
-          <span class="stage-dot c{{ loop.index }}" aria-hidden="true"></span>
-          <div><h3>{{ s.t }}</h3><p>{{ s.d }}</p><span class="stage-time">{{ s.time }}</span></div>
-        </li>
-        {% endfor %}
-      </ol>
-      <a class="link-arrow mt-24" href="{{ '/process/' | url }}">Весь процесс из 8 шагов <svg class="i"><use href="#i-arrow"/></svg></a>
-    </div>
-    <div class="rings-col">
-      <div class="rings-vis" aria-hidden="true">
-        <svg class="rings-svg" viewBox="0 0 300 300">
-          {% set radii = [134, 104, 74, 44] %}
-          {% for r in radii %}
-          <circle class="rt r{{ loop.index }}" cx="150" cy="150" r="{{ r }}"/>
-          <circle class="rf r{{ loop.index }}" data-ring-i="{{ loop.index0 }}" cx="150" cy="150" r="{{ r }}"/>
-          {% endfor %}
-        </svg>
-      </div>
-      <p class="rings-caption" aria-hidden="true"><b data-rings-label>4 этапа</b><span data-rings-sub>от идеи до запуска</span></p>
-    </div>
-  </div>
-</section>
+{% include "home/pipeline.njk" %}
+{% include "partials/ask.njk" %}
+{% include "home/industries.njk" %}
+{% include "home/showcase.njk" %}
+{% include "home/team.njk" %}
+{% include "home/wallet.njk" %}
+{% include "home/partner.njk" %}
 
-{# ================= TWINWIN ================= #}
-<section class="section night" data-twin>
-  <div class="aurora is-night" aria-hidden="true"><i></i><i></i><i></i></div>
-  <div class="wrap">
-    <div class="twin-head center">
-      <p class="app-badge" data-reveal><span class="app-icon md ic-w"><svg><use href="#i-w"/></svg></span>TwinWin</p>
-      <h2 class="h2" data-reveal>Мозг вашей компании.<br><span class="grad-text">Ответ за 10 секунд.</span></h2>
-      <p class="lead center" data-reveal style="margin-top:20px">Готовая платформа корпоративных знаний: подключает документы, регламенты, встречи и переписку и отвечает сотрудникам со ссылками на источник.</p>
-    </div>
-    {% include "partials/spotlight.njk" %}
-    <div class="twin-stats">
-      <div class="twin-stat glass-dark" data-reveal><b>10 сек</b><span>среднее время до ответа с цитатой источника</span></div>
-      <div class="twin-stat glass-dark" data-reveal><b>3 языка</b><span>русский, узбекский и английский без машинного перевода</span></div>
-      <div class="twin-stat glass-dark" data-reveal><b>85%</b><span>порог приёмки на пилоте: 50 реальных вопросов</span></div>
-      <div class="twin-stat glass-dark" data-reveal><b>от $5 000</b><span>облачная версия для компаний 20–200 человек</span></div>
-    </div>
-    <div class="hero-cta center" data-reveal><a class="btn btn-lg" href="{{ '/twinwin/' | url }}">Смотреть TwinWin</a><button class="btn btn-outline btn-lg" type="button" data-modal="call">Запросить демо</button></div>
-  </div>
-</section>
-
-{# ================= WHY AGENTS DON'T MAKE THINGS UP ================= #}
-<section class="section is-paper">
+<section class="section faq-sec" aria-labelledby="faq-title">
   <div class="wrap">
     <div class="split">
       <div class="split-sticky">
-        <h2 class="h2" data-reveal>Почему агент не выдумывает ответы</h2>
-        <p class="lead" data-reveal>Ответ всегда со ссылкой на источник. Права доступа применяются до генерации. Каждый запрос логируется.</p>
+        <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Вопросы</p>
+        <h2 class="h2" id="faq-title">Частые вопросы о Company Brain</h2>
+        <p class="lead" style="margin-top:18px">Не нашли ответ? Спросите на созвоне — это бесплатно.</p>
+        <div class="mt-24"><button class="btn btn-brand" type="button" data-modal="request">Задать вопрос</button></div>
       </div>
-      <div class="bento is-2">
-        <div class="tile" data-reveal><span class="app-icon md ic-1"><svg><use href="#i-link"/></svg></span><h3>Ответ со ссылкой</h3><p>Под каждым ответом — документ, пункт и дата. Не нашёл подтверждения — говорит «не знаю» и зовёт человека.</p></div>
-        <div class="tile" data-reveal><span class="app-icon md ic-3"><svg><use href="#i-lock"/></svg></span><h3>Права до генерации</h3><p>Агент физически не видит документы, к которым у сотрудника нет доступа.</p></div>
-        <div class="tile" data-reveal><span class="app-icon md ic-2"><svg><use href="#i-target"/></svg></span><h3>Порог уверенности</h3><p>Семантический поиск плюс ключевые слова. Уверенность ниже порога — агент не отвечает.</p></div>
-        <div class="tile" data-reveal><span class="app-icon md ic-8"><svg><use href="#i-shield"/></svg></span><h3>Полный аудит</h3><p>Каждый запрос, источник и ответ в логе: всегда видно, почему агент ответил именно так.</p></div>
-        <div class="tile span-2 is-ink" data-reveal><span class="app-icon md ic-5"><svg><use href="#i-cloud"/></svg></span><h3>Облако W2W или ваш контур</h3><p>Postgres и pgvector, гибридный поиск, RBAC и аудит-логи. Интеграции: 1С, AmoCRM, Bitrix24, Google Drive, Gmail, Slack, API. Финальный стек фиксируем на Discovery.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{# ================= INDUSTRIES BENTO ================= #}
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head center">
-      <h2 class="h2" data-reveal>Где агенты окупаются быстрее всего</h2>
-    </div>
-    <div class="bento">
-      {% for ind in services.agentIndustries %}
-      <div class="tile{% if loop.index == 1 or loop.index == 6 or loop.index == 7 or loop.index == 8 %} span-2{% endif %}{% if loop.index == 1 %} is-brand{% endif %}{% if loop.index == 8 %} is-green{% endif %}" data-reveal>
-        <span class="app-icon md ic-{{ loop.index }}"><svg><use href="#{{ ui.industryIcons[loop.index0] }}"/></svg></span>
-        <h3>{{ ind[0] }}</h3>
-        <p>{{ ind[1] }}</p>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-{# ================= PROJECTS ================= #}
-<section class="section is-paper">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h2" data-reveal>Мы строим не только агентов</h2>
-        <p class="lead" data-reveal>50+ проектов: платформы, ERP, маркетплейсы и мобильные приложения в Узбекистане, Казахстане и США.</p>
-      </div>
-      <a class="link-arrow" href="{{ '/projects/' | url }}" data-reveal>Все проекты <svg class="i"><use href="#i-arrow"/></svg></a>
-    </div>
-    <div class="pgrid">
-      {% for slug in ['logx-eld', 'profitex', 'onlayn-hamshira', 'uybaza'] %}{% set p = projects | find('slug', slug) %}
-      {% include "partials/pcard.njk" %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-{# ================= TEAM ================= #}
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <h2 class="h2" data-reveal>Кто отвечает за ваш проект</h2>
-        <p class="lead" data-reveal>У каждого направления есть человек с именем и зоной ответственности. Вы знаете, кому писать.</p>
-      </div>
-      <a class="link-arrow" href="{{ '/team/' | url }}" data-reveal>Вся команда <svg class="i"><use href="#i-arrow"/></svg></a>
-    </div>
-    <div class="team-grid">
-      {% for p in team %}{% include "partials/person.njk" %}{% endfor %}
-    </div>
-  </div>
-</section>
-
-{# ================= WHY US BENTO ================= #}
-<section class="section is-paper">
-  <div class="wrap">
-    <div class="sec-head center"><h2 class="h2" data-reveal>Что вы получаете, выбирая нас</h2></div>
-    <div class="bento">
-      <div class="tile span-2" data-reveal><span class="app-icon md ic-1"><svg><use href="#i-sparkle"/></svg></span><h3>Агенты как инженерная задача</h3><p>Архитектура, тесты качества, метрики приёмки, мониторинг и дообучение. Агент живёт в проде годами.</p></div>
-      <div class="tile is-num" data-reveal><b>$10–30</b><p>за час работы — в 2–3 раза ниже международных студий</p></div>
-      <div class="tile is-num" data-reveal><b>1 день</b><p>до старта работ вместо 1–3 месяцев у крупных подрядчиков</p></div>
-      <div class="tile is-brand" data-reveal><b style="font-size:clamp(44px,4.6vw,68px);font-weight:800;letter-spacing:-0.05em;line-height:1">50+</b><p>реализованных проектов и партнёров</p></div>
-      <div class="tile span-2" data-reveal><span class="app-icon md ic-2"><svg><use href="#i-grid"/></svg></span><h3>Полный стек под ключ</h3><p>Агенту нужны интеграции, ERP, CRM, мобильное приложение. Делаем всё внутри одной команды.</p></div>
-      <div class="tile is-green" data-reveal><b style="font-size:clamp(44px,4.6vw,68px);font-weight:800;letter-spacing:-0.05em;line-height:1">3</b><p>страны активных проектов: Узбекистан, Казахстан, США</p></div>
-      <div class="tile span-2" data-reveal><span class="app-icon md ic-8"><svg><use href="#i-chart"/></svg></span><h3>Прозрачность</h3><p>Открытые сроки, бюджет и статус задач. Доступ к трекерам: вы всегда видите, на что идут деньги.</p></div>
-      <div class="tile span-2" data-reveal><span class="app-icon md ic-3"><svg><use href="#i-people"/></svg></span><h3>Партнёрский формат</h3><p>Не только «заказчик и исполнитель»: revenue sharing, совместные продукты, долевое участие.</p></div>
-    </div>
-  </div>
-</section>
-
-{# ================= PARTNERS ================= #}
-<section class="section">
-  <div class="wrap">
-    <div class="feature-brand split split-eq" data-reveal>
-      <div>
-        <h2 class="h2 h2-sm">Приводите клиентов — зарабатывайте 10–25% с каждого проекта</h2>
-        <p class="lead" style="margin-top:18px">Revenue Sharing для маркетинговых агентств, консалтинга и интеграторов. Риски реализации берём на себя.</p>
-        <div class="hero-cta">
-          <a class="btn btn-on-brand" href="{{ '/partners/' | url }}">Узнать о партнёрстве</a>
-          <a class="btn btn-outline" href="{{ '/documents/' | url }}">Партнёрская модель (PDF)</a>
-        </div>
-      </div>
-      <div class="deal">
-        <div class="deal-row"><div class="deal-cell"><small>Партнёр</small><b>Передаёт лид</b><p>Компания, контакт ЛПР и потребность. Лид закрепляется за вами.</p></div><div class="deal-cell is-us"><small>Win to Win</small><b>Продаёт и реализует</b><p>КП, договор, разработка и запуск. Риски реализации на нас.</p></div></div>
-        <div class="deal-row"><div class="deal-cell"><small>Партнёр</small><b>Получает 10–25%</b><p>С каждого платежа клиента, начиная с первого.</p></div><div class="deal-cell is-us"><small>Win to Win</small><b>Не забирает выплаты</b><p>No Clawback: полученное остаётся у партнёра.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{# ================= REVIEWS + MEDIA ================= #}
-<section class="section is-paper">
-  <div class="wrap">
-    <div class="split">
-      <div class="split-sticky">
-        <h2 class="h2" data-reveal>Что о нас говорят клиенты</h2>
-        <p class="lead" data-reveal>Записываем видео- и текстовые отзывы клиентов: имя, компания, результат в цифрах.</p>
-      </div>
-      <div>
-        <p class="todo" data-reveal>Блок появится по мере записи отзывов. Формат: фото или видео, имя, компания, результат в цифрах.</p>
-        <div class="sec-head mt-48" style="margin-bottom:16px">
-          <h3 class="h3">Разбираемся в AI и аутсорсинге вместе</h3>
-          <a class="link-arrow" href="{{ '/media/' | url }}">Все статьи <svg class="i"><use href="#i-arrow"/></svg></a>
-        </div>
-        <div class="list" data-reveal>
-          {% for a in extra.articles | limit(3) %}
-          <div class="list-row">
-            <div>
-              {% if a.ready %}<a href="{{ ('/media/' + a.slug + '/') | url }}" style="display:block;font-weight:600">{{ a.title }}</a>{% else %}<b style="font-weight:600;color:var(--label-2)">{{ a.title }}</b>{% endif %}
-              <div class="tags mt-8"><span class="tag">{{ a.tag }}</span>{% if not a.ready %}<span class="tag tag-dashed">готовится</span>{% endif %}</div>
-            </div>
-            {% if a.ready %}<svg class="i" style="color:var(--label-3)"><use href="#i-chevron"/></svg>{% endif %}
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{# ================= FAQ ================= #}
-<section class="section">
-  <div class="wrap">
-    <div class="split">
-      <div class="split-sticky">
-        <h2 class="h2" data-reveal>Вопросы об AI-агентах</h2>
-        <p class="lead" data-reveal>Не нашли ответ? Спросите на созвоне — это бесплатно.</p>
-        <button class="btn mt-24" type="button" data-modal="call" data-reveal>Задать вопрос</button>
-      </div>
-      <div data-reveal>{% set items = faq.agents %}{% set open = true %}{% include "partials/faq.njk" %}</div>
+      {% set items = faq.brain %}{% set open = true %}{% include "partials/faq.njk" %}
     </div>
   </div>
 </section>

@@ -1,0 +1,14 @@
+---
+pagination:
+  data: redirects
+  size: 1
+  alias: r
+permalink: "{{ r.from }}"
+eleventyExcludeFromCollections: true
+---
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><title>Страница переехала — Win to Win</title>
+<meta name="robots" content="noindex"><link rel="canonical" href="{{ site.domain }}{{ r.to }}">
+<meta http-equiv="refresh" content="0; url={{ r.to | url }}">
+<script>location.replace("{{ r.to | url }}" + location.hash);</script></head>
+<body><p>Страница переехала: <a href="{{ r.to | url }}">{{ r.to }}</a></p></body></html>

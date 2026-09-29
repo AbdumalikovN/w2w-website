@@ -1,0 +1,85 @@
+{# Multi-step request form. Set rqId before including. #}
+<form class="rq" data-rq="{{ rqId }}" novalidate>
+  <div class="rq-head">
+    <ol class="rq-steps" aria-hidden="true">
+      <li class="is-on"><span>1</span>Контакты</li>
+      <li><span>2</span>Задача</li>
+      <li><span><svg class="i"><use href="#i-check"/></svg></span>Готово</li>
+    </ol>
+    <div class="rq-meter" role="progressbar" aria-label="Заявка заполнена" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="rq-track"><i data-rq-fill></i></div>
+      <output class="rq-pct" data-rq-pct>0%</output>
+    </div>
+  </div>
+
+  <div class="rq-stage" data-rq-stage>
+    <fieldset class="rq-step" data-step="1">
+      <legend class="rq-legend">Как с вами связаться</legend>
+      <label class="rq-field" id="{{ rqId }}-f-company"><input name="company" required autocomplete="organization" placeholder=" " data-w="20"><span>Название компании<em aria-hidden="true">*</em></span><svg class="i rq-ok" aria-hidden="true"><use href="#i-check"/></svg></label>
+      <label class="rq-field" id="{{ rqId }}-f-name"><input name="name" required autocomplete="name" placeholder=" " data-w="20"><span>Ваше имя<em aria-hidden="true">*</em></span><svg class="i rq-ok" aria-hidden="true"><use href="#i-check"/></svg></label>
+      <label class="rq-field" id="{{ rqId }}-f-phone"><input name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder=" " data-w="20"><span>Телефон или Telegram<em aria-hidden="true">*</em></span><svg class="i rq-ok" aria-hidden="true"><use href="#i-check"/></svg></label>
+      <p class="rq-error" data-rq-error role="alert" hidden>Заполните три поля, чтобы мы могли связаться с вами.</p>
+      <div class="rq-actions">
+        <button class="btn btn-brand btn-lg rq-next" type="button" data-rq-next>Далее<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <p class="rq-hint">Второй шаг можно пропустить</p>
+      </div>
+    </fieldset>
+
+    <fieldset class="rq-step" data-step="2" hidden>
+      <legend class="rq-legend">Расскажите о задаче <span class="rq-opt">необязательно</span></legend>
+      <label class="rq-field rq-area"><textarea name="task" rows="3" maxlength="600" placeholder=" " data-w="15"></textarea><span>Коротко о задаче</span><small class="rq-count" data-rq-count>0 / 600</small></label>
+      <div class="rq-group">
+        <p class="rq-label" id="{{ rqId }}-dir-l">Направление</p>
+        <div class="rq-chips" role="group" aria-labelledby="{{ rqId }}-dir-l" data-rq-dirs>
+          <button class="chip" type="button" aria-pressed="false" data-v="Company Brain"><svg class="i" aria-hidden="true"><use href="#i-brain"/></svg>Company Brain</button>
+          <button class="chip" type="button" aria-pressed="false" data-v="ERP / CRM"><svg class="i" aria-hidden="true"><use href="#i-grid"/></svg>ERP / CRM</button>
+          <button class="chip" type="button" aria-pressed="false" data-v="Мобильное приложение"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>Мобильное приложение</button>
+          <button class="chip" type="button" aria-pressed="false" data-v="Веб-платформа"><svg class="i" aria-hidden="true"><use href="#i-globe"/></svg>Веб-платформа</button>
+          <button class="chip" type="button" aria-pressed="false" data-v="AI-автоматизация"><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg>AI-автоматизация</button>
+          <button class="chip" type="button" aria-pressed="false" data-v="Команда на аутсорс"><svg class="i" aria-hidden="true"><use href="#i-people"/></svg>Команда на аутсорс</button>
+          <button class="chip" type="button" aria-pressed="false" data-v="Другое"><svg class="i" aria-hidden="true"><use href="#i-sparkle"/></svg>Другое</button>
+        </div>
+      </div>
+      <div class="rq-group">
+        <p class="rq-label" id="{{ rqId }}-bud-l">Бюджет <output class="rq-budget" data-rq-budget>$10 000 – $30 000</output></p>
+        <div class="rq-range" data-rq-range>
+          <div class="rq-rtrack" aria-hidden="true"><i data-rq-sel></i></div>
+          <input type="range" min="0" max="10" step="1" value="1" aria-label="Бюджет от" data-rq-lo>
+          <input type="range" min="0" max="10" step="1" value="4" aria-label="Бюджет до" data-rq-hi>
+          <div class="rq-scale" aria-hidden="true"><span>$5k</span><span>$30k</span><span>$100k</span><span>$200k+</span></div>
+        </div>
+        <div class="rq-presets" role="group" aria-labelledby="{{ rqId }}-bud-l">
+          <button class="chip" type="button" data-bud="0,1">до $10k</button>
+          <button class="chip" type="button" data-bud="1,4">$10–30k</button>
+          <button class="chip" type="button" data-bud="4,6">$30–50k</button>
+          <button class="chip" type="button" data-bud="6,10">$50k+</button>
+          <button class="chip" type="button" data-bud="unknown" aria-pressed="false">Пока не знаю</button>
+        </div>
+      </div>
+      <p class="rq-error" data-rq-error2 role="alert" hidden>Не удалось отправить. Напишите нам в Telegram или на info@w2w.uz.</p>
+      <div class="rq-actions rq-actions-2">
+        <button class="btn btn-glass rq-back" type="button" data-rq-back aria-label="Назад"><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <button class="btn btn-glass" type="button" data-rq-skip>Пропустить</button>
+        <button class="btn btn-brand btn-lg rq-send" type="submit">Отправить заявку<svg class="i" aria-hidden="true"><use href="#i-send"/></svg></button>
+      </div>
+    </fieldset>
+
+    <div class="rq-step rq-done" data-step="3" hidden tabindex="-1">
+      <div class="rq-check" data-rq-ok aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg></div>
+      <div class="rq-check rq-check-fb" data-rq-fb hidden aria-hidden="true"><svg class="i"><use href="#i-send"/></svg></div>
+      <h3 class="rq-done-title" data-rq-ok>Заявка у нас</h3>
+      <p class="rq-done-text" data-rq-ok>Менеджер свяжется с вами в рабочее время в течение часа. А пока — попробуйте побить рекорд нашего COO в «Охоте на баги».</p>
+      <h3 class="rq-done-title" data-rq-fb hidden>Остался один шаг</h3>
+      <p class="rq-done-text" data-rq-fb hidden>Отправьте заявку в WhatsApp или на почту — текст уже готов. Менеджер ответит в рабочее время в течение часа.</p>
+      <div class="rq-actions rq-fb-actions" data-rq-fb hidden>
+        <a class="btn btn-brand btn-lg" data-send-wa href="{{ (site.socials | find('id', 'whatsapp')).href }}" target="_blank" rel="noopener"><svg class="i" aria-hidden="true"><use href="#i-whatsapp"/></svg>Отправить в WhatsApp</a>
+        <a class="btn btn-glass" data-send-mail href="mailto:{{ site.email }}"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>Отправить на почту</a>
+      </div>
+      <div class="rq-actions" data-rq-ok>
+        <button class="btn btn-brand btn-lg" type="button" data-modal="game"><svg class="i" aria-hidden="true"><use href="#i-game"/></svg>Играть, пока ждём</button>
+        <button class="btn btn-glass" type="button" data-rq-again>Новая заявка</button>
+      </div>
+    </div>
+  </div>
+  <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+</form>

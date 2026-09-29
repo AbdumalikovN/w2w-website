@@ -1,0 +1,81 @@
+{% set show = [
+  { slug: "onlayn-hamshira", shot: true, kind: "Медицина · веб и мобильное приложение", url: "onlaynhamshira.uz" },
+  { slug: "edumaster", shot: true, kind: "Образование · веб-платформа", url: "edu-master.uz" },
+  { slug: "uj-links", shot: true, kind: "Сервисы · веб-платформа и CMS", url: "ujlinks.uz" },
+  { slug: "muslim-board", shot: true, kind: "Сообщества · цифровая платформа", url: "muslim.uz" },
+  { slug: "logx-eld", shot: false, kind: "Логистика США · мобайл и веб", url: "logx.us" },
+  { slug: "uybaza", shot: false, kind: "Недвижимость · ERP и CRM", url: "" }
+] %}
+<section class="section sc" data-sc aria-labelledby="sc-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Проекты</p>
+        <h2 class="h2" id="sc-title" data-no-auto>Системы, которые <span class="grad-text">уже работают</span></h2>
+      </div>
+      <a class="btn btn-glass" href="{{ '/projects/' | url }}">Все проекты<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="sc-box">
+      <div class="sc-list" role="tablist" aria-label="Проект" data-sc-tabs>
+        {% for s in show %}{% set p = projects | find("slug", s.slug) %}
+        <button class="sc-tab" type="button" role="tab" id="sc-t-{{ s.slug }}" aria-controls="sc-p-{{ s.slug }}" aria-selected="{{ 'true' if loop.first else 'false' }}" tabindex="{{ '0' if loop.first else '-1' }}">
+          <span class="sc-tab-n" aria-hidden="true">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
+          <span class="sc-tab-t"><b>{{ p.name }}</b><small>{{ s.kind }}</small></span>
+          <i class="sc-tab-bar" aria-hidden="true"></i>
+        </button>
+        {% endfor %}
+      </div>
+      <div class="sc-stage">
+        <div class="sc-devices" aria-hidden="true">
+          <div class="sc-display">
+            <div class="sc-bezel">
+              <div class="sc-screen" data-sc-screen>
+                {% for s in show %}{% set p = projects | find("slug", s.slug) %}
+                <div class="sc-page{% if loop.first %} is-on{% endif %}" data-sc-page="{{ loop.index0 }}">
+                  {% if s.shot %}
+                  <div class="sc-browser"><i></i><i></i><i></i><span>{{ s.url }}</span></div>
+                  <div class="sc-scroll"><img src="{{ ('/assets/img/projects/' + s.slug + '-desktop.webp') | url }}" alt="" width="1200" height="3500" loading="lazy" decoding="async"></div>
+                  {% else %}
+                  <div class="sc-cover sc-cover-{{ p.tone }}">
+                    <svg class="sc-cover-w"><use href="#i-w"/></svg>
+                    <p class="sc-cover-k">{{ s.kind }}</p>
+                    <p class="sc-cover-n">{{ p.name }}</p>
+                    <p class="sc-cover-d">{{ p.short }}</p>
+                    <div class="sc-cover-ui"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  </div>
+                  {% endif %}
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <div class="sc-neck"></div>
+            <div class="sc-base"></div>
+          </div>
+          <div class="sc-phone">
+            <div class="sc-phone-in">
+              <span class="sc-island"></span>
+              {% for s in show %}{% set p = projects | find("slug", s.slug) %}
+              <div class="sc-mpage{% if loop.first %} is-on{% endif %}" data-sc-mpage="{{ loop.index0 }}">
+                {% if s.shot %}
+                <div class="sc-scroll"><img src="{{ ('/assets/img/projects/' + s.slug + '-mobile.webp') | url }}" alt="" width="560" height="4400" loading="lazy" decoding="async"></div>
+                {% else %}
+                <div class="sc-cover sc-cover-{{ p.tone }} is-m"><svg class="sc-cover-w"><use href="#i-w"/></svg><p class="sc-cover-n">{{ p.name }}</p><div class="sc-cover-ui"><i></i><i></i><i></i><i></i></div></div>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% for s in show %}{% set p = projects | find("slug", s.slug) %}
+        <div class="sc-cap" role="tabpanel" id="sc-p-{{ s.slug }}" aria-labelledby="sc-t-{{ s.slug }}"{% if not loop.first %} hidden{% endif %}>
+          <p>{{ p.short }}</p>
+          <div class="sc-cap-links">
+            {% if p.detail %}<a class="link-arrow" href="{{ ('/projects/' + p.slug + '/') | url }}">Кейс<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>{% endif %}
+            {% if s.url %}<a class="sc-live" href="https://{{ s.url }}" target="_blank" rel="noopener"><span class="dot-live" aria-hidden="true"></span>{{ s.url }}</a>{% endif %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

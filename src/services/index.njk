@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
-title: "Услуги: AI-агенты, ERP и CRM, мобильная и веб-разработка"
-description: "Полный цикл разработки цифровых продуктов: AI-агенты под ключ, ERP и CRM, мобильные приложения, веб-платформы и маркетплейсы. Дизайн, QA, DevOps, безопасность, консалтинг."
+title: "Услуги: Company Brain, ERP и CRM, мобильная и веб-разработка"
+description: "Полный цикл разработки цифровых продуктов: Company Brain, ERP и CRM, мобильные приложения, веб-платформы и маркетплейсы. Дизайн, QA, DevOps, безопасность, консалтинг."
 permalink: /services/
 ---
 <section class="hero-page">
@@ -9,8 +9,8 @@ permalink: /services/
     <div>
       <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Услуги</p>
       <h1 class="h1">Полный цикл разработки цифровых продуктов</h1>
-      <p class="lead">Основной фокус — AI-агенты под ключ. Вокруг них полный цикл: ERP и CRM, мобильные приложения, веб-платформы, а также дизайн, QA, DevOps, безопасность и консалтинг.</p>
-      <div class="hero-cta"><button class="btn" type="button" data-modal="request">Отправить заявку</button><a class="btn btn-outline" href="{{ '/process/' | url }}">Как мы работаем</a></div>
+      <p class="lead">Основной фокус — Company Brain, второй мозг компании. Вокруг него полный цикл: ERP и CRM, мобильные приложения, веб-платформы, а также дизайн, QA, DevOps, безопасность и консалтинг.</p>
+      <div class="hero-cta"><button class="btn btn-brand" type="button" data-modal="request">Отправить заявку</button><a class="btn btn-glass" href="{{ '/process/' | url }}">Как мы работаем</a></div>
     </div>
     <div class="hero-page-aside">
       <p><b>$10–30 в час</b>ставка команды: в 2–3 раза ниже международных студий при сопоставимом качестве</p>
@@ -24,7 +24,7 @@ permalink: /services/
     <h2 class="h2">Основные направления</h2>
     <div class="index mt-32">
       {% for s in services.main %}
-      <a class="index-row" href="{{ ('/services/' + s.slug + '/') | url }}" data-cols="4-7">
+      <a class="index-row" href="{{ (s.url or ('/services/' + s.slug + '/')) | url }}" data-cols="4-7">
         <h3>{% set si = ui.serviceIcons[s.slug] %}{% if si %}<span class="app-icon md ic-{{ si[1] }}"><svg><use href="#{{ si[0] }}"/></svg></span>{% endif %}{{ s.title }}</h3>
         <p>{{ s.text }}</p>
         <span class="link-arrow">Подробнее <svg class="i"><use href="#i-arrow"/></svg></span>
@@ -76,8 +76,8 @@ permalink: /services/
     <div class="split">
       <div class="split-sticky">
         <h2 class="h2">Вопросы про услуги и работу</h2>
-        <p class="lead" style="margin-top:18px">Про стоимость агентов — отдельный блок в <a href="{{ '/calculator/' | url }}">калькуляторе</a>.</p>
-        <div class="mt-24"><button class="btn" type="button" data-modal="call">Задать вопрос</button></div>
+        <p class="lead" style="margin-top:18px">Про стоимость Company Brain — отдельный блок в <a href="{{ '/calculator/' | url }}">калькуляторе</a>.</p>
+        <div class="mt-24"><button class="btn btn-brand" type="button" data-modal="request">Задать вопрос</button></div>
       </div>
       <div>
         {% set items = faq.services %}{% include "partials/faq.njk" %}

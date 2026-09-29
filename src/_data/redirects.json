@@ -1,0 +1,4 @@
+[
+  { "from": "/twinwin/", "to": "/brain/" },
+  { "from": "/services/agents/", "to": "/brain/skills/" }
+]

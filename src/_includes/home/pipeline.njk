@@ -1,0 +1,45 @@
+{% set stages = [
+  { id: "discovery", t: "Discovery", time: "3–5 дней", d: "Разбираем процессы, считаем стоимость рутины и выбираем сценарии с максимальной отдачей.", art: "Карта процессов и расчёт окупаемости", icon: "i-search", log: "анализ 14 процессов · ROI рассчитан", res: "ok · 4 дня" },
+  { id: "prototype", t: "Прототип", time: "2 недели", d: "Собираем Company Brain на ваших документах. Через две недели вы задаёте ему вопросы.", art: "Рабочий прототип на ваших данных", icon: "i-code", log: "проиндексировано 3 212 документов", res: "ok · 12 дней" },
+  { id: "pilot", t: "Пилот с метрикой", time: "2–4 недели", d: "50 реальных вопросов, порог приёмки 85%. Не прошли — дорабатываем за свой счёт.", art: "Отчёт о качестве ответов", icon: "i-target", log: "50/50 вопросов · точность 91% ≥ 85%", res: "passed" },
+  { id: "launch", t: "Запуск", time: "1–2 недели", d: "Интеграции, права доступа, обучение команды — и Company Brain выходит в работу.", art: "Company Brain в продакшене", icon: "i-bolt", log: "9 интеграций · 120 пользователей", res: "deployed" },
+  { id: "grow", t: "Развитие", time: "по SLA", d: "Следим за качеством, подключаем новые навыки и источники, поддерживаем по SLA.", art: "Ежемесячный отчёт об эффекте", icon: "i-trend", log: "мониторинг качества · новые навыки", res: "running" }
+] %}
+<section class="pl" data-pl aria-labelledby="pl-title">
+  <div class="pl-pin" data-pl-pin>
+    <div class="wrap">
+      <div class="sec-head pl-head">
+        <div>
+          <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Как проходит внедрение</p>
+          <h2 class="h2" id="pl-title" data-no-auto>Внедрение как <span class="grad-text">CI/CD-пайплайн</span></h2>
+        </div>
+        <p class="lead">Каждый этап — как шаг сборки: у него есть результат, который можно проверить. Следующий начинается, только когда предыдущий «зелёный».</p>
+      </div>
+      <ol class="pl-track" data-pl-track>
+        {% for s in stages %}
+        <li class="pl-node" data-pl-node="{{ loop.index0 }}">
+          <div class="pl-job">
+            <span class="pl-status" aria-hidden="true"><svg class="i pl-ic"><use href="#{{ s.icon }}"/></svg><svg class="i pl-ok"><use href="#i-check"/></svg><i class="pl-spin"></i></span>
+            <span class="pl-job-t"><b>{{ s.t }}</b><small>{{ s.time }}</small></span>
+          </div>
+          <div class="pl-detail">
+            <p>{{ s.d }}</p>
+            <p class="pl-art"><svg class="i" aria-hidden="true"><use href="#i-file"/></svg>{{ s.art }}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ol>
+      <div class="pl-console" aria-hidden="true">
+        <div class="pl-console-bar"><i></i><i></i><i></i><span>w2w-pipeline — company-brain</span><b class="pl-console-state" data-pl-state>queued</b></div>
+        <div class="pl-console-body">
+          <p class="pl-cmd"><span>$</span> w2w pipeline run --product company-brain --client «ваша компания»</p>
+          {% for s in stages %}
+          <p class="pl-line" data-pl-line="{{ loop.index0 }}"><span class="pl-l-stage">▸ {{ s.id }}</span><span class="pl-l-msg">{{ s.log }}</span><span class="pl-l-res">{{ s.res }}</span></p>
+          {% endfor %}
+          <p class="pl-line pl-final" data-pl-line="5"><span class="pl-l-stage">✓ done</span><span class="pl-l-msg">Company Brain работает у вас в компании</span></p>
+        </div>
+      </div>
+      <div class="pl-foot"><a class="link-arrow" href="{{ '/process/' | url }}">Подробно о процессе и гарантиях<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+    </div>
+  </div>
+</section>

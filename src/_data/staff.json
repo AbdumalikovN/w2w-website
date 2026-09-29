@@ -1,0 +1,60 @@
+{
+  "groups": [
+    {
+      "id": "dev", "title": "Разработка", "icon": "i-code", "tone": "ic-1",
+      "text": "Backend, frontend, мобильные приложения и тестирование. Пишут код, который потом передаётся клиенту вместе с документацией.",
+      "people": [
+        { "slug": "samariddin-paritdinov", "name": "Samariddin Paritdinov", "role": "Backend-разработчик", "since": "2025", "photo": true },
+        { "slug": "asliddin-abdumannonov", "name": "Asliddin Abdumannonov", "role": "Backend-разработчик", "since": "2025", "photo": true },
+        { "slug": "anvarjon-nizomiddinov", "name": "Anvarjon Nizomiddinov", "role": "Backend-разработчик", "since": "2025", "photo": true },
+        { "slug": "fazliddin-paritdinov", "name": "Fazliddin Paritdinov", "role": "Backend-разработчик, стажёр", "since": "2025", "photo": true },
+        { "slug": "ehson-komiljonov", "name": "Ehson Komiljonov", "role": "Frontend-инженер (Middle)", "since": "2025", "photo": true },
+        { "slug": "mexrobjon-turdimurodov", "name": "Mexrobjon Turdimurodov", "role": "Frontend-разработчик", "since": "2025", "photo": true },
+        { "slug": "islom-abdugofurov", "name": "Islom Abdug‘ofurov", "role": "Frontend-разработчик", "since": "2025", "photo": false },
+        { "slug": "habibullo-axrorov", "name": "Habibullo Axrorov", "role": "Мобильный разработчик", "since": "2025", "photo": true },
+        { "slug": "orifjon-otkirov", "name": "Orifjon O‘tkirov", "role": "QA-инженер", "since": "2025", "photo": false }
+      ]
+    },
+    {
+      "id": "design", "title": "Дизайн", "icon": "i-layout", "tone": "ic-8",
+      "text": "Интерфейсы продуктов: от исследований и прототипов до дизайн-систем.",
+      "people": [
+        { "slug": "akbarxoja-polatxojayev", "name": "Akbarxo‘ja Po‘latxo‘jayev", "role": "UI/UX-дизайнер", "since": "2025", "photo": true },
+        { "slug": "mironshox-soliyev", "name": "Mironshox Soliyev", "role": "UX/UI-дизайнер", "since": "2025", "photo": true }
+      ]
+    },
+    {
+      "id": "pm", "title": "Проекты и продукт", "icon": "i-flow", "tone": "ic-2",
+      "text": "Проектные менеджеры и аналитики: сроки, коммуникация с клиентом, требования и приёмка.",
+      "people": [
+        { "slug": "numonjon-umarov", "name": "Numonjon Umarov", "role": "Руководитель поставки продукта", "since": "2025", "photo": true },
+        { "slug": "mohira-habibullayeva", "name": "Mohira Habibullayeva", "role": "Проектный менеджер", "since": "2025", "photo": true },
+        { "slug": "rokhila-toshpulatova", "name": "Rokhila Toshpulatova", "role": "Проектный менеджер", "since": "2025", "photo": true },
+        { "slug": "oyimtillo-tojimamatova", "name": "Oyimtillo Tojimamatova", "role": "Бизнес-аналитик, PM", "since": "2024", "photo": false },
+        { "slug": "alisher-hadimetov", "name": "Alisher Hadimetov", "role": "Проектный менеджер", "since": "2025", "photo": false }
+      ]
+    },
+    {
+      "id": "growth", "title": "Маркетинг и продажи", "icon": "i-trend", "tone": "ic-5",
+      "text": "Бренд, digital-маркетинг, SEO и продажи — всё, благодаря чему о W2W узнают новые клиенты.",
+      "people": [
+        { "slug": "ibrohim-mirsadiqov", "name": "Ibrohim Mirsadiqov", "role": "Маркетинг-менеджер", "since": "2024", "photo": true },
+        { "slug": "shokhsanam-ganiyeva", "name": "Shokhsanam Ganiyeva", "role": "SEO и digital-маркетинг", "since": "2025", "photo": true },
+        { "slug": "ibrohim-asadullayev", "name": "Ibrohim Asadullayev", "role": "Менеджер B2E-продаж", "since": "2025", "photo": false },
+        { "slug": "abduraxmon-amonov", "name": "Abduraxmon Amonov", "role": "Менеджер по продажам", "since": "2026", "photo": false },
+        { "slug": "gulandom-rasulova", "name": "Gulandom Rasulova", "role": "Лицо бренда", "since": "", "photo": false }
+      ]
+    },
+    {
+      "id": "office", "title": "Офис и стажёры", "icon": "i-cap", "tone": "ic-7",
+      "text": "Офис-менеджмент и стажёры, которые растут вместе с проектами компании.",
+      "people": [
+        { "slug": "mubina-ziyamuxamedova", "name": "Mubina Ziyamuxamedova", "role": "Офис-менеджер", "since": "2025", "photo": false },
+        { "slug": "juratbek-xudayberganov", "name": "Juratbek Xudayberganov", "role": "Специалист", "since": "2026", "photo": true },
+        { "slug": "sulaymon-orinov", "name": "Sulaymon O‘rinov", "role": "Стажёр", "since": "2026", "photo": false },
+        { "slug": "hojimurod-obidjanov", "name": "Hojimurod Obidjanov", "role": "Стажёр", "since": "2026", "photo": false },
+        { "slug": "alisher-tojimatov", "name": "Alisher Tojimatov", "role": "Стажёр", "since": "", "photo": false }
+      ]
+    }
+  ]
+}

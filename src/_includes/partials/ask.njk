@@ -1,0 +1,76 @@
+{# Role-based Company Brain demo. Used on the home page and on /brain/. #}
+<section class="section night ask" id="ask" data-ask aria-labelledby="ask-title">
+  <div class="aurora is-night" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap ask-in">
+    <div class="sec-head center">
+      <p class="eyebrow ask-eb"><span class="eb-dot" aria-hidden="true"></span>Company Brain в деле</p>
+      <h2 class="h2" id="ask-title" data-no-auto>Спросите то, на что раньше <span class="grad-text">уходил целый день</span></h2>
+      <p class="lead">Выберите роль и посмотрите, как Company Brain отвечает руководителю: с цифрами, ссылками на источники и готовыми действиями.</p>
+    </div>
+    <div class="ask-roles" role="tablist" aria-label="Роль">
+      {% for r in roles.roles %}
+      <button class="ask-role" type="button" role="tab" id="ask-tab-{{ r.id }}" aria-controls="ask-p-{{ r.id }}" aria-selected="{{ 'true' if loop.first else 'false' }}" tabindex="{{ '0' if loop.first else '-1' }}" data-ask-role="{{ loop.index0 }}">
+        <span class="app-icon sm {{ r.tone }}" aria-hidden="true"><svg><use href="#{{ r.icon }}"/></svg></span>
+        <span class="ask-role-t"><b>{{ r.role }}</b><small>{{ r.title }}</small></span>
+        <i class="ask-role-timer" aria-hidden="true"></i>
+      </button>
+      {% endfor %}
+    </div>
+    <div class="ask-win" data-ask-win>
+      <div class="ask-glow" aria-hidden="true"></div>
+      <div class="ask-bar">
+        <svg class="i" aria-hidden="true"><use href="#i-search"/></svg>
+        <p class="ask-q"><span data-ask-q>{{ roles.roles[0].q }}</span><i class="ask-caret" aria-hidden="true"></i></p>
+        <span class="ask-kbd" aria-hidden="true">↵</span>
+      </div>
+      <ol class="ask-think" data-ask-think aria-hidden="true"></ol>
+      {% for r in roles.roles %}
+      <div class="ask-panel" role="tabpanel" id="ask-p-{{ r.id }}" aria-labelledby="ask-tab-{{ r.id }}" data-ask-panel="{{ loop.index0 }}"{% if not loop.first %} hidden{% endif %}>
+        <p class="sr-only">{{ r.q }}</p>
+        <ul class="ask-steps" hidden>{% for s in r.steps %}<li>{{ s }}</li>{% endfor %}</ul>
+        <div class="ask-grid">
+          <div class="ask-main">
+            <p class="ask-label"><span class="app-icon sm ic-w" aria-hidden="true"><svg><use href="#i-w"/></svg></span>Company Brain<span class="ask-time">{{ r.time }}</span></p>
+            <p class="ask-a">{{ r.a | brainText | safe }}</p>
+            <div class="ask-src">
+              {% for s in r.src %}<span class="ask-chip"><i class="cite">{{ loop.index }}</i><svg class="i" aria-hidden="true"><use href="#{{ s[0] }}"/></svg>{{ s[1] }}</span>{% endfor %}
+            </div>
+            <div class="ask-act">
+              {% for a in r.act %}<button class="ask-btn{% if loop.first %} is-main{% endif %}" type="button" data-ask-act><svg class="i" aria-hidden="true"><use href="#{{ 'i-bolt' if loop.first else 'i-send' }}"/></svg>{{ a }}</button>{% endfor %}
+            </div>
+          </div>
+          <div class="ask-viz ask-viz-{{ r.viz.type }}">
+            {% if r.viz.label %}<p class="ask-viz-l">{{ r.viz.label }}</p>{% endif %}
+            {% if r.viz.type == "bars" %}
+            {% set mx = r.viz.items | maxcol(1) %}
+            <div class="av-bars">
+              {% for it in r.viz.items %}<div class="av-bar{% if loop.index0 == r.viz.hl %} is-hl{% endif %}"><b>{{ it[1] | numru }}{{ r.viz.unit }}</b><i style="--v: {{ (it[1] / mx * 100) | round(1) }}%"></i><span>{{ it[0] }}</span></div>{% endfor %}
+            </div>
+            {% elif r.viz.type == "hbars" %}
+            {% set mx = r.viz.items | maxcol(1) %}
+            <div class="av-hbars">
+              {% for it in r.viz.items %}<div class="av-hbar"><span>{{ it[0] }}</span><i style="--v: {{ (it[1] / mx * 100) | round(1) }}%"></i><b>${{ it[1] | numru }}</b></div>{% endfor %}
+            </div>
+            {% elif r.viz.type == "status" %}
+            <div class="av-status">
+              {% for it in r.viz.items %}<div class="av-st is-{{ it[2] }}"><span>{{ it[0] }}</span><i style="--v: {{ it[1] }}%"></i><b>{{ it[1] }}%</b></div>{% endfor %}
+            </div>
+            {% elif r.viz.type == "table" %}
+            <table class="av-tbl">
+              <thead><tr>{% for h in r.viz.head %}<th>{{ h }}</th>{% endfor %}</tr></thead>
+              <tbody>{% for it in r.viz.items %}<tr{% if loop.index0 == r.viz.hl %} class="is-hl"{% endif %}>{% for c in it %}<td>{{ c }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+            </table>
+            {% elif r.viz.type == "kpis" %}
+            <div class="av-kpis">
+              {% for it in r.viz.items %}<div class="av-kpi"><b>{{ it[0] }}</b><span>{{ it[1] }}</span></div>{% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        <p class="ask-meta"><span><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>Ответ за {{ r.time }}</span><span><svg class="i" aria-hidden="true"><use href="#i-link"/></svg>{{ r.src | length }} источника</span><span><svg class="i" aria-hidden="true"><use href="#i-lock"/></svg>Права доступа проверены</span></p>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="ask-note">Демо на данных вымышленной компании. На внедрении Company Brain подключается к вашим системам и отвечает по вашим данным.</p>
+  </div>
+</section>

@@ -1,14 +1,41 @@
-<footer class="site-footer">
+<footer class="site-footer" data-footer>
   <div class="wrap">
-    <div class="footer-top">
-      <div class="footer-brand">
+    <div class="ft-hero">
+      <div class="ft-game" data-dark-zone>
+        <div class="ft-game-art" aria-hidden="true">
+          <span class="ft-code"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <svg class="ft-bug b1"><use href="#i-bug"/></svg><svg class="ft-bug b2"><use href="#i-bug"/></svg><svg class="ft-bug b3"><use href="#i-bug"/></svg>
+        </div>
+        <p class="ft-game-kicker"><svg class="i" aria-hidden="true"><use href="#i-game"/></svg>Мини-игра «Охота на баги»</p>
+        <h2 class="ft-game-title">Пока ждёте ответа — поймайте все баги</h2>
+        <p class="ft-game-text">Мы ответим раньше, чем вы побьёте рекорд нашего COO.</p>
+        <div class="ft-game-row">
+          <div class="ft-rec">
+            <img src="{{ '/assets/img/team/nuriddin-abdumalikov-sq.webp' | url }}" alt="" width="44" height="44" loading="lazy">
+            <span><b>{{ site.game.record | usd | replace('$', '') }}</b><small>Рекорд · Nuriddin Abdumalikov, COO</small></span>
+          </div>
+          <button class="btn btn-brand btn-lg" type="button" data-modal="game"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg>Играть</button>
+        </div>
+      </div>
+      <div class="ft-contact">
         {% include "partials/logo.njk" %}
-        <p class="footer-desc">AI-агенты и IT-аутсорсинг полного цикла из Ташкента. Резидент IT Park Uzbekistan. Мы выигрываем только тогда, когда выигрываете вы.</p>
-        <div class="clocks" data-clocks>
+        <p class="ft-desc">Company Brain и IT-аутсорсинг полного цикла из Ташкента. Резидент IT Park Uzbekistan. Мы выигрываем только тогда, когда выигрываете вы.</p>
+        <a class="ft-phone" href="{{ site.phoneHref }}">{{ site.phone }}</a>
+        <a class="ft-mail" href="mailto:{{ site.email }}">{{ site.email }}</a>
+        <p class="ft-addr">{{ site.address }}</p>
+        <p class="footer-online"><span class="dot-live" aria-hidden="true"></span>Отвечаем в рабочее время в течение часа</p>
+        <div class="clocks">
           {% for c in site.clocks %}<span class="clock"><span class="clock-city">{{ c.city }}</span><time class="clock-time" data-tz="{{ c.tz }}">—:—</time></span>{% endfor %}
         </div>
-        <p class="footer-online"><span class="dot-live" aria-hidden="true"></span>Отвечаем в рабочее время в течение часа</p>
       </div>
+    </div>
+
+    <nav class="ft-soc" aria-label="Win to Win в соцсетях">
+      {# a network without a link is not shown; add its URL in site.json and the icon appears #}
+      {% for s in site.socials %}{% if s.href %}<a class="soc-ic soc-{{ s.id }}" href="{{ s.href }}" aria-label="{{ s.name }}" title="{{ s.name }}"{% if s.href.startsWith('http') %} target="_blank" rel="noopener"{% endif %}><svg aria-hidden="true"><use href="#i-{{ s.id }}"/></svg>{% if s.label %}<span class="soc-t">{{ s.label }}</span>{% endif %}</a>{% endif %}{% endfor %}
+    </nav>
+
+    <div class="ft-cols">
       {% for col in nav.footer %}
       <div class="footer-col">
         <h2 class="footer-h">{{ col.title }}</h2>
@@ -16,19 +43,21 @@
       </div>
       {% endfor %}
       <div class="footer-col">
-        <h2 class="footer-h">Контакты</h2>
-        <a href="{{ site.phoneHref }}">{{ site.phone }}</a>
-        <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-        <p class="footer-addr">{{ site.address }}</p>
-        <div class="soc">
-          {% for s in site.socials %}<a href="{{ s.href }}">{{ s.name }}</a>{% endfor %}
+        <h2 class="footer-h">Настройки</h2>
+        <div class="ft-lang" role="group" aria-label="Язык сайта">
+          <a href="{{ page.url | url }}" data-lang-link="ru" hreflang="ru" aria-current="true">RU</a>
+          <a href="{{ ('/uz' + page.url) | url }}" data-lang-link="uz" hreflang="uz">UZ</a>
+          <a href="{{ ('/en' + page.url) | url }}" data-lang-link="en" hreflang="en">EN</a>
         </div>
-        <p class="footer-lang"><span class="sr-only">Язык сайта: </span><span class="is-on">RU</span><span>UZ</span><span>EN</span><span class="sr-only"> — узбекская и английская версии готовятся</span></p>
+        <button class="ft-pref" type="button" data-theme-toggle aria-pressed="false"><span>Тёмная тема</span><span class="switch" aria-hidden="true"></span></button>
+        <button class="ft-pref" type="button" data-sound-toggle aria-pressed="false"><span>Звук и музыка</span><span class="switch" aria-hidden="true"></span></button>
       </div>
     </div>
+
     <div class="footer-bottom">
-      <p>© {{ '' | year }} {{ site.legal }}. Все права защищены. ИНН {{ site.inn }}</p>
-      <p><a href="{{ '/documents/' | url }}">Документы и сертификаты</a> <a href="{{ '/documents/' | url }}">Политика конфиденциальности</a></p>
+      <p>© {{ '' | year }} {{ site.legal }}. ИНН {{ site.inn }}. {{ site.certificate }}</p>
+      <p><a href="{{ '/documents/' | url }}">Документы и сертификаты</a><a href="{{ '/documents/' | url }}#privacy">Политика конфиденциальности</a></p>
     </div>
   </div>
+  <div class="ft-giant" aria-hidden="true">Win to Win</div>
 </footer>

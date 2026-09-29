@@ -1,125 +1,182 @@
 ---
 layout: layouts/base.njk
-title: "Партнёрство: revenue sharing 10–25% с каждого проекта"
-description: "Партнёрская модель Win to Win для маркетинговых агентств, консалтинга и интеграторов: вы приводите клиента, мы реализуем проект и делимся доходом. Нулевой риск, оплата с первого платежа, No Clawback."
+title: "Партнёрская программа: до 25% маржи с каждого проекта"
+description: "Партнёрская программа Win to Win для агентств, консультантов и интеграторов: вы приводите клиента, мы реализуем проект и делимся маржой — до 25%. Выплаты с первого платежа клиента, без возвратов."
 permalink: /partners/
+scripts: ["partners"]
 ---
-<section class="hero-page is-brand">
-  <div class="wrap hero-page-in">
-    <div>
-      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Партнёрство</p>
-      <h1 class="h1">Зарабатывайте <span style="white-space:nowrap">10–25%</span> с каждого приведённого проекта</h1>
-      <p class="lead">Партнёрская модель Win to Win для маркетинговых агентств, консалтинга и интеграторов: вы приводите клиента, мы реализуем проект и делимся доходом. Все риски реализации на нас.</p>
-      <div class="hero-cta"><button class="btn btn-on-brand" type="button" data-modal="call">Записаться на созвон</button><a class="btn btn-outline" href="{{ '/documents/' | url }}">Партнёрская модель (PDF)</a></div>
+<section class="hero-page is-dark pt-hero" data-dark-zone>
+  <div class="aurora is-night" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="wrap pt-in">
+    <div class="pt-copy">
+      <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Партнёрская программа</p>
+      <h1 class="h1">Приводите клиентов — получайте до&nbsp;<span class="grad-text">25% маржи</span></h1>
+      <p class="lead">Для агентств, консультантов и интеграторов. Вы знакомите нас с клиентом, мы продаём и реализуем проект, а маржой делимся с вами — с каждого платежа клиента.</p>
+      <div class="hero-cta"><button class="btn btn-brand btn-lg" type="button" data-modal="request">Стать партнёром</button><a class="btn btn-glass btn-lg" href="{{ '/documents/' | url }}">Партнёрская модель (PDF)</a></div>
+      {# the real figure goes into site.json → payouts.lastMonth (number, USD); while it is null the line is not shown #}
+      {% if site.payouts and site.payouts.lastMonth %}<p class="pt-paid"><span class="dot-live" aria-hidden="true"></span>Партнёрам выплачено в прошлом месяце: <b>{{ site.payouts.lastMonth | usd }}</b></p>{% endif %}
     </div>
-    <div class="hero-page-aside">
-      <p><b>0%</b>риска для партнёра после передачи лида</p>
-      <p><b>No Clawback</b>полученные выплаты остаются у вас, даже если проект остановлен</p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <h2 class="h2">Revenue Sharing, No Risk, Win-Win</h2>
-    <div class="figures figures-4 mt-48">
-      <div><div class="num">0%</div><p><b>Нулевой риск.</b> После передачи лида партнёр не несёт никакой ответственности: реализация полностью на W2W.</p></div>
-      <div><div class="num">с 1-го</div><p><b>Оплата с первого платежа.</b> Комиссия начисляется сразу после получения оплаты от клиента, по каждому этапу.</p></div>
-      <div><div class="num">100%</div><p><b>No Clawback.</b> Если проект прекращается, партнёр оставляет себе все полученные выплаты. Без штрафов и вычетов.</p></div>
-      <div><div class="num">1 документ</div><p><b>Прозрачность.</b> Все условия фиксируются в письменном партнёрском соглашении.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section is-paper">
-  <div class="wrap">
-    <h2 class="h2">Для кого эта модель</h2>
-    <div class="industries mt-32">
-      <div><b>Маркетинговые агентства</b><p>Ваши клиенты регулярно спрашивают про разработку: монетизируйте эти запросы.</p></div>
-      <div><b>Консалтинг и интеграторы</b><p>Дополните свои услуги надёжным техподрядчиком под white label.</p></div>
-      <div><b>Зарубежные компании</b><p>Продавайте разработку на своём рынке, производство берём на себя.</p></div>
-      <div><b>Нетворкеры и советники</b><p>Достаточно познакомить нас с клиентом: остальное сделаем сами.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <h2 class="h2">Комиссия по типам лидов</h2>
-    <p class="lead mt-16">Процент зависит от того, насколько «тёплый» клиент и какую часть продажи вы берёте на себя. База расчёта фиксируется в партнёрском соглашении.</p>
-    <div class="tbl-wrap mt-32" tabindex="0" role="region" aria-label="Комиссия по типам лидов">
-      <table class="tbl">
-        <thead><tr><th>Тип лида</th><th>Что это</th><th>Проекты до $20 000</th><th>От $20 000</th></tr></thead>
-        <tbody>
-          <tr><td><b>Горячий лид</b></td><td>Клиент с бюджетом и конкретной потребностью, готов обсуждать проект</td><td><b>15%</b></td><td><b>20%</b></td></tr>
-          <tr><td><b>Холодный лид</b></td><td>Первичный интерес, «может быть в будущем»</td><td><b>10%</b></td><td><b>15%</b></td></tr>
-          <tr><td><b>Полная продажа</b></td><td>Партнёр сам находит клиента, ведёт переговоры и закрывает сделку</td><td><b>20%</b></td><td><b>25%</b></td></tr>
-          <tr><td><b>Только знакомство</b></td><td>Партнёр знакомит клиента с командой W2W, в продаже не участвует</td><td><b>10%</b></td><td><b>15%</b></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="industries is-3 mt-32">
-      <div><b>Допродажа от W2W, до 6 месяцев</b><p>Клиент докупил услуги — вы получаете 5% с допродажи.</p></div>
-      <div><b>Допродажа от W2W, после 12 месяцев</b><p>Комиссия с допродаж завершается: 0%.</p></div>
-      <div><b>Допродажа от партнёра</b><p>Допродажу инициировали вы — 10%, без ограничения по времени.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section is-paper">
-  <div class="wrap">
-    <div class="split">
-      <div class="split-sticky">
-        <h2 class="h2">Сколько вы заработаете</h2>
-        <p class="lead" style="margin-top:18px">Горячий лид, проект на $30 000, ставка партнёра 20%. Клиент платит тремя траншами — вы получаете выплату после каждого.</p>
-        <p class="mt-24" style="border-left:1px solid var(--ink);padding-left:16px"><b>Если клиент остановит проект на 2-м этапе</b> — вы сохраняете уже полученные $1 200. Никаких возвратов.</p>
+    <div class="pt-flow" data-pt-flow aria-hidden="true">
+      <div class="pt-map" data-pt-map>
+        <svg class="pt-lines" viewBox="0 0 520 440" preserveAspectRatio="none"><path id="pt-p1" d="M86 96 C 200 96, 180 220, 260 220"/><path id="pt-p2" d="M260 220 C 340 220, 330 344, 434 344"/></svg>
+        <div class="pt-node pt-client"><span class="app-icon md ic-8"><svg><use href="#i-building"/></svg></span><b>Клиент</b><small>платит за проект</small></div>
+        <div class="pt-node pt-w2w"><span class="app-icon lg ic-w"><svg><use href="#i-w"/></svg></span><b>Win to Win</b><small>реализует проект</small></div>
+        <div class="pt-node pt-you"><span class="app-icon md ic-2"><svg><use href="#i-person"/></svg></span><b>Вы</b><small>получаете долю маржи</small></div>
       </div>
-      <div class="tbl-wrap" tabindex="0" role="region" aria-label="Пример выплат по этапам">
-        <table class="tbl tbl-num">
-          <thead><tr><th>Этап</th><th>Платёж клиента</th><th>Ваша комиссия</th><th>Накопительно</th></tr></thead>
-          <tbody>
-            <tr><td>1, аванс</td><td>$10 000</td><td><b>$600</b></td><td>$600</td></tr>
-            <tr><td>2, середина</td><td>$10 000</td><td><b>$600</b></td><td>$1 200</td></tr>
-            <tr><td>3, финал</td><td>$10 000</td><td><b>$600</b></td><td><b>$1 800</b></td></tr>
-          </tbody>
-        </table>
+      <div class="pt-dash">
+        <p class="pt-dash-h"><span>Партнёрский кабинет</span><em>пример</em></p>
+        <p class="pt-dash-k">Выплачено по проекту</p>
+        <p class="pt-dash-v" data-pt-total>$0</p>
+        <div class="pt-dash-bars"><i data-pt-bar></i><i data-pt-bar></i><i data-pt-bar></i></div>
+        <p class="pt-dash-s"><span data-pt-step>Ждём первый платёж клиента</span></p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section pt-facts-sec">
   <div class="wrap">
-    <h2 class="h2">Три шага до первой выплаты</h2>
-    <div class="flow is-3 mt-32">
-      <div><h3><span class="step-n">1</span>Созвон и соглашение</h3><p>Знакомимся, отвечаем на вопросы, подписываем партнёрское соглашение с фиксацией процентов.</p></div>
-      <div><h3><span class="step-n">2</span>Передаёте лид</h3><p>Название компании, контакт ЛПР, потребность и стадия бюджета. Лид закрепляется за вами: при споре приоритет у того, кто зарегистрировал первым.</p></div>
-      <div><h3><span class="step-n">3</span>Получаете выплаты</h3><p>Мы продаём (если нужно), реализуем проект и переводим вашу комиссию с каждого платежа клиента.</p></div>
+    <div class="pt-facts">
+      <div><b>до 25%</b><span>маржи проекта — ваша доля</span></div>
+      <div><b>с 1-го платежа</b><span>выплата после каждого транша клиента</span></div>
+      <div><b>0%</b><span>риска после передачи лида</span></div>
+      <div><b>No Clawback</b><span>полученные выплаты не возвращаются</span></div>
     </div>
   </div>
 </section>
 
-<section class="section is-paper">
+<section class="section" aria-labelledby="who-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Для кого</p>
+        <h2 class="h2" id="who-t">Кому подходит программа</h2>
+      </div>
+      <p class="lead">Если ваши клиенты спрашивают про разработку, CRM или AI — вы уже можете на этом зарабатывать.</p>
+    </div>
+    <div class="pt-who">
+      <div class="pt-who-i"><span class="app-icon md ic-1" aria-hidden="true"><svg><use href="#i-target"/></svg></span><h3>Маркетинговые агентства</h3><p>Клиенты регулярно просят сайт, CRM или автоматизацию — монетизируйте эти запросы.</p></div>
+      <div class="pt-who-i"><span class="app-icon md ic-2" aria-hidden="true"><svg><use href="#i-gears"/></svg></span><h3>Консалтинг и интеграторы</h3><p>Дополните свои услуги надёжным технологическим подрядчиком, в том числе под white label.</p></div>
+      <div class="pt-who-i"><span class="app-icon md ic-8" aria-hidden="true"><svg><use href="#i-globe"/></svg></span><h3>Зарубежные компании</h3><p>Продавайте разработку на своём рынке — производство и качество берём на себя.</p></div>
+      <div class="pt-who-i"><span class="app-icon md ic-5" aria-hidden="true"><svg><use href="#i-people"/></svg></span><h3>Нетворкеры и советники</h3><p>Достаточно познакомить нас с клиентом — остальное сделаем сами.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="rate-t">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Комиссия</p>
+        <h2 class="h2" id="rate-t">Сколько процентов маржи — ваши</h2>
+      </div>
+      <p class="lead">Доля зависит от того, насколько «тёплый» клиент и какую часть продажи вы берёте на себя. Для проектов от $20 000 ставка выше.</p>
+    </div>
+    <div class="pt-rates">
+      {% set rates = [
+        ["Только знакомство", "Знакомите клиента с командой, в продаже не участвуете", 10, 15, "i-link"],
+        ["Холодный лид", "Первичный интерес: «может быть, в будущем»", 10, 15, "i-bubble"],
+        ["Горячий лид", "Есть бюджет и конкретная потребность, клиент готов обсуждать", 15, 20, "i-bolt"],
+        ["Полная продажа", "Вы сами находите клиента, ведёте переговоры и закрываете сделку", 20, 25, "i-trophy"]
+      ] %}
+      {% for r in rates %}
+      <div class="pt-rate{% if loop.last %} is-top{% endif %}">
+        <span class="app-icon md is-glass" aria-hidden="true"><svg><use href="#{{ r[4] }}"/></svg></span>
+        <h3>{{ r[0] }}</h3>
+        <p>{{ r[1] }}</p>
+        <div class="pt-rate-v">
+          <div><small>до $20 000</small><b>{{ r[2] }}%</b><i style="--v: {{ r[2] * 4 }}%"></i></div>
+          <div><small>от $20 000</small><b>{{ r[3] }}%</b><i style="--v: {{ r[3] * 4 }}%"></i></div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="pt-upsell">
+      <div><b>5%</b><span>допродажа от W2W в первые 6 месяцев</span></div>
+      <div><b>0%</b><span>допродажа от W2W после 12 месяцев</span></div>
+      <div><b>10%</b><span>допродажа, которую инициировали вы, — бессрочно</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-sim-sec" aria-labelledby="sim-t" data-pt-sim>
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Калькулятор дохода</p>
+        <h2 class="h2" id="sim-t">Ваш доход за год</h2>
+      </div>
+      <p class="lead">Задайте, сколько клиентов вы приводите и какого размера проекты, — график покажет выплаты по месяцам.</p>
+    </div>
+    <div class="pt-sim">
+      <div class="pt-sim-ctl">
+        <div class="pt-ctl">
+          <div class="pt-ctl-h"><label for="pt-n">Клиентов в квартал</label><output data-pt-n-out>1</output></div>
+          <input id="pt-n" type="range" min="1" max="6" step="1" value="1" data-pt-n>
+        </div>
+        <div class="pt-ctl">
+          <div class="pt-ctl-h"><label for="pt-b">Средний бюджет проекта</label><output data-pt-b-out>$30 000</output></div>
+          <input id="pt-b" type="range" min="10000" max="150000" step="5000" value="30000" data-pt-b>
+        </div>
+        <div class="pt-ctl">
+          <p class="pt-ctl-h"><span>Тип лида</span></p>
+          <div class="segmented pt-seg" role="radiogroup" aria-label="Тип лида" data-pt-type>
+            <span class="seg-thumb" aria-hidden="true"></span>
+            <button type="button" role="radio" aria-checked="false" data-rate="10,15">Знакомство</button>
+            <button type="button" role="radio" aria-checked="false" data-rate="10,15">Холодный</button>
+            <button type="button" role="radio" aria-checked="true" data-rate="15,20">Горячий</button>
+            <button type="button" role="radio" aria-checked="false" data-rate="20,25">Продажа</button>
+          </div>
+        </div>
+        <div class="pt-sim-total">
+          <small>Выплаты за 12 месяцев</small>
+          <b data-pt-year>$7 200</b>
+          <span data-pt-per>≈ $600 в месяц в среднем</span>
+        </div>
+      </div>
+      <div class="pt-chart">
+        <div class="pt-chart-h"><span>Выплаты по месяцам</span><span class="pt-legend"><i></i>выплата<i class="is-line"></i>накопительно</span></div>
+        <div class="pt-chart-box">
+          <svg class="pt-svg" data-pt-svg aria-hidden="true"></svg>
+        </div>
+        <p class="pt-chart-note">Модель: маржа проекта 30%, клиент платит тремя траншами — в первый, третий и пятый месяц проекта. Реальные суммы зависят от договора с клиентом.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="steps-t">
+  <div class="wrap">
+    <h2 class="h2" id="steps-t">Три шага до первой выплаты</h2>
+    <ol class="pt-steps mt-48">
+      <li><span class="pt-step-n">1</span><h3>Созвон и соглашение</h3><p>Знакомимся, отвечаем на вопросы, подписываем партнёрское соглашение с фиксацией процентов.</p></li>
+      <li><span class="pt-step-n">2</span><h3>Передаёте лид</h3><p>Компания, контакт ЛПР, потребность и стадия бюджета. Лид закрепляется за вами: при споре приоритет у того, кто зарегистрировал его первым.</p></li>
+      <li><span class="pt-step-n">3</span><h3>Получаете выплаты</h3><p>Мы продаём (если нужно), реализуем проект и переводим вашу долю с каждого платежа клиента.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section">
   <div class="wrap">
     <div class="split split-eq">
       <div>
-        <h2 class="h2">Кто за что отвечает</h2>
+        <h2 class="h2 h2-sm">Кто за что отвечает</h2>
         <div class="ledger mt-32">
           <div class="ledger-head"><div>Партнёр</div><div>Win to Win</div></div>
           <div class="ledger-row"><div data-col="Партнёр"><b>Риск после передачи лида: 0%</b></div><div data-col="Win to Win"><p>100%, полный</p></div></div>
           <div class="ledger-row"><div data-col="Партнёр"><p>В реализации проекта не участвует</p></div><div data-col="Win to Win"><b>Полная ответственность за реализацию</b></div></div>
           <div class="ledger-row"><div data-col="Партнёр"><b>При отмене проекта сохраняет все выплаты</b></div><div data-col="Win to Win"><p>Прекращает выплаты</p></div></div>
-          <div class="ledger-row"><div data-col="Партнёр"><b>Возврат комиссии: нет, никогда</b></div><div data-col="Win to Win"><p>Clawback не применяется</p></div></div>
+          <div class="ledger-row"><div data-col="Партнёр"><b>Возврат выплат: нет, никогда</b></div><div data-col="Win to Win"><p>Clawback не применяется</p></div></div>
         </div>
       </div>
       <div>
-        <h2 class="h2">Скачайте и изучите</h2>
+        <h2 class="h2 h2-sm">Документы</h2>
         <div class="list mt-32">
-          <div class="list-row"><div><b>Партнёрская модель W2W</b><span class="small">условия, комиссии, примеры расчёта</span></div><a class="btn btn-ghost btn-sm" href="{{ '/documents/' | url }}">PDF</a></div>
-          <div class="list-row"><div><b>Партнёрское соглашение</b><span class="small">юридический шаблон договора о сотрудничестве</span></div><a class="btn btn-ghost btn-sm" href="{{ '/documents/' | url }}">DOCX</a></div>
+          <div class="list-row"><div><b>Партнёрская модель W2W</b><span class="small">условия, комиссии, примеры расчёта</span></div><a class="btn btn-glass btn-sm" href="{{ '/documents/' | url }}">PDF</a></div>
+          <div class="list-row"><div><b>Партнёрское соглашение</b><span class="small">шаблон договора о сотрудничестве</span></div><a class="btn btn-glass btn-sm" href="{{ '/documents/' | url }}">DOCX</a></div>
         </div>
-        <h3 class="h3 mt-48">Уже с нами</h3>
-        <div class="tags mt-16">{% for p in partners | limit(12) %}<span class="tag">{{ p.name }}</span>{% endfor %}<span class="tag">и ещё {{ partners.length - 12 }}</span></div>
+        <h3 class="h3 mt-48">Нам доверяют</h3>
+        <div class="pt-logos mt-16">{% for l in partnerLogos | limit(12) %}<span><img src="{{ ('/assets/img/partners-v3/' + l.file) | url }}" alt="{{ l.name }}" width="120" height="63" loading="lazy"></span>{% endfor %}</div>
       </div>
     </div>
   </div>
@@ -130,7 +187,7 @@ permalink: /partners/
     <div class="split">
       <div class="split-sticky">
         <h2 class="h2">Вопросы партнёров</h2>
-        <div class="mt-24"><button class="btn" type="button" data-modal="call">Стать партнёром</button></div>
+        <div class="mt-24"><button class="btn btn-brand" type="button" data-modal="request">Стать партнёром</button></div>
       </div>
       {% set items = faq.partners %}{% include "partials/faq.njk" %}
     </div>

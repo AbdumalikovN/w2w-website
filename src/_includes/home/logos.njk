@@ -1,0 +1,20 @@
+{% set half = (partnerLogos | length / 2) | round(0, "ceil") %}
+<section class="lg-logos" id="logos" aria-labelledby="logos-title">
+  <div class="wrap lg-logos-head">
+    <p class="lg-logos-count"><b data-count="50" data-suffix="+">50+</b></p>
+    <h2 class="lg-logos-title" id="logos-title">компаний и проектов в Узбекистане, Казахстане и США доверили нам свои системы</h2>
+  </div>
+  <div class="lg-rows">
+    {% for row in [0, 1] %}
+    <div class="lg-row{% if row == 1 %} is-rev{% endif %}">
+      {% for dup in [0, 1] %}
+      <ul class="lg-track"{% if dup == 1 %} aria-hidden="true"{% endif %}>
+        {% for l in partnerLogos %}{% if (row == 0 and loop.index0 < half) or (row == 1 and loop.index0 >= half) %}
+        <li class="lg-tile"><img src="{{ ('/assets/img/partners-v3/' + l.file) | url }}" alt="{% if dup == 0 %}{{ l.name }}{% endif %}" width="240" height="126" loading="lazy" decoding="async"></li>
+        {% endif %}{% endfor %}
+      </ul>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>

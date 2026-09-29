@@ -1,19 +1,25 @@
-<section class="cta">
+<section class="rqs" id="request" aria-labelledby="rqs-title">
   <div class="wrap">
-    <div class="cta-card" data-reveal>
+    <div class="rqs-card" data-dark-zone>
       <div class="aurora is-night" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div>
-        <h2 class="h2">Расскажите о задаче — вернёмся с решением и оценкой</h2>
-        <p class="lead-on-dark">Бесплатная консультация 30 минут. Сроки и бюджет фиксируем до старта работ.</p>
+      <div class="rqs-copy">
+        <p class="rqs-eb"><span class="dot-live" aria-hidden="true"></span>Отвечаем в рабочее время в течение часа</p>
+        <h2 class="rqs-title" id="rqs-title">Обсудим <span class="grad-text">ваш проект</span></h2>
+        <p class="rqs-lead">Два коротких шага. Второй можно пропустить — детали обсудим на созвоне.</p>
+        <ol class="rqs-next">
+          <li><span>1</span><b>Созвон 30 минут</b><small>Разбираем задачу и предлагаем решение</small></li>
+          <li><span>2</span><b>КП за 2–3 дня</b><small>Объём, сроки и бюджет фиксируем до старта</small></li>
+          <li><span>3</span><b>Прототип за 2 недели</b><small>Company Brain уже работает на ваших данных</small></li>
+        </ol>
+        <div class="rqs-person">
+          <img src="{{ '/assets/img/team/nuriddin-abdumalikov-sq.webp' | url }}" alt="" width="56" height="56" loading="lazy">
+          <span><b>Nuriddin Abdumalikov</b><small>COO — лично отвечает за старт вашего проекта</small></span>
+        </div>
+        <p class="rqs-contacts"><a href="{{ site.phoneHref }}"><svg class="i" aria-hidden="true"><use href="#i-phone"/></svg>{{ site.phone }}</a><a href="mailto:{{ site.email }}"><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>{{ site.email }}</a></p>
       </div>
-      <form class="form form-on-dark cta-form glass-dark" data-form="cta" novalidate>
-        <label class="field"><span>Имя</span><input name="name" required autocomplete="name"></label>
-        <label class="field"><span>Телефон или Telegram</span><input name="contact" required autocomplete="tel"></label>
-        <label class="field"><span>Коротко о задаче</span><textarea name="task" rows="3"></textarea></label>
-        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <p class="form-error" data-error hidden>Заполните имя и контакт, чтобы мы могли ответить.</p>
-        <button class="btn btn-on-dark btn-lg" type="submit">Отправить заявку</button>
-      </form>
+      <div class="rqs-form">
+        {% set rqId = "s" %}{% include "partials/rq-form.njk" %}
+      </div>
     </div>
   </div>
 </section>

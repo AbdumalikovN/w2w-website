@@ -1,50 +1,47 @@
 {
-  "types": [
-    { "id": "support", "label": "Поддержка клиентов", "k": 1.0 },
-    { "id": "sales", "label": "Продажи и лиды", "k": 1.1 },
-    { "id": "voice", "label": "Голосовой агент", "k": 1.6 },
-    { "id": "docs", "label": "Документы и бэк-офис", "k": 1.5 },
-    { "id": "knowledge", "label": "База знаний компании", "k": 1.3 },
-    { "id": "ops", "label": "Операционные процессы", "k": 1.4 },
-    { "id": "analytics", "label": "Аналитика и отчёты", "k": 1.3 },
-    { "id": "hr", "label": "HR-агент", "k": 1.0 }
+  "skills": [
+    { "id": "knowledge", "label": "Знания компании", "short": "Ответы по документам", "k": 1.3, "icon": "i-book", "tone": "ic-5" },
+    { "id": "support", "label": "Поддержка клиентов", "short": "Чаты, почта, сайт", "k": 1.0, "icon": "i-bubble", "tone": "ic-1" },
+    { "id": "sales", "label": "Продажи и заявки", "short": "Лиды 24/7, CRM", "k": 1.1, "icon": "i-target", "tone": "ic-2" },
+    { "id": "voice", "label": "Голос и звонки", "short": "RU · UZ · EN", "k": 1.6, "icon": "i-wave", "tone": "ic-7" },
+    { "id": "docs", "label": "Документы", "short": "Счета, акты, договоры", "k": 1.5, "icon": "i-doc", "tone": "ic-6" },
+    { "id": "ops", "label": "Процессы", "short": "1С, CRM, Drive", "k": 1.4, "icon": "i-gears", "tone": "ic-4" },
+    { "id": "analytics", "label": "Аналитика", "short": "Отчёты словами", "k": 1.3, "icon": "i-chart", "tone": "ic-8" },
+    { "id": "hr", "label": "HR", "short": "Найм и онбординг", "k": 1.0, "icon": "i-people", "tone": "ic-3" }
   ],
   "channels": [
-    { "id": "telegram", "label": "Telegram" },
-    { "id": "web", "label": "Виджет на сайте" },
-    { "id": "whatsapp", "label": "WhatsApp" },
-    { "id": "phone", "label": "Телефония" },
-    { "id": "email", "label": "Почта" },
-    { "id": "portal", "label": "Внутренний портал" }
+    { "id": "telegram", "label": "Telegram", "icon": "i-telegram" },
+    { "id": "web", "label": "Сайт", "icon": "i-globe" },
+    { "id": "whatsapp", "label": "WhatsApp", "icon": "i-whatsapp" },
+    { "id": "phone", "label": "Телефония", "icon": "i-phone" },
+    { "id": "email", "label": "Почта", "icon": "i-mail" },
+    { "id": "portal", "label": "Портал", "icon": "i-grid" }
   ],
   "knowledge": [
-    { "id": "s", "label": "до 500 документов", "add": 0 },
-    { "id": "m", "label": "500–5 000 документов", "add": 1500 },
-    { "id": "l", "label": "более 5 000 документов", "add": 4000 }
+    { "id": "s", "label": "до 500", "hint": "документов", "add": 0 },
+    { "id": "m", "label": "500–5 000", "hint": "документов", "add": 1500 },
+    { "id": "l", "label": "5 000+", "hint": "документов", "add": 4000 }
   ],
   "deploy": [
-    { "id": "cloud", "label": "Облако W2W", "k": 1.0 },
-    { "id": "private", "label": "Приватный контур клиента", "k": 1.5 }
+    { "id": "cloud", "label": "Облако W2W", "hint": "быстрее и дешевле", "k": 1.0 },
+    { "id": "private", "label": "Ваш контур", "hint": "данные не покидают периметр", "k": 1.5 }
   ],
   "extras": [
-    { "id": "audit", "label": "Аудит-логи и SLA", "add": 1500 },
-    { "id": "hitl", "label": "Контроль человеком", "add": 1000 },
-    { "id": "ui", "label": "Кастомный интерфейс", "add": 2500 },
-    { "id": "training", "label": "Обучение команды заказчика", "add": 800 }
+    { "id": "audit", "label": "Аудит-логи и SLA", "hint": "журнал запросов и гарантии", "add": 1500, "icon": "i-shield" },
+    { "id": "hitl", "label": "Контроль человеком", "hint": "согласование важных действий", "add": 1000, "icon": "i-person" },
+    { "id": "ui", "label": "Свой интерфейс", "hint": "под ваш бренд", "add": 2500, "icon": "i-layout" },
+    { "id": "training", "label": "Обучение команды", "hint": "воркшопы и инструкции", "add": 800, "icon": "i-cap" }
   ],
   "urgency": [
     { "id": "normal", "label": "Обычный график", "k": 1.0 },
-    { "id": "fast", "label": "Срочно, сжатые сроки", "k": 1.25 }
+    { "id": "fast", "label": "Срочно", "k": 1.25 }
   ],
-  "defaults": {
-    "type": "support",
-    "channels": ["telegram"],
-    "integrations": 2,
-    "knowledge": "m",
-    "languages": 2,
-    "deploy": "cloud",
-    "extras": ["audit"],
-    "urgency": "normal"
-  },
+  "presets": [
+    { "id": "knowledge", "label": "Знания компании", "icon": "i-book", "set": { "skills": ["knowledge"], "channels": ["portal", "telegram"], "integrations": 3, "knowledge": "l", "languages": 2, "deploy": "cloud", "extras": ["audit"], "urgency": "normal" } },
+    { "id": "support", "label": "Поддержка клиентов", "icon": "i-bubble", "set": { "skills": ["support"], "channels": ["telegram", "web"], "integrations": 1, "knowledge": "m", "languages": 2, "deploy": "cloud", "extras": ["hitl"], "urgency": "normal" } },
+    { "id": "sales", "label": "Отдел продаж", "icon": "i-target", "set": { "skills": ["sales", "analytics"], "channels": ["telegram", "whatsapp", "web"], "integrations": 2, "knowledge": "m", "languages": 2, "deploy": "cloud", "extras": ["audit"], "urgency": "normal" } },
+    { "id": "full", "label": "Полный Company Brain", "icon": "i-brain", "set": { "skills": ["knowledge", "support", "sales", "docs", "analytics"], "channels": ["telegram", "web", "portal"], "integrations": 5, "knowledge": "l", "languages": 3, "deploy": "private", "extras": ["audit", "hitl", "training"], "urgency": "normal" } }
+  ],
+  "defaults": { "skills": ["knowledge"], "channels": ["portal", "telegram"], "integrations": 3, "knowledge": "l", "languages": 2, "deploy": "cloud", "extras": ["audit"], "urgency": "normal" },
   "minSetup": 5000
 }

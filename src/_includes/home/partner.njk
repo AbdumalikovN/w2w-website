@@ -1,0 +1,43 @@
+<section class="section ps" data-ps aria-labelledby="ps-title">
+  <div class="wrap">
+    <div class="ps-card">
+      <div class="ps-bg" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="ps-copy">
+        <p class="eyebrow ps-eb"><span class="eb-dot" aria-hidden="true"></span>Партнёрская программа</p>
+        <h2 class="h2 ps-title" id="ps-title" data-no-auto>До 25% маржи за каждого клиента</h2>
+        <p class="ps-lead">Приводите клиентов — мы реализуем проект и делимся маржой. Для агентств, консультантов и интеграторов: выплата с каждого платежа клиента, без возвратов.</p>
+        <ul class="ps-points">
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>С первого платежа клиента</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>No Clawback: выплаты не возвращаются</li>
+          <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg>Лид закрепляется за вами</li>
+        </ul>
+        <a class="btn btn-on-brand btn-lg" href="{{ '/partners/' | url }}">Условия программы<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="ps-sim" data-ps-sim>
+        <p class="ps-sim-h">Посчитайте свою выплату</p>
+        <div class="ps-row">
+          <label class="ps-l" for="ps-budget">Бюджет проекта</label>
+          <output class="ps-o" data-ps-budget-out>$30 000</output>
+        </div>
+        <input class="ps-range" id="ps-budget" type="range" min="10000" max="150000" step="5000" value="30000" data-ps-budget>
+        <p class="ps-l">Что вы делаете</p>
+        <div class="ps-types" role="radiogroup" aria-label="Тип лида" data-ps-types>
+          <button type="button" role="radio" aria-checked="false" data-rate="10,15">Знакомство</button>
+          <button type="button" role="radio" aria-checked="false" data-rate="10,15">Холодный лид</button>
+          <button type="button" role="radio" aria-checked="true" data-rate="15,20">Горячий лид</button>
+          <button type="button" role="radio" aria-checked="false" data-rate="20,25">Продаёте сами</button>
+        </div>
+        <div class="ps-result">
+          <div><small>Ваша выплата</small><b data-ps-pay>$1 800</b></div>
+          <div class="ps-rate"><small>Ставка от маржи</small><b data-ps-rate>20%</b></div>
+        </div>
+        <div class="ps-tranches" aria-hidden="true">
+          <div><i></i><span>1-й платёж</span><b data-ps-t>$600</b></div>
+          <div><i></i><span>2-й платёж</span><b data-ps-t>$600</b></div>
+          <div><i></i><span>3-й платёж</span><b data-ps-t>$600</b></div>
+        </div>
+        <p class="ps-note">Пример при марже проекта 30%. Для проектов от $20 000 ставка выше. Точные условия фиксируются в партнёрском соглашении.</p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+{# Large team card. Expects `pm` or `m` (team member). #}
+{% set c = pm or m %}
+<article class="tm-card" data-tilt="4">
+  <a class="tm-photo tm-{{ c.slug }}" href="{{ ('/team/' + c.slug + '/') | url }}" aria-label="{{ c.name }}, {{ c.role }}">
+    <span class="tm-bg" aria-hidden="true"></span>
+    {% if c.photo %}
+    <img src="{{ ('/assets/img/team/' + c.photo + '.webp') | url }}" alt="" width="800" height="1000" loading="lazy" decoding="async">
+    {% else %}
+    <span class="tm-initials" aria-hidden="true">{{ c.name | initials }}</span>
+    {% endif %}
+    <span class="tm-code">{{ c.code }}</span>
+  </a>
+  <div class="tm-info">
+    <h3 class="tm-name"><a href="{{ ('/team/' + c.slug + '/') | url }}">{{ c.name }}</a></h3>
+    <p class="tm-role">{{ c.role }}</p>
+    <p class="tm-short">{{ c.short }}</p>
+    {% set so = c.socials %}
+    {% if so.telegram or so.instagram or so.linkedin or so.whatsapp or so.email %}
+    <div class="tm-soc">
+      {% if so.telegram %}<a class="tm-s tm-s-tg" href="{{ so.telegram | tgHref }}" target="_blank" rel="noopener" aria-label="Telegram: {{ c.name }}" title="Telegram"><svg aria-hidden="true"><use href="#i-telegram"/></svg></a>{% endif %}
+      {% if so.instagram %}<a class="tm-s tm-s-ig" href="{{ so.instagram | igHref }}" target="_blank" rel="noopener" aria-label="Instagram: {{ c.name }}" title="Instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a>{% endif %}
+      {% if so.linkedin %}<a class="tm-s tm-s-in" href="{{ so.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn: {{ c.name }}" title="LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>{% endif %}
+      {% if so.whatsapp %}<a class="tm-s tm-s-wa" href="{{ so.whatsapp | waHref }}" target="_blank" rel="noopener" aria-label="WhatsApp: {{ c.name }}" title="WhatsApp"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg></a>{% endif %}
+      {% if so.email %}<a class="tm-s tm-s-mail" href="mailto:{{ so.email }}" aria-label="Почта: {{ c.name }}" title="{{ so.email }}"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>{% endif %}
+    </div>
+    {% endif %}
+  </div>
+</article>

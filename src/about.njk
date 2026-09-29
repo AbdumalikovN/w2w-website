@@ -9,8 +9,8 @@ permalink: /about/
     <div>
       <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>О компании</p>
       <h1 class="h1">Мы выигрываем только тогда, когда выигрываете вы</h1>
-      <p class="lead">Win to Win — IT-аутсорсинговая компания из Ташкента, резидент IT Park Uzbekistan. Строим AI-агентов, ERP, CRM, мобильные приложения и веб-платформы для клиентов в Узбекистане, Казахстане, США и Европе.</p>
-      <div class="hero-cta"><button class="btn" type="button" data-modal="call">Записаться на созвон</button><a class="btn btn-outline" href="{{ '/career/' | url }}">Присоединиться к команде</a></div>
+      <p class="lead">Win to Win — IT-аутсорсинговая компания из Ташкента, резидент IT Park Uzbekistan. Строим Company Brain — второй мозг компании, а также ERP, CRM, мобильные приложения и веб-платформы для клиентов в Узбекистане, Казахстане, США и Европе.</p>
+      <div class="hero-cta"><button class="btn btn-brand" type="button" data-modal="request">Записаться на созвон</button><a class="btn btn-glass" href="{{ '/career/' | url }}">Присоединиться к команде</a></div>
     </div>
     <div class="hero-page-aside">
       <p><b>№4689</b>сертификат резидента IT Park Uzbekistan, в реестре с 29.08.2025</p>
@@ -31,7 +31,7 @@ permalink: /about/
         <p>Формат сотрудничества выбираете вы: fixed price, time &amp; materials, выделенная команда или партнёрская модель с разделением дохода и долевым участием.</p>
         <div class="figures is-2 mt-32">
           <div><div class="num">50+</div><p>проектов и партнёров</p></div>
-          <div><div class="num">4 рынка</div><p>Узбекистан, Казахстан, США, Европа и ОАЭ</p></div>
+          <div><div class="num">5 рынков</div><p>Узбекистан, Казахстан, США, Европа и ОАЭ</p></div>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@ permalink: /about/
       <div>
         <h2 class="h2">Резидент IT Park Uzbekistan</h2>
         <p class="lead" style="margin-top:18px">ООО «WIN TO WIN» внесено в Единый реестр резидентов Технопарка 29 августа 2025 года. Guvohnoma №4689 можно проверить по QR-коду на сертификате.</p>
-        <div class="mt-24"><a class="btn btn-ghost" href="{{ '/documents/' | url }}">Все документы и сертификаты</a></div>
+        <div class="mt-24"><a class="btn btn-glass" href="{{ '/documents/' | url }}">Все документы и сертификаты</a></div>
       </div>
       <div class="cover cover-brand" style="aspect-ratio:16/9"><span class="cover-meta">IT Park Uzbekistan</span><span class="cover-name">Сертификат №4689</span></div>
     </div>
@@ -70,14 +70,13 @@ permalink: /about/
     <div class="sec-head">
       <div>
         <h2 class="h2">Люди, которые делают проекты</h2>
-        <p class="lead">Четыре руководителя, между которыми распределена ответственность за ваш проект: стратегия, коммерция, технология и доставка.</p>
+        <p class="lead">Пять руководителей, между которыми распределена ответственность за ваш проект: стратегия, операции, технологии, маркетинг и команда.</p>
       </div>
       <a class="link-arrow" href="{{ '/team/' | url }}">Вся команда <svg class="i"><use href="#i-arrow"/></svg></a>
     </div>
-    <div class="team-grid">
-      {% for p in team %}{% include "partials/person.njk" %}{% endfor %}
+    <div class="tm-grid">
+      {% for m in team %}{% include "partials/person-card.njk" %}{% endfor %}
     </div>
-    <p class="todo mt-24">Фото и состав обновим после фотосессии. Имена и роли — на подтверждении.</p>
   </div>
 </section>
 

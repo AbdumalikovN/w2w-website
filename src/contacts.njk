@@ -25,10 +25,10 @@ permalink: /contacts/
     <div class="split split-eq">
       <div>
         <div class="contact-group">
-        <div class="contact-row"><div><p class="label">Телефон</p><a class="value" href="{{ site.phoneHref }}">{{ site.phone }}</a></div><button class="btn btn-ghost btn-sm" type="button" data-modal="call">Заказать звонок</button></div>
+        <div class="contact-row"><div><p class="label">Телефон</p><a class="value" href="{{ site.phoneHref }}">{{ site.phone }}</a></div><button class="btn btn-glass btn-sm" type="button" data-modal="request">Заказать звонок</button></div>
         <div class="contact-row"><div><p class="label">Почта</p><a class="value" href="mailto:{{ site.email }}">{{ site.email }}</a></div></div>
         <div class="contact-row"><div><p class="label">Адрес</p><p class="value" style="font-size:19px">{{ site.address }}</p></div></div>
-        <div class="contact-row"><div><p class="label">Мессенджеры и соцсети</p><div class="tags mt-8">{% for s in site.socials %}<a class="tag" href="{{ s.href }}">{{ s.name }}</a>{% endfor %}</div></div></div>
+        <div class="contact-row"><div><p class="label">Мессенджеры и соцсети</p><div class="tags mt-8">{% for s in site.socials %}{% if s.href and s.id != 'phone' %}<a class="tag" href="{{ s.href }}"{% if s.href.startsWith('http') %} target="_blank" rel="noopener"{% endif %}>{{ s.name }}</a>{% endif %}{% endfor %}</div></div></div>
         </div>
         <div class="mt-32">
           <p class="label small muted" style="font-weight:600">Реквизиты</p>

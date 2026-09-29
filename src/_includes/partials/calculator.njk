@@ -1,88 +1,105 @@
-{# Калькулятор в стиле «Настройки» iOS. JS (main.js) пересчитывает при каждом изменении; начальные значения — calc.defaults. #}
-<div class="calc" data-calc="full">
-  <div class="settings">
-    <div class="set-group" data-reveal>
-      <p class="set-head" id="calc-type-l">Тип агента</p>
-      <div class="set-card">
-        <div class="opts" data-group="type" role="radiogroup" aria-labelledby="calc-type-l">
-          {% for t in calc.types %}<button type="button" class="chip{% if t.id == calc.defaults.type %} is-on{% endif %}" role="radio" aria-checked="{{ 'true' if t.id == calc.defaults.type else 'false' }}" data-value="{{ t.id }}">{{ t.label }}</button>{% endfor %}
-        </div>
-      </div>
-    </div>
-
-    <div class="set-group" data-reveal>
-      <p class="set-head" id="calc-ch-l">Каналы, где работает агент</p>
-      <div class="set-card" data-group="channels" data-multi role="group" aria-labelledby="calc-ch-l">
-        {% for c in calc.channels %}<button type="button" class="set-row" role="switch" aria-checked="{{ 'true' if c.id in calc.defaults.channels else 'false' }}" data-value="{{ c.id }}"><span class="app-icon ic-{{ loop.index }}"><svg><use href="#{{ ui.channelIcons[c.id] }}"/></svg></span><span class="set-label">{{ c.label }}</span><span class="switch" aria-hidden="true"></span></button>{% endfor %}
-      </div>
-    </div>
-
-    <div class="set-group" data-reveal>
-      <p class="set-head">Системы и данные</p>
-      <div class="set-card">
-        <div class="set-row"><span class="app-icon ic-5"><svg><use href="#i-link"/></svg></span><label class="set-label" for="calc-integrations">Интеграции<small>1С, CRM, база, API</small></label><output data-out="integrations">{{ calc.defaults.integrations }} системы</output></div>
-        <div class="set-row is-slider rng"><input id="calc-integrations" class="ios-range" type="range" min="0" max="8" step="1" value="{{ calc.defaults.integrations }}" data-group="integrations"></div>
-        <div class="segmented-wrap">
-          <span class="segmented-label" id="calc-kn-l">Объём базы знаний</span>
-          <div class="segmented" data-group="knowledge" role="radiogroup" aria-labelledby="calc-kn-l">
-            <span class="seg-thumb" aria-hidden="true"></span>
-            {% for k in calc.knowledge %}<button type="button" role="radio" aria-checked="{{ 'true' if k.id == calc.defaults.knowledge else 'false' }}" data-value="{{ k.id }}">{{ k.label | replace(' документов', '') }}<span class="sr-only"> документов</span></button>{% endfor %}
-          </div>
-        </div>
-        <div class="set-row"><span class="app-icon ic-8"><svg><use href="#i-globe"/></svg></span><span class="set-label" id="calc-lang-l">Языки общения</span>
-          <div class="stepper" data-stepper="languages" data-min="1" data-max="4" role="group" aria-labelledby="calc-lang-l">
-            <button type="button" data-step="-1" aria-label="Меньше языков"><svg class="i"><use href="#i-minus"/></svg></button>
-            <output data-out="languages" aria-live="polite">{{ calc.defaults.languages }} языка</output>
-            <button type="button" data-step="1" aria-label="Больше языков"><svg class="i"><use href="#i-plus"/></svg></button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="set-group" data-reveal>
-      <p class="set-head">Запуск</p>
-      <div class="set-card">
-        <div class="segmented-wrap">
-          <span class="segmented-label" id="calc-dep-l">Где разворачиваем</span>
-          <div class="segmented" data-group="deploy" role="radiogroup" aria-labelledby="calc-dep-l">
-            <span class="seg-thumb" aria-hidden="true"></span>
-            {% for d in calc.deploy %}<button type="button" role="radio" aria-checked="{{ 'true' if d.id == calc.defaults.deploy else 'false' }}" data-value="{{ d.id }}">{{ d.label }}</button>{% endfor %}
-          </div>
-        </div>
-        <button type="button" class="set-row" role="switch" aria-checked="{{ 'true' if calc.defaults.urgency == 'fast' else 'false' }}" data-toggle="urgency" data-on="fast" data-off="normal"><span class="app-icon ic-3"><svg><use href="#i-bolt"/></svg></span><span class="set-label">Срочный запуск<small>сжатые сроки, команда больше</small></span><span class="switch" aria-hidden="true"></span></button>
-      </div>
-    </div>
-
-    <div class="set-group" data-reveal>
-      <p class="set-head" id="calc-ex-l">Дополнительно</p>
-      <div class="set-card" data-group="extras" data-multi role="group" aria-labelledby="calc-ex-l">
-        {% for e in calc.extras %}<button type="button" class="set-row" role="switch" aria-checked="{{ 'true' if e.id in calc.defaults.extras else 'false' }}" data-value="{{ e.id }}"><span class="app-icon ic-{{ loop.index + 4 }}"><svg><use href="#{{ ui.extraIcons[e.id] }}"/></svg></span><span class="set-label">{{ e.label }}</span><span class="switch" aria-hidden="true"></span></button>{% endfor %}
-      </div>
-    </div>
+<div class="cx" data-calc>
+  <script type="application/json" data-calc-data>{{ calc | dump | safe }}</script>
+  <div class="cx-presets" role="group" aria-label="Готовые сценарии">
+    <span class="cx-presets-l"><svg class="i" aria-hidden="true"><use href="#i-bolt"/></svg>Быстрый старт</span>
+    {% for p in calc.presets %}<button class="cx-preset" type="button" data-preset="{{ p.id }}" aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#{{ p.icon }}"/></svg>{{ p.label }}</button>{% endfor %}
   </div>
-
-  <aside class="calc-result" aria-label="Предварительная оценка">
-    <div class="result-card">
-      <p class="result-title"><span class="dot-live" aria-hidden="true"></span>Предварительная оценка</p>
-      <div class="result-main">
-        <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-track" cx="60" cy="60" r="46"/><circle class="ring-fill" data-out="ring" cx="60" cy="60" r="46"/></svg>
-        <div class="price"><span data-out="setup">$9 500 – $15 500</span><small>внедрение под ключ, единоразово</small></div>
+  <div class="cx-grid">
+    <div class="cx-steps">
+      <fieldset class="cx-step">
+        <legend class="cx-lg"><span class="cx-n">1</span>Какие навыки подключаем?<small>можно несколько</small></legend>
+        <div class="cx-skills" data-group="skills" data-multi>
+          {% for s in calc.skills %}
+          <button class="cx-skill" type="button" role="checkbox" aria-checked="false" data-value="{{ s.id }}">
+            <span class="app-icon md {{ s.tone }}" aria-hidden="true"><svg><use href="#{{ s.icon }}"/></svg></span>
+            <span class="cx-skill-t"><b>{{ s.label }}</b><small>{{ s.short }}</small></span>
+            <i class="cx-tick" aria-hidden="true"><svg><use href="#i-check"/></svg></i>
+          </button>
+          {% endfor %}
+        </div>
+      </fieldset>
+      <fieldset class="cx-step">
+        <legend class="cx-lg"><span class="cx-n">2</span>Где Company Brain работает с людьми?</legend>
+        <div class="cx-chips" data-group="channels" data-multi>
+          {% for c in calc.channels %}<button class="chip cx-chip" type="button" role="checkbox" aria-checked="false" data-value="{{ c.id }}"><svg class="i" aria-hidden="true"><use href="#{{ c.icon }}"/></svg>{{ c.label }}</button>{% endfor %}
+        </div>
+      </fieldset>
+      <fieldset class="cx-step">
+        <legend class="cx-lg"><span class="cx-n">3</span>Сколько систем подключаем?<output class="cx-val" data-out="integrations">3 системы</output></legend>
+        <div class="cx-slider">
+          <input class="cx-range" type="range" min="0" max="10" step="1" value="3" data-group="integrations" aria-label="Число интеграций">
+          <div class="cx-ticks" aria-hidden="true">{% for t in range(0, 11) %}<i{% if t % 5 == 0 %} class="is-major"{% endif %}></i>{% endfor %}</div>
+        </div>
+        <p class="cx-hint">1С, amoCRM, Bitrix24, Google Drive, почта, телефония — каждая система добавляет источник знаний и действий.</p>
+      </fieldset>
+      <fieldset class="cx-step">
+        <legend class="cx-lg"><span class="cx-n">4</span>Объём базы знаний</legend>
+        <div class="segmented cx-seg" role="radiogroup" aria-label="Объём базы знаний" data-group="knowledge">
+          <span class="seg-thumb" aria-hidden="true"></span>
+          {% for k in calc.knowledge %}<button type="button" role="radio" aria-checked="false" data-value="{{ k.id }}"><b>{{ k.label }}</b><small>{{ k.hint }}</small></button>{% endfor %}
+        </div>
+      </fieldset>
+      <div class="cx-pair">
+        <fieldset class="cx-step">
+          <legend class="cx-lg"><span class="cx-n">5</span>Языки</legend>
+          <div class="cx-stepper" data-stepper="languages" data-min="1" data-max="3">
+            <button type="button" data-step="-1" aria-label="Меньше языков"><svg class="i" aria-hidden="true"><use href="#i-minus"/></svg></button>
+            <output data-out="languages">2 языка</output>
+            <button type="button" data-step="1" aria-label="Больше языков"><svg class="i" aria-hidden="true"><use href="#i-plus"/></svg></button>
+          </div>
+          <p class="cx-hint">Русский, узбекский, английский</p>
+        </fieldset>
+        <fieldset class="cx-step">
+          <legend class="cx-lg"><span class="cx-n">6</span>Где хранить данные</legend>
+          <div class="cx-deploy" role="radiogroup" aria-label="Где хранить данные" data-group="deploy">
+            {% for d in calc.deploy %}<button type="button" role="radio" aria-checked="false" data-value="{{ d.id }}"><svg class="i" aria-hidden="true"><use href="#{{ 'i-cloud' if d.id == 'cloud' else 'i-server' }}"/></svg><b>{{ d.label }}</b><small>{{ d.hint }}</small></button>{% endfor %}
+          </div>
+        </fieldset>
       </div>
-      <dl class="orows">
-        <div><dt>Эксплуатация и поддержка</dt><dd data-out="monthly">$500 – $1 500 в месяц</dd></div>
-        <div><dt>До промышленного запуска</dt><dd data-out="weeks">6–10 недель</dd></div>
-        <div><dt>Пилот с метрикой качества</dt><dd>2–4 недели</dd></div>
-        <div><dt>Команда на проекте</dt><dd data-out="team">2–3 специалиста и PM</dd></div>
-      </dl>
-      <div class="calc-parts">
-        <p class="calc-parts-title">Структура оценки</p>
-        <div class="stackbar" data-out="stackbar" aria-hidden="true"></div>
-        <ul class="legend" data-out="parts"></ul>
-        <p class="calc-k" data-out="mult" hidden></p>
-      </div>
-      <p class="sr-only" aria-live="polite" data-out="summary"></p>
-      <button class="btn btn-primary btn-lg" type="button" data-modal="request">Получить точный расчёт в КП</button>
-      <p class="calc-disclaimer">Диапазон носит справочный характер и не является офертой. Точная стоимость фиксируется в коммерческом предложении после брифинга. Минимальный бюджет проекта — $5 000.</p>
+      <fieldset class="cx-step">
+        <legend class="cx-lg"><span class="cx-n">7</span>Дополнительно</legend>
+        <div class="cx-extras" data-group="extras" data-multi>
+          {% for x in calc.extras %}
+          <button class="cx-extra" type="button" role="switch" aria-checked="false" data-value="{{ x.id }}">
+            <span class="app-icon sm is-glass" aria-hidden="true"><svg><use href="#{{ x.icon }}"/></svg></span>
+            <span class="cx-extra-t"><b>{{ x.label }}</b><small>{{ x.hint }}</small></span>
+            <span class="switch" aria-hidden="true"></span>
+          </button>
+          {% endfor %}
+          <button class="cx-extra is-urgent" type="button" role="switch" aria-checked="false" data-toggle="urgency" data-on="fast" data-off="normal">
+            <span class="app-icon sm is-glass" aria-hidden="true"><svg><use href="#i-clock"/></svg></span>
+            <span class="cx-extra-t"><b>Срочный запуск</b><small>сжатые сроки, коэффициент ×1,25</small></span>
+            <span class="switch" aria-hidden="true"></span>
+          </button>
+        </div>
+      </fieldset>
     </div>
-  </aside>
+
+    <aside class="cx-sum" aria-label="Расчёт">
+      <div class="cx-card" data-cx-card>
+        <div class="cx-card-glow" aria-hidden="true"></div>
+        <p class="cx-l">Внедрение</p>
+        <p class="cx-range-out" data-out="setup">$12 500 – $19 500</p>
+        <div class="cx-meter" aria-hidden="true"><i data-out="meter"></i><span>$5k</span><span>$30k</span><span>$60k+</span></div>
+        <dl class="cx-facts">
+          <div><dt><svg class="i" aria-hidden="true"><use href="#i-refresh"/></svg>Эксплуатация</dt><dd data-out="monthly">$500 – $1 500 в месяц</dd></div>
+          <div><dt><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>Срок запуска</dt><dd data-out="weeks">6–10 недель</dd></div>
+          <div><dt><svg class="i" aria-hidden="true"><use href="#i-people"/></svg>Команда</dt><dd data-out="team">3–4 специалиста и PM</dd></div>
+        </dl>
+        <div class="cx-stack" data-out="stackbar" aria-hidden="true"></div>
+        <ul class="cx-parts" data-out="parts"></ul>
+        <p class="cx-mult" data-out="mult" hidden></p>
+        <div class="cx-actions">
+          <button class="btn btn-brand btn-lg btn-block" type="button" data-cx-request>Получить точное КП<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+          <button class="btn btn-glass btn-block" type="button" data-cx-copy><svg class="i" aria-hidden="true"><use href="#i-copy"/></svg>Скопировать расчёт</button>
+        </div>
+        <p class="cx-disc">Диапазон носит справочный характер и не является офертой. Точная стоимость фиксируется в коммерческом предложении после брифинга. Минимальный бюджет проекта — $5 000.</p>
+      </div>
+    </aside>
+  </div>
+  <div class="cx-bar" data-cx-bar>
+    <span class="cx-bar-t"><small>Внедрение</small><b data-out="setup2">$12 500 – $19 500</b></span>
+    <button class="btn btn-brand btn-sm" type="button" data-cx-request>Получить КП</button>
+  </div>
+  <p class="sr-only" aria-live="polite" data-out="summary"></p>
 </div>

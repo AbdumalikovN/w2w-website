@@ -1,0 +1,33 @@
+<section class="sk" data-sk aria-labelledby="sk-title">
+  <div class="sk-pin" data-sk-pin>
+    <div class="wrap sk-head">
+      <div>
+        <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Навыки Company Brain</p>
+        <h2 class="h2" id="sk-title" data-no-auto>Один мозг — <span class="grad-text">восемь навыков</span></h2>
+      </div>
+      <p class="lead">Подключаем те навыки, которые окупаются у вас. Они работают на общей базе знаний и передают задачи друг другу — как отделы одной компании.</p>
+    </div>
+    <div class="sk-rail" data-sk-rail>
+      <ol class="sk-track" data-sk-track>
+        {% for a in agents %}
+        <li class="sk-card" style="--i: {{ loop.index0 }}">
+          <div class="sk-top">
+            <span class="app-icon lg ic-{{ [1,2,8,6,5,7,4,3][loop.index0] }}" aria-hidden="true"><svg><use href="#{{ ui.agentIcons[a.slug] }}"/></svg></span>
+            <span class="sk-n">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
+          </div>
+          <h3 class="sk-name">{{ a.name }}</h3>
+          <p class="sk-text">{{ a.text }}</p>
+          <div class="sk-kpi"><b>{{ a.kpi }}</b><span>{{ a.kpiSub }}</span></div>
+        </li>
+        {% endfor %}
+        <li class="sk-card sk-more">
+          <span class="sk-more-ic" aria-hidden="true"><svg class="i"><use href="#i-plus"/></svg></span>
+          <h3 class="sk-name">Нужен свой навык?</h3>
+          <p class="sk-text">Соберём под ваш процесс: от расчёта КП до контроля смен на складе.</p>
+          <a class="btn btn-brand" href="{{ '/brain/skills/' | url }}">Все навыки<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        </li>
+      </ol>
+    </div>
+    <div class="wrap sk-progress" aria-hidden="true"><i data-sk-bar></i></div>
+  </div>
+</section>
