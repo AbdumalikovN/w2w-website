@@ -7,7 +7,8 @@ import { constants } from "node:fs";
 const WEIGHTS = [400, 500, 600, 700, 800];
 const SUBSETS = new Set(["cyrillic", "cyrillic-ext", "latin", "latin-ext"]);
 const FONT_DIR = new URL("../src/assets/fonts/", import.meta.url);
-const CSS_FILE = new URL("../src/assets/css/fonts.css", import.meta.url);
+const CSS_DIR = new URL("../src/assets/css/", import.meta.url);
+const CSS_FILE = new URL("fonts.css", CSS_DIR);
 const API = `https://fonts.googleapis.com/css2?family=Onest:wght@${WEIGHTS.join(";")}&display=swap`;
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124 Safari/537.36";
 const FALLBACK = `@import url("${API}");\n`;
@@ -16,6 +17,7 @@ async function exists(url) { try { await access(url, constants.F_OK); return tru
 
 async function main() {
   await mkdir(FONT_DIR, { recursive: true });
+  await mkdir(CSS_DIR, { recursive: true }); // папки нет в репозитории: main.css собирается из src/_css, а fonts.css не хранится в git
   if (await exists(new URL("onest-400-cyrillic.woff2", FONT_DIR)) && await exists(CSS_FILE)) {
     console.log("fonts: already present, skipping");
     return;
