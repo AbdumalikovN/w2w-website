@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Win to Win (w2w.uz) — сайт компании на Eleventy",
   "scripts": {
-    "build": "eleventy",
+    "build": "eleventy && node scripts/i18n.mjs",
     "dev": "eleventy --serve",
-    "fonts": "node scripts/fetch-fonts.mjs"
+    "fonts": "node scripts/fetch-fonts.mjs",
+    "i18n:extract": "node scripts/i18n.mjs extract"
   },
   "keywords": [],
   "author": "",
@@ -13,7 +14,11 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@11ty/eleventy": "^3.1.6"
+    "@11ty/eleventy": "^3.1.6",
+    "dom-serializer": "^2.0.0",
+    "domhandler": "^5.0.3",
+    "domutils": "^3.2.2",
+    "htmlparser2": "^10.1.0"
   },
   "dependencies": {
     "gsap": "^3.15.0"

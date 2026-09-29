@@ -1,5 +1,6 @@
 export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
+  eleventyConfig.addWatchTarget("src/_css/");
   eleventyConfig.addPassthroughCopy({ "src/static": "/" });
   eleventyConfig.addPassthroughCopy({ "node_modules/gsap/dist/gsap.min.js": "assets/vendor/gsap.min.js", "node_modules/gsap/dist/ScrollTrigger.min.js": "assets/vendor/ScrollTrigger.min.js" });
 
@@ -14,6 +15,20 @@ export default function (eleventyConfig) {
     .replace(/<[^>]+>/g, " ")
     .replace(/&amp;/g, "&").replace(/&nbsp;/g, " ").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'")
     .replace(/\s+/g, " ").trim());
+  eleventyConfig.addFilter("startsAny", (url, arr) => (arr || []).some((m) => String(url || "").startsWith(m)));
+  eleventyConfig.addFilter("initials", (name) => String(name || "").split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0]).join("").toUpperCase());
+  eleventyConfig.addFilter("tgHref", (h) => "https://t.me/" + String(h || "").replace(/^@/, ""));
+  eleventyConfig.addFilter("igHref", (h) => "https://instagram.com/" + String(h || "").replace(/^@/, ""));
+  eleventyConfig.addFilter("waHref", (n) => "https://wa.me/" + String(n || "").replace(/\D/g, ""));
+  eleventyConfig.addFilter("brainText", (t) => String(t || "")
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+    .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
+    .replace(/\s?\[(\d)\]/g, '\u00a0<sup class="cite">$1</sup>'));
+  eleventyConfig.addFilter("numru", (n) => {
+    const [i, f] = String(n).split(".");
+    return i.replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0") + (f ? "," + f : "");
+  });
+  eleventyConfig.addFilter("maxcol", (arr, i) => Math.max(...(arr || []).map((r) => +r[i] || 0)));
   eleventyConfig.addFilter("jsonstr", (s) => JSON.stringify(String(s || "")));
 
   // Russian typesetting on the final HTML (text nodes only; <title>, tags, scripts, styles untouched):
@@ -40,6 +55,6 @@ export default function (eleventyConfig) {
     pathPrefix: process.env.PATH_PREFIX || "/",
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
-    templateFormats: ["njk", "md", "html"]
+    templateFormats: ["njk", "md", "html", "11ty.js"]
   };
 }

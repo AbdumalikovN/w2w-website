@@ -1,23 +1,23 @@
 # Win to Win — сайт w2w.uz (Website 2.0)
 
-Сайт компании **Win to Win (W2W)**: AI-агенты и IT-аутсорсинг полного цикла. Статический сайт на [Eleventy](https://www.11ty.dev/), 34 страницы, дизайн в стиле iOS по брендбуку W2W (см. `DESIGN.md`). Анимации — [GSAP](https://gsap.com) + ScrollTrigger (npm-пакет `gsap`, при сборке копируется в `assets/vendor/`).
+Сайт компании **Win to Win (W2W)**: Company Brain — второй мозг компании — и IT-аутсорсинг полного цикла. Статический сайт на [Eleventy](https://www.11ty.dev/), три языка (RU — основной, UZ и EN), дизайн в стиле Apple iOS «Liquid Glass» (см. `DESIGN.md`). Анимации — [GSAP](https://gsap.com) + ScrollTrigger (npm-пакет `gsap`, при сборке копируется в `assets/vendor/`).
 
-Опубликовано через GitHub Pages: https://abdumalikovn.github.io/w2w-website/
+Опубликовано через GitHub Pages: https://abdumalikovn.github.io/w2w-website/ (UZ: `/uz/`, EN: `/en/`).
 
 ## Структура
 
 ```
 src/
-  _data/        контент в JSON: site (контакты, реквизиты), nav, agents, calc, projects, team,
-                services, faq, process, extra (вакансии, статьи, документы), partners (лого),
-                ui (иконки, этапы, уведомления на телефоне в первом экране)
-  _includes/    layouts/base.njk + partials (шапка, футер, модалки, калькулятор, лента лого, FAQ…)
-  assets/       css/main.css (дизайн-система), js/main.js (интерактив и анимации), img/ (лого, фавикон), fonts/
-  *.njk         страницы; projects/detail.njk, team/detail.njk, services/detail.njk — шаблоны с пагинацией
-  search-index.njk  → /search-index.json для поиска ⌘K
-  static/       robots.txt (копируется в корень)
-scripts/fetch-fonts.mjs   скачивает Onest для самохостинга (шрифты не хранятся в git)
-prototype/                ч/б прототип v2 (исходная точка дизайна)
+  _data/        контент в JSON: site (контакты, реквизиты, соцсети, рекорд игры), nav (меню), team и staff (команда),
+                roles (демо «Спросите Company Brain»), industries, calc, projects, services, faq, partnerLogos…
+  _i18n/        переводы: uz.json и en.json (ключ — русский текст), segments.json (все строки сайта)
+  _css/         стили по частям (00-tokens … 19-motion); склеиваются в /assets/css/main.css (main-css.11ty.js)
+  _includes/    layouts/base.njk, partials (шапка, футер, модалки, форма заявки, калькулятор…), home/ (блоки главной)
+  assets/js/    loader (заставка), sound (звук и музыка), core (тема, меню, стекло, модалки, поиск), request (форма),
+                game (мини-игра), calc, brain-hero, home, ask, partners — у каждого модуля словари ru/uz/en
+  *.njk         страницы; projects/detail.njk и team/detail.njk — шаблоны с пагинацией
+scripts/i18n.mjs          сборка /uz/ и /en/ из русской версии
+scripts/fetch-fonts.mjs   скачивает шрифт Onest для самохостинга
 .github/workflows/pages.yml  сборка и деплой на GitHub Pages при каждом push в main
 ```
 
@@ -26,28 +26,46 @@ prototype/                ч/б прототип v2 (исходная точка
 ```bash
 npm ci
 node scripts/fetch-fonts.mjs   # один раз
-npm run dev                    # http://localhost:8080
-npm run build                  # сборка в _site/
+npm run dev                    # только русская версия, http://localhost:8080
+npm run build                  # полная сборка в _site/: RU + /uz/ + /en/
 ```
 
-Для сборки под подпапку GitHub Pages: `PATH_PREFIX=/w2w-website/ npx eleventy`. На домене w2w.uz префикс не нужен.
+Для сборки под подпапку GitHub Pages: `PATH_PREFIX=/w2w-website/ npm run build`. На домене w2w.uz префикс не нужен.
+
+## Языки (UZ и EN)
+
+Сайт пишется и правится на русском. После сборки Eleventy скрипт `scripts/i18n.mjs` берёт готовые страницы из `_site`, режет видимый текст на строки (разметка внутри строки сохраняется как `<1>…</1>` и `<2/>`), подставляет переводы из `src/_i18n/uz.json` и `en.json` и пишет копии в `_site/uz/` и `_site/en/`: ссылки, переключатель языка, `lang`, `canonical`, `og:locale` и поиск по сайту — свои для каждого языка.
+
+Если поменяли русский текст:
+
+1. `npm run build && npm run i18n:extract` — покажет, сколько строк без перевода, и запишет их в `work/i18n/todo-uz.json` и `todo-en.json`.
+2. Добавьте переводы в `src/_i18n/uz.json` и `en.json` (ключ — русская строка из todo, значение — перевод с теми же `<1>…</1>`/`<2/>`).
+3. Строка без перевода не ломает сборку: на UZ/EN-странице она остаётся на русском, а сборка пишет предупреждение.
+
+Узбекский — латиница, `o‘`/`g‘` через ‘ (U+2018), тутук-белги — ’ (U+2019). Тексты внутри JS (заставка, игра, калькулятор, форма) — в словарях `ru/uz/en` в начале каждого модуля.
 
 ## Как править
 
-- **Тексты и данные** — в `src/_data/*.json` (услуги, агенты, проекты, команда, FAQ, вакансии). Страницы подтягивают их автоматически.
-- **Контакты, реквизиты, соцсети, endpoint форм** — `src/_data/site.json`.
-- **Новый проект** — добавить объект в `projects.json`; с `"detail": true` появится отдельная страница `/projects/<slug>/`.
-- **Логотипы партнёров** — `src/assets/img/partners/*.webp` + запись в `partners.json` (name, file, w, h).
-- **Внешний вид** — токены и компоненты в `src/assets/css/main.css`, правила в `DESIGN.md`.
+- **Тексты и данные** — `src/_data/*.json`; страницы подтягивают их автоматически.
+- **Контакты, реквизиты, соцсети, endpoint форм** — `src/_data/site.json`. Соцсеть с пустым `href` показывается иконкой с подсказкой «Ссылка скоро появится».
+- **Команда** — `team.json` (руководители, страницы `/team/<slug>/`), `staff.json` (специалисты по группам); фото — `src/assets/img/team/<slug>.webp`.
+- **Новый проект** — объект в `projects.json`; `"detail": true` — отдельная страница, `"shot": true` — скриншоты в макетах Studio Display и iPhone (`img/projects/<slug>-desktop.webp`, `-mobile.webp`).
+- **Внешний вид** — токены и компоненты в `src/_css/`, правила в `DESIGN.md`.
 
 ## Формы → Telegram
 
-Формы (созвон, заявка, CTA, отклик) отправляют JSON `POST` на адрес из `site.formEndpoint`; пока он пустой — после отправки открывается страница «Спасибо» без реальной отправки. Для боевого режима нужен endpoint (serverless-функция или бот), который принимает `{ form, name, company, contact, topic, when, task, cv, page }` и пересылает в Telegram. Поле `website` — honeypot, заполненное значение означает спам.
+Форма заявки (2 шага) и отклик на вакансию отправляют JSON `POST` на `site.formEndpoint` и показывают «Заявка у нас». Пока endpoint пустой, заявка не теряется: на последнем шаге посетитель отправляет готовый текст заявки в WhatsApp компании или на почту info@w2w.uz одной кнопкой. Для полностью автоматического режима нужен endpoint (serverless-функция или Telegram-бот), который принимает `{ form, company, name, phone, task, directions, budget, page, lang }` и пересылает заявку в Telegram команды.
+
+## Соцсети и выплаты партнёрам
+
+- Соцсети — `site.socials`: сеть без ссылки не показывается; добавьте URL — иконка появится в футере и на странице «Контакты».
+- «Партнёрам выплачено в прошлом месяце» — `site.payouts.lastMonth` (число в долларах). Пока `null`, строка на странице «Партнёрам» скрыта.
+- Картинка для превью ссылок — `src/assets/img/og-ru.jpg`, `og-uz.jpg`, `og-en.jpg`; абсолютный адрес строится из `site.origin`.
 
 ## Калькулятор
 
-`src/assets/js/main.js`, функция `calcRun` — демо-модель из прототипа (коэффициенты в `src/_data/calc.json`). Панель результата показывает «Структуру оценки» — доли слагаемых и коэффициенты. Тип агента, выбранный в оценке на главной, передаётся в полный калькулятор; страница `/calculator/?type=hr` открывается с нужным типом (id типов — в `calc.json`). Правила: всегда диапазон, минимум $5 000, дисклеймер «не оферта». Для продакшена расчёт переносится на бэкенд (`POST /api/estimate`, коэффициенты в БД) — контракт описан в брифе проекта.
+`src/assets/js/calc.js`, коэффициенты — `src/_data/calc.json`: навыки, каналы, интеграции, объём знаний, языки, контур, срочность. Всегда диапазон, минимум $5 000, дисклеймер «не оферта».
 
-## Что ещё не заполнено (помечено на сайте пунктиром «На уточнении»)
+## Что ещё нужно от компании
 
-ФИО, фото и биографии руководителей; цифры результатов кейсов и скриншоты продуктов; отзывы клиентов; реальные вакансии; год и стек проектов; написание адреса; ссылки соцсетей; файлы документов; языковые версии UZ/EN; фоновая музыка и мини-игра.
+Фото и соцсети части сотрудников, ссылки на соцсети компании, реальные цифры выплат партнёрам, скриншоты продуктов (LogX ELD, Profitex, Long Haul, Uybaza и др.), цифры результатов кейсов, endpoint для заявок, утверждённые формулировки миссии и видения.

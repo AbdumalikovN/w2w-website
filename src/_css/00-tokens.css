@@ -1,0 +1,152 @@
+/* =====================================================================
+   Win to Win — дизайн-система v3 «Liquid Glass»
+   Onest · Bright Turquoise #0ABCF3 · Shark #232325 · Concrete #F3F3F3 · Green #07E7B7
+   Две темы: светлая (по умолчанию) и тёмная — html[data-theme="dark"].
+   Все цвета компонентов берутся ТОЛЬКО из этих токенов.
+   ===================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- brand constants (одинаковые в обеих темах) ---- */
+  --brand: #0abcf3;
+  --brand-deep: #0797c4;
+  --brand-ink: #0a6f93;          /* текст-ссылки бирюзой на светлом фоне (AA) */
+  --brand-rgb: 10, 188, 243;
+  --green: #07e7b7;
+  --green-deep: #05b58f;
+  --green-rgb: 7, 231, 183;
+  --shark: #232325;
+  --concrete: #f3f3f3;
+  --danger: #e5484d;
+  --warn: #ffb020;
+  --on-brand: #232325;           /* текст на бирюзе — всегда чернильный */
+  --on-brand-2: #143a47;
+
+  /* ---- surfaces ---- */
+  --bg: #f2f3f5;                 /* фон страницы */
+  --bg-elev: #ffffff;            /* карточки */
+  --bg-elev-2: #f7f8fa;          /* вложенные плашки */
+  --bg-sunk: rgba(120, 120, 128, 0.1);  /* поля ввода, треки */
+  --ink: #232325;                /* основной текст */
+  --ink-soft: #3a3a3e;
+  --label-2: #616166;            /* вторичный текст, ≥ 4.5:1 на --bg */
+  --label-3: #6c6c70;            /* третичный текст, ≥ 4.5:1 на --bg и на белом */
+  --sep: rgba(60, 60, 67, 0.13);
+  --fill: rgba(120, 120, 128, 0.12);
+  --fill-2: rgba(120, 120, 128, 0.2);
+  --ink-fill: #232325;           /* заливка основной кнопки */
+  --on-ink: #ffffff;             /* текст на основной кнопке */
+  --link: var(--brand-ink);
+
+  /* ---- liquid glass ---- */
+  --g-fill: rgba(255, 255, 255, 0.5);          /* обычное стекло */
+  --g-fill-thin: rgba(255, 255, 255, 0.26);    /* прозрачное стекло контролов */
+  --g-fill-thick: rgba(250, 251, 253, 0.78);   /* шторки, меню */
+  --g-rim: rgba(255, 255, 255, 0.95);          /* светлая кромка сверху */
+  --g-rim-lo: rgba(255, 255, 255, 0.28);       /* кромка снизу */
+  --g-edge: rgba(20, 40, 60, 0.07);            /* тонкая внешняя обводка */
+  --g-spec: rgba(255, 255, 255, 0.55);         /* блик */
+  --g-shadow: 0 1px 1px rgba(16, 40, 60, 0.04), 0 10px 30px -10px rgba(16, 40, 60, 0.22), 0 2px 6px -2px rgba(16, 40, 60, 0.08);
+  --g-shadow-lift: 0 2px 2px rgba(16, 40, 60, 0.04), 0 26px 60px -18px rgba(16, 40, 60, 0.32), 0 6px 14px -6px rgba(16, 40, 60, 0.12);
+  --g-blur: 22px;
+  --g-sat: 190%;
+
+  /* ---- ambient backdrop (цветные «ауры» за стеклом) ---- */
+  --amb-1: rgba(10, 188, 243, 0.34);
+  --amb-2: rgba(7, 231, 183, 0.26);
+  --amb-3: rgba(120, 190, 255, 0.3);
+
+  /* ---- always-dark scenes (Company Brain, CTA) ---- */
+  --night: #0b0b0d;
+  --night-2: #161618;
+  --night-3: #1f1f22;
+  --night-label-2: rgba(235, 235, 245, 0.66);
+  --night-sep: rgba(255, 255, 255, 0.1);
+
+  /* ---- shape ---- */
+  --r-xl: 40px;
+  --r-lg: 28px;
+  --r-md: 22px;
+  --r-sm: 14px;
+  --r-xs: 10px;
+  --r-pill: 999px;
+
+  /* ---- elevation for opaque cards ---- */
+  --shadow-1: 0 1px 2px rgba(20, 20, 30, 0.04), 0 8px 24px rgba(20, 20, 30, 0.06);
+  --shadow-2: 0 2px 6px rgba(20, 20, 30, 0.05), 0 24px 60px rgba(20, 20, 30, 0.12);
+  --shadow-3: 0 30px 80px rgba(12, 40, 60, 0.22), 0 8px 24px rgba(12, 40, 60, 0.12);
+
+  /* ---- motion ---- */
+  --spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 160ms;
+  --t-mid: 320ms;
+  --t-slow: 560ms;
+
+  /* ---- layout ---- */
+  --gutter: clamp(16px, 5vw, 56px);
+  --max: 1240px;
+  --sp-section: clamp(88px, 12vw, 168px);
+  --header-h: 64px;
+
+  /* ---- legacy aliases (старые шаблоны) ---- */
+  --bg-2: var(--bg-elev);
+  --bg-3: var(--bg-elev-2);
+  --ink-2: var(--ink-soft);
+  --ink-3: var(--label-2);
+  --ink-4: var(--label-3);
+  --line: var(--sep);
+  --ground: var(--bg);
+  --ground-2: var(--bg-elev-2);
+  --paper: var(--bg-elev);
+  --r-panel: var(--r-lg);
+  --r-input: var(--r-sm);
+  --glass: var(--g-fill);
+  --glass-strong: var(--g-fill-thick);
+  --glass-edge: var(--g-rim);
+}
+
+/* ---------- Dark theme ---------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #08090b;
+  --bg-elev: #131418;
+  --bg-elev-2: #1a1b20;
+  --bg-sunk: rgba(125, 128, 140, 0.16);
+  --ink: #f2f3f5;
+  --ink-soft: #d4d6db;
+  --label-2: #a3a7af;
+  --label-3: #83878f;
+  --sep: rgba(255, 255, 255, 0.09);
+  --fill: rgba(125, 128, 140, 0.18);
+  --fill-2: rgba(125, 128, 140, 0.28);
+  --ink-fill: #f2f3f5;
+  --on-ink: #0b0b0d;
+  --link: #5fd2f7;
+  --brand-ink: #5fd2f7;
+
+  --g-fill: rgba(30, 32, 38, 0.46);
+  --g-fill-thin: rgba(40, 42, 50, 0.3);
+  --g-fill-thick: rgba(22, 23, 28, 0.8);
+  --g-rim: rgba(255, 255, 255, 0.26);
+  --g-rim-lo: rgba(255, 255, 255, 0.06);
+  --g-edge: rgba(255, 255, 255, 0.06);
+  --g-spec: rgba(255, 255, 255, 0.16);
+  --g-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), 0 14px 36px -12px rgba(0, 0, 0, 0.7), 0 2px 6px -2px rgba(0, 0, 0, 0.4);
+  --g-shadow-lift: 0 2px 2px rgba(0, 0, 0, 0.3), 0 30px 70px -20px rgba(0, 0, 0, 0.85), 0 8px 18px -8px rgba(0, 0, 0, 0.5);
+  --g-sat: 170%;
+
+  --amb-1: rgba(10, 188, 243, 0.26);
+  --amb-2: rgba(7, 231, 183, 0.16);
+  --amb-3: rgba(70, 110, 255, 0.16);
+
+  --night: #030405;
+  --night-2: #0f1013;
+  --night-3: #17181c;
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-2: 0 2px 6px rgba(0, 0, 0, 0.45), 0 24px 60px rgba(0, 0, 0, 0.55);
+  --shadow-3: 0 30px 80px rgba(0, 0, 0, 0.7), 0 8px 24px rgba(0, 0, 0, 0.5);
+}
