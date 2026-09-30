@@ -27,7 +27,7 @@ scripts: []
     <div class="sec-head">
       <div>
         <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Руководство</p>
-        <h2 class="h2" id="lead-title">Пять человек, за которыми <span class="grad-text">закреплён ваш проект</span></h2>
+        <h2 class="h2" id="lead-title">Люди, за которыми <span class="grad-text">закреплён ваш проект</span></h2>
       </div>
       <p class="lead">У каждого своя страница: зона ответственности, когда писать и как быстро ответят.</p>
     </div>
@@ -70,6 +70,7 @@ scripts: []
         <h3 class="sf-n">{{ p.name }}</h3>
         <p class="sf-r">{{ p.role }}</p>
         {% if p.since %}<p class="sf-s">в команде с {{ p.since }}</p>{% endif %}
+        {% if p.linkedin %}<a class="sf-in" href="{{ p.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn: {{ p.name }}" title="LinkedIn"><svg class="i" aria-hidden="true"><use href="#i-linkedin"/></svg></a>{% endif %}
       </article>
       {% endfor %}
     </div>

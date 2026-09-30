@@ -391,6 +391,20 @@ a.industries-link:hover b { color: var(--brand-ink); }
 .map-ph { aspect-ratio: 4 / 3; border-radius: var(--r-lg); background: radial-gradient(60% 60% at 50% 45%, rgba(10, 188, 243, 0.18), rgba(10, 188, 243, 0) 70%), repeating-linear-gradient(0deg, var(--sep) 0 1px, transparent 1px 44px), repeating-linear-gradient(90deg, var(--sep) 0 1px, transparent 1px 44px), linear-gradient(135deg, rgba(10, 188, 243, 0.08), rgba(7, 231, 183, 0.08)); display: grid; place-items: center; align-content: center; gap: 12px; color: var(--label-2); font-size: 14px; text-align: center; padding: 24px; box-shadow: var(--card-shadow), var(--card-rims); }
 .map-pin { width: 54px; height: 54px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--brand); box-shadow: 0 12px 30px rgba(10, 150, 200, 0.35); display: grid; place-items: center; }
 .map-pin::after { content: ""; width: 18px; height: 18px; border-radius: 50%; background: #fff; }
+.map-box { display: grid; gap: 12px; }
+.map-frame { position: relative; aspect-ratio: 4 / 3; border-radius: var(--r-lg); overflow: hidden; box-shadow: var(--card-shadow), var(--card-rims); background: var(--fill); }
+.map-frame .map-ph { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
+.map-frame .map-ph b { color: var(--ink); }
+.map-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; opacity: 0; transition: opacity 0.6s ease; }
+.map-frame.is-ready iframe { opacity: 1; }
+:root[data-theme="dark"] .map-frame iframe { filter: brightness(0.92) contrast(1.02); }
+.map-links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.map-addr { margin-left: auto; font-size: 14px; color: var(--label-2); }
+.ct-soc { display: flex; flex-wrap: wrap; gap: 8px; }
+.ct-s { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px 9px 10px; border-radius: 999px; font-size: 14px; font-weight: 700; color: var(--ink); text-decoration: none; background: var(--fill); transition: background var(--t-fast) ease, color var(--t-fast) ease, transform var(--t-fast) var(--spring); }
+.ct-s .i { width: 20px; height: 20px; color: rgb(var(--c, var(--brand-rgb))); }
+.ct-s:hover { background: rgba(var(--c, var(--brand-rgb)), 0.14); transform: translateY(-1px); }
+@media (max-width: 600px) { .map-addr { margin-left: 0; width: 100%; } }
 .article-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
 .article-cover { aspect-ratio: 21 / 9; border-radius: var(--r-xl); }
 .sticky-card { position: sticky; top: 100px; }

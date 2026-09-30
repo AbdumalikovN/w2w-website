@@ -69,7 +69,11 @@
   var fmt = function (n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, lang === 'en' ? ',' : ' '); };
   var getBest = function () { try { return +(localStorage.getItem(KEY) || 0); } catch (e) { return 0; } };
   var setBest = function (v) { try { localStorage.setItem(KEY, String(v)); } catch (e) { /* ignore */ } };
-  var BOARD = [[HOLDER + ' · ' + HROLE, RECORD, true], [T.teams[0], 15240], [T.teams[1], 12860], [T.teams[2], 9930], [T.teams[3], 7310]];
+  /* таблица рекордов — сотрудники компании (src/_data/site.json → game.board); COO всегда первый */
+  var AVA_BASE = root.getAttribute('data-ava-base') || '';
+  var BOARD = [];
+  try { BOARD = JSON.parse(root.getAttribute('data-board') || '[]').map(function (r) { return [r.name + ' · ' + r.role, r.score, !!r.top, r.photo ? AVA_BASE + r.photo + '-sq.webp' : '']; }); } catch (e) { BOARD = []; }
+  if (!BOARD.length) BOARD = [[HOLDER + ' · ' + HROLE, RECORD, true, AVA], [T.teams[0], 15240], [T.teams[1], 12860], [T.teams[2], 9930], [T.teams[3], 7310]];
 
   /* ---------- DOM ---------- */
   var careerHref = (W2W.base || '/') + (lang === 'ru' ? '' : lang + '/') + 'career/';
@@ -107,7 +111,7 @@
   var elScore = $('[data-bh-score]'), elCombo = $('[data-bh-combo]'), elComboBox = $('[data-bh-combo-box]'), elLives = $('[data-bh-lives]'), elTime = $('[data-bh-time]'), elTbar = $('[data-bh-tbar]'), elToast = $('[data-bh-toast]');
 
   function renderBoard(ol, you) {
-    var rows = BOARD.map(function (r) { return { n: r[0], s: r[1], coo: !!r[2] }; });
+    var rows = BOARD.map(function (r) { return { n: r[0], s: r[1], coo: !!r[2], ava: r[3] || '' }; });
     var best = getBest();
     var me = Math.max(best, you || 0);
     if (me > 0) rows.push({ n: T.you, s: me, me: true });
@@ -116,7 +120,7 @@
     if (me > 0 && !rows.some(function (r) { return r.me; })) rows[5] = { n: T.you, s: me, me: true, rank: '…' };
     ol.innerHTML = rows.map(function (r, i) {
       return '<li class="' + (r.coo ? 'is-coo' : '') + (r.me ? ' is-me' : '') + '"><span class="bh-rank">' + (r.rank || i + 1) + '</span>' +
-        (r.coo && AVA ? '<img src="' + AVA + '" alt="" width="28" height="28">' : '<i class="bh-ava" aria-hidden="true"></i>') +
+        (r.ava ? '<img src="' + r.ava + '" alt="" width="28" height="28" loading="lazy">' : '<i class="bh-ava" aria-hidden="true"></i>') +
         '<span class="bh-n"></span><b>' + fmt(r.s) + '</b></li>';
     }).join('');
     Array.prototype.forEach.call(ol.querySelectorAll('.bh-n'), function (el, i) { el.textContent = rows[i].n; });
@@ -254,13 +258,18 @@
     ctx.fillText('✓ feat', 0, 1);
     ctx.restore();
   }
+  var LOGO = null;
+  try { LOGO = [new Path2D('M475.92,558.01l18.53-17.94s18.25,106.28,62.54,123.07c44.29,16.79,54.72-110.94,54.72-110.94l7.23-136.7,141.05-141.05s-28.68,508.29-151.48,530.89c0,0-64.87,12.17-106.6-148.28l-26.08-99.05h.08Z'), new Path2D('M344.75,612.26l14.46-14.03s14.26,83.01,48.83,96.13c34.61,13.12,42.75-86.6,42.75-86.6l5.65-106.75,110.15-110.15s-22.4,396.91-118.29,414.53c0,0-50.65,9.48-83.21-115.8l-20.35-77.36v.04Z')]; } catch (e) { LOGO = null; }
   function drawOrb(o, t) {
     ctx.save(); ctx.translate(o.x, o.y);
     var g = ctx.createRadialGradient(-6, -6, 2, 0, 0, 24);
     g.addColorStop(0, '#e6fbff'); g.addColorStop(0.35, '#4fd8ff'); g.addColorStop(1, 'rgba(10,188,243,0.1)');
     ctx.shadowColor = '#0abcf3'; ctx.shadowBlur = 24 + Math.sin(t * 6) * 6;
     ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 19, 0, 6.2832); ctx.fill();
-    ctx.shadowBlur = 0; ctx.fillStyle = '#063a4f'; ctx.font = '800 15px Onest, system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('W', 0, 1);
+    ctx.shadowBlur = 0; ctx.fillStyle = '#063a4f';
+    if (LOGO) { /* знак компании (symbol #i-w, viewBox 335 262 445 555) вписан в круг */
+      var k = 22 / 555; ctx.save(); ctx.translate(-445 * k / 2, -555 * k / 2); ctx.scale(k, k); ctx.translate(-335, -262); ctx.fill(LOGO[0]); ctx.fill(LOGO[1]); ctx.restore();
+    } else { ctx.font = '800 15px Onest, system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText('W', 0, 1); }
     ctx.strokeStyle = 'rgba(127,224,255,0.6)'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(0, 0, 25 + Math.sin(t * 4) * 2, 0, 6.2832); ctx.stroke();
     ctx.restore();
   }

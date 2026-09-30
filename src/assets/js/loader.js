@@ -1,6 +1,6 @@
 /* Win to Win — boot loader: «Company Brain boot sequence».
    Once per browser session (sessionStorage 'w2w-boot'), ≈5 s, 0–100 %.
-   Data streams in from the edges → assembles a rotating neural "brain" → morphs into the W mark → portal reveal. */
+   Data streams in from the edges → spells «AI» → assembles a rotating neural "brain" → morphs into the W mark → portal reveal. */
 (function () {
   'use strict';
   var h = document.documentElement;
@@ -14,9 +14,9 @@
 
   var lang = (h.getAttribute('lang') || 'ru').slice(0, 2);
   var DICT = {
-    ru: ['Инициализация ядра W2W', 'Подключаем источники: 1С · amoCRM · Telegram · почта', 'Индексируем документы', 'Строим граф знаний: люди · клиенты · проекты', 'Проверяем права доступа', 'Калибруем ответы по источникам', 'Company Brain готов'],
-    uz: ['W2W yadrosi ishga tushmoqda', 'Manbalar ulanmoqda: 1C · amoCRM · Telegram · pochta', 'Hujjatlar indekslanmoqda', 'Bilimlar grafi qurilmoqda: odamlar · mijozlar · loyihalar', 'Kirish huquqlari tekshirilmoqda', 'Javoblar manbalar bo‘yicha sozlanmoqda', 'Company Brain tayyor'],
-    en: ['Initialising the W2W core', 'Connecting sources: 1C · amoCRM · Telegram · email', 'Indexing documents', 'Building the knowledge graph: people · clients · projects', 'Checking access rights', 'Calibrating answers against sources', 'Company Brain is ready']
+    ru: ['Инициализация ядра W2W', 'Загружаем AI-модели и подключаем источники: 1С · amoCRM · Telegram · почта', 'Индексируем документы', 'Строим граф знаний: люди · клиенты · проекты', 'Проверяем права доступа', 'Калибруем ответы по источникам', 'Company Brain готов'],
+    uz: ['W2W yadrosi ishga tushmoqda', 'AI modellari yuklanmoqda, manbalar ulanmoqda: 1C · amoCRM · Telegram · pochta', 'Hujjatlar indekslanmoqda', 'Bilimlar grafi qurilmoqda: odamlar · mijozlar · loyihalar', 'Kirish huquqlari tekshirilmoqda', 'Javoblar manbalar bo‘yicha sozlanmoqda', 'Company Brain tayyor'],
+    en: ['Initialising the W2W core', 'Loading AI models, connecting sources: 1C · amoCRM · Telegram · email', 'Indexing documents', 'Building the knowledge graph: people · clients · projects', 'Checking access rights', 'Calibrating answers against sources', 'Company Brain is ready']
   };
   var LOG = DICT[lang] || DICT.ru;
   var LOG_AT = [0, 10, 26, 45, 62, 78, 97];
@@ -66,6 +66,24 @@
   /* ---------- geometry ---------- */
   var P1 = 'M475.92,558.01l18.53-17.94s18.25,106.28,62.54,123.07c44.29,16.79,54.72-110.94,54.72-110.94l7.23-136.7,141.05-141.05s-28.68,508.29-151.48,530.89c0,0-64.87,12.17-106.6-148.28l-26.08-99.05h.08Z';
   var P2 = 'M344.75,612.26l14.46-14.03s14.26,83.01,48.83,96.13c34.61,13.12,42.75-86.6,42.75-86.6l5.65-106.75,110.15-110.15s-22.4,396.91-118.29,414.53c0,0-50.65,9.48-83.21-115.8l-20.35-77.36v.04Z';
+  /* particles first spell "AI": sample the word from an offscreen canvas (normalized: x in [-0.5, 0.5]) */
+  function sampleAI() {
+    var pts = [];
+    try {
+      var oc = document.createElement('canvas'), o = oc.getContext('2d'), fnt = '800 220px Onest, "SF Pro Display", Inter, system-ui, sans-serif';
+      oc.width = 560; oc.height = 260;
+      o.font = fnt; o.textAlign = 'center'; o.textBaseline = 'middle'; o.fillStyle = '#fff';
+      o.fillText('AI', oc.width / 2, oc.height / 2 + 8);
+      var d = o.getImageData(0, 0, oc.width, oc.height).data, minX = oc.width, maxX = 0;
+      for (var y = 0; y < oc.height; y += 3) for (var x = 0; x < oc.width; x += 3) {
+        if (d[(y * oc.width + x) * 4 + 3] > 120) { pts.push([x, y]); if (x < minX) minX = x; if (x > maxX) maxX = x; }
+      }
+      var tw = Math.max(1, maxX - minX), mx = (minX + maxX) / 2;
+      pts = pts.map(function (q) { return [(q[0] - mx) / tw, (q[1] - oc.height / 2) / tw]; });
+    } catch (e) { /* no canvas text: fall back to a line */ }
+    if (!pts.length) for (var i = 0; i < 300; i++) pts.push([i / 300 - 0.5, 0]);
+    return pts;
+  }
   function sampleW() {
     var pts = [];
     try {
@@ -84,8 +102,9 @@
   }
 
   function build() {
-    var wp = sampleW();
+    var wp = sampleW(), ap = sampleAI();
     for (var i = wp.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var tmp = wp[i]; wp[i] = wp[j]; wp[j] = tmp; }
+    for (i = ap.length - 1; i > 0; i--) { var j2 = Math.floor(Math.random() * (i + 1)); var tmp2 = ap[i]; ap[i] = ap[j2]; ap[j2] = tmp2; }
     var diag = Math.hypot(W, H);
     for (i = 0; i < N; i++) {
       /* organic "brain": fibonacci sphere → ellipsoid with a central fissure and folds */
@@ -95,9 +114,10 @@
       x *= 1.16 * fold; y *= 0.9 * fold; z *= 1.02 * fold;
       if (Math.abs(x) < 0.07) x = (x < 0 ? -1 : 1) * 0.07;
       var ang = Math.random() * Math.PI * 2, dist = diag * (0.55 + Math.random() * 0.25);
-      var w = wp[i % wp.length];
+      var w = wp[i % wp.length], ai = ap[i % ap.length];
       P.push({
         b: [x, y, z],
+        a: [ai[0] + (Math.random() - 0.5) * 0.01, ai[1] + (Math.random() - 0.5) * 0.01],
         sx: Math.cos(ang) * dist, sy: Math.sin(ang) * dist,
         d: Math.random() * 0.55,
         md: Math.random() * 0.35,
@@ -157,14 +177,15 @@
     ctx.clearRect(0, 0, W, H);
     ctx.globalCompositeOperation = 'lighter';
 
-    var a = clamp(p / 0.34), m = clamp((p - 0.7) / 0.28), lk = clamp((p - 0.22) / 0.2) * (1 - clamp(m * 1.6));
+    /* фазы заставки: точки слетаются в надпись «AI» (a) → перетекают в мозг (bm) → в знак W2W (m) */
+    var a = clamp(p / 0.26), bm = clamp((p - 0.4) / 0.2), m = clamp((p - 0.74) / 0.24), lk = clamp((p - 0.56) / 0.12) * (1 - clamp(m * 1.6));
     var rotY = t * 0.75, rotX = 0.32 + Math.sin(t * 0.5) * 0.12;
     var cY = Math.cos(rotY), sY = Math.sin(rotY), cX = Math.cos(rotX), sX = Math.sin(rotX);
-    var Wsz = R * 2.35, fov = R * 3.2;
+    var Wsz = R * 2.35, Asz = R * 2.7, fov = R * 3.2;
 
     /* soft core glow */
     var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.9);
-    var gi = 0.14 + 0.2 * a + 0.35 * m;
+    var gi = 0.1 + 0.12 * a + 0.12 * bm + 0.35 * m;
     g.addColorStop(0, 'rgba(10,188,243,' + (gi * 0.55).toFixed(3) + ')');
     g.addColorStop(0.45, 'rgba(7,231,183,' + (gi * 0.16).toFixed(3) + ')');
     g.addColorStop(1, 'rgba(10,188,243,0)');
@@ -178,12 +199,15 @@
       var ps = fov / (fov - z2);
       var bx = cx + x1 * ps, by = cy + y1 * ps;
       var ta = eOut(clamp((a * 1.55 - o.d) / 1));
-      var px = lerp(cx + o.sx, bx, ta), py = lerp(cy + o.sy, by, ta);
+      var ax = cx + o.a[0] * Asz, ay = cy + o.a[1] * Asz;
+      var px = lerp(cx + o.sx, ax, ta), py = lerp(cy + o.sy, ay, ta);          /* fly-in → "AI" */
+      var tb = eIO(clamp(bm * 1.4 - o.md));
+      px = lerp(px, bx, tb); py = lerp(py, by, tb);                              /* "AI" → brain */
       var tm = eIO(clamp(m * 1.4 - o.md));
-      o.x = lerp(px, cx + o.w[0] * Wsz, tm);
+      o.x = lerp(px, cx + o.w[0] * Wsz, tm);                                     /* brain → W */
       o.y = lerp(py, cy + o.w[1] * Wsz * 0.8, tm);
-      o.z = lerp((z2 / R + 1) / 2, 1, tm);
-      o.tm = tm;
+      o.z = lerp(lerp(0.9, (z2 / R + 1) / 2, tb), 1, tm);
+      o.tm = Math.max(tm, 1 - tb);                                              /* плоские фазы (AI и W) рисуем ровными точками */
     }
 
     /* links */

@@ -303,7 +303,7 @@
     }
   });
 
-  /* ---------- no form endpoint yet: hand the prepared text to WhatsApp / e-mail ---------- */
+  /* ---------- no form endpoint yet: hand the prepared text to Telegram / e-mail ---------- */
   var L = ({
     ru: { req: 'Заявка с сайта Win to Win', vac: 'Отклик на вакансию', company: 'Компания', name: 'Имя', contact: 'Контакт', task: 'Задача', dirs: 'Направления', budget: 'Бюджет', cv: 'Резюме', page: 'Страница' },
     uz: { req: 'Win to Win saytidan ariza', vac: 'Vakansiyaga ariza', company: 'Kompaniya', name: 'Ism', contact: 'Kontakt', task: 'Vazifa', dirs: 'Yo‘nalishlar', budget: 'Byudjet', cv: 'Rezyume', page: 'Sahifa' },
@@ -311,8 +311,8 @@
   })[lang] || {};
   W.sendLinks = function (box, title, rows) {
     var text = title + '\n' + rows.filter(function (r) { return r[1]; }).map(function (r) { return r[0] + ': ' + r[1]; }).join('\n') + '\n' + L.page + ': ' + location.href;
-    var wa = $('[data-send-wa]', box), mail = $('[data-send-mail]', box);
-    if (wa) wa.href = wa.getAttribute('href').split('?')[0] + '?text=' + encodeURIComponent(text);
+    var tg = $('[data-send-tg]', box), mail = $('[data-send-mail]', box);
+    if (tg) tg.href = tg.getAttribute('href').split('?')[0] + '?text=' + encodeURIComponent(text); /* t.me/<username>?text= открывает чат с готовым сообщением */
     if (mail) mail.href = mail.getAttribute('href').split('?')[0] + '?subject=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(text);
   };
   W.sendLabels = L;
@@ -459,12 +459,40 @@
     });
   }
 
+  /* ---------- contacts: map loads when scrolled into view (Yandex widget, no API key) ---------- */
+  $$('[data-map]').forEach(function (box) {
+    var frame = $('[data-map-frame]', box), lat = box.getAttribute('data-lat'), lng = box.getAttribute('data-lng'), z = box.getAttribute('data-zoom') || 17;
+    if (!frame || !lat || !lng) return;
+    var load = function () {
+      if ($('iframe', frame)) return;
+      var f = document.createElement('iframe');
+      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      f.src = 'https://yandex.uz/map-widget/v1/?ll=' + lng + '%2C' + lat + '&z=' + z + '&pt=' + lng + '%2C' + lat + '%2Cpm2blm&lang=' + (lang === 'en' ? 'en_US' : lang === 'uz' ? 'uz_UZ' : 'ru_RU') + (dark ? '&theme=dark' : '');
+      f.title = 'Карта: офис Win to Win'; f.loading = 'lazy'; f.allowFullscreen = true; f.referrerPolicy = 'strict-origin-when-cross-origin';
+      f.addEventListener('load', function () { frame.classList.add('is-ready'); });
+      frame.appendChild(f);
+    };
+    if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { load(); io.disconnect(); } }, { rootMargin: '200px' }); io.observe(box); }
+    else load();
+  });
+
   /* ---------- device screenshots: slow auto-scroll while visible ---------- */
   $$('[data-autoscroll]').forEach(function (box) {
     if (reduce) return;
-    var anims = [];
+    var anims = [], frameTimer = 0;
+    var frames = $$('[data-sc-frames]', box);
+    var cycleFrames = function () {
+      clearInterval(frameTimer);
+      if (!frames.length) return;
+      var k = 0;
+      frameTimer = setInterval(function () {
+        k++;
+        frames.forEach(function (f) { var imgs = $$('.sc-frame', f); imgs.forEach(function (im, i) { im.classList.toggle('is-on', i === k % imgs.length); }); });
+      }, 3200);
+    };
     var run = function () {
       anims.forEach(function (a) { a.cancel(); }); anims = [];
+      cycleFrames();
       $$('.sc-scroll', box).forEach(function (sc) {
         var img = $('img', sc); if (!img || !img.animate) return;
         var go = function () {
@@ -475,8 +503,8 @@
       });
     };
     if ('IntersectionObserver' in window) new IntersectionObserver(function (en) {
-      if (en[0].isIntersecting) { if (!anims.length) run(); else anims.forEach(function (a) { a.play(); }); }
-      else anims.forEach(function (a) { a.pause(); });
+      if (en[0].isIntersecting) { if (!anims.length && !frameTimer) run(); else { anims.forEach(function (a) { a.play(); }); cycleFrames(); } }
+      else { anims.forEach(function (a) { a.pause(); }); clearInterval(frameTimer); }
     }, { threshold: 0.2 }).observe(box);
   });
 

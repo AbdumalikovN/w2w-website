@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: "Документы и сертификаты"
-description: "Официальные документы Win to Win: сертификат резидента IT Park Uzbekistan, партнёрская модель и соглашение, политика конфиденциальности, публичная оферта и условия использования."
+description: "Официальные документы Win to Win: сертификат резидента IT Park Uzbekistan, свидетельство о регистрации, партнёрская модель и соглашение, политика конфиденциальности, публичная оферта и условия использования. Все файлы можно скачать."
 permalink: /documents/
 ---
 <section class="hero-page">
@@ -9,7 +9,7 @@ permalink: /documents/
     <div>
       <p class="crumbs"><a href="{{ '/' | url }}">Главная</a><span>/</span>Документы</p>
       <h1 class="h1">Документы и сертификаты</h1>
-      <p class="lead">Официальные документы компании: статус резидента, партнёрские условия и политики. Всё можно скачать и проверить.</p>
+      <p class="lead">Официальные документы компании: статус резидента, регистрация, партнёрские условия и политики. Откройте лист прямо из папки или скачайте файл.</p>
     </div>
     <div class="hero-page-aside">
       <p><b>№4689</b>сертификат резидента IT Park Uzbekistan, проверяется по QR-коду</p>
@@ -19,15 +19,36 @@ permalink: /documents/
 
 <section class="section">
   <div class="wrap">
-    <div class="list doc-list">
-      {% for d in extra.documents %}
-      <div class="list-row">
-        <div style="display:flex;gap:14px;align-items:flex-start"><svg class="i" style="margin-top:4px;color:var(--ink-3)"><use href="#i-file"/></svg><div><b>{{ d.title }}</b><span class="small">{{ d.sub }}</span></div></div>
-        <span class="status{% if not d.ready %} is-pending{% endif %}">{{ d.status }}</span>
+    <div class="fd" data-folder>
+      <div class="fd-tab" aria-hidden="true"><svg class="i"><use href="#i-w"/></svg><span>Win to Win</span><small>Документы · {{ extra.documents | length }}</small></div>
+      <div class="fd-body">
+        <div class="fd-toolbar">
+          <p class="fd-hint"><svg class="i" aria-hidden="true"><use href="#i-eye"/></svg>Нажмите на лист — откроется в новой вкладке</p>
+          <a class="btn btn-glass btn-sm" href="{{ extra.documentsZip.href | url }}" download><svg class="i" aria-hidden="true"><use href="#i-arrow-down"/></svg>Скачать всё · ZIP {{ extra.documentsZip.size }}</a>
+        </div>
+        <ul class="fd-grid">
+          {% for d in extra.documents %}
+          <li class="fd-doc{% if d.landscape %} is-land{% endif %}" style="--i: {{ loop.index0 }}">
+            <a class="fd-sheet" href="{{ d.files[0].href | url }}" target="_blank" rel="noopener" aria-label="Открыть: {{ d.title }}">
+              <span class="fd-paper" aria-hidden="true"></span>
+              <span class="fd-paper" aria-hidden="true"></span>
+              <img src="{{ ('/assets/img/docs/' + d.preview + '.webp') | url }}" alt="Первая страница: {{ d.title }}" width="460" height="{{ 319 if d.landscape else 650 }}" loading="lazy" decoding="async">
+              <span class="fd-kind">{{ d.kind }}</span>
+            </a>
+            <div class="fd-info">
+              <h2 class="fd-title"><a href="{{ d.files[0].href | url }}" target="_blank" rel="noopener">{{ d.title }}</a></h2>
+              <p class="fd-sub">{{ d.sub }}</p>
+              <p class="fd-meta"><span>{{ d.files[0].pages }} стр.</span><span>{{ d.date }}</span></p>
+              <div class="fd-files">
+                {% for f in d.files %}<a class="fd-dl" href="{{ f.href | url }}" download><svg class="i" aria-hidden="true"><use href="#i-arrow-down"/></svg>{{ f.label }}<small>{{ f.size }}</small></a>{% endfor %}
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
       </div>
-      {% endfor %}
     </div>
-    <p class="muted small mt-24">Файлы для скачивания подключим при публикации сайта.</p>
+    <p class="muted small mt-24">Публичная оферта и условия использования — редакция 1.0 от 29.09.2026; действующие редакции всегда публикуются на этой странице. Партнёрское соглашение — шаблон: заполните реквизиты в DOCX и отправьте нам на <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
   </div>
 </section>
 

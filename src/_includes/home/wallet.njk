@@ -11,21 +11,27 @@
     <div class="wl-copy">
       <p class="eyebrow"><span class="eb-dot" aria-hidden="true"></span>Что вы получаете</p>
       <h2 class="h2" id="wl-title" data-no-auto>Шесть гарантий <span class="grad-text">в вашем кошельке</span></h2>
-      <p class="lead">Каждое обещание W2W — как пропуск в Wallet: с конкретной цифрой, которую мы фиксируем в договоре. Нажмите на карточку, чтобы открыть её.</p>
+      <p class="lead">Каждое обещание W2W — как карта в Wallet: с конкретной цифрой, которую мы фиксируем в договоре. Нажмите на любую карту в кошельке — она выедет наверх.</p>
       <ol class="wl-index" data-wl-index>
         {% for p in passes %}<li><button type="button" data-wl-go="{{ loop.index0 }}"{% if loop.first %} aria-current="true"{% endif %}><b>{{ p.v }}</b> {{ p.k }}</button></li>{% endfor %}
       </ol>
     </div>
     <div class="wl-stack" data-wl-stack>
+      <i class="wl-shade" aria-hidden="true"></i>
       {% for p in passes %}
       <button class="wl-pass {{ p.tone }}" type="button" data-wl-pass="{{ loop.index0 }}" style="--i: {{ loop.index0 }}" aria-label="{{ p.k }}: {{ p.v }} {{ p.u }}">
-        <span class="wl-head"><span class="wl-logo"><svg aria-hidden="true"><use href="#i-w"/></svg>Win to Win</span><span class="wl-k">{{ p.k }}</span></span>
+        <span class="wl-head"><span class="wl-logo"><svg aria-hidden="true"><use href="#i-w"/></svg>Win to Win</span><span class="wl-k">{{ p.k }}<b>{{ p.v }}</b></span></span>
         <span class="wl-main"><b class="wl-v">{{ p.v }}</b><span class="wl-u">{{ p.u }}</span></span>
         <span class="wl-t">{{ p.t }}</span>
         <span class="wl-fields"><span><small>{{ p.a[0] }}</small>{{ p.a[1] }}</span><span><small>{{ p.b[0] }}</small>{{ p.b[1] }}</span></span>
         <span class="wl-code" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
       </button>
       {% endfor %}
+      <div class="wl-pocket" aria-hidden="true">
+        <span class="wl-pocket-slot"></span>
+        <span class="wl-pocket-brand"><svg><use href="#i-w"/></svg>Wallet</span>
+        <span class="wl-pocket-hint">6 карт · нажмите на любую</span>
+      </div>
     </div>
   </div>
 </section>

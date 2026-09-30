@@ -45,7 +45,8 @@
 .hh-orb-core { position: absolute; inset: 30%; border-radius: 50%; background: radial-gradient(circle, rgba(var(--brand-rgb), 0.28), rgba(var(--brand-rgb), 0) 70%); animation: orb-pulse 3.2s ease-in-out infinite; }
 @keyframes orb-pulse { 50% { transform: scale(1.25); opacity: 0.6; } }
 .hh-orb-label {
-  position: absolute; left: 50%; top: -16px; translate: -50% 0; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; padding: 7px 14px 7px 10px; border-radius: var(--r-pill);
+  /* по центру сферы: орбита иконок проходит через центр только за пределами сферы, поэтому подпись ни с чем не пересекается */
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%; z-index: 5; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; padding: 7px 14px 7px 10px; border-radius: var(--r-pill);
   font-size: 13px; font-weight: 800; letter-spacing: -0.01em; color: var(--ink);
   background: var(--g-fill-thick); -webkit-backdrop-filter: blur(20px) saturate(200%); backdrop-filter: blur(20px) saturate(200%); box-shadow: var(--g-shadow), var(--g-rims), 0 0 0 0.5px var(--g-edge);
 }
@@ -114,13 +115,35 @@
 .lg-track { display: flex; gap: 16px; padding-right: 16px; flex: none; animation: lg-marq 70s linear infinite; }
 .lg-row.is-rev .lg-track { animation-direction: reverse; animation-duration: 80s; }
 .lg-row:hover .lg-track { animation-play-state: paused; }
-.lg-tile { width: clamp(176px, 16vw, 216px); aspect-ratio: 480 / 252; flex: none; border-radius: 22px; overflow: hidden; background: #fff; box-shadow: var(--card-shadow), inset 0 0 0 1px rgba(20, 40, 60, 0.05); transition: transform var(--t-mid) var(--spring); }
-.lg-tile:hover { transform: translateY(-4px) scale(1.03); }
-.lg-tile img { width: 100%; height: 100%; object-fit: contain; }
+.lg-tile { position: relative; width: clamp(176px, 16vw, 216px); aspect-ratio: 480 / 252; flex: none; border-radius: 22px; overflow: hidden; background: #fff; box-shadow: var(--card-shadow), inset 0 0 0 1px rgba(20, 40, 60, 0.05); transition: box-shadow var(--t-mid) ease; --zoom: 1.8; --lens: 96px; }
+/* наведение: плитка не двигается (ряд обрезан по высоте). Вместо этого — «лупа» из жидкого стекла:
+   круглая линза едет за курсором (--mx/--my/--img/--lens из home.js) и увеличивает логотип под собой
+   (тот же файл фоном, масштаб --zoom, позиция считается так, чтобы точка под курсором осталась на месте),
+   остальной логотип слегка «запотевает»; по краю плитки бежит световой ободок */
+.lg-tile img { width: 100%; height: 100%; object-fit: contain; transition: filter 0.45s ease, opacity 0.45s ease; }
+.lg-tile::before { content: ""; position: absolute; z-index: 2; pointer-events: none; left: var(--mx, 50%); top: var(--my, 50%); width: var(--lens); height: var(--lens); border-radius: 50%; transform: translate(-50%, -50%) scale(0.3); opacity: 0;
+  background-color: #fff;
+  background-image:
+    radial-gradient(circle at 31% 24%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 36%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 56%, rgba(var(--brand-rgb), 0.14) 80%, rgba(var(--green-rgb), 0.18) 92%, rgba(255, 255, 255, 0.9) 100%),
+    var(--img, none);
+  background-repeat: no-repeat;
+  background-size: 100% 100%, 100% 100%, calc(var(--w, 216px) * var(--zoom)) calc(var(--h, 113px) * var(--zoom));
+  background-position: 0 0, 0 0, calc(var(--lens) / 2 - var(--mx, 0px) * var(--zoom)) calc(var(--lens) / 2 - var(--my, 0px) * var(--zoom));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.9), inset 0 -12px 20px rgba(20, 40, 60, 0.14), inset 0 12px 18px rgba(255, 255, 255, 0.55), 0 18px 34px -12px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(20, 40, 60, 0.1);
+  transition: transform 0.5s var(--spring), opacity 0.22s ease; }
+.lg-tile::after { content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit; padding: 2px; opacity: 0; transition: opacity 0.35s ease; background: conic-gradient(from var(--orb-a, 0deg), rgba(var(--brand-rgb), 0) 0%, var(--brand) 18%, var(--green) 32%, rgba(var(--brand-rgb), 0) 48%, rgba(var(--brand-rgb), 0) 100%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+@media (hover: hover) {
+  .lg-tile:hover { box-shadow: var(--card-shadow-lift), inset 0 0 0 1px rgba(20, 40, 60, 0.05); }
+  .lg-tile:hover img { filter: blur(1.4px) saturate(0.7); opacity: 0.55; }
+  .lg-tile:hover::before { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .lg-tile:hover::after { opacity: 1; animation: orb-rim 2.4s linear infinite; }
+}
 :root[data-theme="dark"] .lg-tile { background: #f3f4f6; box-shadow: 0 10px 30px -14px rgba(0, 0, 0, 0.8); filter: brightness(0.94); }
+:root[data-theme="dark"] .lg-tile:hover { filter: none; }
 @keyframes lg-marq { to { transform: translateX(-100%); } }
 @media (max-width: 600px) { .lg-logos-head { flex-direction: column; align-items: flex-start; gap: 10px; } .lg-rows { gap: 10px; } .lg-track { gap: 10px; padding-right: 10px; } .lg-tile { width: 150px; border-radius: 16px; } }
-@media (prefers-reduced-motion: reduce) { .lg-track { animation: none; } .lg-row.is-rev { justify-content: flex-end; } }
+@media (prefers-reduced-motion: reduce) { .lg-track { animation: none; } .lg-row.is-rev { justify-content: flex-end; } .lg-tile img, .lg-tile::before { transition: none; } .lg-tile:hover::after { animation: none; } }
 
 /* ---------- Statement: chaos → one brain ---------- */
 .st { position: relative; }

@@ -8,14 +8,14 @@
       <p class="lead">У каждого направления есть руководитель с именем и зоной ответственности. Вы знаете, кому написать — и вам отвечают.</p>
     </div>
     <div class="tm-grid">
-      {% for m in team %}{% include "partials/person-card.njk" %}{% endfor %}
+      {% for m in team %}{% if m.home %}{% include "partials/person-card.njk" %}{% endif %}{% endfor %}
     </div>
     <div class="tm-more">
       <div class="tm-faces" aria-hidden="true">
         {% for f in ["fazliddin-paritdinov", "mohira-habibullayeva", "asliddin-abdumannonov", "rokhila-toshpulatova", "ibrohim-mirsadiqov", "shokhsanam-ganiyeva"] %}<img src="{{ ('/assets/img/team/' + f + '-sq.webp') | url }}" alt="" width="48" height="48" loading="lazy">{% endfor %}
         <span>+20</span>
       </div>
-      <p><b>И ещё 20+ специалистов</b> — разработчики, дизайнеры, QA, аналитики и проектные менеджеры.</p>
+      <p><b>И ещё 20+ специалистов</b> — разработчики, дизайнеры, QA, аналитики, маркетинг и проектные менеджеры.</p>
       <a class="btn btn-glass" href="{{ '/team/' | url }}">Вся команда<svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
   </div>

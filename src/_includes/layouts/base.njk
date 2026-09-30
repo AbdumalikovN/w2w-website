@@ -7,10 +7,8 @@
   <meta name="description" content="{{ description or site.description }}">
   {% if noindex %}<meta name="robots" content="noindex">
   {% endif %}  <link rel="canonical" href="{{ site.domain }}{{ page.url }}">
-  <link rel="alternate" hreflang="ru" href="{{ site.domain }}{{ page.url }}">
-  <link rel="alternate" hreflang="uz" href="{{ site.domain }}/uz{{ page.url }}">
-  <link rel="alternate" hreflang="en" href="{{ site.domain }}/en{{ page.url }}">
-  <link rel="alternate" hreflang="x-default" href="{{ site.domain }}{{ page.url }}">
+  {% for l in site.languages %}<link rel="alternate" hreflang="{{ l }}" href="{{ site.domain }}{{ ('/' + l) if l != 'ru' else '' }}{{ page.url }}">
+  {% endfor %}  <link rel="alternate" hreflang="x-default" href="{{ site.domain }}{{ page.url }}">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Win to Win">
   <meta property="og:title" content="{{ title or 'Win to Win' }}">

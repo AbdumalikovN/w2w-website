@@ -29,11 +29,24 @@ eleventyComputed:
     {% if p.shot %}
     <div class="pd-devices" data-autoscroll aria-label="Скриншоты {{ p.name }}" role="img">
       <div class="sc-devices">
-        <div class="sc-display">
-          <div class="sc-bezel"><div class="sc-screen"><div class="sc-page is-on"><div class="sc-browser"><i></i><i></i><i></i><span>{{ p.shotUrl }}</span></div><div class="sc-scroll"><img src="{{ ('/assets/img/projects/' + p.slug + '-desktop.webp') | url }}" alt="" width="1200" height="3500" fetchpriority="high"></div></div></div></div>
-          <div class="sc-neck"></div><div class="sc-base"></div>
+        <div class="dv-display">
+          <div class="dv-shell"><div class="dv-glass">
+            <div class="sc-screen"><div class="sc-page is-on"><div class="sc-browser"><i></i><i></i><i></i><span>{{ p.shotUrl }}</span></div>
+              {% if p.frames %}<div class="sc-frames" data-sc-frames>{% for f in range(1, p.frames + 1) %}<img class="sc-frame{% if loop.first %} is-on{% endif %}" src="{{ ('/assets/img/projects/' + p.slug + '-desktop-' + f + '.webp') | url }}" alt="" width="1200" height="750"{% if loop.first %} fetchpriority="high"{% else %} loading="lazy"{% endif %}>{% endfor %}</div>
+              {% else %}<div class="sc-scroll"><img src="{{ ('/assets/img/projects/' + p.slug + '-desktop.webp') | url }}" alt="" width="1200" height="3500" fetchpriority="high"></div>{% endif %}
+            </div></div>
+            <i class="dv-cam"></i><i class="dv-sheen"></i>
+          </div></div>
+          <div class="dv-neck"></div><div class="dv-foot"></div><i class="dv-floor"></i>
         </div>
-        <div class="sc-phone"><div class="sc-phone-in"><span class="sc-island"></span><div class="sc-mpage is-on"><div class="sc-scroll"><img src="{{ ('/assets/img/projects/' + p.slug + '-mobile.webp') | url }}" alt="" width="560" height="4400"></div></div></div></div>
+        <div class="dv-phone">
+          <i class="dv-btn is-action"></i><i class="dv-btn is-vol1"></i><i class="dv-btn is-vol2"></i><i class="dv-btn is-power"></i>
+          <div class="dv-phone-bezel"><div class="sc-phone-in"><span class="sc-island"></span><div class="sc-mpage is-on">
+            {% if p.frames %}<div class="sc-frames" data-sc-frames>{% for f in range(1, p.frames + 1) %}<img class="sc-frame{% if loop.first %} is-on{% endif %}" src="{{ ('/assets/img/projects/' + p.slug + '-mobile-' + f + '.webp') | url }}" alt="" width="560" height="1214"{% if not loop.first %} loading="lazy"{% endif %}>{% endfor %}</div>
+            {% else %}<div class="sc-scroll"><img src="{{ ('/assets/img/projects/' + p.slug + '-mobile.webp') | url }}" alt="" width="560" height="4400"></div>{% endif %}
+          </div></div></div>
+          <i class="dv-sheen"></i>
+        </div>
       </div>
     </div>
     {% else %}

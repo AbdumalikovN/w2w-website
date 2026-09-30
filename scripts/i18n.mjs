@@ -21,7 +21,8 @@ import { Element, Text, isTag, isText } from "domhandler";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = path.join(ROOT, "_site");
 const DICT_DIR = path.join(ROOT, "src/_i18n");
-const LANGS = ["uz", "en"];
+const SITE_DATA = JSON.parse(fs.readFileSync(path.join(ROOT, "src/_data/site.json"), "utf8"));
+const LANGS = (SITE_DATA.languages || ["ru", "en"]).filter((l) => l !== "ru"); // какие версии собирать — src/_data/site.json → languages
 const LOCALE = { uz: "uz_UZ", en: "en_US" };
 const BASE = (() => { let b = process.env.PATH_PREFIX || "/"; if (!b.startsWith("/")) b = "/" + b; if (!b.endsWith("/")) b += "/"; return b; })();
 const DOMAIN = JSON.parse(fs.readFileSync(path.join(ROOT, "src/_data/site.json"), "utf8")).domain.replace(/\/$/, "");

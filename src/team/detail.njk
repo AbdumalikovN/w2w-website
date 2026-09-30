@@ -25,7 +25,6 @@ eleventyComputed:
           {% if so.telegram %}<a class="tm-s tm-s-tg" href="{{ so.telegram | tgHref }}" target="_blank" rel="noopener" aria-label="Telegram" title="Telegram"><svg aria-hidden="true"><use href="#i-telegram"/></svg></a>{% endif %}
           {% if so.instagram %}<a class="tm-s tm-s-ig" href="{{ so.instagram | igHref }}" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a>{% endif %}
           {% if so.linkedin %}<a class="tm-s tm-s-in" href="{{ so.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>{% endif %}
-          {% if so.whatsapp %}<a class="tm-s tm-s-wa" href="{{ so.whatsapp | waHref }}" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg></a>{% endif %}
           {% if so.email %}<a class="tm-s tm-s-mail" href="mailto:{{ so.email }}" aria-label="{{ so.email }}" title="{{ so.email }}"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>{% endif %}
           <a class="tm-s tm-s-mail" href="mailto:{{ site.email }}" aria-label="Почта компании {{ site.email }}" title="{{ site.email }}"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
         </div>

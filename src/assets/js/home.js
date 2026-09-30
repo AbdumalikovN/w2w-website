@@ -154,11 +154,57 @@
       onView(ind, function () { showInd(0); }, { threshold: 0.2 });
     }
 
+    /* ---------- logos: a glass loupe follows the cursor and magnifies the logo under it ----------
+       The loupe is the tile's ::before: the same logo file as a background, scaled by --zoom and positioned
+       so that the point under the cursor stays in place (see .lg-tile::before in 09-home.css). */
+    var lgRows = $('.lg-rows'), lgCur = null;
+    if (lgRows && window.matchMedia('(hover: hover)').matches) {
+      /* the loupe trails the cursor a little (lerp in rAF) so it feels like a heavy drop of glass, not a crosshair */
+      var lgT = { x: 0, y: 0 }, lgP = { x: 0, y: 0 }, lgRaf = 0;
+      var lgStep = function () {
+        lgRaf = 0;
+        if (!lgCur) return;
+        var k = reduce ? 1 : 0.22;
+        lgP.x += (lgT.x - lgP.x) * k; lgP.y += (lgT.y - lgP.y) * k;
+        lgCur.style.setProperty('--mx', lgP.x.toFixed(1) + 'px');
+        lgCur.style.setProperty('--my', lgP.y.toFixed(1) + 'px');
+        if (Math.abs(lgT.x - lgP.x) > 0.3 || Math.abs(lgT.y - lgP.y) > 0.3) lgRaf = requestAnimationFrame(lgStep);
+      };
+      lgRows.addEventListener('pointermove', function (e) {
+        var tile = e.target.closest('.lg-tile'); if (!tile) return;
+        var r = tile.getBoundingClientRect();
+        lgT.x = e.clientX - r.left; lgT.y = e.clientY - r.top;
+        if (tile !== lgCur) {
+          lgCur = tile;
+          var im = $('img', tile), src = im && (im.currentSrc || im.src);
+          if (src) tile.style.setProperty('--img', 'url("' + src + '")');
+          tile.style.setProperty('--w', r.width.toFixed(1) + 'px');
+          tile.style.setProperty('--h', r.height.toFixed(1) + 'px');
+          tile.style.setProperty('--lens', Math.round(r.height * 0.9) + 'px');
+          lgP.x = lgT.x; lgP.y = lgT.y; /* a new tile: the loupe appears right under the cursor */
+        }
+        if (!lgRaf) lgRaf = requestAnimationFrame(lgStep);
+      });
+      lgRows.addEventListener('pointerleave', function () { lgCur = null; });
+    }
+
     /* ---------- showcase: devices ---------- */
     var sc = $('[data-sc]');
     if (sc) {
       var pages = $$('[data-sc-page]', sc), mpages = $$('[data-sc-mpage]', sc), caps = $$('.sc-cap', sc);
-      var cur = -1, timer = 0, anims = [], scIn = false, DUR = 9000;
+      var cur = -1, timer = 0, anims = [], scIn = false, DUR = 9000, frameTimer = 0;
+      var cycleFrames = function (i) {
+        clearInterval(frameTimer);
+        var boxes = [pages[i], mpages[i]].map(function (p) { return p && $('[data-sc-frames]', p); }).filter(Boolean);
+        if (!boxes.length) return;
+        var n = $$('.sc-frame', boxes[0]).length, k = 0;
+        boxes.forEach(function (b) { $$('.sc-frame', b).forEach(function (im, j) { im.classList.toggle('is-on', j === 0); }); });
+        if (n < 2 || reduce) return;
+        frameTimer = setInterval(function () {
+          k = (k + 1) % n;
+          boxes.forEach(function (b) { $$('.sc-frame', b).forEach(function (im, j) { im.classList.toggle('is-on', j === k); }); });
+        }, Math.round(DUR / n));
+      };
       var scrollImg = function (page, dur) {
         var box = $('.sc-scroll', page), img = box && $('img', box);
         if (!img || reduce || !img.animate) return null;
@@ -180,6 +226,7 @@
         caps.forEach(function (c, k) { c.hidden = k !== i; });
         anims.forEach(function (a) { if (a) a.cancel(); }); anims = [];
         anims.push(scrollImg(pages[i], DUR), scrollImg(mpages[i], DUR));
+        cycleFrames(i);
         stabs.forEach(function (t) { t.classList.remove('is-timing'); });
         clearTimeout(timer);
         if (!user && scIn) {
@@ -194,7 +241,7 @@
           scIn = en[0].isIntersecting;
           if (scIn && cur < 0) show(0);
           else if (scIn && !timer) { var c = cur; cur = -1; show(c); }
-          if (!scIn) { clearTimeout(timer); timer = 0; }
+          if (!scIn) { clearTimeout(timer); timer = 0; clearInterval(frameTimer); }
         }, { threshold: 0.3 }).observe(sc);
       } else show(0);
     }
@@ -205,14 +252,18 @@
       var passes = $$('[data-wl-pass]', wl), idx = $$('[data-wl-go]', wl), open = 0;
       var stackEl = $('[data-wl-stack]', wl);
       var layoutW = function () {
-        var ph = passes[0].offsetHeight, rest = passes.length - 1, sliver = 14, peek = 64;
-        stackEl.style.height = (ph + 24 + rest * sliver + peek) + 'px';
+        /* карман кошелька внизу; закрытые карты стоят в нём стопкой и видны «корешками» по strip px каждая */
+        var ph = passes[0].offsetHeight, rest = passes.length - 1, strip = 46, gap = 26, pocketH = 124, tail = 30;
+        var pocketTop = ph + gap + rest * strip + tail;
+        stackEl.style.height = (pocketTop + pocketH) + 'px';
+        stackEl.style.setProperty('--pocket-h', pocketH + 'px');
         var k = 0;
         passes.forEach(function (p, i) {
-          if (i === open) { p.style.setProperty('--y', '0px'); p.style.setProperty('--s', '1'); p.style.zIndex = 20; p.classList.add('is-open'); p.setAttribute('aria-expanded', 'true'); }
+          if (i === open) { p.style.setProperty('--y0', '0px'); p.style.setProperty('--s', '1'); p.style.zIndex = 20; p.classList.add('is-open'); p.setAttribute('aria-expanded', 'true'); }
           else {
-            var y = ph + 24 + k * sliver; k++;
-            p.style.setProperty('--y', y + 'px'); p.style.setProperty('--s', (0.9 + k * 0.016).toFixed(3)); p.style.zIndex = 10 + k; p.classList.remove('is-open'); p.setAttribute('aria-expanded', 'false');
+            var y = ph + gap + k * strip;
+            p.style.setProperty('--y0', y + 'px'); p.style.setProperty('--s', (0.94 + k * 0.012).toFixed(3)); p.style.zIndex = 10 + k; p.classList.remove('is-open'); p.setAttribute('aria-expanded', 'false');
+            k++;
           }
         });
         idx.forEach(function (b, i) { if (i === open) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
@@ -222,7 +273,7 @@
       idx.forEach(function (b, i) { b.addEventListener('click', function () { openPass(i); }); });
       window.addEventListener('resize', layoutW);
       /* intro: passes deal in from below */
-      passes.forEach(function (p) { p.style.setProperty('--y', '420px'); p.style.opacity = '0'; });
+      passes.forEach(function (p) { p.style.setProperty('--y0', '720px'); p.style.opacity = '0'; });
       onView(wl, function () {
         passes.forEach(function (p, i) { setTimeout(function () { p.style.opacity = '1'; layoutW(); }, reduce ? 0 : 120 * i); });
         if (!reduce) {

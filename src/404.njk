@@ -5,7 +5,7 @@ description: "Такой страницы нет."
 permalink: /404.html
 noindex: true
 ---
-<script>(function () { var b = "{{ '/' | url }}", p = location.pathname, l = document.documentElement.lang; ["uz", "en"].forEach(function (x) { if (l !== x && p.indexOf(b + x + "/") === 0) location.replace(b + x + "/404.html"); }); })();</script>
+<script>(function () { var b = "{{ '/' | url }}", p = location.pathname, l = document.documentElement.lang; {{ site.languages | reject("equalto", "ru") | list | dump | safe }}.forEach(function (x) { if (l !== x && p.indexOf(b + x + "/") === 0) location.replace(b + x + "/404.html"); }); })();</script>
 <section class="center-page">
   <div class="wrap">
     <h1 class="display">404</h1>

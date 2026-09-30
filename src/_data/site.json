@@ -3,6 +3,11 @@
   "short": "W2W",
   "domain": "https://w2w.uz",
   "origin": "https://abdumalikovn.github.io",
+  "languages": [
+    "ru",
+    "en"
+  ],
+  "languagesNote": "Языки сайта: ru всегда основной; чтобы включить узбекскую версию, добавьте \"uz\" (переводы уже лежат в src/_i18n/uz.json)",
   "tagline": "Company Brain и IT-аутсорсинг полного цикла из Ташкента",
   "description": "Win to Win внедряет Company Brain — второй мозг компании, который знает всё о ваших процессах, отвечает сотрудникам со ссылками на источники и сам выполняет рутину, — и разрабатывает ERP, CRM, мобильные и веб-платформы для компаний в Узбекистане, Казахстане, США и Европе.",
   "phone": "+998 95 535 35 55",
@@ -19,7 +24,8 @@
     {
       "id": "telegram",
       "name": "Telegram",
-      "href": ""
+      "href": "https://t.me/Abdumalikov_N",
+      "label": "Telegram"
     },
     {
       "id": "instagram",
@@ -29,7 +35,8 @@
     {
       "id": "linkedin",
       "name": "LinkedIn",
-      "href": ""
+      "href": "https://www.linkedin.com/company/win2wingroup",
+      "label": "LinkedIn"
     },
     {
       "id": "youtube",
@@ -49,8 +56,9 @@
     {
       "id": "whatsapp",
       "name": "WhatsApp",
-      "href": "https://wa.me/998955353555",
-      "label": "WhatsApp"
+      "href": "",
+      "label": "WhatsApp",
+      "note": "скрыт: по решению от 29.09 вместо WhatsApp используется Telegram"
     },
     {
       "id": "phone",
@@ -86,8 +94,51 @@
     "note": "Реальные цифры выплат партнёрам появятся после подтверждения бухгалтерией"
   },
   "game": {
-    "record": 18470,
+    "record": 27850,
     "holder": "Nuriddin Abdumalikov",
-    "role": "COO"
+    "role": "COO",
+    "note": "Таблица рекордов мини-игры: рекорд COO должен оставаться первым; разница между строками небольшая",
+    "board": [
+      {
+        "name": "Nuriddin Abdumalikov",
+        "role": "COO",
+        "score": 27850,
+        "photo": "nuriddin-abdumalikov",
+        "top": true
+      },
+      {
+        "name": "Fazliddin Mirzaqosimov",
+        "role": "CTO",
+        "score": 26980,
+        "photo": "fazliddin-mirzaqosimov"
+      },
+      {
+        "name": "Samariddin Paritdinov",
+        "role": "Backend",
+        "score": 26310,
+        "photo": "samariddin-paritdinov"
+      },
+      {
+        "name": "Akbarxo‘ja Po‘latxo‘jayev",
+        "role": "UI/UX",
+        "score": 25740,
+        "photo": "akbarxoja-polatxojayev"
+      },
+      {
+        "name": "Habibullo Axrorov",
+        "role": "Mobile",
+        "score": 25120,
+        "photo": "habibullo-axrorov"
+      }
+    ]
+  },
+  "map": {
+    "yandex": "https://yandex.uz/maps/-/CXU74-8r",
+    "google": "https://maps.app.goo.gl/s9DzCCjjpV1oQXSR6",
+    "note": "Ссылки на карты офиса; координаты для встроенной карты — ниже",
+    "lat": 41.340927,
+    "lng": 69.267365,
+    "zoom": 17,
+    "yandexOid": "84247498630"
   }
 }

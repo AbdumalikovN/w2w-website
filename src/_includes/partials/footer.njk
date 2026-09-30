@@ -45,9 +45,8 @@
       <div class="footer-col">
         <h2 class="footer-h">Настройки</h2>
         <div class="ft-lang" role="group" aria-label="Язык сайта">
-          <a href="{{ page.url | url }}" data-lang-link="ru" hreflang="ru" aria-current="true">RU</a>
-          <a href="{{ ('/uz' + page.url) | url }}" data-lang-link="uz" hreflang="uz">UZ</a>
-          <a href="{{ ('/en' + page.url) | url }}" data-lang-link="en" hreflang="en">EN</a>
+          {% for l in site.languages %}<a href="{{ (('/' + l) if l != 'ru' else '') + page.url | url }}" data-lang-link="{{ l }}" hreflang="{{ l }}"{% if l == 'ru' %} aria-current="true"{% endif %}>{{ l | upper }}</a>
+          {% endfor %}
         </div>
         <button class="ft-pref" type="button" data-theme-toggle aria-pressed="false"><span>Тёмная тема</span><span class="switch" aria-hidden="true"></span></button>
         <button class="ft-pref" type="button" data-sound-toggle aria-pressed="false"><span>Звук и музыка</span><span class="switch" aria-hidden="true"></span></button>

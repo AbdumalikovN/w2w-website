@@ -36,9 +36,9 @@
         <button class="hd-tool hd-lang-btn" type="button" aria-expanded="false" aria-controls="lang-pop" aria-label="Язык сайта"><svg class="i" aria-hidden="true"><use href="#i-globe"/></svg><span data-lang-current>RU</span></button>
         <div class="lang-pop" id="lang-pop">
           <div class="lang-pop-in">
-            <a href="{{ cur | url }}" data-lang-link="ru" hreflang="ru" lang="ru" aria-current="true"><span class="lang-code">RU</span>Русский<svg class="i" aria-hidden="true"><use href="#i-check"/></svg></a>
-            <a href="{{ ('/uz' + cur) | url }}" data-lang-link="uz" hreflang="uz" lang="uz"><span class="lang-code">UZ</span>O‘zbekcha<svg class="i" aria-hidden="true"><use href="#i-check"/></svg></a>
-            <a href="{{ ('/en' + cur) | url }}" data-lang-link="en" hreflang="en" lang="en"><span class="lang-code">EN</span>English<svg class="i" aria-hidden="true"><use href="#i-check"/></svg></a>
+            {% set langNames = { ru: "Русский", uz: "O‘zbekcha", en: "English" } %}
+            {% for l in site.languages %}<a href="{{ (('/' + l) if l != 'ru' else '') + cur | url }}" data-lang-link="{{ l }}" hreflang="{{ l }}" lang="{{ l }}"{% if l == 'ru' %} aria-current="true"{% endif %}><span class="lang-code">{{ l | upper }}</span>{{ langNames[l] }}<svg class="i" aria-hidden="true"><use href="#i-check"/></svg></a>
+            {% endfor %}
           </div>
         </div>
       </div>
@@ -72,9 +72,8 @@
       </nav>
       <div class="mnav-prefs">
         <div class="mnav-lang" role="group" aria-label="Язык сайта">
-          <a href="{{ cur | url }}" data-lang-link="ru" hreflang="ru" aria-current="true">RU</a>
-          <a href="{{ ('/uz' + cur) | url }}" data-lang-link="uz" hreflang="uz">UZ</a>
-          <a href="{{ ('/en' + cur) | url }}" data-lang-link="en" hreflang="en">EN</a>
+          {% for l in site.languages %}<a href="{{ (('/' + l) if l != 'ru' else '') + cur | url }}" data-lang-link="{{ l }}" hreflang="{{ l }}"{% if l == 'ru' %} aria-current="true"{% endif %}>{{ l | upper }}</a>
+          {% endfor %}
         </div>
         <button class="mnav-pref" type="button" data-theme-toggle aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-moon"/></svg><span>Тёмная тема</span><span class="switch" aria-hidden="true"></span></button>
         <button class="mnav-pref" type="button" data-sound-toggle aria-pressed="false"><svg class="i" aria-hidden="true"><use href="#i-speaker"/></svg><span>Звук и музыка</span><span class="switch" aria-hidden="true"></span></button>

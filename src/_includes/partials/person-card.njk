@@ -15,12 +15,11 @@
     <p class="tm-role">{{ c.role }}</p>
     <p class="tm-short">{{ c.short }}</p>
     {% set so = c.socials %}
-    {% if so.telegram or so.instagram or so.linkedin or so.whatsapp or so.email %}
+    {% if so.telegram or so.instagram or so.linkedin or so.email %}
     <div class="tm-soc">
       {% if so.telegram %}<a class="tm-s tm-s-tg" href="{{ so.telegram | tgHref }}" target="_blank" rel="noopener" aria-label="Telegram: {{ c.name }}" title="Telegram"><svg aria-hidden="true"><use href="#i-telegram"/></svg></a>{% endif %}
       {% if so.instagram %}<a class="tm-s tm-s-ig" href="{{ so.instagram | igHref }}" target="_blank" rel="noopener" aria-label="Instagram: {{ c.name }}" title="Instagram"><svg aria-hidden="true"><use href="#i-instagram"/></svg></a>{% endif %}
       {% if so.linkedin %}<a class="tm-s tm-s-in" href="{{ so.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn: {{ c.name }}" title="LinkedIn"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>{% endif %}
-      {% if so.whatsapp %}<a class="tm-s tm-s-wa" href="{{ so.whatsapp | waHref }}" target="_blank" rel="noopener" aria-label="WhatsApp: {{ c.name }}" title="WhatsApp"><svg aria-hidden="true"><use href="#i-whatsapp"/></svg></a>{% endif %}
       {% if so.email %}<a class="tm-s tm-s-mail" href="mailto:{{ so.email }}" aria-label="Почта: {{ c.name }}" title="{{ so.email }}"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>{% endif %}
     </div>
     {% endif %}
