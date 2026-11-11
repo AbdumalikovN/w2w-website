@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BigMart в госзакупках</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400..800&display=swap">
+<script>(function(){var r=document.documentElement,t=null;try{t=localStorage.getItem("bmgov-theme")}catch(e){}if(t){r.setAttribute("data-theme",t)}else if(!r.getAttribute("data-theme")){r.setAttribute("data-theme",window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}})();</script>
+<style>
+:root{
+  /* Layout: floating glass capsule with section tabs on top, one wide column of grouped cards below. Win to Win tokens, light and dark. */
+  color-scheme:light;
+  --brand:#0abcf3;--brand-deep:#0797c4;--brand-ink:#0a6f93;--brand-rgb:10,188,243;
+  --green:#07e7b7;--green-deep:#05b58f;--green-rgb:7,231,183;--ok:#067a62;
+  --shark:#232325;--danger:#e5484d;--danger-ink:#c2333a;--warn:#ffb020;--warn-ink:#8a5a00;--bm-ink:#2343c7;--on-brand:#232325;
+  --bg:#f2f3f5;--bg-elev:#ffffff;--bg-elev-2:#f7f8fa;--ink:#232325;--ink-soft:#3a3a3e;--label-2:#616166;--label-3:#6c6c70;
+  --sep:rgba(60,60,67,.13);--fill:rgba(120,120,128,.12);--fill-2:rgba(120,120,128,.2);--ink-fill:#232325;--on-ink:#ffffff;--link:var(--brand-ink);--thumb:#ffffff;
+  --g-fill-thin:rgba(255,255,255,.26);--g-fill-thick:rgba(250,251,253,.78);--g-rim:rgba(255,255,255,.95);--g-rim-lo:rgba(255,255,255,.28);--g-rim-side:rgba(255,255,255,.55);--g-edge:rgba(20,40,60,.07);--g-spec:rgba(255,255,255,.55);
+  --g-shadow:0 1px 1px rgba(16,40,60,.04),0 10px 30px -10px rgba(16,40,60,.22),0 2px 6px -2px rgba(16,40,60,.08);
+  --amb-1:rgba(10,188,243,.34);--amb-2:rgba(7,231,183,.26);--amb-3:rgba(120,190,255,.3);
+  --grad:linear-gradient(100deg,#0787b4 0%,#0797c4 40%,#05a585 100%);
+  --r-xl:40px;--r-lg:28px;--r-md:22px;--r-sm:14px;
+  --shadow-1:0 1px 2px rgba(20,20,30,.04),0 8px 24px rgba(20,20,30,.06);
+  --spring:cubic-bezier(.32,.72,0,1);--ease-out:cubic-bezier(.16,1,.3,1);
+  --font:Onest,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#08090b;--bg-elev:#131418;--bg-elev-2:#1a1b20;--ink:#f2f3f5;--ink-soft:#d4d6db;--label-2:#a3a7af;--label-3:#83878f;
+  --sep:rgba(255,255,255,.09);--fill:rgba(125,128,140,.18);--fill-2:rgba(125,128,140,.28);--ink-fill:#f2f3f5;--on-ink:#0b0b0d;--link:#5fd2f7;--brand-ink:#5fd2f7;--thumb:#3a3b42;
+  --ok:#3be9c4;--danger-ink:#ff8f94;--warn-ink:#ffc45c;--bm-ink:#9db1ff;
+  --g-fill-thin:rgba(40,42,50,.3);--g-fill-thick:rgba(22,23,28,.8);--g-rim:rgba(255,255,255,.26);--g-rim-lo:rgba(255,255,255,.06);--g-rim-side:rgba(255,255,255,.12);--g-edge:rgba(255,255,255,.06);--g-spec:rgba(255,255,255,.16);
+  --g-shadow:0 1px 1px rgba(0,0,0,.3),0 14px 36px -12px rgba(0,0,0,.7),0 2px 6px -2px rgba(0,0,0,.4);
+  --amb-1:rgba(10,188,243,.26);--amb-2:rgba(7,231,183,.16);--amb-3:rgba(70,110,255,.16);
+  --grad:linear-gradient(100deg,#36cdfb 0%,#0abcf3 40%,#07e7b7 100%);
+  --shadow-1:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{font-size:17px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:lining-nums}
+.aurora{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(44vw 34vw at 10% -8%,var(--amb-1),transparent 70%),radial-gradient(38vw 30vw at 98% 6%,var(--amb-2),transparent 70%),radial-gradient(48vw 36vw at 72% 108%,var(--amb-3),transparent 72%)}
+a{color:var(--link);text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+button{font-family:inherit}
+:focus-visible{outline:3px solid rgba(var(--brand-rgb),.65);outline-offset:2px;border-radius:10px}
+h1,h2,h3{margin:0;text-wrap:balance}
+h1{font-size:clamp(2.3rem,5.6vw,4.4rem);font-weight:800;line-height:.98;letter-spacing:-.05em;margin-bottom:.42em;max-width:17ch}
+h2{font-size:clamp(1.5rem,2.7vw,2.1rem);font-weight:800;line-height:1.08;letter-spacing:-.035em;margin:2.7em 0 .75em}
+h3{font-size:1.06rem;font-weight:700;line-height:1.3;letter-spacing:-.01em;margin:1.6em 0 .4em}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{margin:0 0 1em;max-width:66ch}
+ul,ol{max-width:66ch;padding-left:1.25em;margin:0 0 1em}
+li{margin-bottom:.4em}
+.lead{font-size:clamp(1.06rem,1.6vw,1.26rem);font-weight:500;color:var(--label-2);line-height:1.45;max-width:58ch}
+.muted{color:var(--label-2)}
+.small{font-size:.88rem}
+.glass{background-color:var(--g-fill-thick);background-image:radial-gradient(130% 90% at 18% -12%,var(--g-spec),rgba(255,255,255,0) 48%);-webkit-backdrop-filter:blur(30px) saturate(190%);backdrop-filter:blur(30px) saturate(190%);box-shadow:var(--g-shadow),inset 0 1px 0 0 var(--g-rim),inset 1px 0 0 0 var(--g-rim-side),inset 0 -1px 0 0 var(--g-rim-lo),inset -1px 0 0 0 var(--g-rim-lo),0 0 0 .5px var(--g-edge)}
+
+/* header capsule */
+.top{position:sticky;top:0;z-index:5;padding:12px clamp(10px,3vw,28px) 0}
+.capsule{display:flex;align-items:center;gap:8px;max-width:1240px;margin:0 auto;padding:7px 8px 7px 18px;border-radius:26px;min-height:56px}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);font-weight:700;letter-spacing:-.02em;white-space:nowrap;flex:none}
+.logo-mark{width:21px;height:26px;color:var(--brand);flex:none}
+.brand-x{font-weight:500;color:var(--label-2);padding-left:11px;margin-left:2px;border-left:1px solid var(--sep)}
+.tabsbar{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin:0 auto;padding:2px;min-width:0}
+.tabsbar::-webkit-scrollbar{display:none}
+.tabsbar a{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;color:var(--ink);text-decoration:none;font-size:.88rem;font-weight:500;white-space:nowrap;transition:background-color .16s ease}
+.tabsbar a:hover{background:var(--fill)}
+.tabsbar a[aria-current="page"]{background:var(--ink-fill);color:var(--on-ink);font-weight:600}
+.tabsbar .n{font-size:.7rem;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--fill-2);font-variant-numeric:tabular-nums}
+.tabsbar a[aria-current="page"] .n{background:rgba(127,127,127,.4)}
+.iconbtn{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--fill);color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:transform .16s var(--ease-out)}
+.iconbtn:active{transform:scale(.92)}
+.iconbtn .sun{display:none}
+:root[data-theme="dark"] .iconbtn .sun{display:block}
+:root[data-theme="dark"] .iconbtn .moon{display:none}
+
+main{max-width:1240px;margin:0 auto;padding:clamp(30px,5vw,68px) clamp(16px,4vw,40px) 70px;min-width:0}
+.page{display:none}
+.page.on{display:block;animation:pagein .5s var(--ease-out)}
+@keyframes pagein{from{opacity:.2;transform:translateY(10px)}to{opacity:1;transform:none}}
+.next{margin:3.2em 0 0;padding-top:1.1em;border-top:1px solid var(--sep);font-weight:600;max-width:none}
+.foot{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px) 44px;color:var(--label-2);font-size:.84rem;display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between}
+.foot a{color:var(--label-2)}
+
+/* buttons */
+.btn{--h:50px;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:var(--h);padding:0 24px;border-radius:999px;font:600 16px/1 var(--font);letter-spacing:-.01em;text-decoration:none;white-space:nowrap;border:0;cursor:pointer;background:var(--ink-fill);color:var(--on-ink);box-shadow:0 1px 1px rgba(0,0,0,.08),0 8px 20px -10px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(0,0,0,.2);transition:transform .16s var(--ease-out),background-color .3s ease}
+.btn:active{transform:scale(.97)}
+.btn-brand{background:var(--brand);color:var(--on-brand);box-shadow:0 1px 1px rgba(0,0,0,.06),0 10px 26px -10px rgba(var(--brand-rgb),.8),inset 0 1px 0 rgba(255,255,255,.5),inset 0 -1px 0 rgba(0,0,0,.12)}
+.btn-brand:hover{background:#29c7f7}
+.btn-glass{background:var(--g-fill-thin);color:var(--ink);-webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);box-shadow:inset 0 1px 0 0 var(--g-rim),inset 0 -1px 0 0 var(--g-rim-lo),0 0 0 .5px var(--g-edge),0 6px 18px -10px rgba(0,0,0,.25)}
+.btn-sm{--h:38px;padding:0 16px;font-size:14.5px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 8px}
+.linkbtn{font:600 .86rem var(--font);color:var(--link);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* segmented controls */
+.tabs,.filters,.segmented{display:inline-flex;flex-wrap:wrap;gap:2px;padding:3px;border-radius:14px;background:var(--fill);margin:20px 0 10px;max-width:100%}
+.tabs button,.filters button,.segmented button{font:500 14.5px/1.25 var(--font);padding:9px 14px;border-radius:11px;border:0;background:transparent;color:var(--ink);cursor:pointer;white-space:nowrap;transition:background-color .2s ease}
+.tabs button[aria-selected="true"],.filters button[aria-pressed="true"],.segmented button[aria-selected="true"]{background:var(--thumb);font-weight:700;box-shadow:0 3px 8px rgba(0,0,0,.12),0 3px 1px rgba(0,0,0,.04)}
+.tabs button span{font-weight:500;color:var(--label-2);margin-left:5px}
+
+/* cards, figures, tables */
+.scroll{overflow-x:auto}
+figure{margin:28px 0 34px;background:var(--bg-elev);border-radius:var(--r-lg);padding:clamp(16px,3vw,30px);box-shadow:var(--shadow-1)}
+figure svg{display:block;width:100%;height:auto;min-width:780px;color:var(--ink)}
+figcaption{font-size:.88rem;color:var(--label-2);max-width:74ch;margin-top:14px}
+.tcard{background:var(--bg-elev);border-radius:var(--r-md);box-shadow:var(--shadow-1)}
+table{width:100%;border-collapse:collapse;font-size:.94rem;line-height:1.42}
+th{text-align:left;font-size:.8rem;font-weight:600;color:var(--label-2);padding:14px 20px 10px;border-bottom:1px solid var(--sep);vertical-align:bottom}
+td{border-bottom:1px solid var(--sep);padding:13px 20px;vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.k{font-weight:600}
+tr.hot td{background:rgba(255,176,32,.14)}
+tr.hot td:first-child{box-shadow:inset 4px 0 0 var(--warn)}
+td.num{font-weight:800;font-size:1.25rem;letter-spacing:-.03em;width:3rem;color:var(--label-2)}
+.chip{display:inline-block;font-size:12.5px;font-weight:600;line-height:1.5;padding:2px 10px;border-radius:999px;background:var(--fill);color:var(--ink-soft);white-space:nowrap}
+.chip.bm{background:rgba(60,96,235,.15);color:var(--bm-ink)}
+.chip.w2w{background:rgba(var(--brand-rgb),.17);color:var(--brand-ink)}
+.chip.crit{background:rgba(229,72,77,.15);color:var(--danger-ink)}
+.chip.ok{background:rgba(var(--green-rgb),.2);color:var(--ok)}
+.chip.part{background:rgba(255,176,32,.22);color:var(--warn-ink)}
+.callout{background:var(--brand);color:var(--on-brand);padding:20px 24px;border-radius:var(--r-lg);max-width:78ch;margin:24px 0;box-shadow:0 18px 40px -22px rgba(var(--brand-rgb),.9)}
+.callout p{margin:0;max-width:none}
+.callout a{color:var(--on-brand);font-weight:600}
+
+/* overview */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:26px 0 12px}
+.fact{background:var(--bg-elev);border-radius:var(--r-md);padding:20px 22px 22px;box-shadow:var(--shadow-1)}
+.fact b{display:block;font-size:clamp(1.7rem,3vw,2.5rem);font-weight:800;letter-spacing:-.045em;line-height:1;white-space:nowrap}
+.fact span{display:block;font-size:.9rem;color:var(--label-2);margin-top:10px;line-height:1.3}
+.fact:first-child{background:var(--brand);color:var(--on-brand)}
+.fact:first-child span{color:rgba(35,35,37,.8)}
+.scale{margin-top:4px}
+.scale-bar{position:relative;height:30px;border-radius:10px;background:rgba(var(--brand-rgb),.2)}
+.scale-bar i{position:absolute;left:0;top:-7px;bottom:-7px;width:1%;min-width:6px;background:var(--green-deep);border-radius:4px}
+.scale-lab{display:flex;justify-content:space-between;gap:24px;margin-top:16px;font-size:.94rem}
+.scale-lab b{display:block}
+.scale-lab div:last-child{text-align:right}
+.todo{display:grid;background:var(--bg-elev);border-radius:var(--r-md);box-shadow:var(--shadow-1);overflow:hidden;max-width:940px}
+.todo a{display:grid;grid-template-columns:minmax(0,16rem) minmax(0,1fr) 10px;gap:4px 22px;align-items:center;padding:17px 22px;border-bottom:1px solid var(--sep);text-decoration:none;color:var(--ink);transition:background-color .16s ease}
+.todo a:last-child{border-bottom:0}
+.todo a:hover{background:var(--fill)}
+.todo a::after{content:"";width:8px;height:8px;border-right:2px solid var(--label-3);border-top:2px solid var(--label-3);transform:rotate(45deg)}
+.todo a b{font-weight:700}
+.todo a span{color:var(--label-2);font-size:.94rem}
+.path{list-style:none;padding:0;margin:18px 0 12px;max-width:none;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;counter-reset:st}
+.path li{counter-increment:st;margin:0;padding:16px 16px 18px;border-radius:var(--r-md);background:var(--bg-elev);box-shadow:var(--shadow-1);font-size:.86rem;line-height:1.35}
+.path li::before{content:counter(st);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:3px solid var(--fill-2);font-weight:800;font-size:.9rem;color:var(--label-2)}
+.path li b{display:block;margin:12px 0 4px;font-size:.96rem;line-height:1.2}
+.path li span{color:var(--label-2)}
+.path li.now::before{border-color:var(--green-deep);color:var(--ok)}
+.path li.now b::after{content:"сейчас";display:inline-block;margin-left:6px;font-size:.7rem;font-weight:600;padding:1px 8px;border-radius:999px;background:rgba(var(--green-rgb),.2);color:var(--ok);vertical-align:2px}
+
+/* MVP, model */
+.flow5{list-style:none;padding:0;margin:20px 0;max-width:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;counter-reset:f}
+.flow5 li{counter-increment:f;margin:0;background:var(--bg-elev);border-radius:var(--r-md);padding:18px 20px 20px;font-size:.9rem;line-height:1.4;color:var(--label-2);box-shadow:var(--shadow-1)}
+.flow5 li::before{content:counter(f);font-weight:800;font-size:1.5rem;line-height:1;letter-spacing:-.04em;color:var(--brand-deep)}
+.flow5 svg{display:block;width:100%;height:auto;min-width:0;margin:10px 0 12px;color:var(--ink)}
+.flow5 b{display:block;font-size:1.02rem;margin-bottom:4px;color:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:14px 0}
+.two h3{margin-top:0}
+.two ul{padding-left:1.1em;margin:0}
+.box{background:var(--bg-elev);border-radius:var(--r-md);padding:22px 24px;box-shadow:var(--shadow-1)}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:16px 0 12px}
+.rules div{background:var(--bg-elev);border-radius:var(--r-md);padding:18px 20px 20px;box-shadow:var(--shadow-1)}
+.rules dt{font-size:.86rem;color:var(--label-2)}
+.rules dd{margin:6px 0 0;font-weight:700;font-size:1.12rem;letter-spacing:-.02em;line-height:1.25}
+.rules dd small{display:block;font-weight:400;font-size:.86rem;letter-spacing:0;color:var(--label-2);margin-top:5px}
+.qa3{display:grid;background:var(--bg-elev);border-radius:var(--r-md);box-shadow:var(--shadow-1);max-width:940px;padding:4px 24px}
+.qa3 section{padding:18px 0 8px;border-bottom:1px solid var(--sep)}
+.qa3 section:last-child{border-bottom:0}
+.qa3 h3{margin:0 0 8px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+
+/* tasks */
+.crit4{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch;margin:18px 0 8px}
+.crit4 div{background:var(--bg-elev);box-shadow:var(--shadow-1),inset 4px 0 0 var(--danger);border-radius:var(--r-sm);padding:12px 16px 13px 20px;font-size:.9rem;line-height:1.3;flex:1 1 170px}
+.crit4 div b{display:block;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.crit4 .res4{box-shadow:none;background:var(--ink-fill);color:var(--on-ink);display:flex;align-items:center;font-weight:700}
+.board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:14px;align-items:start}
+.col h3{font-size:1.3rem;font-weight:800;letter-spacing:-.03em;margin:0 0 2px}
+.col>p{font-size:.86rem;color:var(--label-2);margin:0 0 12px}
+.task{background:var(--bg-elev);border-radius:var(--r-sm);box-shadow:var(--shadow-1);padding:14px 16px 15px;margin-bottom:10px;display:grid;grid-template-columns:2.1rem minmax(0,1fr);gap:2px 8px}
+.task.crit{box-shadow:var(--shadow-1),inset 4px 0 0 var(--danger)}
+.task .no{font-weight:800;font-size:1.25rem;letter-spacing:-.03em;line-height:1.2;color:var(--label-3);grid-row:span 3}
+.task b{line-height:1.3;font-weight:600}
+.task .res{font-size:.86rem;color:var(--label-2);line-height:1.35}
+.task .meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.86rem;color:var(--label-2);margin:10px 0 0;max-width:none}
+
+/* questions */
+#qpanel{background:var(--bg-elev);border-radius:var(--r-md);box-shadow:var(--shadow-1);padding:8px 24px 6px;max-width:980px}
+.qhead{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding:14px 0 16px;border-bottom:1px solid var(--sep)}
+.qhead p{margin:0;max-width:56ch}
+.qhead .acts{display:flex;flex-wrap:wrap;gap:8px}
+.q{display:grid;grid-template-columns:2.3rem minmax(0,1fr);gap:0 10px;padding:15px 0 14px;border-bottom:1px solid var(--sep)}
+.q:last-child{border-bottom:0}
+.q .no{font-weight:800;font-size:1.3rem;letter-spacing:-.03em;line-height:1.25;color:var(--label-3)}
+.q p{margin:0;max-width:none}
+.q .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.q .ans{font:inherit;font-size:.95rem;width:100%;min-height:78px;margin-top:10px;padding:11px 13px;border:1px solid var(--sep);border-radius:var(--r-sm);background:var(--bg-elev-2);color:var(--ink);resize:vertical}
+
+/* meetings */
+.order{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0 8px;list-style:none;padding:0;max-width:none}
+.order li{margin:0;padding:18px 20px 20px;border-radius:var(--r-md);background:var(--bg-elev);box-shadow:var(--shadow-1);font-size:.9rem;line-height:1.35;color:var(--label-2)}
+.order li b{display:block;font-size:1.04rem;margin:8px 0 3px;color:var(--ink)}
+.order li i{font-style:normal;font-weight:800;font-size:1.7rem;letter-spacing:-.04em;line-height:1;color:var(--brand-deep)}
+.order li.spare{background:transparent;box-shadow:inset 0 0 0 1.5px var(--fill-2)}
+.order li.spare i{color:var(--label-2);font-size:.86rem;font-weight:600;letter-spacing:0}
+.orgs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.org{background:var(--bg-elev);border-radius:var(--r-lg);box-shadow:var(--shadow-1);padding:22px 24px 20px}
+.org h3{margin:10px 0 2px;font-size:1.14rem}
+.org h3 a{color:var(--ink)}
+.org .role{color:var(--label-2);font-size:.92rem;margin:0 0 12px}
+.org dl{margin:0;display:grid;grid-template-columns:7.4rem minmax(0,1fr);gap:8px 12px;font-size:.92rem;line-height:1.4}
+.org dt{color:var(--label-2)}
+.org dd{margin:0}
+.org .ask{margin-top:14px;padding-top:14px;border-top:1px solid var(--sep);display:grid;gap:10px;font-size:.92rem;line-height:1.4}
+.org .ask b{display:block;font-size:.8rem;color:var(--label-2);font-weight:600}
+.src{columns:2;column-gap:40px;max-width:none;padding:18px 24px 14px 44px;font-size:.94rem;background:var(--bg-elev);border-radius:var(--r-md);box-shadow:var(--shadow-1)}
+.src li{break-inside:avoid}
+
+/* prototype */
+.protobar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:20px 0 14px}
+.protobar .segmented{margin:0}
+.protoframe{border-radius:var(--r-lg);overflow:hidden;background:var(--bg-elev);box-shadow:var(--g-shadow),0 0 0 .5px var(--g-edge);margin:0 auto 14px;transition:max-width .45s var(--spring)}
+.protoframe.m{max-width:410px}
+.protochrome{display:flex;align-items:center;gap:7px;padding:10px 14px;background:var(--bg-elev-2);border-bottom:1px solid var(--sep);font-size:13px;color:var(--label-2)}
+.protochrome i{width:11px;height:11px;border-radius:50%;background:var(--fill-2);flex:none}
+.protochrome span{margin-left:8px;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#protoif{display:block;width:100%;height:min(84vh,880px);min-height:520px;border:0;background:#fff}
+.protoframe.full{position:fixed;inset:10px;z-index:20;max-width:none;margin:0;display:flex;flex-direction:column}
+.protoframe.full #protoif{flex:1;height:auto}
+.hints{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:16px 0}
+.hints div{background:var(--bg-elev);border-radius:var(--r-md);padding:18px 20px;box-shadow:var(--shadow-1);font-size:.92rem;color:var(--label-2);line-height:1.4}
+.hints b{display:block;color:var(--ink);font-size:1rem;margin-bottom:4px}
+
+#copybox{position:fixed;inset:0;background:rgba(8,9,11,.6);display:grid;place-items:center;padding:16px;z-index:30}
+#copybox[hidden]{display:none}
+#copybox .in{background:var(--bg-elev);border-radius:var(--r-lg);padding:20px;width:min(720px,100%);display:grid;gap:12px}
+#copybox textarea{font:inherit;font-size:.9rem;width:100%;height:46vh;padding:12px;border:1px solid var(--sep);border-radius:var(--r-sm);background:var(--bg-elev-2);color:var(--ink)}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ink-fill);color:var(--on-ink);padding:10px 20px;border-radius:999px;font-weight:600;font-size:.92rem;z-index:31}
+#toast[hidden]{display:none}
+
+@media (prefers-reduced-motion:reduce){.page.on{animation:none}.btn,.iconbtn,.protoframe{transition:none}}
+@media (max-width:1180px){
+  .capsule{flex-wrap:wrap;padding:8px 8px 6px 16px}
+  .tabsbar{order:3;flex-basis:100%;margin:0}
+  .iconbtn{margin-left:auto}
+  .path{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .flow5{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .rules{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  html{font-size:16px}
+  .board,.orgs,.two,.hints{grid-template-columns:minmax(0,1fr)}
+  .order,.facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .src{columns:1}
+}
+@media (max-width:620px){
+  .brand-x{display:none}
+  .path,.flow5,.rules,.order{grid-template-columns:minmax(0,1fr)}
+  .todo a{grid-template-columns:minmax(0,1fr) 10px}
+  .todo a span{grid-column:1}
+  .todo a::after{grid-row:1;grid-column:2}
+  .scale-lab{flex-direction:column;gap:8px}
+  .scale-lab div:last-child{text-align:left}
+  .org dl{grid-template-columns:minmax(0,1fr)}
+  .scroll table{min-width:600px}
+  #qpanel,.qa3{padding-left:16px;padding-right:16px}
+}
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+<header class="top">
+  <div class="capsule glass">
+    <a class="brand" href="#obzor"><svg class="logo-mark" viewBox="335 262 445 555" aria-hidden="true"><path fill="currentColor" d="M475.92,558.01l18.53-17.94s18.25,106.28,62.54,123.07c44.29,16.79,54.72-110.94,54.72-110.94l7.23-136.7,141.05-141.05s-28.68,508.29-151.48,530.89c0,0-64.87,12.17-106.6-148.28l-26.08-99.05h.08Z"/><path fill="currentColor" d="M344.75,612.26l14.46-14.03s14.26,83.01,48.83,96.13c34.61,13.12,42.75-86.6,42.75-86.6l5.65-106.75,110.15-110.15s-22.4,396.91-118.29,414.53c0,0-50.65,9.48-83.21-115.8l-20.35-77.36v.04Z"/></svg><span>Win to Win</span><span class="brand-x">BigMart в госзакупках</span></a>
+    <nav class="tabsbar" aria-label="Разделы">
+      <a href="#obzor" data-p="obzor">Обзор</a>
+      <a href="#zakon" data-p="zakon">Закон</a>
+      <a href="#model" data-p="model">Модель сделки</a>
+      <a href="#mvp" data-p="mvp">MVP</a>
+      <a href="#prototip" data-p="prototip">Прототип</a>
+      <a href="#zadachi" data-p="zadachi">Задачи <span class="n">18</span></a>
+      <a href="#voprosy" data-p="voprosy">Вопросы <span class="n">45</span></a>
+      <a href="#ploshchadki" data-p="ploshchadki">Встречи</a>
+    </nav>
+    <button type="button" class="iconbtn" id="themebtn" aria-label="Переключить светлую и тёмную тему"><svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a.7.7 0 0 0-.9-.8A9.5 9.5 0 1 0 20.800 15.400a.7.7 0 0 0-.8-.9z"/></svg><svg class="sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.500v2M12 19.500v2M2.500 12h2M19.500 12h2M5.300 5.300l1.400 1.400M17.300 17.300l1.400 1.400M5.300 18.700l1.400-1.400M17.300 6.700l1.400-1.400"/></svg></button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ ОБЗОР ============ -->
+<section class="page" id="p-obzor">
+<h1>BigMart выходит в госзакупки <span class="grad">через малую закупку</span></h1>
+<p class="lead">Школа, детский сад, вуз или поликлиника покупают недорогие товары без тендера. Достаточно получить цены у трёх поставщиков и заключить договор с тем, кто предложил наименьшую. Мы предлагаем провести этот путь в одном окне на каталоге BigMart.</p>
+<div class="cta"><a class="btn btn-brand" href="#voprosy">Ответить на вопросы</a><a class="btn btn-glass" href="#prototip">Открыть прототип</a></div>
+
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1060 270" role="img" aria-label="Малая закупка: потребность, запрос цен, три предложения, договор по наименьшей цене, публикация на портале за пять рабочих дней, оплата через казначейство. Модуль BigMart закрывает шаги до договора включительно." font-family="inherit">
+<defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>
+<g fill="none" stroke="currentColor" stroke-width="1.5">
+<rect x="20" y="60" width="140" height="64" rx="8"/><rect x="186" y="60" width="140" height="64" rx="8"/>
+<rect x="558" y="60" width="140" height="64" rx="8"/><rect x="724" y="60" width="140" height="64" rx="8"/><rect x="890" y="60" width="140" height="64" rx="8"/>
+<path d="M160 92H184" marker-end="url(#a1)"/><path d="M326 92H350" marker-end="url(#a1)"/><path d="M532 92H556" marker-end="url(#a1)"/><path d="M698 92H722" marker-end="url(#a1)"/><path d="M864 92H888" marker-end="url(#a1)"/>
+<rect x="352" y="30" width="180" height="34" rx="6" stroke-width="1.2"/><rect x="352" y="120" width="180" height="34" rx="6" stroke-width="1.2"/>
+</g>
+<rect x="352" y="75" width="180" height="34" rx="6" style="fill:rgba(var(--green-rgb),.18);stroke:var(--ok)" stroke-width="2.5"/>
+<rect x="452" y="43" width="68" height="8" rx="4" fill="currentColor" opacity=".3"/>
+<rect x="452" y="88" width="40" height="8" rx="4" style="fill:var(--ok)"/>
+<rect x="452" y="133" width="56" height="8" rx="4" fill="currentColor" opacity=".3"/>
+<g font-size="14" fill="currentColor">
+<text x="364" y="52">Продавец А</text><text x="364" y="97" font-weight="800" style="fill:var(--ok)">Продавец Б</text><text x="364" y="142">Продавец В</text>
+<text x="442" y="18" text-anchor="middle" font-size="13.5">три предложения, полоса показывает цену</text>
+<text x="442" y="177" text-anchor="middle" font-size="13.5" font-weight="800" style="fill:var(--ok)">наименьшая цена выигрывает</text>
+<g font-size="16" font-weight="800"><text x="32" y="85">Потребность</text><text x="198" y="85">Запрос цен</text><text x="570" y="85">Договор</text><text x="736" y="85">Портал</text><text x="902" y="85">Оплата</text></g>
+<g font-size="13.5"><text x="32" y="102">школа, детсад,</text><text x="32" y="116">вуз, поликлиника</text>
+<text x="198" y="102">минимум трём</text><text x="198" y="116">продавцам</text>
+<text x="570" y="102">с продавцом, чья</text><text x="570" y="116">цена наименьшая</text>
+<text x="736" y="102">xarid.icppa.uz,</text><text x="736" y="116">5 рабочих дней</text>
+<text x="902" y="102">казначейство</text><text x="902" y="116">платит продавцу</text></g>
+</g>
+<rect x="20" y="198" width="678" height="54" rx="8" style="fill:rgba(var(--brand-rgb),.14)"/>
+<rect x="724" y="198" width="306" height="54" rx="8" style="fill:var(--fill)"/>
+<g font-size="14" fill="currentColor">
+<text x="36" y="220" font-weight="800" style="fill:var(--brand-ink)">Делает модуль BigMart</text>
+<text x="36" y="239">собирает потребность, рассылает запрос, сравнивает цены, готовит документы</text>
+<text x="740" y="220" font-weight="800">Делает заказчик</text>
+<text x="740" y="239">модуль готовит файлы и напоминает</text>
+</g>
+</svg>
+</div>
+<figcaption>Так устроена упрощённая процедура закупки малой стоимости по закону. Модуль BigMart берёт на себя шаги до договора включительно. Публикацию и регистрацию выполняет заказчик.</figcaption>
+</figure>
+
+<div class="facts">
+  <div class="fact"><b>3</b><span>ценовых предложения минимум</span></div>
+  <div class="fact"><b>11 млн сум</b><span>лимит на один договор</span></div>
+  <div class="fact"><b>220 млн сум</b><span>лимит на заказчика в год</span></div>
+  <div class="fact"><b>5</b><span>рабочих дней на публикацию договора</span></div>
+</div>
+<p class="small muted">Лимиты указаны для бюджетного заказчика: 25 и 500 базовых расчётных величин. БРВ с 1 сентября 2026 года равна 440 000 сум. Основание: <a href="https://lex.uz/ru/docs/5382983">закон «О государственных закупках»</a>, глава 5¹.</p>
+
+<h2>Два контура</h2>
+<p>Малая закупка ограничена лимитом. Всё, что крупнее, бюджетные организации покупают в электронном магазине на площадках UZEX и Hayot Birja. Поэтому проект идёт двумя контурами, а MVP делаем для первого.</p>
+<figure>
+<div class="scale" role="img" aria-label="Лимит одного договора для бюджетного заказчика: 11 миллионов сум в малой закупке и 1,1 миллиарда сум в электронном магазине">
+  <div class="scale-bar"><i></i></div>
+  <div class="scale-lab">
+    <div><b>Контур 1. Малая закупка</b>до 11 млн сум на договор</div>
+    <div><b>Контур 2. Электронный магазин</b>до 1,1 млрд сум на договор по товарам</div>
+  </div>
+</div>
+<figcaption>Лимит одного договора для бюджетного заказчика. Шкала линейная: первый контур занимает сотую часть полосы.</figcaption>
+</figure>
+<div class="scroll tcard">
+<table>
+<thead><tr><th>Параметр</th><th>Контур 1. Малая закупка</th><th>Контур 2. Электронный магазин</th></tr></thead>
+<tbody>
+<tr><td class="k">Правовая основа</td><td>Глава 5¹ закона: упрощённая процедура закупки малой стоимости</td><td>Статьи 49–51 закона: электронный магазин</td></tr>
+<tr><td class="k">Где проходит</td><td>В кабинете BigMart, публикация на портале Агентства</td><td>На площадках UZEX и Hayot Birja</td></tr>
+<tr><td class="k">Роль BigMart</td><td>Оператор сервиса: запрос цен, сравнение, документы, доставка</td><td>Агрегатор: публикует оферты продавцов и отвечает на запросы цен</td></tr>
+<tr><td class="k">Что нужно для запуска</td><td>Решение по модели сделки и MVP</td><td>Договорённости с биржами и их интерфейсы</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Почему сейчас</h2>
+<ul>
+<li>С 1 октября 2026 года любая закупка идёт только по плану-графику на портале, а казначейство платит после публикации договора. Заказчику нужен цифровой след каждой закупки.</li>
+<li>Малая закупка по закону проходит вне электронных систем, поэтому площадки её не обслуживают. Она остаётся бумажной.</li>
+<li>У BigMart уже есть то, что нужно заказчику: каталог с ценами, продавцы, доставка и электронные документы.</li>
+<li>Масштаб: за первое полугодие 2026 года в стране заключено 1 099 305 договоров госзакупок (<a href="https://www.uzdaily.uz/ru/obem-goszakupok-v-uzbekistane-dostig-1884-trln-sumov/">UzDaily</a>). В стране 11 118 школ (<a href="https://stat.uz/img/news/obshchee-srednee-obrazovanie_p22745.pdf">Национальный комитет по статистике</a>).</li>
+</ul>
+
+<h2>Что нужно от BigMart сейчас</h2>
+<div class="todo">
+  <a href="#voprosy"><b>Ответить на вопросы</b><span>45 вопросов по четырём ролям: CEO, технический директор, юрист и финансы, операции.</span></a>
+  <a href="#prototip"><b>Посмотреть прототип</b><span>Кликабельный кабинет закупщика в стиле BigMart: пять шагов закупки, русский и узбекский.</span></a>
+  <a href="#model"><b>Принять решение по модели сделки</b><span>Договор с бюджетным заказчиком подписывает продавец, BigMart работает как оператор сервиса и доставки.</span></a>
+  <a href="#zadachi"><b>Закрыть задачи анализа</b><span>18 задач на две команды. Четыре из них критические: без них разработку начинать нельзя.</span></a>
+  <a href="#ploshchadki"><b>Провести встречи</b><span>Агентство, Hayot Birja и UZEX. Встречи проводим вместе с Ильхомом Омоновым.</span></a>
+</div>
+
+<h2>Путь к запуску</h2>
+<ol class="path">
+  <li class="now"><b>Вопросы и задачи</b><span>BigMart отвечает на вопросы, команды закрывают задачи анализа</span></li>
+  <li><b>Встречи</b><span>Агентство, Hayot Birja, UZEX</span></li>
+  <li><b>ТЗ и видение MVP</b><span>Дорабатываем по ответам и встречам, BigMart подтверждает</span></li>
+  <li><b>Коммерческое предложение</b><span>Готовим после подтверждения ТЗ</span></li>
+  <li><b>Разработка MVP</b><span>Модуль «Малая закупка»</span></li>
+  <li><b>Пилот</b><span>Первые бюджетные организации</span></li>
+  <li><b>Второй контур</b><span>Электронный магазин бирж</span></li>
+</ol>
+<p class="next">Дальше: <a href="#zakon">как устроена малая закупка</a></p>
+</section>
+
+<!-- ============ ЗАКОН И ПРОЦЕСС ============ -->
+<section class="page" id="p-zakon">
+<h1>Как устроена малая закупка и где теряется время</h1>
+<p class="lead">Сегодня малая закупка отнимает у бюджетной организации дни ручной работы. Модуль сокращает её до одного дня и убирает ошибки в документах.</p>
+
+<h2>Правила, которые нельзя нарушить</h2>
+<dl class="rules">
+  <div><dt>Источник цен</dt><dd>Запрос минимум у трёх поставщиков<small>или цены из открытых источников</small></dd></div>
+  <div><dt>Победитель</dt><dd>Наименьшая цена<small>договор заключается только с победителем</small></dd></div>
+  <div><dt>Лимит на один договор</dt><dd>11 000 000 сум<small>25 БРВ × 440 000 сум</small></dd></div>
+  <div><dt>Лимит на год</dt><dd>220 000 000 сум<small>500 БРВ × 440 000 сум, на заказчика</small></dd></div>
+  <div><dt>Публикация</dt><dd>5 рабочих дней<small>основания и договор, портал xarid.icppa.uz</small></dd></div>
+  <div><dt>Оплата</dt><dd>Через казначейство<small>после публикации и регистрации договора</small></dd></div>
+</dl>
+<p class="small muted">Объявление не публикуется, закупочная комиссия не нужна. Участник и его аффилированное лицо не могут участвовать в одной закупке. Нормы: <a href="https://lex.uz/ru/docs/5382983">закон о госзакупках</a>, <a href="https://lex.uz/ru/docs/7239170">поправки ЗРУ-1005</a>, <a href="https://buxgalter.uz/uz/publish/doc/text189777_razmery_brv_mrot_bvip_i_mpr_v_uzbekistane">размер БРВ</a>.</p>
+
+<h2>Как закупают сейчас и что меняет модуль</h2>
+<div class="scroll tcard">
+<table>
+<thead><tr><th></th><th>Сейчас</th><th>С модулем BigMart</th></tr></thead>
+<tbody>
+<tr><td class="num">1</td><td>Руководитель издаёт приказ, закупка вносится в план-график на портале</td><td class="muted">Без изменений: это делает заказчик</td></tr>
+<tr class="hot"><td class="num">2</td><td>Закупщик сам ищет трёх поставщиков: звонки, письма, знакомые</td><td>Запрос уходит продавцам каталога, у которых есть нужные товары</td></tr>
+<tr class="hot"><td class="num">3</td><td>Поставщики присылают ценовые предложения на бумаге или в мессенджере</td><td>Продавец подтверждает цену со своей страницы, предложение сохраняется в системе</td></tr>
+<tr class="hot"><td class="num">4</td><td>Закупщик сравнивает цены вручную и оформляет обоснование выбора</td><td>Система сравнивает предложения, показывает наименьшую цену и готовит обоснование</td></tr>
+<tr><td class="num">5</td><td>Договор подписывается с тем, кто дал наименьшую цену</td><td>Договор с победителем формируется по шаблону</td></tr>
+<tr><td class="num">6</td><td>Основания и договор размещаются на портале в течение 5 рабочих дней</td><td>Чек-лист и напоминание о сроке. Размещает заказчик</td></tr>
+<tr><td class="num">7</td><td>Договор регистрируется в казначействе, после поставки проходит оплата</td><td>BigMart доставляет товар, казначейство платит продавцу</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small muted" style="margin-top:12px">Основное время уходит на выделенные шаги 2–4. Там же появляются формальные предложения «для галочки» и ошибки, из-за которых задерживается оплата. Порядок описан по закону и справочным системам. На живых образцах его проверяет <a href="#zadachi">задача 6</a>.</p>
+
+<h2>Кому что даёт модуль</h2>
+<div class="scroll tcard">
+<table>
+<thead><tr><th>Участник</th><th>Что ему нужно</th><th>Что даёт модуль</th></tr></thead>
+<tbody>
+<tr><td class="k" style="white-space:normal">Закупщик школы, детсада, вуза, поликлиники</td><td>Быстро купить недорогие товары и не нарушить порядок</td><td>Три предложения и документы в одном окне</td></tr>
+<tr><td class="k" style="white-space:normal">Бухгалтерия заказчика</td><td>Правильный комплект для портала и казначейства</td><td>Шаблоны, чек-лист, контроль лимитов</td></tr>
+<tr><td class="k" style="white-space:normal">Продавец BigMart</td><td>Продажи госсектору без тендерной работы</td><td>Запрос цен приходит сам, ответ в один клик</td></tr>
+<tr><td class="k" style="white-space:normal">BigMart</td><td>Новый сегмент клиентов</td><td>Поток заказов от бюджетных организаций</td></tr>
+<tr><td class="k" style="white-space:normal">Агентство по промышленной кооперации и государственным закупкам</td><td>Прозрачность малых закупок</td><td>Цифровой след каждой закупки</td></tr>
+<tr><td class="k" style="white-space:normal">UZEX и Hayot Birja</td><td>Объём сделок в электронном магазине</td><td>Продавцы и каталог BigMart на втором контуре</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Три вопроса из обсуждения</h2>
+<div class="qa3">
+<section><h3>Ценовое предложение или договор? <span class="chip ok">по закону ясно</span></h3>
+<p>Закон требует запросить цены минимум у трёх поставщиков, а договор заключить только с победителем. Проекты договоров от всех трёх закон не требует. Что просит казначейство на практике, покажут образцы документов (задача 6).</p></section>
+<section><h3>Куда публиковать? <span class="chip ok">по закону ясно</span></h3>
+<p>На специальный информационный портал госзакупок xarid.icppa.uz. Его ведёт Агентство по промышленной кооперации и государственным закупкам.</p></section>
+<section><h3>Кто подписывает договор и платит? <span class="chip part">подтверждено частично</span></h3>
+<p>В школах и детсадах заявку на оплату подаёт само учреждение, а платёж проводит районное или областное управление образования через казначейство (<a href="https://pempal.org/sites/default/files/event/attachments/day2_group_discussions_uzbekistan_schools_rus.pdf">презентация казначейства, 2024</a>). Вузы с финансовой самостоятельностью сами получают бюджетные средства (<a href="https://lex.uz/uz/docs/5793256">ПП-61</a>).</p>
+<p>Кто подписывает договор малой закупки у школы и на кого считается годовой лимит, не подтверждено. Это выясняет задача 5.</p></section>
+</div>
+
+<h2>Допущения и риски</h2>
+<div class="scroll tcard">
+<table>
+<thead><tr><th>Риск</th><th>Что делаем</th></tr></thead>
+<tbody>
+<tr><td>Три предложения через одного комиссионера сочтут предложениями одного поставщика</td><td>Договор подписывает продавец, BigMart остаётся оператором. Подробности на странице <a href="#model">«Модель сделки»</a></td></tr>
+<tr><td>Заказчиком окажется районный отдел, а не школа. Тогда 220 млн сум в год приходится на весь район</td><td>Проверяем на пяти организациях до начала разработки</td></tr>
+<tr><td>На нужный товар нет трёх продавцов</td><td>Считаем покрытие каталога: задача 3</td></tr>
+<tr><td>Продавцы отвечают медленно</td><td>Цена из каталога подставляется сама, продавец только подтверждает</td></tr>
+<tr><td>Правила изменятся</td><td>Лимиты и шаблоны настраиваются без разработки</td></tr>
+</tbody>
+</table>
+</div>
+<p class="next">Дальше: <a href="#model">модель сделки</a></p>
+</section>
+
+<!-- ============ МОДЕЛЬ СДЕЛКИ ============ -->
+<section class="page" id="p-model">
+<h1>Договор с бюджетным заказчиком подписывает продавец</h1>
+<p class="lead">В госзакупке BigMart перестаёт быть стороной договора и остаётся оператором сервиса и доставки. Это единственное изменение логики BigMart, без которого модуль не запустить.</p>
+<div class="callout"><p><b>Нужно решение BigMart.</b> Проще немного изменить логику работы BigMart, чем добиваться изменения закона. Решение принимают CEO и юрист: <a href="#zadachi">задача 4</a>.</p></div>
+
+<figure>
+<div class="scroll">
+<svg viewBox="0 0 1060 340" role="img" aria-label="Слева действующая схема: покупатель заключает договор с BigMart как комиссионером, BigMart выплачивает продавцу. Справа режим Госзакупки: заказчик заключает договор напрямую с продавцом, казначейство платит продавцу, BigMart доставляет товар и получает от продавца вознаграждение за услугу." font-family="inherit">
+<defs>
+<marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="a2g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--ok)"/></marker>
+</defs>
+<line x1="520" y1="16" x2="520" y2="326" stroke="currentColor" stroke-opacity=".3" stroke-dasharray="4 6"/>
+<g font-size="17" font-weight="800" fill="currentColor"><text x="20" y="34">Сейчас: продажи бизнесу</text><text x="560" y="34">Режим «Госзакупки»</text></g>
+<!-- A -->
+<rect x="185" y="140" width="130" height="56" rx="8" style="fill:rgba(var(--brand-rgb),.16);stroke:var(--brand-deep)" stroke-width="2.5"/>
+<g fill="none" stroke="currentColor" stroke-width="1.5">
+<rect x="20" y="140" width="130" height="56" rx="8"/><rect x="350" y="140" width="130" height="56" rx="8"/>
+<path d="M150 158H183" marker-end="url(#a2)"/><path d="M315 158H348" marker-end="url(#a2)"/>
+<path d="M350 180H317" marker-end="url(#a2)"/><path d="M185 180H152" marker-end="url(#a2)"/>
+</g>
+<g fill="currentColor" text-anchor="middle">
+<g font-size="16" font-weight="800"><text x="85" y="173">Покупатель</text><text x="250" y="165" style="fill:var(--brand-ink)">BigMart</text><text x="415" y="173">Продавец</text></g>
+<text x="250" y="183" font-size="13" style="fill:var(--brand-ink)">комиссионер</text>
+<g font-size="13.5"><text x="167" y="128">договор, оплата</text><text x="332" y="128">выплата</text><text x="332" y="216">товар</text><text x="167" y="216">доставка,</text><text x="167" y="231">счёт-фактура</text></g>
+</g>
+<g font-size="14" fill="currentColor"><text x="20" y="284" font-weight="800">Сторона договора с покупателем: BigMart.</text><text x="20" y="303">Три его продавца для заказчика выглядят</text><text x="20" y="320">как один поставщик.</text></g>
+<!-- B -->
+<rect x="735" y="266" width="150" height="52" rx="8" style="fill:rgba(var(--brand-rgb),.16);stroke:var(--brand-deep)" stroke-width="2.5"/>
+<g fill="none" stroke="currentColor" stroke-width="1.5">
+<rect x="735" y="56" width="150" height="48" rx="8"/><rect x="560" y="150" width="150" height="56" rx="8"/><rect x="900" y="150" width="140" height="56" rx="8"/>
+<path d="M665 150L756 107" marker-end="url(#a2)"/><path d="M862 106L943 148" marker-end="url(#a2)"/>
+<path d="M758 266L667 209" marker-end="url(#a2)"/><path d="M945 208L864 265" marker-end="url(#a2)"/>
+</g>
+<path d="M713 178H897" fill="none" style="stroke:var(--ok)" stroke-width="3" marker-end="url(#a2g)" marker-start="url(#a2g)"/>
+<g fill="currentColor">
+<g font-size="16" font-weight="800" text-anchor="middle"><text x="810" y="85">Казначейство</text><text x="635" y="183">Заказчик</text><text x="970" y="183">Продавец</text><text x="810" y="290" style="fill:var(--brand-ink)">BigMart</text></g>
+<text x="810" y="307" font-size="13" text-anchor="middle" style="fill:var(--brand-ink)">сервис и доставка</text>
+<text x="805" y="167" font-size="14" font-weight="800" text-anchor="middle" style="fill:var(--ok)">договор, счёт-фактура</text>
+<g font-size="13.5"><text x="700" y="122" text-anchor="end">регистрация договора</text><text x="914" y="120">оплата</text>
+<text x="700" y="248" text-anchor="end">доставка, документы</text><text x="914" y="240">вознаграждение</text><text x="914" y="255">за услугу</text></g>
+</g>
+</svg>
+</div>
+<figcaption>Слева действующая схема BigMart, справа схема для госзакупок. Меняется одна связь: договор и счёт-фактура идут напрямую между заказчиком и продавцом. Каталог, продавцы и доставка остаются теми же.</figcaption>
+</figure>
+
+<h2>Почему это нужно</h2>
+<p>Заказчику нужны цены минимум трёх поставщиков, а участник и его аффилированное лицо не могут участвовать в одной закупке (<a href="https://lex.uz/ru/docs/7239170">ЗРУ-1005</a>). Сейчас BigMart продаёт от своего имени как комиссионер (<a href="https://docs.bigmart.uz/legal/contract-for-seller">оферта для продавцов</a>). Три предложения его продавцов юридически могут считаться предложениями одного поставщика.</p>
+
+<h2>Что меняется</h2>
+<div class="scroll tcard">
+<table>
+<thead><tr><th>Параметр</th><th>Сейчас, продажи бизнесу</th><th>Модуль «Госзакупки»</th></tr></thead>
+<tbody>
+<tr><td class="k">Сторона договора с покупателем</td><td>BigMart как комиссионер</td><td>Продавец</td></tr>
+<tr><td class="k">Кто выставляет счёт-фактуру</td><td>BigMart, с ИНН продавца в строке товара</td><td>Продавец</td></tr>
+<tr><td class="k">Куда приходит оплата</td><td>На счёт BigMart, затем выплата продавцу</td><td>Продавцу напрямую от казначейства</td></tr>
+<tr><td class="k">Как зарабатывает BigMart</td><td>Комиссия удерживается из выплаты продавцу</td><td>Вознаграждение за услуги платформы и доставки, счёт продавцу</td></tr>
+<tr><td class="k">Правовая основа</td><td>Действующие оферты</td><td>Отдельная оферта для госзакупок</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Что BigMart нужно решить</h2>
+<ol>
+<li>Отдельная оферта для продавцов: услуги платформы и доставки, вознаграждение, порядок расчётов.</li>
+<li>Как BigMart получает вознаграждение, если деньги приходят продавцу: счёт, депозит продавца или взаимозачёт с выплатами по обычным продажам.</li>
+<li>Кто отвечает перед бюджетным заказчиком за доставку, приёмку и возвраты.</li>
+<li>Как проверять независимость продавцов: разные ИНН и учредители.</li>
+<li>Каких продавцов допускать. С 1 октября 2026 года индивидуальные предприниматели участвуют в госзакупках только по ограниченному перечню видов деятельности.</li>
+</ol>
+<p>Вопросы по модели собраны на странице <a href="#voprosy">«Вопросы»</a> и отмечены как ключевые: CEO 2 и 3, технический директор 8, юрист 1–3.</p>
+
+<h2>Запасные варианты</h2>
+<p>Они нужны, если BigMart захочет остаться стороной договора.</p>
+<div class="two">
+  <div class="box"><h3>Одно предложение от BigMart</h3><p style="margin:0">BigMart подаёт одно предложение, ещё два заказчик получает от внешних поставщиков. Главная трудность заказчика остаётся: искать поставщиков он продолжает сам.</p></div>
+  <div class="box"><h3>Каталог как открытый источник цен</h3><p style="margin:0">Заказчик сравнивает цены из открытых источников, включая каталог BigMart. Нужен письменный ответ Агентства, что каталог маркетплейса считается таким источником.</p></div>
+</div>
+<p class="next">Дальше: <a href="#mvp">видение MVP</a></p>
+</section>
+
+<!-- ============ MVP ============ -->
+<section class="page" id="p-mvp">
+<h1>MVP: кабинет закупщика для малой закупки</h1>
+<p class="lead">Бюджетная организация проходит малую закупку в одном окне: от списка потребностей до пакета документов. Модуль работает поверх каталога BigMart и выглядит как его раздел.</p>
+
+<h2>Пять шагов в кабинете</h2>
+<ol class="flow5">
+<li><svg viewBox="0 0 120 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="6" width="112" height="12" rx="3"/><rect x="4" y="24" width="112" height="12" rx="3"/><rect x="4" y="42" width="70" height="10" rx="3" style="fill:rgba(var(--green-rgb),.18);stroke:var(--ok)"/></svg><b>Потребность</b>Товары из каталога BigMart или списком. Система сразу проверяет лимиты на договор и на год.</li>
+<li><svg viewBox="0 0 120 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="18" width="34" height="22" rx="4"/><path d="M40 29H62M62 29L84 10M62 29H84M62 29L84 48"/><circle cx="96" cy="10" r="7"/><circle cx="96" cy="29" r="7"/><circle cx="96" cy="48" r="7"/></svg><b>Запрос цен</b>Запрос получают продавцы, у которых есть эти товары. Цена из каталога подставляется сама.</li>
+<li><svg viewBox="0 0 120 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="24" height="44" rx="3"/><rect x="48" y="24" width="24" height="28" rx="3" style="fill:rgba(var(--green-rgb),.18);stroke:var(--ok)"/><rect x="88" y="16" width="24" height="36" rx="3"/></svg><b>Сравнение</b>Три и более независимых предложения. Система показывает наименьшую цену и победителя.</li>
+<li><svg viewBox="0 0 120 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h28l10 10v38H14z"/><path d="M22 24h22M22 32h22M22 40h14"/><path d="M68 4h28l10 10v38H68z"/><path d="M76 24h22M76 32h22M76 40h14"/></svg><b>Документы</b>Запрос цен, предложения, обоснование выбора и договор с победителем. На русском и узбекском.</li>
+<li><svg viewBox="0 0 120 56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="14" cy="12" r="7" style="fill:rgba(var(--green-rgb),.18);stroke:var(--ok)"/><path d="M28 12h84"/><circle cx="14" cy="30" r="7"/><path d="M28 30h64"/><circle cx="14" cy="48" r="7"/><path d="M28 48h74"/></svg><b>Публикация и оплата</b>Чек-лист: портал за 5 рабочих дней, регистрация в казначействе, доставка, оплата.</li>
+</ol>
+
+<h2>Что входит и что нет</h2>
+<div class="two">
+  <div class="box"><h3>Входит в MVP</h3>
+    <ul>
+      <li>Веб-кабинет закупщика на русском и узбекском</li>
+      <li>Запрос цен, сбор и сравнение предложений</li>
+      <li>Пакет документов по шаблонам</li>
+      <li>Счётчик лимитов на договор и на год</li>
+      <li>Страница продавца для подтверждения цены</li>
+      <li>Панель администратора BigMart</li>
+    </ul></div>
+  <div class="box"><h3>Не входит, следующие этапы</h3>
+    <ul>
+      <li>Интеграция с порталом Агентства и казначейством. В MVP выгрузка вручную по чек-листу</li>
+      <li>Электронная подпись внутри кабинета</li>
+      <li>Электронный магазин UZEX и Hayot Birja</li>
+      <li>Мобильное приложение</li>
+      <li>Автоматическая проверка аффилированности продавцов</li>
+      <li>Финансирование продавцов под оплату казначейства</li>
+    </ul></div>
+</div>
+
+<h2>Что остаётся в BigMart как есть</h2>
+<p>Ядро маркетплейса не меняется. Модуль использует то, что уже работает: каталог, продавцов, доставку и электронные счета-фактуры. Новое появляется в трёх местах: кабинет закупщика, страница продавца для ответа на запрос цен и отдельная оферта для госзакупок.</p>
+
+<h2>Прототип</h2>
+<p>Это видение можно пройти руками: кликабельный прототип кабинета закупщика открыт в соседнем разделе. В нём демо-данные, стиль BigMart, русский и узбекский языки. Правки собирает <a href="#zadachi">задача 15</a>.</p>
+<div class="cta"><a class="btn btn-brand" href="#prototip">Открыть прототип</a></div>
+
+<h2>Что нужно подтвердить</h2>
+<ul>
+<li>Состав MVP из таблицы выше: что входит и что переносится.</li>
+<li>Модель сделки, от которой зависят документы и страница продавца.</li>
+<li>Стартовые категории и регион пилота. Наше предложение: канцелярия, хозтовары и бытовая химия в Ташкенте.</li>
+<li>Название и адрес модуля: раздел bigmart.uz или отдельный поддомен.</li>
+</ul>
+<p class="next">Дальше: <a href="#prototip">прототип</a></p>
+</section>
+
+<!-- ============ ПРОТОТИП ============ -->
+<section class="page" id="p-prototip">
+<h1>Прототип кабинета закупщика</h1>
+<p class="lead">Так модуль «Госзакупки» будет выглядеть внутри BigMart. Данные демонстрационные, действия ничего не отправляют. Пройдите закупку от списка товаров до оплаты.</p>
+<div class="protobar">
+  <div class="segmented" role="tablist" aria-label="Размер экрана" id="protosize"><button type="button" role="tab" id="ps-d" data-w="desktop" aria-selected="true">Компьютер</button><button type="button" role="tab" id="ps-m" data-w="mobile" aria-selected="false">Телефон</button></div>
+  <button type="button" class="btn btn-sm btn-glass" id="protofull">Развернуть на весь экран</button>
+</div>
+<div class="protoframe" id="protoframe">
+  <div class="protochrome"><i></i><i></i><i></i><span>Прототип: модуль «Госзакупки» для BigMart</span><button type="button" class="btn btn-sm" id="protoclose" hidden>Свернуть</button></div>
+  <iframe id="protoif" src="prototype.html" title="Прототип кабинета закупщика"></iframe>
+</div>
+<h2>Что посмотреть</h2>
+<div class="hints">
+  <div><b>Лимиты</b>На первом экране виден годовой лимит и лимит одного договора. Добавьте парты во вкладке «Списком»: система остановит закупку выше лимита.</div>
+  <div><b>Сравнение предложений</b>Отправьте запрос цен и дождитесь трёх ответов. На третьем шаге наименьшая цена определяет победителя.</div>
+  <div><b>Документы и публикация</b>Четвёртый шаг собирает пакет документов, пятый ведёт по чек-листу: портал, казначейство, доставка, оплата.</div>
+  <div><b>Кабинет продавца</b>Переключатель слева показывает страницу продавца: цена из каталога подставлена, подтверждение в один клик.</div>
+  <div><b>Два языка</b>Кнопки RU и UZ в шапке переключают интерфейс и документы.</div>
+  <div><b>Правки</b>Замечания к прототипу собираем в общей группе: <a href="#zadachi">задача 15</a>.</div>
+</div>
+<p class="next">Дальше: <a href="#zadachi">задачи проекта</a></p>
+</section>
+
+<!-- ============ ЗАДАЧИ ============ -->
+<section class="page" id="p-zadachi">
+<h1>18 задач до старта разработки</h1>
+<p class="lead">Задачи закрывают две команды. Без четырёх критических разработку начинать нельзя: от них зависят модель сделки и размер рынка.</p>
+<div class="crit4" aria-label="Критические задачи">
+  <div><b>3</b>Покрытие каталога: три и более продавца на товар</div>
+  <div><b>4</b>Решение по модели сделки</div>
+  <div><b>5</b>Кто подписывает договор и платит у заказчика</div>
+  <div><b>9</b>Юридическое заключение и проект оферты</div>
+  <div class="res4">Решение о старте разработки</div>
+</div>
+<div class="filters" role="group" aria-label="Фильтр по исполнителю">
+  <button type="button" id="f-all" data-side="all" aria-pressed="true">Все</button>
+  <button type="button" id="f-bm" data-side="bm" aria-pressed="false">BigMart</button>
+  <button type="button" id="f-w2w" data-side="w2w" aria-pressed="false">Win to Win</button>
+  <button type="button" id="f-joint" data-side="joint" aria-pressed="false">Совместно</button>
+</div>
+<div class="board" id="board"></div>
+<p class="legend"><span><span class="chip crit">критическая</span> блокирует старт разработки</span><span><span class="chip bm">BigMart</span> <span class="chip w2w">Win to Win</span> <span class="chip joint">совместно</span> кто выполняет</span></p>
+<p class="next">Дальше: <a href="#voprosy">вопросы к BigMart</a></p>
+</section>
+
+<!-- ============ ВОПРОСЫ ============ -->
+<section class="page" id="p-voprosy">
+<h1>45 вопросов к BigMart</h1>
+<p class="lead">Вопросы разделены по ролям. Ответ можно написать прямо здесь, затем скопировать весь список с ответами и отправить в общую группу.</p>
+<div class="tabs" role="tablist" aria-label="Роль" id="qtabs"></div>
+<div id="qpanel"></div>
+<p class="small muted" style="margin-top:16px">Ответы сохраняются только в этом браузере и никуда не отправляются. Чтобы передать их, нажмите «Скопировать с ответами».</p>
+<p class="next">Дальше: <a href="#ploshchadki">площадки и встречи</a></p>
+</section>
+
+<!-- ============ ПЛОЩАДКИ ============ -->
+<section class="page" id="p-ploshchadki">
+<h1>С кем встречаемся и о чём договариваемся</h1>
+<p class="lead">Первая встреча нужна с Агентством: оно регулирует госзакупки и ведёт портал, куда заказчики выгружают договоры малой закупки. Затем идём к двум главным операторам электронного магазина.</p>
+
+<h2>Порядок встреч</h2>
+<ol class="order">
+  <li><i>1</i><b>Агентство</b>Получаем позицию по модели сделки и по порталу</li>
+  <li><i>2</i><b>Hayot Birja</b>Идём с уже понятной рамкой, обсуждаем совместный модуль</li>
+  <li><i>3</i><b>UZEX</b>Обсуждаем каталог и продавцов BigMart в электронном магазине</li>
+  <li class="spare"><i>запасной партнёр</i><b>Toshkent tovar xomashyo birjasi</b>Новая площадка, условия подключения</li>
+</ol>
+<p class="small muted">Встречи назначает Win to Win, проводим вместе с Ильхомом Омоновым: <a href="#zadachi">задача 12</a>.</p>
+
+<h2>Организации и руководители</h2>
+<div class="orgs" id="orgs"></div>
+<div class="callout"><p><b>Главный довод для операторов.</b> Малая закупка сейчас проходит мимо их систем и не приносит им сделок. Совместный модуль возвращает этот объём на площадку.</p></div>
+
+<h2>Остальные площадки и сервисы</h2>
+<p>На старте они BigMart не нужны: закрывают другие виды закупок или только собирают объявления.</p>
+<div class="scroll tcard">
+<table>
+<thead><tr><th>Площадка</th><th>Что там происходит</th><th>Нужна ли BigMart</th></tr></thead>
+<tbody>
+<tr><td class="k" style="white-space:normal">cooperation.uz, электронный кооперационный портал</td><td>Закупки у отечественных производителей</td><td>Позже: канал для продавцов-производителей</td></tr>
+<tr><td class="k" style="white-space:normal">ekoplatforma.uz, система UZEX</td><td>Закупки у местных производителей</td><td>Обсуждаем вместе с UZEX</td></tr>
+<tr><td class="k" style="white-space:normal">Shaffof qurilish</td><td>Тендеры в строительстве</td><td>Нет</td></tr>
+<tr><td class="k" style="white-space:normal">e-auksion.uz</td><td>Продажа и аренда государственного имущества</td><td>Нет</td></tr>
+<tr><td class="k" style="white-space:normal">Республиканская универсальная агропромышленная биржа</td><td>Деятельность временно приостановлена</td><td>Нет</td></tr>
+<tr><td class="k" style="white-space:normal">tendergpt.uz, uztender.com, bnect.pro</td><td>Агрегаторы объявлений и коммерческие тендеры</td><td>Только для мониторинга</td></tr>
+</tbody>
+</table>
+</div>
+<p style="margin-top:14px">Позже понадобятся ещё две организации. Комитет казначейской службы регистрирует договоры и проводит оплату. Ассоциация участников государственных закупок даёт выход на поставщиков.</p>
+
+<h2>Что не подтверждено</h2>
+<ul>
+<li>Официального реестра операторов электронной системы госзакупок в открытом доступе не нашлось. Список собран по сайтам площадок, перечню бирж Комитета по конкуренции и публикациям. Реестр стоит запросить у Агентства.</li>
+<li>Руководитель Toshkent tovar xomashyo birjasi в открытых источниках не найден.</li>
+<li>Должность Н. С. Саматова взята со страницы Международной ассоциации бирж СНГ, дата там не указана. С 1 июля 2026 года у UZEX новая структура. Имена нужно уточнить в приёмной.</li>
+<li>Кто в Агентстве отвечает именно за портал и малые закупки, на сайте не указано.</li>
+<li>Прямых телефонов руководителей в открытых источниках нет. Обращаться нужно через приёмные и официальные адреса.</li>
+<li>Площадки из последней таблицы, кроме агропромышленной биржи, описаны по обзорным публикациям без сверки с их сайтами.</li>
+</ul>
+<p class="next">Дальше: <a href="#istochniki">источники</a></p>
+</section>
+
+<!-- ============ ИСТОЧНИКИ ============ -->
+<section class="page" id="p-istochniki">
+<h1>Источники</h1>
+<p class="lead">Нормы закона и сведения об организациях взяты из открытых источников. Материалы не заменяют юридическое заключение: его готовит задача 9.</p>
+<h2>Закон и практика</h2>
+<ul class="src">
+<li><a href="https://lex.uz/ru/docs/5382983">Закон «О государственных закупках» № ЗРУ-684, действующая редакция</a></li>
+<li><a href="https://lex.uz/ru/docs/7239170">Закон № ЗРУ-1005 от 27.11.2024: упрощённая процедура закупки малой стоимости</a></li>
+<li><a href="https://lex.uz/ru/docs/7952240">Указ № УП-259 от 26.12.2025 о реформе госзакупок</a></li>
+<li><a href="https://buxgalter.uz/uz/publish/doc/text189777_razmery_brv_mrot_bvip_i_mpr_v_uzbekistane">Размеры БРВ, buxgalter.uz</a></li>
+<li><a href="http://actsoft.uz/tpost/adza5i5lj1-kogda-provodit-uproschennuyu-zakupku">Когда проводить упрощённую закупку, справочная система «Госзакупки»</a></li>
+<li><a href="https://xarid.uzex.uz/">Объявления о портале xarid.icppa.uz и уполномоченном органе, xarid.uzex.uz</a></li>
+<li><a href="https://pempal.org/sites/default/files/event/attachments/day2_group_discussions_uzbekistan_schools_rus.pdf">Финансирование школ и детсадов, презентация Узбекистана для PEMPAL, июнь 2024</a></li>
+<li><a href="https://lex.uz/uz/docs/5793256">ПП-61 от 24.12.2021 о финансовой самостоятельности вузов</a></li>
+<li><a href="https://www.uzdaily.uz/ru/obem-goszakupok-v-uzbekistane-dostig-1884-trln-sumov/">Госзакупки за первое полугодие 2026 года, UzDaily</a></li>
+<li><a href="https://stat.uz/img/news/obshchee-srednee-obrazovanie_p22745.pdf">Общее среднее образование, Национальный комитет по статистике</a></li>
+</ul>
+<h2>BigMart</h2>
+<ul class="src">
+<li><a href="https://docs.bigmart.uz/legal/contract-for-seller">Оферта BigMart для продавцов</a></li>
+<li><a href="https://docs.bigmart.uz/legal/contract-for-customer">Оферта BigMart для покупателей</a></li>
+</ul>
+<h2>Площадки и регулятор</h2>
+<ul class="src">
+<li><a href="https://gov.uz/ru/icppa/guides">Руководство Агентства, gov.uz</a></li>
+<li><a href="https://www.spot.uz/ru/2026/02/06/new-agency/">Создание Агентства и назначение директора, Spot.uz, 06.02.2026</a></li>
+<li><a href="https://www.uzdaily.uz/ru/mirzokhid-toshmatov-naznachen-zamdirektora-agentstva-promkooperatsii/">Назначение заместителя директора по комплаенсу, UzDaily, октябрь 2026</a></li>
+<li><a href="https://mab-sng.org/members/uzbekskaya-respublikanskaya-tovarno-syrevaya-birzha-2/">Правление UZEX, Международная ассоциация бирж СНГ</a></li>
+<li><a href="https://www.spot.uz/ru/2025/04/20/uzex-appointment">Назначение председателя правления UZEX, Spot.uz, 20.04.2025</a></li>
+<li><a href="https://uzex.uz/ru/pages/about-structure">Организационная структура UZEX с 01.07.2026</a></li>
+<li><a href="https://raqobat.gov.uz/en/what-we-do/exchange-trading-control/list-of-organizations-licensed-to-carry-out-commodity-exchange-activities/">Перечень лицензированных товарных бирж, Комитет по развитию конкуренции</a></li>
+<li><a href="https://www.spot.uz/ru/2025/02/10/hayot-birja/">Hayot Birja, бывший XT-Xarid, Spot.uz, 10.02.2025</a></li>
+<li><a href="https://ebirja.uz/en/about/about">Toshkent tovar xomashyo birjasi, ebirja.uz</a></li>
+</ul>
+</section>
+
+</main>
+<footer class="foot"><span>Win to Win для BigMart. Версия от 10 ноября 2026 года. Материалы обновляются по мере ответов и встреч.</span><span><a href="#istochniki">Источники</a> &nbsp; <a href="https://w2w.uz">w2w.uz</a></span></footer>
+
+<div id="copybox" hidden><div class="in"><b>Выделите текст и скопируйте его</b><textarea id="copyarea" readonly aria-label="Текст для копирования"></textarea><div><button type="button" class="btn btn-sm" id="copyclose">Закрыть</button></div></div></div>
+<div id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+/* ---------- pages ---------- */
+var PAGES=["obzor","zakon","model","mvp","prototip","zadachi","voprosy","ploshchadki","istochniki"];
+var first=true;
+function show(){
+  var h=(location.hash||"").slice(1), id=PAGES.indexOf(h)>-1?h:"obzor";
+  $$(".page").forEach(function(p){p.classList.toggle("on",p.id==="p-"+id)});
+  $$(".tabsbar a").forEach(function(a){if(a.getAttribute("data-p")===id){a.setAttribute("aria-current","page");if(!first&&a.scrollIntoView){try{a.scrollIntoView({block:"nearest",inline:"center"})}catch(e){}}}else a.removeAttribute("aria-current")});
+  if(!first) window.scrollTo(0,0);
+  first=false;
+}
+window.addEventListener("hashchange",show);
+
+/* ---------- tasks ---------- */
+/* [№, блок, задача, результат, кто, сторона, очередь, критическая] */
+var TASKS=[
+[1,"Данные BigMart","Ответить на вопросы по четырём ролям","Заполненный опросник","CEO, технический директор, юрист, операции","bm",1,0],
+[2,"Данные BigMart","Дать доступ к API или выгрузке каталога: товары, цены, продавцы, ИКПУ","Тестовый доступ или файл","Технический директор","bm",1,0],
+[3,"Данные BigMart","Посчитать покрытие: у скольких товаров есть три и более продавца","Таблица по категориям","Технический директор BigMart, Win to Win","joint",1,1],
+[4,"Данные BigMart","Принять решение по модели сделки","Решение CEO и позиция юриста","CEO, юрист","bm",2,1],
+[5,"Заказчики","Выяснить, кто подписывает договор и платит в школе, детсаду, вузе, поликлинике","Схема по каждому типу заказчика","Win to Win, контакты от BigMart","joint",1,1],
+[6,"Заказчики","Собрать образцы документов малой закупки: приказ, запрос цен, ценовые предложения, обоснование, договор, экраны портала","Комплект с 3–5 организаций","Win to Win, BigMart","joint",1,0],
+[7,"Заказчики","Провести 5 интервью с закупщиками и бухгалтерами","Записи и список проблем","Win to Win","w2w",2,0],
+[8,"Заказчики","Найти 10 организаций для пилота в Ташкенте","Список с контактами","Продажи BigMart","bm",3,0],
+[9,"Право","Подготовить юридическое заключение по модели и проект оферты для госзакупок","Заключение и проект оферты","Юрист BigMart или внешний, Win to Win","joint",2,1],
+[10,"Право","Проверить нормы об оплате: предоплата, сроки казначейства, требования к договору","Памятка на одну страницу","Win to Win, юрист","joint",2,0],
+[11,"Право","Подготовить запрос в Агентство о разъяснении по модели","Письмо за подписью BigMart","Win to Win готовит, BigMart подписывает","joint",2,0],
+[12,"Площадки","Назначить встречи: Агентство, UZEX, Hayot Birja","Даты встреч","Win to Win и CEO BigMart","joint",1,0],
+[13,"Площадки","Подготовить презентацию для встреч","Презентация на 8–10 слайдов","Win to Win","w2w",2,0],
+[14,"Площадки","Запросить у площадок условия и API электронного магазина","Ответы площадок","Win to Win, BigMart","joint",2,0],
+[15,"Продукт","Показать прототип и собрать правки","Список правок","Win to Win, BigMart","joint",1,0],
+[16,"Продукт","Написать ТЗ на MVP","ТЗ, подтверждённое BigMart","Win to Win","w2w",3,0],
+[17,"Продукт","Согласовать шаблоны документов на русском и узбекском","Утверждённые шаблоны","Win to Win, юрист","joint",3,0],
+[18,"Завершение","Подготовить коммерческое предложение, когда подтверждены ТЗ и видение MVP","Коммерческое предложение","Win to Win","w2w",3,0]
+];
+var QUEUES=[["Первая очередь","Начинаем сразу"],["Вторая очередь","После первых ответов"],["Третья очередь","Перед стартом разработки"]];
+var SIDE={bm:"BigMart",w2w:"Win to Win",joint:"совместно"};
+var side="all";
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function renderTasks(){
+  var html="";
+  QUEUES.forEach(function(q,i){
+    var list=TASKS.filter(function(t){return t[6]===i+1&&(side==="all"||t[5]===side)});
+    html+='<div class="col"><h3>'+q[0]+'</h3><p>'+q[1]+'. Задач: '+list.length+'</p>';
+    list.forEach(function(t){
+      html+='<div class="task'+(t[7]?' crit':'')+'"><span class="no">'+t[0]+'</span><b>'+esc(t[2])+'</b><span class="res">Результат: '+esc(t[3])+'. Выполняет: '+esc(t[4])+'</span><span class="meta">'+(t[7]?'<span class="chip crit">критическая</span>':'')+'<span class="chip '+t[5]+'">'+SIDE[t[5]]+'</span><span class="chip">'+esc(t[1])+'</span></span></div>';
+    });
+    if(!list.length) html+='<p class="small muted">В этой очереди таких задач нет.</p>';
+    html+='</div>';
+  });
+  $("#board").innerHTML=html;
+}
+$$(".filters button").forEach(function(b){b.addEventListener("click",function(){side=b.getAttribute("data-side");$$(".filters button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});renderTasks()})});
+
+/* ---------- questions ---------- */
+var ROLES=[
+{id:"ceo",name:"CEO",note:"Ответы 1–3 определяют модель сделки и состав MVP.",key:[2,3],q:[
+"Какая цель по госсектору на 12 месяцев: число организаций, оборот, доля в выручке?",
+"Подтверждаете ли модель, где договор с бюджетным заказчиком подписывает продавец, а BigMart работает как оператор сервиса и доставки? К какой дате будет решение?",
+"Как BigMart зарабатывает в госзакупках: действующая комиссия с продавца или отдельное вознаграждение за услугу?",
+"С каких категорий и регионов начинаем? Наше предложение: канцелярия, хозтовары и бытовая химия в Ташкенте.",
+"Есть ли уже бюджетные клиенты или запросы от них? Сколько и какие?",
+"Какие у BigMart контакты в Агентстве, UZEX и Hayot Birja? Кто идёт на встречи?",
+"Кто владелец продукта со стороны BigMart и кто отвечает на вопросы команды ежедневно?",
+"Под каким названием и на каком адресе запускаем модуль: раздел bigmart.uz или отдельный поддомен?",
+"Интересно ли финансирование продавцов под оплату казначейства через банки-партнёры BigMart?"]},
+{id:"cto",name:"Технический директор",note:"От вопросов 1–5 зависит состав MVP: API, структура каталога и покрытие товаров продавцами.",key:[8],q:[
+"Какой стек и архитектура: backend, frontend, база данных, хостинг, монолит или сервисы?",
+"Есть ли API для партнёров: каталог, цены, остатки, продавцы, заказы? Где документация?",
+"Как технически сделаны интеграции с банками (Anor Bank, Xalq Banki, Davr Bank): встроенная страница, единый вход, API?",
+"Как связаны одинаковые товары разных продавцов: одна карточка с несколькими предложениями или отдельные карточки?",
+"Сколько товаров имеют три и более продавца? Нужна выгрузка: категория, товар, число продавцов, минимальная и максимальная цена.",
+"Какие поля есть у товара: ИКПУ, единица измерения, НДС, штрихкод, страна происхождения? У какой доли карточек заполнен ИКПУ?",
+"Как устроены аккаунты компаний: роли, согласование заказов, лимиты? Можно ли добавить тип «бюджетная организация»?",
+"Можно ли создать заказ, где стороной сделки является продавец, а BigMart выполняет только доставку? Что придётся менять?",
+"Как уведомить продавца о запросе цен и принять подтверждение: кабинет продавца, вебхук, Telegram-бот, ссылка?",
+"Какие интеграции уже есть: Didox, E-IMZO, OneID, my.soliq.uz, платёжные системы?",
+"Чем формируются документы: есть ли генератор PDF или DOCX и поддержка двух языков?",
+"Есть ли дизайн-система или UI-kit в Figma и библиотека компонентов?",
+"Есть ли тестовый стенд и как Win to Win получит доступ? Какие требования к коду, безопасности и развёртыванию?",
+"Ведётся ли журнал действий пользователей? Для госзаказчиков он нужен на каждом шаге.",
+"Кто из разработчиков BigMart подключается к проекту и на сколько часов в неделю?",
+"Можно ли получить обезличенную статистику заказов для оценки спроса: категории, средний чек, повторные покупки?"]},
+{id:"legal",name:"Юрист и финансы",note:"Ответы 1–3 нужны для решения по модели сделки.",key:[1,2,3],q:[
+"Кто сторона сделки с покупателем по действующим офертам? Оферта для продавцов называет BigMart (п. 2.3, 4.2), оферта для покупателей называет продавца (п. 3.2).",
+"Каким договором оформить роль BigMart в госзакупках: услуги оператора электронной торговой площадки, агентский договор или иное?",
+"Как BigMart получит вознаграждение, если казначейство платит продавцу: счёт на услуги, депозит, взаимозачёт?",
+"Как услуга отразится в учёте и НДС у BigMart и у продавцов, которые не платят НДС?",
+"Подано ли уведомление о деятельности оператора электронной коммерции по новому порядку 2026 года?",
+"Был ли опыт договоров с бюджетными организациями: регистрация в казначействе, предоплата, сроки оплаты?",
+"На каких условиях работает отсрочка платежа: лимиты, сроки, кто финансирует? Применима ли она к бюджетным заказчикам?",
+"Кто несёт ответственность за качество и возвраты перед бюджетным заказчиком?",
+"Есть ли у BigMart данные об учредителях и бенефициарах продавцов для проверки аффилированности?",
+"Сколько хранятся документы сделок и где находятся серверы?"]},
+{id:"ops",name:"Операции, логистика и продажи",note:"От ответов 1–3 зависит, где запускать пилот и сколько продавцов смогут участвовать.",key:[],q:[
+"В какие регионы и за какой срок BigMart доставляет сейчас? На каких условиях идёт доставка вне Ташкента и кто возит?",
+"Какая доля заказов идёт со склада BigMart и какая со складов продавцов? Каков средний срок сборки?",
+"Сколько продавцов активны? Сколько из них юрлица, ИП, плательщики НДС, отечественные производители?",
+"Какие документы оформляются при приёмке: накладная, акт, доверенность?",
+"Как обрабатываются возвраты и недопоставки?",
+"Какие категории и какой средний чек дают основную выручку в продажах бизнесу?",
+"Кто будет вести бюджетных клиентов: персональный менеджер, поддержка на узбекском и русском?",
+"За какое время продавцы обычно подтверждают заказ? Реально ли получать ответ на запрос цен за 2–4 часа?",
+"Есть ли продажи в госсектор и база контактов бюджетных организаций?",
+"Кто обучит первых заказчиков: вебинар, инструкция, выезд?"]}
+];
+var answers={};
+try{answers=JSON.parse(localStorage.getItem("bmgov-answers")||"{}")||{}}catch(e){answers={}}
+function saveAnswers(){try{localStorage.setItem("bmgov-answers",JSON.stringify(answers))}catch(e){}}
+var role="ceo", openAns={};
+function answered(r){return r.q.filter(function(_,i){return (answers[r.id+"-"+(i+1)]||"").trim()}).length}
+function renderTabs(){
+  $("#qtabs").innerHTML=ROLES.map(function(r){return '<button type="button" role="tab" id="tab-'+r.id+'" data-role="'+r.id+'" aria-selected="'+(r.id===role)+'">'+r.name+'<span>'+r.q.length+'</span></button>'}).join("");
+}
+function renderQ(){
+  var r=ROLES.filter(function(x){return x.id===role})[0], n=answered(r);
+  var html='<div class="qhead"><p><b>'+r.name+'.</b> '+r.note+' <span id="qcount" class="muted">Отвечено: '+n+' из '+r.q.length+'.</span></p><div class="acts"><button type="button" class="btn btn-sm btn-glass" id="copy-q">Скопировать вопросы</button><button type="button" class="btn btn-sm btn-brand" id="copy-qa">Скопировать с ответами</button></div></div>';
+  r.q.forEach(function(q,i){
+    var k=r.id+"-"+(i+1), has=(answers[k]||"").trim(), isOpen=openAns[k]||has;
+    html+='<div class="q"><span class="no">'+(i+1)+'</span><div><p>'+esc(q)+'</p><div class="row">'+(r.key.indexOf(i+1)>-1?'<span class="chip part">ключевой для модели сделки</span>':'')+(isOpen?'':'<button type="button" class="linkbtn" data-open="'+k+'">Написать ответ</button>')+'</div>'+(isOpen?'<textarea class="ans" id="ans-'+k+'" data-k="'+k+'" aria-label="Ответ на вопрос '+(i+1)+'" placeholder="Ваш ответ">'+esc(answers[k]||"")+'</textarea>':'')+'</div></div>';
+  });
+  $("#qpanel").innerHTML=html;
+}
+function roleText(withAns){
+  var r=ROLES.filter(function(x){return x.id===role})[0];
+  var out="BigMart в госзакупках. Вопросы: "+r.name+"\n\n";
+  r.q.forEach(function(q,i){out+=(i+1)+". "+q+"\n";if(withAns){out+="Ответ: "+((answers[r.id+"-"+(i+1)]||"").trim()||"—")+"\n"}out+="\n"});
+  return out.trim()+"\n";
+}
+var toastT;
+function toast(msg){var t=$("#toast");t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true},2200)}
+function manual(txt){$("#copyarea").value=txt;$("#copybox").hidden=false;var a=$("#copyarea");a.focus();a.select()}
+function copy(txt){
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(function(){toast("Скопировано")},function(){manual(txt)})}
+    else manual(txt);
+  }catch(e){manual(txt)}
+}
+$("#copyclose").addEventListener("click",function(){$("#copybox").hidden=true});
+$("#qtabs").addEventListener("click",function(e){var b=e.target.closest("button[data-role]");if(!b)return;role=b.getAttribute("data-role");renderTabs();renderQ()});
+$("#qpanel").addEventListener("click",function(e){
+  var o=e.target.closest("[data-open]");
+  if(o){var k=o.getAttribute("data-open");openAns[k]=true;renderQ();var ta=document.getElementById("ans-"+k);if(ta)ta.focus();return}
+  if(e.target.closest("#copy-q")){copy(roleText(false));return}
+  if(e.target.closest("#copy-qa")){copy(roleText(true))}
+});
+$("#qpanel").addEventListener("input",function(e){
+  var ta=e.target.closest("textarea[data-k]");if(!ta)return;
+  answers[ta.getAttribute("data-k")]=ta.value;saveAnswers();
+  var r=ROLES.filter(function(x){return x.id===role})[0],c=$("#qcount");if(c)c.textContent="Отвечено: "+answered(r)+" из "+r.q.length+".";
+});
+
+/* ---------- organisations ---------- */
+var ORGS=[
+{o:"Встреча 1",n:"Агентство по промышленной кооперации и государственным закупкам",url:"https://gov.uz/ru/icppa/guides",role:"Регулятор госзакупок. Ведёт портал xarid.icppa.uz",
+ head:"Директор: Хайдаров Бахтияр Халимович. Заместители: Юнусов Джахонгир Баходирович, Пардаев Илхомжон Гулом угли, Тошматов Мирзохид Жапаралиевич (комплаенс)",
+ contact:"info@icppa.uz. Ташкент, Яккасарайский район, ул. Нукус, 52. Приём директора: среда, 10:00–13:00",
+ give:"Пилот цифровой малой закупки. Каждая закупка оставляет полный след: запрос, три предложения, выбор, договор",
+ ask:"Письменное разъяснение, что предложения независимых продавцов маркетплейса считаются ценовыми предложениями по статье 51¹. Позицию, считается ли каталог маркетплейса открытым источником цен. Ответ, есть ли у портала программный интерфейс для загрузки оснований и договоров"},
+{o:"Встреча 2",n:"АО «Hayot Birja»",url:"https://www.spot.uz/ru/2025/02/10/hayot-birja/",role:"Оператор xt-xarid.uz. До июня 2024 года XT-Xarid Texnologiyalari, товарная биржа с февраля 2025 года",
+ head:"Генеральный директор: Юлдашев Алишер Бахтиёрович",
+ contact:"(78) 150-03-14, info@hayotbirja.uz. Ташкент, Яшнабадский район, ул. Махтумкули, 114-а",
+ give:"Каталог и продавцов BigMart для электронного магазина, плюс совместный модуль малой закупки на каталоге BigMart",
+ ask:"Интерфейс для публикации оферт и ответов на запросы цен. Условия для агрегатора, который ведёт кабинеты продавцов. Условия площадки и требования к задатку. Готовность к пилоту"},
+{o:"Встреча 3",n:"АО «Узбекская республиканская товарно-сырьевая биржа», UZEX",url:"https://mab-sng.org/members/uzbekskaya-respublikanskaya-tovarno-syrevaya-birzha-2/",role:"Крупнейший оператор: xarid.uzex.uz и новая версия new-xarid.uzex.uz",
+ head:"Председатель правления: Каюмов Асадулла Уролович. Заместитель по биржевым торгам, госзакупкам и электронной коммерции: Саматов Набихон Субихонович",
+ contact:"(71) 207-00-33, info@rtsb.uz. Ташкент, ул. Бобура, 77",
+ give:"Каталог и продавцов BigMart для электронного магазина: больше оферт и конкуренции",
+ ask:"Интерфейс для публикации оферт и ответов на запросы цен. Условия для агрегатора, который ведёт кабинеты продавцов. Условия площадки и требования к задатку"},
+{o:"Запасной партнёр",n:"АО «Toshkent tovar xomashyo birjasi»",url:"https://ebirja.uz/en/about/about",role:"Новая биржа: ebirja.uz, госзакупки на xarid.ebirja.uz. Запасной партнёр",
+ head:"В открытых источниках не найден",
+ contact:"+998 55 510-33-11",
+ give:"Поток продавцов для новой площадки",
+ ask:"Условия подключения и интерфейс"}
+];
+$("#orgs").innerHTML=ORGS.map(function(o){
+  return '<article class="org"><span class="chip '+(o.o.indexOf('Встреча')===0?'ok':'joint')+'">'+o.o+'</span><h3><a href="'+o.url+'">'+esc(o.n)+'</a></h3><p class="role">'+esc(o.role)+'</p><dl><dt>Руководители</dt><dd>'+esc(o.head)+'</dd><dt>Контакты</dt><dd>'+esc(o.contact)+'</dd></dl><div class="ask"><div><b>Что предлагаем</b>'+esc(o.give)+'</div><div><b>Что просим</b>'+esc(o.ask)+'</div></div></article>';
+}).join("");
+
+/* ---------- theme ---------- */
+var rootEl=document.documentElement;
+$("#themebtn").addEventListener("click",function(){var t=rootEl.getAttribute("data-theme")==="dark"?"light":"dark";rootEl.setAttribute("data-theme",t);try{localStorage.setItem("bmgov-theme",t)}catch(e){}});
+/* ---------- prototype frame ---------- */
+$("#protosize").addEventListener("click",function(e){var b=e.target.closest("button[data-w]");if(!b)return;$$("#protosize button").forEach(function(x){x.setAttribute("aria-selected",x===b?"true":"false")});$("#protoframe").classList.toggle("m",b.getAttribute("data-w")==="mobile")});
+function protoFull(on){$("#protoframe").classList.toggle("full",on);$("#protoclose").hidden=!on;document.body.style.overflow=on?"hidden":""}
+$("#protofull").addEventListener("click",function(){protoFull(true)});
+$("#protoclose").addEventListener("click",function(){protoFull(false)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")protoFull(false)});
+(function(){var p=location.pathname;if(/(^|\.)(w2w\.uz|vercel\.app|github\.io|netlify\.app)$/.test(location.hostname)&&!/\/$/.test(p)&&!/\.html?$/i.test(p)){$("#protoif").src=p+"/prototype.html"}})();
+
+renderTasks();renderTabs();renderQ();show();
+})();
+</script>
+</body>
+</html>
